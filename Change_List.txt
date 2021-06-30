@@ -1,13 +1,4 @@
 ############################################################
-# Installation
-############################################################
-
-Move the ExtendedBalanceMod folder into "Demigod\bindata\mods". If you're using
-Steam, move it to "Program Files (x86)\Steam\steamapps\common\Demigod\bindata\mods".
-
-
-
-############################################################
 # Extended BalanceMod Changes (for BalanceMod 1.31, see below)
 ############################################################
 
