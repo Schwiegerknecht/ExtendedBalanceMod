@@ -48,6 +48,7 @@ Items.Item_Artifact_090.GetCritMult = function(self) return Ability['Item_Artifa
 Items.Item_Artifact_090.Tooltip.Passives = '[GetCritChance]% chance to deal a critical strike for [GetCritMult]x damage.'
 ]]
 
+--[[
 #################################################################################################################
 # Stormbringer Rework
 #################################################################################################################
@@ -377,7 +378,7 @@ Items.Item_Artifact_080.Tooltip.Bonuses = {
     '+[GetRateOfFire]% Attack Speed',
 }
 
---[[
+
 # Tailwind Movement Speed Aura
 # Potential Buff - Do some testing first
 #################################################################################################################
@@ -433,7 +434,7 @@ table.insert(Items.Item_Artifact_080.Abilities, AbilityBlueprint {
 -- Update Tooltip for Aura
 Items.Item_Artifact_080.GetMoveBuff = function(self) return math.floor( Buffs['Item_Artifact_080_Aura'].Affects.MoveMult.Mult * 100) end
 Items.Item_Artifact_080.Tooltip.Auras = '+[GetMoveBuff]% Movement Speed Aura'
-]]
+
 
 
 -- Remove old description variables
@@ -445,7 +446,7 @@ Items.Item_Artifact_080.GetProcManaGain = nil
 #################################################################################################################
 # Stormbringer Rework End
 #################################################################################################################
-
+]]
 
 #################################################################################################################
 # Unmaker Rework
