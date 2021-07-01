@@ -446,7 +446,7 @@ Items.Item_Artifact_080.GetProcManaGain = nil
 #################################################################################################################
 # Stormbringer Rework End
 #################################################################################################################
-
+]]
 
 #################################################################################################################
 # Unmaker Rework
@@ -573,4 +573,3 @@ table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '+[GetManaBonus] Mana')
 -- Description for mana leech
 Items.Item_Artifact_060.GetManaLeechBonus = function(self) return math.floor(Buffs['Item_Artifact_060_ManaLeech'].EnergyReturnPercent * 100) end
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, 'Gain [GetManaLeechBonus]% of your damage in Mana')
-]]
