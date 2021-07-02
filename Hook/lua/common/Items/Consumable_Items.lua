@@ -8,8 +8,6 @@ Ability.Item_Consumable_130.CastAction = 'CastItem1sec'
 Ability.Item_Consumable_130.ChainAffectRadius = 8
 
 -- Schwiegerknecht start
--- Set Warpstone cast to 0.2 seconds (from 0.5 and from instant in BalanceMod1.31)
-Ability.Item_Consumable_070.CastingTime = 0.2
 -- Set Warpstone Cooldown to 30 (from 45)
 Ability.Item_Consumable_070.Cooldown = 30
 -- Increase Sludge Slinger attack speed reduction to 40% (from 30)
