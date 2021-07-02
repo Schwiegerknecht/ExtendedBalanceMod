@@ -158,7 +158,6 @@ Magus Rod:
 Cost: 2500 gold (normally 3250)
 
 Warpstone:
-Cast time: 0.2 (0.5 normally and instant in BalanceMod 1.31)
 Cooldown: 30 (normally 45)
 Cost: 4200 gold (normally 5500)
 
