@@ -48,10 +48,17 @@ Items.Item_Artifact_090.GetCritMult = function(self) return Ability['Item_Artifa
 Items.Item_Artifact_090.Tooltip.Passives = '[GetCritChance]% chance to deal a critical strike for [GetCritMult]x damage.'
 ]]
 
---[[
+
 #################################################################################################################
 # Stormbringer Rework
 #################################################################################################################
+
+-- Remove old description variables
+Items.Item_Artifact_080.GetCooldownBonus = nil
+Items.Item_Artifact_080.GetManaBonus = nil
+Items.Item_Artifact_080.GetManaRegenBonus = nil
+Items.Item_Artifact_080.GetProcManaGain = nil
+
 
 # Lightning Weapon Proc
 #################################################################################################################
@@ -69,14 +76,9 @@ Ability.Item_Artifact_080_WeaponProc.Effects = {
     Group = 'Runes',
     Beams = 'LightningBeam01',
 }
+
 -- Adjust Proc Chance
 Ability.Item_Artifact_080_WeaponProc.WeaponProcChance = 25
-
--- Make WeaponProc call lightning function, thereby deleting old Proc
-Ability.Item_Artifact_080_WeaponProc.OnWeaponProc = function(self, unit, target, damageData)
-    # New Proc
-    ForkThread(self.LightningThread, self, unit, target, damageData)
-end
 
 -- Add lightning function to AbilityBlueprint
 Ability.Item_Artifact_080_WeaponProc.LightningThread = function(self, unit, target, damageData)
@@ -187,6 +189,12 @@ Ability.Item_Artifact_080_WeaponProc.LightningThread = function(self, unit, targ
     beamTrash = nil
 end
 
+-- Make WeaponProc call lightning function, thereby deleting old Proc
+Ability.Item_Artifact_080_WeaponProc.OnWeaponProc = function(self, unit, target, damageData)
+    # New Proc
+    ForkThread(self.LightningThread, self, unit, target, damageData)
+end
+
 -- Update description
 Items.Item_Artifact_080.GetDamageBonus = function(self) return Ability['Item_Artifact_080_WeaponProc'].DamageAmt end
 Items.Item_Artifact_080.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to strike nearby enemies with lightning for [GetDamageBonus] damage.'
@@ -201,8 +209,8 @@ function CallRain( abilityDef, unit, params, projectile )
     if unit:IsDead() then
         return
     end
-        
-        # Number of waves of ice/fire to drop
+    
+    # Number of waves of ice/fire to drop
     for j = 1, abilityDef.NumWaves or 1 do
         local balls = abilityDef.NumFireBalls or 10
         local radius = abilityDef.AffectRadius
@@ -210,7 +218,7 @@ function CallRain( abilityDef, unit, params, projectile )
             local tpos = VDiff(params.Target.Position, unit:GetPosition())
             #local tpos = table.copy(params.Target.Position)
             tpos[2] = 16 + Random(2,8)
-
+            
             local horizontal_angle = (2*math.pi) / balls
             local angleInitial = GetRandomFloat( 0, horizontal_angle )
             local xVec, zVec
@@ -366,6 +374,8 @@ Items.Item_Artifact_080.Description = 'Use: Summon [GetWaves] waves of hail to t
 -- Items.Item_Artifact_080.Tooltip.Bonuses = {}
 -- Items.Item_Artifact_080.Tooltip.ChanceOnHit = {}
 
+
+
 # New Quiet Bonuses
 #################################################################################################################
 
@@ -378,6 +388,7 @@ Items.Item_Artifact_080.Tooltip.Bonuses = {
     '+[GetRateOfFire]% Attack Speed',
 }
 
+--[[
 
 # Tailwind Movement Speed Aura
 # Potential Buff - Do some testing first
@@ -437,12 +448,6 @@ Items.Item_Artifact_080.Tooltip.Auras = '+[GetMoveBuff]% Movement Speed Aura'
 
 
 
--- Remove old description variables
-Items.Item_Artifact_080.GetCooldownBonus = nil
-Items.Item_Artifact_080.GetManaBonus = nil
-Items.Item_Artifact_080.GetManaRegenBonus = nil
-Items.Item_Artifact_080.GetProcManaGain = nil
-
 #################################################################################################################
 # Stormbringer Rework End
 #################################################################################################################
@@ -457,7 +462,7 @@ Items.Item_Artifact_080.GetProcManaGain = nil
 # Make it a non-clickable item
 # BotS ability as Passive
 # New stats: SpellDamageMult, Cooldown reduction, Base Mana
-# Add SpellCostMult affectType (see BuffAffects.lua and ForgeUnit.lua and hero ability files)
+# Perhaps add SpellCostMult affectType (see BuffAffects.lua and ForgeUnit.lua and hero ability files)
 
 
 -- Buffs.Item_Artifact_060_Passive.Affects.SkillDamageMult = {Add = 0.50}
