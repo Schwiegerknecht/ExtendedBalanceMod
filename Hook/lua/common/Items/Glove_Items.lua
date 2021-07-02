@@ -113,7 +113,7 @@ BuffBlueprint {
     Stacks = 'ALWAYS',
     Duration = 0,
     Affects = {
-        Health = {MaxHealthPercent = -0.02},
+        Health = {MaxHealthPercent = -0.015},
     },
     Effects = 'Manadrain01',
     EffectsBone = -2,
