@@ -1,3 +1,5 @@
+-- Make warpstone an instant cast down from 0.5 second cast time
+Ability.Item_Consumable_070.CastingTime = 0
 -- Increase Warlord punisher range to 20 up from 15
 Ability.Item_Consumable_130.RangeMax = 20
 -- Decrease Warlord Punisher casting time to 0.3 from 1
