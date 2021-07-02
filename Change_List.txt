@@ -44,7 +44,7 @@ Cleave Size: 5 (normally 2.5)
 Weapon Damage: 150 (normally 50)
 
 Bulwark of the Ages:
-Damage mitigation 18% (normally 25%)
+Damage mitigation 15% (normally 25%)
 
 Ashkandor:
 Crit damage: x3 (normally x4)
@@ -53,11 +53,11 @@ Stormbringer: =====[REWORK]=====
 All old stats and old passive removed. Stormbringer now brings storm and lightning!
 - WeaponProc: 25% chance on hit to strike nearby enemies with lightning, hitting
 4 enemies for 250 damage each.
-- On Use: Summon 7 waves of hail, doing 200 area damage and slowing movement
-speed of all enemy units by 7% (this slow can stack).
+- On Use: Summon 5 waves of hail, doing 200 area damage and slowing movement
+speed of all enemy units by 10%.
     - Cooldown: 40 seconds.
     - Affect Radius: 8 (TB's Rain of Ice is 10)
-- 25% Attack Speed (normally 0)
+- 20% Attack Speed (normally 0)
 
 Unmaker: =====[REWORK]=====
 All old stats and old passive removed.
@@ -118,7 +118,7 @@ Attack Speed: 10% (normally 0)
 
 Doomspite Grips:
 Attack Speed: 20% (normally 10)
-WeaponProc: On each hit, target loses 2% of its max HP (100% chance). Only applies to enemy Demigods.
+WeaponProc: On each hit, target loses 1.5% of its max HP (100% chance). Only applies to enemy Demigods.
 
 ------------------------------------------------------------
 
@@ -158,7 +158,6 @@ Magus Rod:
 Cost: 2500 gold (normally 3250)
 
 Warpstone:
-Cast time: 0.2 (0.5 normally and instant in BalanceMod 1.31)
 Cooldown: 30 (normally 45)
 Cost: 4200 gold (normally 5500)
 
@@ -340,4 +339,3 @@ Citadel Upgrades:
 
 -Gold2 = Produce 4 gold (normally 2)
 -Gold3 = Produce 4 gold (normally 2)
-

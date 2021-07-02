@@ -11,8 +11,8 @@ Buffs.Item_Artifact_050.Affects.Evasion.Add = 20
 -- Decrease Ashkandor crit damage to x3, down from x4
 Ability.Item_Artifact_100_Crit.CritMult = 3.0
 
--- Decrease damage mitigation of Bulwark of the Ages to 18%, down from 25%
-Buffs.Item_Artifact_120.Affects.DamageTakenMult = {Add = -0.18}
+-- Decrease damage mitigation of Bulwark of the Ages to 15%, down from 25%
+Buffs.Item_Artifact_120.Affects.DamageTakenMult = {Add = -0.15}
 
 -- Orb of Veiled Storms: lower cooldown to 30 (from 45), increase range to 15 (from 10) and add 12 Mana regen (from 0)
 Ability.Item_Artifact_110.Cooldown = 30
@@ -296,10 +296,10 @@ BuffBlueprint {
     Debuff = true,
     CanBeDispelled = true,
     EntityCategory = 'MOBILE',
-    Stacks = 'ALWAYS', -- use 'ALWAYS' for slow that stacks for each wave, 'REPLACE' for singular slow
+    Stacks = 'REPLACE', -- use 'ALWAYS' for slow that stacks for each wave, 'REPLACE' for singular slow
     Duration = 5,
     Affects = {
-        MoveMult = {Mult = -0.07},
+        MoveMult = {Mult = -0.10},
     },
     Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
 }
@@ -344,7 +344,7 @@ table.insert(Items.Item_Artifact_080.Abilities, 1, AbilityBlueprint {
     DamageAmt = 200,
     AffectRadius = 8,
     NumFireBalls = 5,
-    NumWaves = 7,
+    NumWaves = 5,
     DamageType = 'SpellFire',
     Buff1 = 'Item_Artifact_080_Slow',
     Buff2 = 'Item_Artifact_080_FreezeSlowFx01',
@@ -381,7 +381,7 @@ Items.Item_Artifact_080.Description = 'Use: Summon [GetWaves] waves of hail to t
 
 -- Replace old Quiet Bonuses with Attack Speed, adjust Tooltip
 Buffs.Item_Artifact_080.Affects = {
-    RateOfFire = {Mult = 0.25},
+    RateOfFire = {Mult = 0.20},
 }
 Items.Item_Artifact_080.GetRateOfFire = function(self) return math.floor(Buffs['Item_Artifact_080'].Affects.RateOfFire.Mult * 100) end
 Items.Item_Artifact_080.Tooltip.Bonuses = {

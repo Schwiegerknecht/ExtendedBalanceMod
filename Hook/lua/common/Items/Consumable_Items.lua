@@ -1,3 +1,5 @@
+-- Make warpstone an instant cast down from 0.5 second cast time
+Ability.Item_Consumable_070.CastingTime = 0
 -- Increase Warlord punisher range to 20 up from 15
 Ability.Item_Consumable_130.RangeMax = 20
 -- Decrease Warlord Punisher casting time to 0.3 from 1
@@ -8,8 +10,6 @@ Ability.Item_Consumable_130.CastAction = 'CastItem1sec'
 Ability.Item_Consumable_130.ChainAffectRadius = 8
 
 -- Schwiegerknecht start
--- Set Warpstone cast to 0.2 seconds (from 0.5 and from instant in BalanceMod1.31)
-Ability.Item_Consumable_070.CastingTime = 0.2
 -- Set Warpstone Cooldown to 30 (from 45)
 Ability.Item_Consumable_070.Cooldown = 30
 -- Increase Sludge Slinger attack speed reduction to 40% (from 30)
