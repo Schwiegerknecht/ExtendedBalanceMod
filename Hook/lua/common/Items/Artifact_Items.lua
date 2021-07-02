@@ -199,13 +199,13 @@ end
 Items.Item_Artifact_080.GetDamageBonus = function(self) return Ability['Item_Artifact_080_WeaponProc'].DamageAmt end
 Items.Item_Artifact_080.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to strike nearby enemies with lightning for [GetDamageBonus] damage.'
 
---[[
-    # New Active Ability Rain of Ice
-    #################################################################################################################
-    -- New active ability that summons a hail storm
-    
-    -- Rain of Ice function
-    function CallRain( abilityDef, unit, params, projectile )
+
+# New Active Ability Rain of Ice
+#################################################################################################################
+-- New active ability that summons a hail storm
+
+-- Rain of Ice function
+function CallRain( abilityDef, unit, params, projectile )
     if unit:IsDead() then
         return
     end
@@ -374,7 +374,7 @@ Items.Item_Artifact_080.Description = 'Use: Summon [GetWaves] waves of hail to t
 -- Items.Item_Artifact_080.Tooltip.Bonuses = {}
 -- Items.Item_Artifact_080.Tooltip.ChanceOnHit = {}
 
-]]
+
 
 # New Quiet Bonuses
 #################################################################################################################
@@ -462,7 +462,7 @@ Items.Item_Artifact_080.Tooltip.Auras = '+[GetMoveBuff]% Movement Speed Aura'
 # Make it a non-clickable item
 # BotS ability as Passive
 # New stats: SpellDamageMult, Cooldown reduction, Base Mana
-# Add SpellCostMult affectType (see BuffAffects.lua and ForgeUnit.lua and hero ability files)
+# Perhaps add SpellCostMult affectType (see BuffAffects.lua and ForgeUnit.lua and hero ability files)
 
 
 -- Buffs.Item_Artifact_060_Passive.Affects.SkillDamageMult = {Add = 0.50}
