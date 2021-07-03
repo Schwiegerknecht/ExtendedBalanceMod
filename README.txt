@@ -1,7 +1,7 @@
 # ExtendedBalanceMod_v0.1
 A very first version to test out. (A multiplier for Spell Damage is not
 implemented yet, but pretty much everything else I planned for testing is
-there.)
+there. And at a first glance, that multiplier might not even be necessary.)
 
 # Download and Installation: 
 - Go to: https://github.com/Schwiegerknecht/ExtendedBalanceMod_v0.1
