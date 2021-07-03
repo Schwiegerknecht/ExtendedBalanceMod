@@ -184,7 +184,7 @@ Cooldown: 40 seconds
 Currency income: 3/6/9 (from 4/8/12 in BalanceMod 1.31, normally 4/6/8)
 
 Building Firepower:
-Level 2, 3 and 4 give towers 2 additional range each.
+Level 2, 3 and 4 each give towers 2 additional range.
 
 Finger of God:
 Cooldown: 30 seconds (normally 60)
