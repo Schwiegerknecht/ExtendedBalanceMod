@@ -127,7 +127,7 @@ Ability.Item_Glove_050_WeaponProc.OnWeaponProc = function(self, unit, target, da
     end
 end
 -- Update Tooltip
-Items.Item_Glove_050.GetHealthDrain = function(self) return math.floor(Buffs.Item_Glove_050_Drain.Affects.Health.MaxHealthPercent * 100 * -1) end
+Items.Item_Glove_050.GetHealthDrain = function(self) return math.floor(Buffs.Item_Glove_050_Drain.Affects.Health.MaxHealthPercent * 1000 * -1) / 10 end
 Items.Item_Glove_050.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to make the target lose [GetHealthDrain]% of its maximum health'
 
 -- Doomspite Grips: Increase Attack Speed to 20% (normally 10)
