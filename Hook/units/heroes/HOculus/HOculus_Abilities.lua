@@ -4,7 +4,6 @@
 
 Ability.HOculusSacrifice01.AreaHeal = function(self, unit, data)
     if data.Amount > self.MinHit then
-        Buff.ApplyBuff(unit, 'HOculusSacrificeDebuff01', unit)
         
         local HealAmt = data.Amount * self.PercentHeal
         local pos = unit:GetPosition()
