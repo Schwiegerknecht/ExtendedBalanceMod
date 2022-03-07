@@ -6,13 +6,28 @@
 v.0.2
 ############################################################
 
-Potential Changes/Ideas: 
+Potential Changes/Ideas:
+------------------------
 
 Capture Lock: Revert duration, increase cast time instead
 
 Rook: lower Tower of Light HP by 10-15%
 Oak: Decrease Shield duration by 1-1.5 seconds.
 (Perhaps reduce cost for small potions (especially mana potions), since they barely get used.)
+Oculus:
+  Ideas to make the barely used abilities viable compared to dmg build:
+- minions explode upon death
+- mana aura
+- mana drain
+- probably buff king of the minotaurs in general; maybe tanky minion build with sacrifice?
+- lightning damage reflect
+
+# Demigods
+############################################################
+
+Oculus:
+Sacrifice now works as advertised. (Radius = 10)
+
 
 ############################################################
 # v. 0.1
@@ -39,9 +54,9 @@ TB:
 Just for ease of access, stance switch times are now accessible via
 Ability.HEMA01SwitchIce.SwitchDuration and
 Ability.HEMA01SwitchFire.SwitchDuration, respectively (via
-HEMA01_Abilities.lua). No change to switch times. Although interestingly when
+HEMA01_Abilities.lua). No change to switch times. (Fun fact: When
 switching to Fire stance he is immobile and silenced for that amount of time,
-while he only is silenced when switching to Ice stance.
+while he only is silenced when switching to Ice stance.)
 
 # Items
 ############################################################
