@@ -12,3 +12,31 @@ Buffs.HSednaInspiringRoar.Duration = 10
 
 -- Increase Wild Swing Radius to 3
 Buffs.HSednaWildSwings.Affects.DamageRadius.Add = 3
+
+
+-- Schwiegerknecht start
+
+-- Increase Yeti armor
+Buffs.HSednaYetiBuff02.Affects.Armor  = {Add = 50}
+Buffs.HSednaYetiBuff03.Affects.Armor  = {Add = 100}
+Buffs.HSednaYetiBuff04.Affects.Armor  = {Add = 150}
+
+-- Reduce mana cost of Horn of the Yeti
+Ability.HSednaYeti01.EnergyCost = 525
+Ability.HSednaYeti02.EnergyCost = 650
+Ability.HSednaYeti03.EnergyCost = 775
+Ability.HSednaYeti04.EnergyCost = 900
+
+-- Adjust descriptions to make changes clearer
+Ability.HSednaYeti02.GetYetiHP = function(self) return math.floor ( Buffs.HSednaYetiBuff02.Affects.MaxHealth.Add) end
+Ability.HSednaYeti02.GetYetiArmor = function(self) return math.floor ( Buffs.HSednaYetiBuff02.Affects.Armor.Add) end
+Ability.HSednaYeti03.GetYetiHP = function(self) return math.floor ( Buffs.HSednaYetiBuff03.Affects.MaxHealth.Add) end
+Ability.HSednaYeti03.GetYetiArmor = function(self) return math.floor ( Buffs.HSednaYetiBuff03.Affects.Armor.Add) end
+Ability.HSednaYeti04.GetYetiHP = function(self) return math.floor ( Buffs.HSednaYetiBuff04.Affects.MaxHealth.Add) end
+Ability.HSednaYeti04.GetYetiArmor = function(self) return math.floor ( Buffs.HSednaYetiBuff04.Affects.Armor.Add) end
+
+Ability.HSednaYeti02.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
+Ability.HSednaYeti03.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
+Ability.HSednaYeti04.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
+
+__moduleinfo.auto_reload = true

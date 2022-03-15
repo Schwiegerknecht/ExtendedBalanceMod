@@ -28,6 +28,15 @@ Oculus:
 Oculus:
 Sacrifice now works as advertised. (Radius = 10)
 
+Rook:
+
+Energizer adds a debuff immunity while channeling.
+
+Sedna:
+
+Yetis gain 0/50/100/150 armor (from 0/0/0/0)
+Yetis cost 525/650/775/900 mana (from 550/750/950/1150)
+
 
 ############################################################
 # v. 0.1
@@ -276,98 +285,98 @@ NightCrawler Turn Rate 360 (normally 180)
 Items
 
 Boots
--Sabatons: Cost 400 (normally 600)
--Assassin's footguard: 10% Chance to do 1.5X critical (normally no critical hit chance)
--Iron Walkers +450 Armor +1050 Mana (normally no armor / mana)
--Desperate Boots: Activate on 50% Health (normally 30%) dodge 30% (normally 20%)
+- Sabatons: Cost 400 (normally 600)
+- Assassin's footguard: 10% Chance to do 1.5X critical (normally no critical hit chance)
+- Iron Walkers +450 Armor +1050 Mana (normally no armor / mana)
+- Desperate Boots: Activate on 50% Health (normally 30%) dodge 30% (normally 20%)
 
 Helms
--Plate Visor: +260 Mana (normally no mana)
--Theurgist's Hat: +70% mana, 10% proc (normally 35% mana / 5% proc)
--Vinling Helm: 5% proc effect (up from 3%)
+- Plate Visor: +260 Mana (normally no mana)
+- Theurgist's Hat: +70% mana, 10% proc (normally 35% mana / 5% proc)
+- Vinling Helm: 5% proc effect (up from 3%)
 
 Armor
--Armor of Vengenance: +10 life per second (normally no life per second)
--Groffling Warplate: Proc chance 5% (up from 1%)
--Platemail of the Crusader: Proc Chance 3% (up from 1%)
+- Armor of Vengenance: +10 life per second (normally no life per second)
+- Groffling Warplate: Proc chance 5% (up from 1%)
+- Platemail of the Crusader: Proc Chance 3% (up from 1%)
 
 Gloves
--Gauntlet's of Depair: Mana drain 525 (up from 300)
--Slayer's Wraps: Damage 35 (normally 30)
--DoomSpite: Cleave Radius 3 (normally 1.5) Proc Chance 50/33 (up from 25/16)
+- Gauntlet's of Depair: Mana drain 525 (up from 300)
+- Slayer's Wraps: Damage 35 (normally 30)
+- DoomSpite: Cleave Radius 3 (normally 1.5) Proc Chance 50/33 (up from 25/16)
 
 Trinkets
--Blood Stone Ring Cost 1250, LifeSteal 4% (normally 3%)
--Warlord's Punisher: Range = 20 (up from 15), 0.3 cast time (normally 1), chain radius 8 (normally 5)
--Ring of the Ancients: +10% Attack Speed (normally no attack speed)
--WarpStone: Instant Cast (normally 0.3 Second Cast)
+- Blood Stone Ring Cost 1250, LifeSteal 4% (normally 3%)
+- Warlord's Punisher: Range = 20 (up from 15), 0.3 cast time (normally 1), chain radius 8 (normally 5)
+- Ring of the Ancients: +10% Attack Speed (normally no attack speed)
+- WarpStone: Instant Cast (normally 0.3 Second Cast)
 
 Consumables
--Robust Rejuv: Cost 400 (normally 450)
--Hex Scroll: Cost 150 (normally 250)
--Scroll of Restoration: Cost 150 (normally 250)
+- Robust Rejuv: Cost 400 (normally 450)
+- Hex Scroll: Cost 150 (normally 250)
+- Scroll of Restoration: Cost 150 (normally 250)
 
 Artifact Consumables
--Enhanced Health: Cost 400 (normally 800)
--Enhanced Mana: Cost 400 (normally 1000)
--Revitalization Elixir: Cost 500 (normally 1000)
--Supreme Health: Cost 750 (normally 1200)
--Supreme Mana: Cost 750 (normally 1500)
--Supreme Revitalization Elixir: Cost 900 (normally 1500)
+- Enhanced Health: Cost 400 (normally 800)
+- Enhanced Mana: Cost 400 (normally 1000)
+- Revitalization Elixir: Cost 500 (normally 1000)
+- Supreme Health: Cost 750 (normally 1200)
+- Supreme Mana: Cost 750 (normally 1500)
+- Supreme Revitalization Elixir: Cost 900 (normally 1500)
 
 Artifacts:
--Cloak of Elfinkind: Dodge 20 (normally 15)
+- Cloak of Elfinkind: Dodge 20 (normally 15)
 
 Favor Items:
 
 Standard
--Goggles: 10% chance to do 1.5x damage (normally no crit chance)
--Charm of Life +10 Health Per Second (normally 5)
--Brilliant Bauble: +250 Health +175 mana (normally none)
--Blood of the Fallen +600 life (normally +800)
--Staff of the Warmage: +1050 mana (normally 800)
--Diamond Pendant: Mana 525 (up from 250) Cooldown 13% (up from 10%)
--Amulet of Teleportation: Cooldown 30 (normally 45)
--Cape of Plentiful Magic: Radius 15 (normally 8)
--Saam-Els Cloak: +10% Movement (up from +5%)
--Wings of the Seraphim: Radius 15 (normally radius 8) 
+- Goggles: 10% chance to do 1.5x damage (normally no crit chance)
+- Charm of Life +10 Health Per Second (normally 5)
+- Brilliant Bauble: +250 Health +175 mana (normally none)
+- Blood of the Fallen +600 life (normally +800)
+- Staff of the Warmage: +1050 mana (normally 800)
+- Diamond Pendant: Mana 525 (up from 250) Cooldown 13% (up from 10%)
+- Amulet of Teleportation: Cooldown 30 (normally 45)
+- Cape of Plentiful Magic: Radius 15 (normally 8)
+- Saam-Els Cloak: +10% Movement (up from +5%)
+- Wings of the Seraphim: Radius 15 (normally radius 8) 
 
 Assassin
--Poison Dagger: 10% Attack Speed (normally 5%)
--Essence of Magic: Cooldown 30 (normally 45)
--Furious Blade: +250 Life (normally +100)
+- Poison Dagger: 10% Attack Speed (normally 5%)
+- Essence of Magic: Cooldown 30 (normally 45)
+- Furious Blade: +250 Life (normally +100)
 
 Generals
--Chared Totem of War: Damage 30, Minion Attack Speed 5% (normally 15 damage, no minion attack speed)
--Pendant of Grace: +20 dodge for demigod and minions (normally +10% for demigods, +15% for minions)
--Horn of Battle: +100 Minion life over 10 seconds (normally 50 life over 20 sec)
--Blood Soaked Wand: 1 second cast (normally 2 seconds)
--Cloak of the Night: Cooldown 45 (normally 60)
+- Chared Totem of War: Damage 30, Minion Attack Speed 5% (normally 15 damage, no minion attack speed)
+- Pendant of Grace: +20 dodge for demigod and minions (normally +10% for demigods, +15% for minions)
+- Horn of Battle: +100 Minion life over 10 seconds (normally 50 life over 20 sec)
+- Blood Soaked Wand: 1 second cast (normally 2 seconds)
+- Cloak of the Night: Cooldown 45 (normally 60)
 
 Reinforcements:
 
--Angels
+- Angels
 Damage 90 (normally 45)
 Targeting Prioirty: Catapultasauri -> Priests -> Everything
 
--Catapultasauri
+- Catapultasauri
 Targeting Priority: Demigods -> Structures -> Everything
 
--Priests
+- Priests
 Targeting Priority: Demigods -> Structures -> Everything
 
 Citadel Upgrades:
--Armory1 = 500 (normally 600
--Armory2 = 1500 (normally 1800)	
--Armory3 = 2500 (normally 3000)
--Armory4 = 3500 (normally 4800)
+- Armory1 = 500 (normally 600
+- Armory2 = 1500 (normally 1800)	
+- Armory3 = 2500 (normally 3000)
+- Armory4 = 3500 (normally 4800)
 
--GraveYard1 = 500 (normally 600)
--GraveYard2 - 1500 (normally 1800)
--Graveyard3 = 3500 (normally 5400)
+- GraveYard1 = 500 (normally 600)
+- GraveYard2 - 1500 (normally 1800)
+- Graveyard3 = 3500 (normally 5400)
 
--Trebuchets = 2500 (normally 3200)
--Finger of God = 3500 (normally 4000)
+- Trebuchets = 2500 (normally 3200)
+- Finger of God = 3500 (normally 4000)
 
--Gold2 = Produce 4 gold (normally 2)
--Gold3 = Produce 4 gold (normally 2)
+- Gold2 = Produce 4 gold (normally 2)
+- Gold3 = Produce 4 gold (normally 2)
