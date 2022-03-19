@@ -1,0 +1,53 @@
+MeshBlueprint {
+    IconFadeInZoom = 1000,
+    LODs = {
+        {
+            MeshName = '/../../../../../characters/Vampire/Vampire_MESH.gr2',      #23skinned bones
+            AlbedoName = '/characters/Vampire/Vampire_albedo.dds',
+            NormalsName = '/characters/Vampire/Vampire_normalsTS.dds',
+            SpecularName = '/characters/Vampire/Vampire_specteam.dds',
+            AdditiveName = '/characters/Sniper/additive.dds',
+            MultiplicativeName = '/characters/Sniper/multiplicative.dds',
+            LODMin = 0,
+            LODCutoff = 30,
+            ShaderName = 'Unit',
+            Silhouette = true,
+        },
+        {
+            MeshName = '/../../../../../characters/Vampire/Vampire_lod1_MESH.gr2',     #13skinned bones
+            AlbedoName = '/characters/Vampire/Vampire_albedo.dds',
+            NormalsName = '/characters/Vampire/Vampire_normalsTS.dds',
+            SpecularName = '/characters/Vampire/Vampire_specteam.dds',
+            AdditiveName = '/characters/Sniper/additive.dds',
+            MultiplicativeName = '/characters/Sniper/multiplicative.dds',
+            LODMin = 30,
+            LODCutoff = 60,
+            ShaderName = 'Unit',
+            Silhouette = true,
+        },
+        {
+            MeshName = '/../../../../../characters/Vampire/Vampire_lod2_MESH.gr2',         #8skinned bones
+            AlbedoName = '/characters/Vampire/Vampire_albedo.dds',
+            NormalsName = '/characters/Vampire/Vampire_normalsTS.dds',
+            SpecularName = '/characters/Vampire/Vampire_specteam.dds',
+            AdditiveName = '/characters/Sniper/additive.dds',
+            MultiplicativeName = '/characters/Sniper/multiplicative.dds',
+            LODMin = 60,
+            LODCutoff = 100,
+            ShaderName = 'Unit',
+            Silhouette = true,
+        },
+        {
+            MeshName = '/../../../../../characters/Vampire/Vampire_lod3_MESH.gr2',     #8skinned bones
+            AlbedoName = '/characters/Vampire/Vampire_albedo.dds',
+            NormalsName = '/characters/Vampire/Vampire_normalsTS.dds',
+            SpecularName = '/characters/Vampire/Vampire_specteam.dds',
+            AdditiveName = '/characters/Sniper/additive.dds',
+            MultiplicativeName = '/characters/Sniper/multiplicative.dds',
+            LODMin = 100,
+            LODCutoff = 1000,
+            ShaderName = 'Unit',
+            Silhouette = true,
+        },
+    },
+}
