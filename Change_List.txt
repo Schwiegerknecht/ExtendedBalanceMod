@@ -12,7 +12,9 @@ Potential Changes/Ideas:
 Capture Lock: Revert duration, increase cast time instead
 
 Rook: lower Tower of Light HP by 10-15%
+
 Oak: Decrease Shield duration by 1-1.5 seconds.
+
 (Perhaps reduce cost for small potions (especially mana potions), since they barely get used.)
 Oculus:
   Ideas to make the barely used abilities viable compared to dmg build:
@@ -21,6 +23,14 @@ Oculus:
 - mana drain
 - probably buff king of the minotaurs in general; maybe tanky minion build with sacrifice?
 - lightning damage reflect
+
+Erebus: Make Army of the Night attractive with some sort of Elite Nightcrawlers
+(fewer, but stronger)
+    -- Requirements/TODO: If they should be bigger visually create mesh.bp and
+    character.lua with modified DrawScales in the /character folder. Create a
+    script.lua and unit.bp in Heroes/HVampire and call those via the functions
+    RaiseVampire and Coven in HVampire_Abilities.lua. Otherwise just give them a
+    buff via Army of the Night.
 
 # Demigods
 ############################################################
@@ -34,8 +44,8 @@ Energizer adds a debuff immunity while channeling.
 
 Sedna:
 
-Yetis gain 0/50/100/150 armor (from 0/0/0/0)
-Yetis cost 525/650/775/900 mana (from 550/750/950/1150)
+Yeti gain 0/50/100/150 armor (from 0/0/0/0)
+Yeti cost 525/650/775/900 mana (from 550/750/950/1150)
 
 
 ############################################################
