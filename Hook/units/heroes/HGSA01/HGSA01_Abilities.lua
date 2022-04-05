@@ -27,3 +27,50 @@ Buffs.HGSA01Maim03.Affects.MoveMult.Mult = -0.15
  
 --Increase Deadeye Proc Chance to 10% normally 3
 Ability.HGSA01Deadeye01.WeaponProcChance = 10
+
+-- Schwiegerknecht start
+
+-- Vengeance gives Movement Speed to allies on activating Angelic Fury
+
+-- Movement Speed buff
+BuffBlueprint {
+    Name = 'HGSA01VeangeanceAllyBuff',
+    DisplayName = 'Vengeance',
+    Description = 'Movement Speed increased.',
+    BuffType = 'HGSA01FURYALLY',
+    Debuff = false,
+    Stacks = 'ALWAYS',
+    Duration = 10,
+    Affects = {
+        MoveMult = {Mult = .25},
+    },
+    Icon = '/DGRegulus/NewRegulusAngelicFury01',
+}
+Ability.HGSA01AngelicFuryOn.VengBuffAffectRadius = 15
+-- Apply the buff when activating Angelic Fury
+Ability.HGSA01AngelicFuryOn.OnStartAbility = function(self, unit, params)
+    # Manages adding the proper buff and proc
+    AngelicFuryFunctionalityEntrance(unit)
+    # Determines if we should do the damaging mode change or the normal.
+    if Validate.HasAbility(unit,'HGSA01Vengeance01') then
+        local thd = ForkThread(VengeanceThread, self, unit, params)
+        unit.Trash:Add(thd)
+
+        Buff.ApplyBuff(unit, 'HGSA01VeangeanceAllyBuff', unit)
+        
+        -- Add Buff to allies, taken from Surge of Faith -- Schwiegerknecht
+        local pos = table.copy(unit:GetPosition())
+        #local aiBrain = unit:GetAIBrain()
+        #local army = unit:GetArmy()
+
+        local entities = GetEntitiesInSphere("UNITS", table.copy(unit:GetPosition()), self.VengBuffAffectRadius)
+        for k,entity in entities do
+            if IsAlly(unit:GetArmy(), entity:GetArmy()) and not entity:IsDead() and not EntityCategoryContains(categories.NOBUFFS, entity) and not EntityCategoryContains(categories.UNTARGETABLE, entity) then
+                Buff.ApplyBuff(entity, 'HGSA01VeangeanceAllyBuff', unit)
+            end
+        end
+    else
+        local thd = ForkThread(AngelicFuryEnter, self, unit, params)
+        unit.Trash:Add(thd)
+    end
+end
