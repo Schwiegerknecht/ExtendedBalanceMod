@@ -28,26 +28,50 @@ Buffs.HGSA01Maim03.Affects.MoveMult.Mult = -0.15
 --Increase Deadeye Proc Chance to 10% normally 3
 Ability.HGSA01Deadeye01.WeaponProcChance = 10
 
+
 -- Schwiegerknecht start
 
--- Vengeance gives Movement Speed to allies on activating Angelic Fury
+-- Vengeance gives 25% Movement Speed to allies on activating Angelic Fury and decreases enemy Attack Speed by 20%
 
--- Movement Speed buff
+-- Ally Movement Speed buff
 BuffBlueprint {
     Name = 'HGSA01VeangeanceAllyBuff',
     DisplayName = 'Vengeance',
     Description = 'Movement Speed increased.',
     BuffType = 'HGSA01FURYALLY',
     Debuff = false,
-    Stacks = 'ALWAYS',
+    Stacks = 'REPLACE',
     Duration = 10,
     Affects = {
         MoveMult = {Mult = .25},
     },
-    Icon = '/DGRegulus/NewRegulusAngelicFury01',
+    Icon = '/DGRegulus/NewRegulusvengence01',
 }
-Ability.HGSA01AngelicFuryOn.VengBuffAffectRadius = 15
--- Apply the buff when activating Angelic Fury
+-- Enemy Attack Speed debuff
+BuffBlueprint {
+    Name = 'HGSA01VeangeanceEnemyDebuff',
+    DisplayName = 'Vengeance',
+    Description = 'Attack Speed decreased.',
+    BuffType = 'HGSA01FURYENEMY',
+    Debuff = true,
+    Stacks = 'REPLACE',
+    Duration = 10,
+    Affects = {
+        RateOfFire = {Mult = -0.20},
+    },
+    Icon = '/DGRegulus/NewRegulusvengence01',
+}
+
+-- Set Range to be the same for both allied buff and enemy debuff
+Ability.HGSA01Vengeance01.VengBuffAffectRadius = 150
+Ability.HGSA01AngelicFuryOn.VengAllyBuffAffectRadius = Ability.HGSA01Vengeance01.VengBuffAffectRadius
+Ability.HGSA01AngelicFuryOff.VengEnemyBuffAffectRadius = Ability.HGSA01Vengeance01.VengBuffAffectRadius
+-- Setting common duration doesn't work, BuffName.Duration only seems to take integers.
+-- Ability.HGSA01Vengeance01.VengBuffDuration = 5
+-- Ability.HGSA01AngelicFuryOn.VengAllyBuffDuration = Ability.HGSA01Vengeance01.VengBuffDuration
+-- Ability.HGSA01AngelicFuryOff.VengEnemyBuffDuration = Ability.HGSA01Vengeance01.VengBuffDuration
+
+-- Apply the ally buff when activating Angelic Fury
 Ability.HGSA01AngelicFuryOn.OnStartAbility = function(self, unit, params)
     # Manages adding the proper buff and proc
     AngelicFuryFunctionalityEntrance(unit)
@@ -58,12 +82,10 @@ Ability.HGSA01AngelicFuryOn.OnStartAbility = function(self, unit, params)
 
         Buff.ApplyBuff(unit, 'HGSA01VeangeanceAllyBuff', unit)
         
-        -- Add Buff to allies, taken from Surge of Faith -- Schwiegerknecht
+        -- Add Buff to allies, taken from Mass Charm -- Schwiegerknecht
         local pos = table.copy(unit:GetPosition())
-        #local aiBrain = unit:GetAIBrain()
-        #local army = unit:GetArmy()
 
-        local entities = GetEntitiesInSphere("UNITS", table.copy(unit:GetPosition()), self.VengBuffAffectRadius)
+        local entities = GetEntitiesInSphere("UNITS", table.copy(unit:GetPosition()), self.VengAllyBuffAffectRadius)
         for k,entity in entities do
             if IsAlly(unit:GetArmy(), entity:GetArmy()) and not entity:IsDead() and not EntityCategoryContains(categories.NOBUFFS, entity) and not EntityCategoryContains(categories.UNTARGETABLE, entity) then
                 Buff.ApplyBuff(entity, 'HGSA01VeangeanceAllyBuff', unit)
@@ -74,3 +96,32 @@ Ability.HGSA01AngelicFuryOn.OnStartAbility = function(self, unit, params)
         unit.Trash:Add(thd)
     end
 end
+-- Apply enemy debuff when deactivating Angelic Fury
+Ability.HGSA01AngelicFuryOff.OnStartAbility = function(self, unit, params)
+    # Manages ending the buff
+    AngelicFuryFunctionalityEnd(unit)
+    local thd = ForkThread(AngelicFuryExit, self, unit, params)
+    unit.Trash:Add(thd)
+
+    -- Add Debuff to enemies -- Schwiegerknecht
+    if Validate.HasAbility(unit,'HGSA01Vengeance01') then
+        local pos = table.copy(unit:GetPosition())
+
+        local entities = GetEntitiesInSphere("UNITS", table.copy(unit:GetPosition()), self.VengEnemyBuffAffectRadius)
+        for k,entity in entities do
+            if IsEnemy(unit:GetArmy(), entity:GetArmy()) and not entity:IsDead() and not EntityCategoryContains(categories.NOBUFFS, entity) and not EntityCategoryContains(categories.UNTARGETABLE, entity) then
+                Buff.ApplyBuff(entity, 'HGSA01VeangeanceEnemyDebuff', unit)
+            end
+        end
+    end
+end
+
+-- Add description
+Ability.HGSA01Vengeance01.GetAllySpeed = function(self) return math.floor( Buffs['HGSA01VeangeanceAllyBuff'].Affects.MoveMult.Mult * 100) end
+Ability.HGSA01Vengeance01.GetEnemyAtkDebuff = function(self) return math.floor( Buffs['HGSA01VeangeanceEnemyDebuff'].Affects.RateOfFire.Mult * 100 * -1) end
+
+Ability.HGSA01Vengeance01.GetVengBuffRadius = function(self) return math.floor( Ability['HGSA01Vengeance01'].VengBuffAffectRadius) end
+-- Ability.HGSA01Vengeance01.GetVengBuffDuration = function(self) return math.floor( Ability['HGSA01Vengeance01'].VengBuffDuration) end
+Ability.HGSA01Vengeance01.GetVengAllyBuffDuration = function(self) return math.floor( Buffs['HGSA01VeangeanceAllyBuff'].Duration) end
+Ability.HGSA01Vengeance01.GetVengEnemyBuffDuration = function(self) return math.floor( Buffs['HGSA01VeangeanceEnemyDebuff'].Duration) end
+Ability.HGSA01Vengeance01.Description = 'When Regulus uses Angelic Fury, he unleashes a nova of holy power around him, dealing [GetDamage] damage and sending nearby enemies flying. He also increases his and allies\' Movement Speed by [GetAllySpeed]% for [GetVengAllyBuffDuration] seconds when entering this state and decreases enemies\' Attack Speed by [GetEnemyAtkDebuff]% for [GetVengEnemyBuffDuration] seconds when leaving the state. These effects are applied in range [GetVengBuffRadius].'

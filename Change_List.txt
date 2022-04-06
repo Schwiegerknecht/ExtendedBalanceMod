@@ -38,8 +38,13 @@ Erebus: Make Army of the Night attractive with some sort of Elite Nightcrawlers
 Oculus:
 Sacrifice now works as advertised. (Radius = 10)
 
-Rook:
+Regulus:
+Vengeance now adds a Movement Speed buff to Regulus and his allies when he activates Angelic Fury.
+- 25% Movement Speed (15 Range, 10 Duration)
+Vengeance now adds a Attack Speed debuff to enemies when Regulus exits Angelic Fury.
+- -20% Attack Speed (15 Range, 10 Duration)
 
+Rook:
 Energizer adds a debuff immunity while channeling.
 
 Sedna:
