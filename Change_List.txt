@@ -15,6 +15,8 @@ Rook: lower Tower of Light HP by 10-15%
 
 Oak: Decrease Shield duration by 1-1.5 seconds.
 
+UB: Potential Ooze Nerf - increase own HP lost per tick to however much enemies take
+
 (Perhaps reduce cost for small potions (especially mana potions), since they barely get used.)
 Oculus:
   Ideas to make the barely used abilities viable compared to dmg build:
@@ -38,14 +40,21 @@ Erebus: Make Army of the Night attractive with some sort of Elite Nightcrawlers
 Oculus:
 Sacrifice now works as advertised. (Radius = 10)
 
-Rook:
+Regulus:
+Vengeance: 15 damage radius (normally 10)
+Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
+- 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
+- 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
+Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
+- -20% Attack Speed (15 Range, 10 Duration)
 
+Rook:
 Energizer adds a debuff immunity while channeling.
 
 Sedna:
 
-Yeti gain 0/50/100/150 armor (from 0/0/0/0)
-Yeti cost 525/650/775/900 mana (from 550/750/950/1150)
+Yeti: 0/50/100/150 armor (from 0/0/0/0)
+Yeti: 525/650/775/900 mana cost (from 550/750/950/1150)
 
 
 ############################################################
