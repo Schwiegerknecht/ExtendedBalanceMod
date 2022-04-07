@@ -55,7 +55,7 @@ table.insert(Items.AchievementMana.Abilities, AbilityBlueprint {
 Buffs.AchievementMana.Affects.EnergyRegen = {Add = 4}
 -- Add description
 Items.AchievementMana.GetManaRegenBonus = function(self) return Buffs['AchievementMana'].Affects.EnergyRegen.Add end
-Items.AchievementMana.GetAuraPulseRegen = function(self) return math.floor(Buffs['AchievementMana_PulseRegen'].Affects.EnergyRegen.Add * 10) / 10 end
+Items.AchievementMana.GetAuraPulseRegen = function(self) return string.format("%.1f", Buffs['AchievementMana_PulseRegen'].Affects.EnergyRegen.Add) end
 Items.AchievementMana.GetAuraPulseTime = function(self) return Ability['AchievementMana_Aura'].AuraPulseTime end
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana Regen')
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetAuraPulseRegen] Mana Regen every [GetAuraPulseTime] seconds')
