@@ -31,8 +31,11 @@ Ability.HGSA01Deadeye01.WeaponProcChance = 10
 
 -- Schwiegerknecht start
 
--- Vengeance gives 25% Movement Speed to allies on activating Angelic Fury and decreases enemy Attack Speed by 20%
+-- Increase Vengeance Damage radius from 10 to 15 to better match the animation
+Ability.HGSA01AngelicFuryOn.VengAffectRadius = 15
 
+-- Vengeance gives 25% Movement Speed to allies on activating Angelic Fury and decreases enemy Attack Speed by 20%.
+-- Regulus also gains 25% Attack Speed and 45 Weapon Damage for himself.
 -- Ally Movement Speed buff
 BuffBlueprint {
     Name = 'HGSA01VeangeanceAllyBuff',
@@ -43,7 +46,22 @@ BuffBlueprint {
     Stacks = 'REPLACE',
     Duration = 10,
     Affects = {
-        MoveMult = {Mult = .25},
+        MoveMult = {Mult = 0.25},
+    },
+    Icon = '/DGRegulus/NewRegulusvengence01',
+}
+-- Self Attack Speed and Weapon Damage buff
+BuffBlueprint {
+    Name = 'HGSA01VeangeanceSelfBuff',
+    DisplayName = 'Vengeance',
+    Description = 'Attack Speed and Weapon Damage increased.',
+    BuffType = 'HGSA01FURYSELF',
+    Debuff = false,
+    Stacks = 'REPLACE',
+    Duration = 10,
+    Affects = {
+        RateOfFire = {Mult = 0.25},
+        DamageRating = {Add = 45},
     },
     Icon = '/DGRegulus/NewRegulusvengence01',
 }
@@ -63,13 +81,9 @@ BuffBlueprint {
 }
 
 -- Set Range to be the same for both allied buff and enemy debuff
-Ability.HGSA01Vengeance01.VengBuffAffectRadius = 150
+Ability.HGSA01Vengeance01.VengBuffAffectRadius = 15
 Ability.HGSA01AngelicFuryOn.VengAllyBuffAffectRadius = Ability.HGSA01Vengeance01.VengBuffAffectRadius
 Ability.HGSA01AngelicFuryOff.VengEnemyBuffAffectRadius = Ability.HGSA01Vengeance01.VengBuffAffectRadius
--- Setting common duration doesn't work, BuffName.Duration only seems to take integers.
--- Ability.HGSA01Vengeance01.VengBuffDuration = 5
--- Ability.HGSA01AngelicFuryOn.VengAllyBuffDuration = Ability.HGSA01Vengeance01.VengBuffDuration
--- Ability.HGSA01AngelicFuryOff.VengEnemyBuffDuration = Ability.HGSA01Vengeance01.VengBuffDuration
 
 -- Apply the ally buff when activating Angelic Fury
 Ability.HGSA01AngelicFuryOn.OnStartAbility = function(self, unit, params)
@@ -81,6 +95,7 @@ Ability.HGSA01AngelicFuryOn.OnStartAbility = function(self, unit, params)
         unit.Trash:Add(thd)
 
         Buff.ApplyBuff(unit, 'HGSA01VeangeanceAllyBuff', unit)
+        Buff.ApplyBuff(unit, 'HGSA01VeangeanceSelfBuff', unit)
         
         -- Add Buff to allies, taken from Mass Charm -- Schwiegerknecht
         local pos = table.copy(unit:GetPosition())
@@ -121,7 +136,8 @@ Ability.HGSA01Vengeance01.GetAllySpeed = function(self) return math.floor( Buffs
 Ability.HGSA01Vengeance01.GetEnemyAtkDebuff = function(self) return math.floor( Buffs['HGSA01VeangeanceEnemyDebuff'].Affects.RateOfFire.Mult * 100 * -1) end
 
 Ability.HGSA01Vengeance01.GetVengBuffRadius = function(self) return math.floor( Ability['HGSA01Vengeance01'].VengBuffAffectRadius) end
--- Ability.HGSA01Vengeance01.GetVengBuffDuration = function(self) return math.floor( Ability['HGSA01Vengeance01'].VengBuffDuration) end
-Ability.HGSA01Vengeance01.GetVengAllyBuffDuration = function(self) return math.floor( Buffs['HGSA01VeangeanceAllyBuff'].Duration) end
-Ability.HGSA01Vengeance01.GetVengEnemyBuffDuration = function(self) return math.floor( Buffs['HGSA01VeangeanceEnemyDebuff'].Duration) end
-Ability.HGSA01Vengeance01.Description = 'When Regulus uses Angelic Fury, he unleashes a nova of holy power around him, dealing [GetDamage] damage and sending nearby enemies flying. He also increases his and allies\' Movement Speed by [GetAllySpeed]% for [GetVengAllyBuffDuration] seconds when entering this state and decreases enemies\' Attack Speed by [GetEnemyAtkDebuff]% for [GetVengEnemyBuffDuration] seconds when leaving the state. These effects are applied in range [GetVengBuffRadius].'
+#Ability.HGSA01Vengeance01.GetVengAllyBuffDuration = function(self) return math.floor( Buffs['HGSA01VeangeanceAllyBuff'].Duration) end
+#Ability.HGSA01Vengeance01.GetVengEnemyBuffDuration = function(self) return math.floor( Buffs['HGSA01VeangeanceEnemyDebuff'].Duration) end
+Ability.HGSA01Vengeance01.GetVengSelfAttackBuff = function(self) return math.floor( Buffs['HGSA01VeangeanceSelfBuff'].Affects.RateOfFire.Mult * 100) end
+Ability.HGSA01Vengeance01.GetVengSelfDamageBuff = function(self) return math.floor( Buffs['HGSA01VeangeanceSelfBuff'].Affects.DamageRating.Add) end
+Ability.HGSA01Vengeance01.Description = 'When Regulus uses Angelic Fury, he unleashes a nova of holy power around him, dealing [GetDamage] damage and sending nearby enemies flying. He and his nearby allies gain +[GetAllySpeed]% Movement Speed and Regulus himself gains [GetVengSelfDamageBuff] weapon damage and +[GetVengSelfAttackBuff]% Attack Speed. Leaving this state decreases nearby enemies\' Attack Speed by [GetEnemyAtkDebuff]%.'
