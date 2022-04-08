@@ -3,58 +3,69 @@ Ability.HVampireBatSwarm02.RangeMax = 25
 
 -- Schwiegerknecht
 
-Buffs.HVampireArmyoftheNight.Affects.LifeSteal.Add = 0.5
-Buffs.HVampireArmyoftheNight.Affects.RateOfFire.Mult = 1.5
+--Increase Army of the Night buffs: 40% Attack Speed (from 5) and + 100% Lifesteal (from 10%)
+Buffs.HVampireArmyoftheNight.Affects.RateOfFire.Mult = 0.4
+Buffs.HVampireArmyoftheNight.Affects.LifeSteal.Add = 1.0
 
--- Option: Give nightcrawlers armor shred by using AddAbil Army of the night  to
--- give them a weapon proc ability similar to Deadeye. Use Oculus' Lightning Blast maybe.
 
+-- Use an extra buff in between, otherwise Army of the Night would need to be an aura like Lightning Blast which contains a similar buff.
+
+--[[This only works once for existing Night Crawlers, not new ones after adding ability. Use Coven function instead. Or maybe the ArmyBonus right away?
 Ability.HVampireArmyoftheNight.OnAbilityAdded = function(self, unit)
-        unit:GetAIBrain():AddArmyBonus( 'HVampireArmyoftheNight', self )
-        local vampirelings = ArmyBrains[vampLord:GetArmy()]:GetListOfUnits(categories.hvampirevampire01, false)
-        for k,vampireling in vampirelings do
-            Buff.ApplyBuff(vampireling, 'HVampireArmyoftheNightProcDebuff', unit)
-        end
+    unit:GetAIBrain():AddArmyBonus( 'HVampireArmyoftheNight', self )
+    local vampirelings = ArmyBrains[unit:GetArmy()]:GetListOfUnits(categories.hvampirevampire01, false)
+    for k,vampireling in vampirelings do
+        Buff.ApplyBuff(vampireling, 'HVampireArmyoftheNightPlaceholder', unit)
     end
+end
+]]
 
+-- Give Nightcrawlers a WeaponProc to reduce armor
 
-
+-- Add ability via Buff in the ArmyBonusBlueprint
+Buffs.HVampireArmyoftheNight.OnBuffAffect = function(self, unit, instigator)
+    Abil.AddAbility(unit, 'HVampireArmyoftheNightMinionAbil', true)
+end
+-- Give WeaponProc to Night Walkers
 AbilityBlueprint {
-    Name = 'HVampireArmyoftheNightProc',
+    Name = 'HVampireArmyoftheNightMinionAbil',
     DisplayName = 'Army of the Night Armor Shred',
     Description = 'Erebus\' Night Walkers have a [GetProcChance]% chance on each auto attack to reduce their targets armor.',
     GetProcChance = function(self) return math.floor( self.WeaponProcChance ) end,
     --GetDuration = function(self) return string.format("%.1f", Buffs['HGSA01DeadeyeStun01'].Duration) end,
     AbilityType = 'WeaponProc',
-    WeaponProcChance = 10,
+    WeaponProcChance = 100,
     OnWeaponProc = function(self, unit, target, damageData)
         if EntityCategoryContains(categories.ALLUNITS, target) and not EntityCategoryContains(categories.UNTARGETABLE, target) then
             Buff.ApplyBuff(target, 'HVampireArmyoftheNightProcDebuff', unit)
             # Play altered impact effects on top of normal effects
             #FxDeadeyeImpact(unit, damageData.Origin)
-            FxDeadeyeImpact(target)
+            #FxDeadeyeImpact(target)
         end
     end,
     Icon = '/DGVampLord/NewVamplordArmyoftheNight01',
 }
-
+-- Debuff applied on Proc
 BuffBlueprint {
     Name = 'HVampireArmyoftheNightProcDebuff',
-    DisplayName = '<LOC ABILITY_HGSA01_0073>Deadeye',
-    Description = '<LOC ABILITY_HGSA01_0005>Stunned.',
-    BuffType = 'HGSA01DEADEYESTUN',
-    EntityCategory = 'MOBILE - UNTARGETABLE',
+    DisplayName = 'Army of the Night',
+    Description = 'WRECKED!',
+    BuffType = 'HVAMPIREVAMPIREPROC',
+    EntityCategory = 'ALLUNITS - UNTARGETABLE',
     Debuff = true,
     CanBeDispelled = true,
     Stacks = 'REPLACE',
-    Duration = 1.5,
+    Duration = 5
     Affects = {
-        Stun = {Add = 0},
+        Armor = {Add = -50},
     },
     Icon = '/DGVampLord/NewVamplordArmyoftheNight01',
 }
 
--- Testing if you can call the new class EliteCrawler
+#TODO: Description
+
+
+-- Testing if you can call the new class EliteCrawler. But you can't that easily.
 --[[
 function RaiseVampire(abilDef, deadUnit)
     local inst = deadUnit.AbilityData.VampLord.VampireConversionInst
