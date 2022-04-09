@@ -39,7 +39,7 @@ Erebus:
 Army of the Night:
 - 40% Attack Speed (from 5%)
 - 100% Lifesteal (from 10%)
-- Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on towers)
+- Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
 
 Oculus:
 Sacrifice now works as advertised. (Radius = 10)
