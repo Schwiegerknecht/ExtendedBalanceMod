@@ -15,16 +15,24 @@ Rook: lower Tower of Light HP by 10-15%
 
 Oak: Decrease Shield duration by 1-1.5 seconds.
 
-UB: Potential Ooze Nerf - increase own HP lost per tick to however much enemies take
+UB: Potential Ooze Nerf - increase own HP lost per tick to however much enemies
+take
 
-(Perhaps reduce cost for small potions (especially mana potions), since they barely get used.)
+(Perhaps reduce cost for small potions (especially mana potions), since they
+barely get used.)
+
 Oculus:
   Ideas to make the barely used abilities viable compared to dmg build:
 - minions explode upon death
 - mana aura
 - mana drain
-- probably buff king of the minotaurs in general; maybe tanky minion build with sacrifice?
+- probably buff king of the minotaurs in general; maybe tanky minion build with
+  sacrifice?
 - lightning damage reflect
+
+QoT:
+  Update Summon Shambler II-IV description to make clear how much stronger
+  Shamblers get.
 
 Erebus: Make Army of the Night attractive with some sort of Elite Nightcrawlers
 (fewer, but stronger)
@@ -41,20 +49,31 @@ Oculus:
 Sacrifice now works as advertised. (Radius = 10)
 
 Regulus:
-Vengeance: 15 damage radius (normally 10)
-Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
-- 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
-- 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
-Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
-- -20% Attack Speed (15 Range, 10 Duration)
+Vengeance:
+  - 15 damage radius (normally 10)
+  Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
+  - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
+  - 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
+  Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
+  - -20% Attack Speed (15 Range, 10 Duration)
+Deadeye:
+  The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe
+  - 1 second stun on Snipe added
+
+Queen of Thorns:
+Uproot III:
+  Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
+Uproot IV:
+  Stuns the targeted structure for its duration (10 sec).
 
 Rook:
-Energizer adds a debuff immunity while channeling.
+Energizer:
+  Adds a debuff immunity while channeling.
 
 Sedna:
-
-Yeti: 0/50/100/150 armor (from 0/0/0/0)
-Yeti: 525/650/775/900 mana cost (from 550/750/950/1150)
+Yeti:
+  - 0/50/100/150 armor (from 0/0/0/0)
+  - 525/650/775/900 mana cost (from 550/750/950/1150)
 
 
 ############################################################
@@ -66,19 +85,22 @@ Yeti: 525/650/775/900 mana cost (from 550/750/950/1150)
 ############################################################
 
 Oak:
-Adapt Shield III duration for a linear progression. Also create progression from
-damage immunity --> cleanse and damage immunity --> damage and debuff immunity:
-- Shield III duration: 5 seconds (normally 6)
-- Remove the cleanse from Shield I, so now it does what the description says.
-- Adapt description for Shield II to include the debuff cleanse.
-- Adapt description for Shield III to include debuff immunity.
-- Adapt description for Shield IV to include debuff immunity.
+Shield III:
+  Adapt duration for a linear progression. Also create progression from
+  damage immunity --> cleanse and damage immunity --> damage and debuff immunity:
+  - Shield III duration: 5 seconds (normally 6)
+  - Remove the cleanse from Shield I, so now it does what the description says.
+  - Adapt description for Shield II to include the debuff cleanse.
+  - Adapt description for Shield III to include debuff immunity.
+  - Adapt description for Shield IV to include debuff immunity.
 
 UB:
-Acclimation damage mitigation: 25% (normally 40%)
-Foul Grasp I + II: These don't ignore Stun Immunities anymore. TESTING REQUIRED!
+Acclimation:
+  - Damage mitigation: 25% (normally 40%)
+Foul Grasp I + II:
+  - These don't ignore Stun Immunities anymore. TESTING REQUIRED!
 
-TB: 
+TB:
 Just for ease of access, stance switch times are now accessible via
 Ability.HEMA01SwitchIce.SwitchDuration and
 Ability.HEMA01SwitchFire.SwitchDuration, respectively (via

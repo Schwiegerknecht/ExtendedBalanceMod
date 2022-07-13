@@ -88,3 +88,96 @@ function Consume(abilityDef, unit, params)
         DamageArea(data)
     end
 end
+
+-- Schwiegerknecht start
+-- Uproot 3 and 4 appliy fire rate debuff / stun to target.
+BuffBlueprint {
+    Name = 'HQueenUprootStun03',
+    Debuff = true,
+    CanBeDispelled = false,
+    DisplayName = 'Uproot',
+    Description = 'Rate of fire reduced.',
+    BuffType = 'UPROOTSTUN',
+    Stacks = 'REPLACE',
+    Icon = '/dgqueenofthorns/NewQueenUproot01',
+    Duration = 10,
+    Affects = {
+        RateOfFire = {Mult = -0.5},
+    },
+}
+Ability.HQueenUproot03.OnStartAbility = function(self, unit, params)
+    local thd = ForkThread(Uproot, self, unit, params)
+    local target = params.Targets[1]
+    Buff.ApplyBuff(target, 'HQueenUprootStun03', unit)
+end
+Ability.HQueenUproot03.GetRateOfFire = function(self) return math.floor( Buffs['HQueenUprootStun03'].Affects.RateOfFire.Mult * 100 * -1) end
+Ability.HQueenUproot03.Description = 'Queen of Thorns sends her vines deep beneath the earth to destroy target structure\'s foundation, dealing [GetDamage] damage over [GetDuration] seconds. The structure\'s rate of fire is reduced by [GetRateOfFire]%.'
+
+BuffBlueprint {
+    Name = 'HQueenUprootStun04',
+    Debuff = true,
+    CanBeDispelled = false,
+    DisplayName = 'Uproot',
+    Description = 'Stunned.',
+    BuffType = 'UPROOTSTUN',
+    Stacks = 'REPLACE',
+    Icon = '/dgqueenofthorns/NewQueenUproot01',
+    Duration = 10,
+    Affects = {
+        Stun = {Add = 0},
+    },
+}
+Ability.HQueenUproot04.OnStartAbility = function(self, unit, params)
+    local thd = ForkThread(Uproot, self, unit, params)
+    local target = params.Targets[1]
+    Buff.ApplyBuff(target, 'HQueenUprootStun04', unit)
+end
+Ability.HQueenUproot04.GetStunDuration = function(self) return math.floor( Buffs['HQueenUprootStun04'].Duration) end
+Ability.HQueenUproot04.Description = 'Queen of Thorns sends her vines deep beneath the earth to destroy target structure\'s foundation, dealing [GetDamage] damage over [GetDuration] seconds. The structure is disabled for [GetStunDuration] seconds.'
+
+--[[Incomplete idea:
+--Add gold income buff to Entourage, ramping up to Tribute
+BuffBlueprint {
+    Name = 'HQueenEntourageTribute01',
+    BuffType = 'HQUEENENTOURAGEBUFF',
+    DisplayName = '<LOC ABILITY_Queen_0110>Entourage I Tribute',
+    Description = '<LOC ABILITY_Queen_0111>Gold production increased.',
+    Debuff = false,
+    Stacks = 'REPLACE',
+    Duration = -1,
+    Affects = {
+        GoldProduction = {Add = 1},
+    },
+}
+BuffBlueprint {
+    Name = 'HQueenEntourageTribute02',
+    BuffType = 'HQUEENENTOURAGEBUFF',
+    DisplayName = '<LOC ABILITY_Queen_0112>Entourage II Tribute',
+    Description = '<LOC ABILITY_Queen_0113>Gold production increased.',
+    Debuff = false,
+    Stacks = 'REPLACE',
+    Duration = -1,
+    Affects = {
+        GoldProduction = {Add = 2},
+    },
+}
+BuffBlueprint {
+    Name = 'HQueenEntourageTribute03',
+    BuffType = 'HQUEENENTOURAGEBUFF',
+    DisplayName = '<LOC ABILITY_Queen_0114>Entourage III Tribute',
+    Description = '<LOC ABILITY_Queen_0115>Gold production increased.',
+    Debuff = false,
+    Stacks = 'REPLACE',
+    Duration = -1,
+    Affects = {
+        GoldProduction = {Add = 3},
+    },
+}
+--Change Entourage descriptions
+Ability.HQueenEntourage01.GetEntourageGoldBuff1 = function(self) return math.floor( Buffs['HQueenEntourageTribute01'].Affects.GoldProduction.Add ) end
+Ability.HQueenEntourage02.GetEntourageGoldBuff2 = function(self) return math.floor( Buffs['HQueenEntourageTribute02'].Affects.GoldProduction.Add ) end
+Ability.HQueenEntourage03.GetEntourageGoldBuff3 = function(self) return math.floor( Buffs['HQueenEntourageTribute03'].Affects.GoldProduction.Add ) end
+Ability.HQueenEntourage01.Description = 'Increases Shambler Health by [GetShamblerHealth] and damage by [GetShamblerDamage]. Queen of Thorns demands tribute from her subjects. Gold production increased by [GetEntourageGoldBuff1] while Shamblers are alive.'
+Ability.HQueenEntourage02.Description = 'Increases Shambler Health by [GetShamblerHealth] and damage by [GetShamblerDamage]. Queen of Thorns demands tribute from her subjects. Gold production increased by [GetEntourageGoldBuff2] while Shamblers are alive.'
+Ability.HQueenEntourage03.Description = 'Increases Shambler Health by [GetShamblerHealth] and damage by [GetShamblerDamage]. Queen of Thorns demands tribute from her subjects. Gold production increased by [GetEntourageGoldBuff3] while Shamblers are alive.'
+]]
