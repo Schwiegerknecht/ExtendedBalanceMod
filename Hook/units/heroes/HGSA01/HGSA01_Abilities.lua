@@ -217,6 +217,37 @@ Ability.HGSA01Deadeye01.WeaponProcChance = nil
 Ability.HGSA01Deadeye01.GetChance = nil
 Ability.HGSA01Deadeye01.OnWeaponProc = nil
 Ability.HGSA01Deadeye01.GetSnipeStunDuration = function(self) return math.floor( Buffs['HGSA01DeadeyeSnipeStun01'].Duration ) end
-Ability.HGSA01Deadeye01.Description = 'Regulus arrows stop his enemies dead in their tracks. Snipe now stuns enemies for [GetSnipeStunDuration] second.'
+Ability.HGSA01Deadeye01.Description = 'Regulus\' arrows stop his enemies dead in their tracks. Snipe now stuns enemies for [GetSnipeStunDuration] second.'
+
+
+-- Impedance Bolt now immobilizes enemies for 0.5 seconds on WeaponProc
+BuffBlueprint {
+    Name = 'HGSA01MaimImmobile',
+    DisplayName = '<LOC ABILITY_HGSA01_0051>Maim',
+    Description = '<LOC ABILITY_HGSA01_0052>Immobilized.',
+    BuffType = 'HGSA01IMPEDANCEROOT',
+    EntityCategory = 'MOBILE - UNTARGETABLE',
+    Debuff = true,
+    CanBeDispelled = true,
+    Stacks = 'REPLACE',
+    Duration = 0.5,
+    Affects = {
+        UnitImmobile = {Bool = true},
+    },
+    Icon = '/DGRegulus/NewRegulusDeadeye01',
+}
+Ability.HGSA01ImpedanceBolt01.OnWeaponProc = function(self, unit, target, damageData)
+    Buff.ApplyBuff(target, 'HGSA01ImpedanceBoltDebuff01', unit)
+    Buff.ApplyBuff(target, 'HGSA01MaimImmobile', unit)
+
+    # Play altered impact effects on top of normal effects, if the unit is a Hero
+    if EntityCategoryContains(categories.HERO, target) then
+        FxImpedanceImpact(unit:GetArmy(), damageData.Origin)
+    end
+end
+-- Change Impedance Bolt Description
+Ability.HGSA01ImpedanceBolt01.GetImmobileDuration = function(self) return (math.floor( Buffs['HGSA01MaimImmobile'].Duration )) end
+Ability.HGSA01ImpedanceBolt01.Description = 'Regulus\' bolts have a [GetChance]% chance to cripple the opponent, doubling the cost of abilities for [GetDuration] seconds and immobilizing them for [GetImmobileDuration] seconds.'
+
 
 __moduleinfo.auto_reload = true
