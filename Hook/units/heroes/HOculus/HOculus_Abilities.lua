@@ -3,7 +3,7 @@
 # the original would also heal towers which does not seem to be the intention.
 
 for i=1,3 do
-    Ability.['HOculusSacrifice0'..i].AreaHeal = function(self, unit, data)
+    Ability['HOculusSacrifice0'..i].AreaHeal = function(self, unit, data)
         if data.Amount > self.MinHit then
             
             local HealAmt = data.Amount * self.PercentHeal
@@ -53,7 +53,7 @@ for i=1,3 do
                         AttachBuffEffectAtBone( v, 'Heal05', -2 );
                     end
                 end
-            end             
+            end
         end
     end
 end
