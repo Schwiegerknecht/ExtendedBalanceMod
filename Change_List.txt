@@ -75,6 +75,15 @@ Yeti:
   - 0/50/100/150 armor (from 0/0/0/0)
   - 525/650/775/900 mana cost (from 550/750/950/1150)
 
+# Items
+############################################################
+
+Amulet of Teleportation:
+Cooldown: 35 (up from 30; 45 in vanilla DG)
+
+Staff of the Warmage:
+Mana Regen over time: 4 + 0.5*hero level (instead of 4 + 0.2/60 seconds)
+  - Note: Also fixes the regen being lost upon death.
 
 ############################################################
 # v. 0.1

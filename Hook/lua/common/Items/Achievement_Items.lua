@@ -1,5 +1,6 @@
---Reduce Amulet of Teleport cooldown to 30 from 45
-Ability.AchievementTeleport.Cooldown = 30 
+--(Reduce Amulet of Teleport cooldown to 30 from 45)
+-- Schwiegerknecht: Increase cooldown to 35 secs
+Ability.AchievementTeleport.Cooldown = 35
 -- Reduce Blood Soaked wand castingtime to 1 down from 2
 Ability.AchievementAEHeal.CastingTime = 1 
 --Switch blood soaked wand cast animation to 1 second (because we reduced it from 2)
@@ -25,18 +26,18 @@ Buffs.AchievementHealth.Affects.MaxHealth.Add = 600
 -- Staff of the Warmage, increase mana to 1050 up from 800
 Buffs.AchievementMana.Affects.MaxEnergy.Add = 1050 
 
--- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.2/60 secs) - Schwiegerknecht
+-- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel) -- Schwiegerknecht
 BuffBlueprint{
-	Name = 'AchievementMana_PulseRegen',
-	BuffType = 'AchievementMana_PulseRegen',
+	Name = 'AchievementMana_LevelEnergyRegen',
+	BuffType = 'AchievementMana_LevelEnergyRegen',
 	DisplayName = '<LOC ITEM_Achievement_0090>Staff of the Warmage',
 	Description = '<LOC ITEM_Achievement_0091>Increasing Mana Regen',
 	Icon = '/NewIcons/AchievementRewards/StaffoftheWarmage',
 	Debuff = false,
-	Stacks = 'ALWAYS',
+	Stacks = 'REPLACE',
 	Duration = -1,
 	Affects = {
-		EnergyRegen = {Add = 0.2},
+		EnergyRegen = {Add = 0.5},
 	},
 }
 
@@ -44,21 +45,27 @@ table.insert(Items.AchievementMana.Abilities, AbilityBlueprint {
 	Name = 'AchievementMana_Aura',
 	AbilityType = 'Aura',
 	AffectRadius = 1,
-	AuraPulseTime = 60,
+	AuraPulseTime = 1,
+	LevelEnergyRegen = 0.5,
 	Icon = 'NewIcons/Helm/Helm1',
 	TargetAlliance = 'Ally',
 	TargetCategory = 'HERO - UNTARGETABLE',
 	OnAuraPulse = function(self, unit)
-		Buff.ApplyBuff(unit, 'AchievementMana_PulseRegen', unit)
+		local aiBrain = unit:GetAIBrain()
+		local hero = aiBrain:GetHero()
+		local herolvl = hero:GetLevel()
+		local addMana = herolvl * self.LevelEnergyRegen
+
+		Buffs['AchievementMana_LevelEnergyRegen'].Affects.EnergyRegen.Add = addMana
+		Buff.ApplyBuff(unit, 'AchievementMana_LevelEnergyRegen', unit)
 	end,
 })
 Buffs.AchievementMana.Affects.EnergyRegen = {Add = 4}
 -- Add description
 Items.AchievementMana.GetManaRegenBonus = function(self) return Buffs['AchievementMana'].Affects.EnergyRegen.Add end
-Items.AchievementMana.GetAuraPulseRegen = function(self) return string.format("%.1f", Buffs['AchievementMana_PulseRegen'].Affects.EnergyRegen.Add) end
-Items.AchievementMana.GetAuraPulseTime = function(self) return Ability['AchievementMana_Aura'].AuraPulseTime end
+Items.AchievementMana.GetManaLevelRegen = function(self) return string.format("%.1f", Buffs['AchievementMana_LevelEnergyRegen'].Affects.EnergyRegen.Add) end
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana Regen')
-table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetAuraPulseRegen] Mana Regen every [GetAuraPulseTime] seconds')
+table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaLevelRegen] Mana Regen per hero level')
 -- End of Staff of the Warmage change
 
 -- Cape of Plentiful Mana: Increase affect radius from 8 to 15, so this item is easier to use
