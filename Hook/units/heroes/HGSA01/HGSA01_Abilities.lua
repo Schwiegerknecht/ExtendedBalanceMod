@@ -230,7 +230,7 @@ BuffBlueprint {
     Debuff = true,
     CanBeDispelled = true,
     Stacks = 'REPLACE',
-    Duration = 0.5,
+    Duration = 0.8,
     Affects = {
         UnitImmobile = {Bool = true},
     },
@@ -246,7 +246,7 @@ Ability.HGSA01ImpedanceBolt01.OnWeaponProc = function(self, unit, target, damage
     end
 end
 -- Change Impedance Bolt Description
-Ability.HGSA01ImpedanceBolt01.GetImmobileDuration = function(self) return (math.floor( Buffs['HGSA01MaimImmobile'].Duration )) end
+Ability.HGSA01ImpedanceBolt01.GetImmobileDuration = function(self) return string.format("%.1f", math.floor( Buffs['HGSA01MaimImmobile'].Duration )) end
 Ability.HGSA01ImpedanceBolt01.Description = 'Regulus\' bolts have a [GetChance]% chance to cripple the opponent, doubling the cost of abilities for [GetDuration] seconds and immobilizing them for [GetImmobileDuration] seconds.'
 
 

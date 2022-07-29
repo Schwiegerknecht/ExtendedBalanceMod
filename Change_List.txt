@@ -61,7 +61,7 @@ Deadeye:
   - 1 second stun on Snipe added
 Impedance Bolt:
   Enemies are also immobilized on WeaponProc (on top of higher mana costs)
-  - 0.5 seconds immobilization on WeaponProc
+  - 0.8 seconds immobilization on WeaponProc
 
 Queen of Thorns:
 Uproot III:
