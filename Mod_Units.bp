@@ -176,8 +176,9 @@ UnitBlueprint {
         },		
     },
 }
-
+#################################################################################################################
 # Schwiegerknecht start
+#################################################################################################################
 UnitBlueprint {
     BlueprintId = "ugbshop06",
     Merge = true,
@@ -255,4 +256,28 @@ UnitBlueprint {
             },
         },		
     },
+}
+UnitBlueprint {
+    BlueprintId = "HRookTowerOfLight02_unit",
+    Merge = true,
+    Defense = {
+        Health = 1900,
+        MaxHealth = 1900,
+    }
+}
+UnitBlueprint {
+    BlueprintId = "HRookTowerOfLight03_unit",
+    Merge = true,
+    Defense = {
+        Health = 2300,
+        MaxHealth = 2300,
+    }
+}
+UnitBlueprint {
+    BlueprintId = "HRookTowerOfLight04_unit",
+    Merge = true,
+    Defense = {
+        Health = 2700,
+        MaxHealth = 2700,
+    }
 }

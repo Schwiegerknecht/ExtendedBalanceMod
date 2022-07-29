@@ -72,6 +72,8 @@ Uproot IV:
 Rook:
 Energizer:
   Adds a debuff immunity while channeling.
+Power of the Tower:
+  1500/1900/2300/2700 Tower HP (down from 1500/1950/2400/2850)
 
 Sedna:
 Yeti:
