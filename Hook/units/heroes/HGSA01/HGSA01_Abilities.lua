@@ -157,7 +157,7 @@ BuffBlueprint {
     Debuff = true,
     CanBeDispelled = true,
     Stacks = 'REPLACE',
-    Duration = 1,
+    Duration = 1.5,
     Affects = {
         Stun = {Add = 0},
     },

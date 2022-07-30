@@ -70,7 +70,7 @@ Items.Item_Artifact_080.GetProcManaGain = nil
 Ability.Item_Artifact_080_WeaponProc.Chains = 4
 Ability.Item_Artifact_080_WeaponProc.ChainTime = 0.1
 Ability.Item_Artifact_080_WeaponProc.ChainAffectRadius = 5
-Ability.Item_Artifact_080_WeaponProc.DamageAmt = 250
+Ability.Item_Artifact_080_WeaponProc.DamageAmt = 125
 Ability.Item_Artifact_080_WeaponProc.Effects = {
     Base = 'Items',
     Group = 'Runes',
@@ -78,7 +78,7 @@ Ability.Item_Artifact_080_WeaponProc.Effects = {
 }
 
 -- Adjust Proc Chance
-Ability.Item_Artifact_080_WeaponProc.WeaponProcChance = 25
+Ability.Item_Artifact_080_WeaponProc.WeaponProcChance = 50
 
 -- Add lightning function to AbilityBlueprint
 Ability.Item_Artifact_080_WeaponProc.LightningThread = function(self, unit, target, damageData)
@@ -299,7 +299,7 @@ BuffBlueprint {
     Stacks = 'REPLACE', -- use 'ALWAYS' for slow that stacks for each wave, 'REPLACE' for singular slow
     Duration = 5,
     Affects = {
-        MoveMult = {Mult = -0.10},
+        MoveMult = {Mult = -0.15},
     },
     Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
 }
@@ -388,10 +388,7 @@ Items.Item_Artifact_080.Tooltip.Bonuses = {
     '+[GetRateOfFire]% Attack Speed',
 }
 
---[[
-
 # Tailwind Movement Speed Aura
-# Potential Buff - Do some testing first
 #################################################################################################################
 
 -- Healing Wind Fx for Movement Speed Aura
@@ -429,7 +426,7 @@ table.insert(Items.Item_Artifact_080.Abilities, AbilityBlueprint {
             Stacks = 'REPLACE',
             CanBeEvaded = false,
             Affects = {
-                MoveMult = {Mult = 0.05},
+                MoveMult = {Mult = 0.10},
             },
         },
     },
@@ -444,14 +441,15 @@ table.insert(Items.Item_Artifact_080.Abilities, AbilityBlueprint {
 
 -- Update Tooltip for Aura
 Items.Item_Artifact_080.GetMoveBuff = function(self) return math.floor( Buffs['Item_Artifact_080_Aura'].Affects.MoveMult.Mult * 100) end
-Items.Item_Artifact_080.Tooltip.Auras = '+[GetMoveBuff]% Movement Speed Aura'
+Items.Item_Artifact_080.GetMoveBuffRange = function(self) return math.floor( Ability['Item_Artifact_080_Aura'].AffectRadius) end
+Items.Item_Artifact_080.Tooltip.Auras = '+[GetMoveBuff]% Movement Speed Aura ([GetMoveBuffRange] range)'
 
 
 
 #################################################################################################################
 # Stormbringer Rework End
 #################################################################################################################
-]]
+
 
 #################################################################################################################
 # Unmaker Rework
@@ -464,8 +462,6 @@ Items.Item_Artifact_080.Tooltip.Auras = '+[GetMoveBuff]% Movement Speed Aura'
 # New stats: SpellDamageMult, Cooldown reduction, Base Mana
 # Perhaps add SpellCostMult affectType (see BuffAffects.lua and ForgeUnit.lua and hero ability files)
 
-
--- Buffs.Item_Artifact_060_Passive.Affects.SkillDamageMult = {Add = 0.50}
 
 -- Make it a non-clickable item
 Items.Item_Artifact_060.Useable = false

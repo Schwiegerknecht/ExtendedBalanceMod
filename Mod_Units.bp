@@ -261,23 +261,35 @@ UnitBlueprint {
     BlueprintId = "hrooktoweroflight02",
     Merge = true,
     Defense = {
-        Health = 1900,
-        MaxHealth = 1900,
+        Health = 1850, #1950
+        MaxHealth = 1850,
     },
 }
 UnitBlueprint {
     BlueprintId = "hrooktoweroflight03",
     Merge = true,
     Defense = {
-        Health = 2300,
-        MaxHealth = 2300,
+        Health = 2200, #2400
+        MaxHealth = 2200,
     },
 }
 UnitBlueprint {
     BlueprintId = "hrooktoweroflight04",
     Merge = true,
     Defense = {
-        Health = 2700,
-        MaxHealth = 2700,
+        Health = 2550, #2800
+        MaxHealth = 2550,
     },
+}
+UnitBlueprint {
+    BlueprintId = "hsednayeti",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+    Weapon = {
+    {
+        MaxRadius = 6, #5
+    }
+    }
 }

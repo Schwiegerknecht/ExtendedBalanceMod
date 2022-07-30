@@ -58,7 +58,7 @@ Vengeance:
   - -20% Attack Speed (15 Range, 10 Duration)
 Deadeye:
   The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe
-  - 1 second stun on Snipe added
+  - 1.5 second stun on Snipe added
 Impedance Bolt:
   Enemies are also immobilized on WeaponProc (on top of higher mana costs)
   - 0.8 seconds immobilization on WeaponProc
@@ -73,12 +73,16 @@ Rook:
 Energizer:
   Adds a debuff immunity while channeling.
 Power of the Tower:
-  1500/1900/2300/2700 Tower HP (down from 1500/1950/2400/2850)
+  1500/1850/2200/2550 Tower HP (down from 1500/1950/2400/2850)
 
 Sedna:
-Yeti:
+Horn of the Yeti:
+  - Turn rate: 360 (from 180)
+  - Attack radius: 6 (from 5)
   - 0/50/100/150 armor (from 0/0/0/0)
   - 525/650/775/900 mana cost (from 550/750/950/1150)
+Wild Swings:
+  - +40 weapon damage
 
 # Items
 ############################################################
@@ -89,6 +93,12 @@ Cooldown: 35 (up from 30; 45 in vanilla DG)
 Staff of the Warmage:
 Mana Regen over time: 4 + 0.5*hero level (instead of 4 + 0.2/60 seconds)
   - Note: Also fixes the regen being lost upon death.
+
+Stormbringer:
+Proc chance: 50% (from 25)
+Lightning damage: 125 (from 250)
+Ice Rain movement slow: 15% (from 10%)
+Movement speed aura: 10% for allies in range 15
 
 ############################################################
 # v. 0.1
