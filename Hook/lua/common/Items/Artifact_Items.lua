@@ -517,7 +517,7 @@ Items.Item_Artifact_060.Abilities = {
         Icon = 'NewIcons/Artifacts/Unmaker',
         Buffs = {
             BuffBlueprint {
-                Name = 'Item_Artifact_060',
+                Name = 'Item_Artifact_060_Quiet',
                 BuffType = 'IARTCRIT2QUIET',
                 Debuff = false,
                 EntityCategory = 'ALLUNITS',
@@ -565,8 +565,8 @@ Items.Item_Artifact_060.Abilities = {
 
 -- Update description for Buff Item_Artifact_060
 -- Items.Item_Artifact_060.GetSpellDamageBonus = function(self) return math.floor(Buffs['Item_Artifact_060'].Affects.SpellDamageMult.Add * 100) end
-Items.Item_Artifact_060.GetCooldownBonus = function(self) return math.floor(Buffs['Item_Artifact_060'].Affects.Cooldown.Mult * 100 * (-1)) end
-Items.Item_Artifact_060.GetManaBonus = function(self) return Buffs['Item_Artifact_060'].Affects.MaxEnergy.Add end
+Items.Item_Artifact_060.GetCooldownBonus = function(self) return math.floor(Buffs['Item_Artifact_060_Quiet'].Affects.Cooldown.Mult * 100 * (-1)) end
+Items.Item_Artifact_060.GetManaBonus = function(self) return Buffs['Item_Artifact_060_Quiet'].Affects.MaxEnergy.Add end
 -- table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '+[GetSpellDamageBonus]% Spell Damage')
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '-[GetCooldownBonus]% to Ability Cooldowns')
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '+[GetManaBonus] Mana')

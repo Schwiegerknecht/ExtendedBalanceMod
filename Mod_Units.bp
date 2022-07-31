@@ -291,5 +291,12 @@ UnitBlueprint {
     {
         MaxRadius = 6, #5
     }
-    }
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hqueenent",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
 }

@@ -57,23 +57,29 @@ Vengeance:
   Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
   - -20% Attack Speed (15 Range, 10 Duration)
 Deadeye:
-  The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe
+  The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe.
   - 1.5 second stun on Snipe added
 Impedance Bolt:
   Enemies are also immobilized on WeaponProc (on top of higher mana costs)
   - 0.8 seconds immobilization on WeaponProc
 
 Queen of Thorns:
+Shamblers:
+  - Turn rate: 360 (from 180)
+Entourage:
+  - Gold production increased by 1/2/3 (from 0/0/0)
+Compost:
+  - HP regeneration: 5/10/15/20/30/40 per compost level (from 0/0/0/0/0/0)
 Uproot III:
-  Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
+  - Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
 Uproot IV:
-  Stuns the targeted structure for its duration (10 sec).
+  - Stuns the targeted structure for its duration (10 sec).
 
 Rook:
 Energizer:
-  Adds a debuff immunity while channeling.
+  - Debuff immunity while channeling.
 Power of the Tower:
-  1500/1850/2200/2550 Tower HP (down from 1500/1950/2400/2850)
+  - 1500/1850/2200/2550 Tower HP (down from 1500/1950/2400/2850)
 
 Sedna:
 Horn of the Yeti:
@@ -82,7 +88,7 @@ Horn of the Yeti:
   - 0/50/100/150 armor (from 0/0/0/0)
   - 525/650/775/900 mana cost (from 550/750/950/1150)
 Wild Swings:
-  - +40 weapon damage
+  - +40 Yeti weapon damage
 
 # Items
 ############################################################
