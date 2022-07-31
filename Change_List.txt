@@ -11,15 +11,8 @@ Potential Changes/Ideas:
 
 Capture Lock: Revert duration, increase cast time instead
 
-Rook: lower Tower of Light HP by 10-15%
 
 Oak: Decrease Shield duration by 1-1.5 seconds.
-
-UB: Potential Ooze Nerf - increase own HP lost per tick to however much enemies
-take
-
-(Perhaps reduce cost for small potions (especially mana potions), since they
-barely get used.)
 
 Oculus:
   Ideas to make the barely used abilities viable compared to dmg build:
