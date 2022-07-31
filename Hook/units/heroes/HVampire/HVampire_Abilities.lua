@@ -44,7 +44,7 @@ BuffBlueprint {
     EntityCategory = 'ALLUNITS - UNTARGETABLE',
     Debuff = true,
     CanBeDispelled = true,
-    Stacks = 'Always',
+    Stacks = 'ALWAYS',
     Duration = 5,
     Affects = {
         Armor = {Add = -75},
