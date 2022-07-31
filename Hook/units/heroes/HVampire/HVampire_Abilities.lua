@@ -22,16 +22,15 @@ end
 AbilityBlueprint {
     Name = 'HVampireArmyoftheNightMinionAbil',
     DisplayName = 'Army of the Night Armor Shred',
-    Description = 'Erebus\' Night Walkers have a [GetProcChance]% chance on each auto attack to reduce their targets armor.',
+    Description = 'Erebus\' Night Walkers have a [GetProcChance]% chance on each auto attack to reduce their targets armor by [GetArmorShred] for [GetDuration] seconds. This also works on structures.',
     GetProcChance = function(self) return math.floor( self.WeaponProcChance ) end,
+    GetArmorShred = function(self) return math.floor( Buffs['HVampireArmyoftheNightProcDebuff'].Affects.Armor.Add * -1) end,
+    GetDuration = function(self) return math.floor( Buffs['HVampireArmyoftheNightProcDebuff'].Duration) end,
     AbilityType = 'WeaponProc',
     WeaponProcChance = 50,
     OnWeaponProc = function(self, unit, target, damageData)
         if EntityCategoryContains(categories.ALLUNITS, target) and not EntityCategoryContains(categories.UNTARGETABLE, target) then
             Buff.ApplyBuff(target, 'HVampireArmyoftheNightProcDebuff', unit)
-            # Play altered impact effects on top of normal effects
-            #FxDeadeyeImpact(unit, damageData.Origin)
-            #FxDeadeyeImpact(target)
         end
     end,
     Icon = '/DGVampLord/NewVamplordArmyoftheNight01',
@@ -60,80 +59,3 @@ Ability.HVampireArmyoftheNight.GetArmorReduction = function(self) return math.fl
 Ability.HVampireArmyoftheNight.Description = 'Lord Erebus leads his Night Walkers as a bloodthirsty pack. Their Attack Speed is increased by [GetAttackBonus]% and they gain [GetLifeStealBonus]% lifesteal. They also have a [GetProcChance]% chance on auto attack to reduce the target\'s armor by [GetArmorReduction].'
 
 __moduleinfo.auto_reload = true
-
-
---[[The below works once for existing Night Crawlers, not new ones after adding ability. Use Coven function instead. Or maybe the ArmyBonus right away?
-Ability.HVampireArmyoftheNight.OnAbilityAdded = function(self, unit)
-    unit:GetAIBrain():AddArmyBonus( 'HVampireArmyoftheNight', self )
-    local vampirelings = ArmyBrains[unit:GetArmy()]:GetListOfUnits(categories.hvampirevampire01, false)
-    for k,vampireling in vampirelings do
-        Buff.ApplyBuff(vampireling, 'HVampireArmyoftheNightPlaceholder', unit)
-    end
-end
-]]
-
--- Testing if you can call the new class EliteCrawler. But you can't that easily.
---[[
-function RaiseVampire(abilDef, deadUnit)
-    local inst = deadUnit.AbilityData.VampLord.VampireConversionInst
-    if not inst or inst:IsDead() or deadUnit == inst then
-        return
-    end
-    local rand = Random(1, 100)
-    if rand > abilDef.VampireChance then
-        return
-    end
-
-    local numVampires = ArmyBrains[inst:GetArmy()]:GetCurrentUnits(categories.elitecrawler)
-    #LOG('*DEBUG: num vampires = ' .. numVampires)
-    if(numVampires < inst.AbilityData.Vampire.VampireMax) then
-        local pos = deadUnit:GetPosition()
-        local orient = deadUnit:GetOrientation()
-        local brainNum = inst:GetArmy()
-        local vampireling = CreateUnitHPR('EliteCrawler', brainNum, pos[1], pos[2], pos[3], orient[1], orient[2],orient[3])
-        if not vampireling then
-            return
-        end
-		vampireling:AdjustHealth( vampireling:GetMaxHealth() )
-        IssueGuard({vampireling}, inst)
-
-        # Apply Coven buff to new vampire
-        for i = 1, 3 do
-            if(Validate.HasAbility(inst, 'HVampireCoven0' .. i)) then
-                Buff.ApplyBuff(vampireling, 'HVampireCovenTarget0' .. i, inst)
-            end
-            if(Validate.HasAbility(inst, 'HVampireConversion0' .. i)) then
-                Buff.ApplyBuff(vampireling, 'HVampireConversionTarget0' .. i, inst)
-                vampireling:AdjustHealth(vampireling:GetMaxHealth())
-            end
-        end
-    end
-end
-
-function Coven(buffDef, vampLord, buffName)
-    if(vampLord and not vampLord:IsDead()) then
-        if(not vampLord.AbilityData.Vampire) then
-            vampLord.AbilityData.Vampire = {}
-        end
-        if buffDef.VampireMax then
-            vampLord.AbilityData.Vampire.VampireMax = buffDef.VampireMax
-        end
-
-        # Apply Coven buff to existing vampires
-        # Vampirelings Health is increased by the difference between their old max Health and their new max Health
-        if(buffName) then
-            local vampirelings = ArmyBrains[vampLord:GetArmy()]:GetListOfUnits(categories.elitecrawler, false)
-            for k, v in vampirelings do
-                if(v and not v:IsDead()) then
-                    local oldHealth = v:GetHealth()
-                    local oldMaxHealth = v:GetMaxHealth()
-                    Buff.ApplyBuff(v, buffName, vampLord)
-                    local newMaxHealth = v:GetMaxHealth()
-                    local adjustedHealth = newMaxHealth - (oldMaxHealth - oldHealth)
-                    v:AdjustHealth(adjustedHealth)
-                end
-            end
-        end
-    end
-end
-]]
