@@ -39,4 +39,11 @@ Ability.HSednaYeti02.Description = 'Sedna summons [GetNumYetis] mighty Yeti to d
 Ability.HSednaYeti03.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
 Ability.HSednaYeti04.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
 
+-- Wild Swings gives Yeti 40 auto attack damage
+Buffs.HSednaWildSwings.Affects.DamageRating = {Add = 40}
+-- Adjust description and make it clearer
+Ability.HSednaWildSwings.GetDamageRating = function(self) return math.floor(Buffs.HSednaWildSwings.Affects.DamageRating.Add) end
+Ability.HSednaWildSwings.Description = 'Sedna\'s Yetis strike with wide swings, dealing [GetDamageMult]% cleave damage to nearby enemies. They also gain [GetDamageRating] weapon damage.'
+
+
 __moduleinfo.auto_reload = true

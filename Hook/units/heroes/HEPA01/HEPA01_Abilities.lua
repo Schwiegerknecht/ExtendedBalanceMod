@@ -16,6 +16,11 @@ Ability.HEPA01FoulGrasp03.Amount = 249
 --Decrease the damage mitigation by Acclimation (down from 40%) --Schwiegerknecht
 Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.25}
 
+--Increase self damage from Ooze to 20/40/60/80 (from 20/30/40/50)
+for i = 1,4 do
+    Buffs['HEPA01OozeSelf0'..i].Affects.Health.Add = -20*i
+end
+
 --Make Foul Grasp I+II not ignore stun immunities anymore --Schwiegerknecht
 -- I think this works, but need to test with people
 BuffBlueprint {

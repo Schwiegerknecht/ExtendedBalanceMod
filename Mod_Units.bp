@@ -1,18 +1,18 @@
 UnitBlueprint {
-   BlueprintId = "hepa01",
-   Merge = true,
-   Physics = {
-   MaxSpeed = 6.0, # 6.3
-       },
-   }
-   UnitBlueprint {
-   BlueprintId = "hvampirevampire01",
-   Merge = true,
-   Physics = {
-   MaxSpeed = 6.3, # 6.0
-   TurnRate = 360, #180
-       },
-   }
+    BlueprintId = "hepa01",
+    Merge = true,
+    Physics = {
+        MaxSpeed = 6.0, # 6.3
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hvampirevampire01",
+    Merge = true,
+    Physics = {
+        MaxSpeed = 6.3, # 6.0
+        TurnRate = 360, #180
+    },
+}
 UnitBlueprint {
     BlueprintId = 'hoculusblightning01',
     Merge = true,
@@ -21,7 +21,7 @@ UnitBlueprint {
         Damage = 25,
         },
     },
-    }
+}
 UnitBlueprint {
     BlueprintId = 'hoculusblightning02',
     Merge = true,
@@ -30,7 +30,7 @@ UnitBlueprint {
             Damage = 50,
         },
     },
-    }
+}
 UnitBlueprint {
     BlueprintId = 'hoculusblightning03',
     Merge = true,
@@ -39,7 +39,7 @@ UnitBlueprint {
             Damage = 75,
         },
     },
-    }
+}
 UnitBlueprint {
     BlueprintId = 'hoculusblightning04',
     Merge = true,
@@ -48,67 +48,67 @@ UnitBlueprint {
             Damage = 100,
         },
     },
-    }
+}
 UnitBlueprint {
-   BlueprintId = "rpriest01",
-   Merge = true,
+    BlueprintId = "rpriest01",
+    Merge = true,
     Weapon = {
         {
         TargetPriorities = {
-        'HERO',
-        'DEFENSE',
-        'ALLUNITS',
+            'HERO',
+            'DEFENSE',
+            'ALLUNITS',
+            },
         },
     },
-   },
-   }
+}
 UnitBlueprint {
-   BlueprintId = "rcatapultasaurus01",
-   Merge = true,
+    BlueprintId = "rcatapultasaurus01",
+    Merge = true,
     Weapon = {
        {
-    TargetPriorities = {
-        'HERO',
-        'DEFENSE',
-        'ALLUNITS',
-        },
+        TargetPriorities = {
+            'HERO',
+            'DEFENSE',
+            'ALLUNITS',
+            },
         },
     },
-    }
+}
 UnitBlueprint {
-   BlueprintId = "rangel01",
-   Merge = true,
-   Weapon = {
-       {
-       Damage = 90,
-    TargetPriorities = {
-         'CATAPULTASAURUS',
-        'PRIEST',
-                'ALLUNITS',
+    BlueprintId = "rangel01",
+    Merge = true,
+    Weapon = {
+        {
+        Damage = 90,
+        TargetPriorities = {
+            'CATAPULTASAURUS',
+            'PRIEST',
+            'ALLUNITS',
+            },
+        },
     },
-    },
-   },
-   }  
+}  
 UnitBlueprint {
     BlueprintId = "ugbshop07",
     Merge = true,
     Shop = {
     Tree = {
-            # Robust Rejuvenation Elixir
-            Item_Large_Rejuv_Elixir = {
-                Cost = 375,
-                ItemBP = 'Item_Large_Rejuv_Elixir',
-            },
-      # Hex Scroll
-            Item_Consumable_100 = {
-                Cost = 150,
-                ItemBP = 'Item_Consumable_100',
-            },
+        # Robust Rejuvenation Elixir
+        Item_Large_Rejuv_Elixir = {
+            Cost = 375,
+            ItemBP = 'Item_Large_Rejuv_Elixir',
+        },
+        # Hex Scroll
+        Item_Consumable_100 = {
+            Cost = 150,
+            ItemBP = 'Item_Consumable_100',
+        },
         # Restorative Scroll
-            Item_Consumable_090 = {
-                Cost = 150,
-                ItemBP = 'Item_Consumable_090',
-            },
+        Item_Consumable_090 = {
+            Cost = 150,
+            ItemBP = 'Item_Consumable_090',
+        },
     },
     },
 }
@@ -118,35 +118,35 @@ UnitBlueprint {
     Shop = {
     Tree = {
         # Combat Health
-            Item_Health_Potion_Art = {
-                Cost = 375,
-                ItemBP = 'Item_Health_Potion_Art',
+        Item_Health_Potion_Art = {
+            Cost = 375,
+            ItemBP = 'Item_Health_Potion_Art',
             },
-            # Large Health
-            Item_Large_Health_Potion_Art = {
-                Cost = 750,
-                ItemBP = 'Item_Large_Health_Potion_Art',
-            },
-            # Combat Mana
-            Item_Mana_Potion_Art = {
-                Cost = 400,
-                ItemBP = 'Item_Mana_Potion_Art',
-            },
-            # Large Mana
-            Item_Large_Mana_Potion_Art = {
-                Cost = 750,
-                ItemBP = 'Item_Large_Mana_Potion_Art',
-            },
-            # Combat Rejuv
-            Item_Rejuv_Elixir_Art = {
-                Cost = 500,
-                ItemBP = 'Item_Rejuv_Elixir_Art',
-            },
-            # Large Rejuv
-            Item_Large_Rejuv_Elixir_Art = {
-                Cost = 900,
-                ItemBP = 'Item_Large_Rejuv_Elixir_Art',
-            },
+        # Large Health
+        Item_Large_Health_Potion_Art = {
+            Cost = 750,
+            ItemBP = 'Item_Large_Health_Potion_Art',
+        },
+        # Combat Mana
+        Item_Mana_Potion_Art = {
+            Cost = 400,
+            ItemBP = 'Item_Mana_Potion_Art',
+        },
+        # Large Mana
+        Item_Large_Mana_Potion_Art = {
+            Cost = 750,
+            ItemBP = 'Item_Large_Mana_Potion_Art',
+        },
+        # Combat Rejuv
+        Item_Rejuv_Elixir_Art = {
+            Cost = 500,
+            ItemBP = 'Item_Rejuv_Elixir_Art',
+        },
+        # Large Rejuv
+        Item_Large_Rejuv_Elixir_Art = {
+            Cost = 900,
+            ItemBP = 'Item_Large_Rejuv_Elixir_Art',
+        },
     },
     },
 }
@@ -169,15 +169,16 @@ UnitBlueprint {
     Shop = {
         Tree = {
             # Footman's Sabatons
-             Item_Boot_010 = {
+            Item_Boot_010 = {
                 Cost = 400,
                 ItemBP = 'Item_Boot_010',
             },
         },		
     },
 }
-
+#################################################################################################################
 # Schwiegerknecht start
+#################################################################################################################
 UnitBlueprint {
     BlueprintId = "ugbshop06",
     Merge = true,
@@ -254,5 +255,48 @@ UnitBlueprint {
                 ItemBP = 'Item_Consumable_070',
             },
         },		
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hrooktoweroflight02",
+    Merge = true,
+    Defense = {
+        Health = 1850, #1950
+        MaxHealth = 1850,
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hrooktoweroflight03",
+    Merge = true,
+    Defense = {
+        Health = 2200, #2400
+        MaxHealth = 2200,
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hrooktoweroflight04",
+    Merge = true,
+    Defense = {
+        Health = 2550, #2800
+        MaxHealth = 2550,
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hsednayeti",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+    Weapon = {
+    {
+        MaxRadius = 6, #5
+    }
+    },
+}
+UnitBlueprint {
+    BlueprintId = "hqueenent",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
     },
 }

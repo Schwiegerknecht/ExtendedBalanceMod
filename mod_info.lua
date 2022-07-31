@@ -1,15 +1,16 @@
-    name = "Extended BalanceMod 0.1"
-    version = 1
+    name = "Extended BalanceMod 0.2"
+    version = 0.2
     copyright = "Copyright � 2012, LORD-ORION, 2021 Schwiegerknecht"
     description = "Balance Changes to Items and Demigods, expanding on the code of LORD-ORION'S BalanceMod 1.31."
     author = "LORD-ORION, Schwiegerknecht"                              # Optional author info
-    url = "http://www.gaspoweredgames.com"
+    url = "https://github.com/Schwiegerknecht/ExtendedBalanceMod_v0.1"
 
-    uid = "74D55C14-CAD3-11EB-AF13-DC45FC2CA371"
+    uid = "C97FF2C6-07CA-11ED-83F8-C105EDFF9207"
     exclusive = false
     ui_only = false
     
     conflicts = {
+    "74D55C14-CAD3-11EB-AF13-DC45FC2CA371", --ExtendedBalmod 0.1
     "872e2f19-e3e7-4b51-ae99-e901573b818c", --Balmod 1.31
 	"872e2f19-e3e7-4b51-ae99-e901573b818b", --Balmod 1.3
     	"872e2f19-e3e7-4b51-ae99-e901573b818a", --Balmod 1.2 test
@@ -21,6 +22,10 @@
 	"FAB343E0-7139-11E0-8556-15334824019B", --CrazyTown 1.2
 	"CE38E9F8-7D70-11E0-A66D-65294824019B", --CrazyTown 1.3
 	"6651C334-86E7-11E0-992A-33C64724019B" -- CrazyTown 1.4
+    }
+
+    after = {
+    "003B56DC-6BF9-11DF-8A4C-A7DEDFD71052" --Uberfix 1.06
     }
     
     --requires = {"1BC15004-2757-11E0-BF50-820CDFD72085", --Enhanced UI

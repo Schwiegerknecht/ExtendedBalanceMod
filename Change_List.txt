@@ -15,14 +15,24 @@ Rook: lower Tower of Light HP by 10-15%
 
 Oak: Decrease Shield duration by 1-1.5 seconds.
 
-(Perhaps reduce cost for small potions (especially mana potions), since they barely get used.)
+UB: Potential Ooze Nerf - increase own HP lost per tick to however much enemies
+take
+
+(Perhaps reduce cost for small potions (especially mana potions), since they
+barely get used.)
+
 Oculus:
   Ideas to make the barely used abilities viable compared to dmg build:
 - minions explode upon death
 - mana aura
 - mana drain
-- probably buff king of the minotaurs in general; maybe tanky minion build with sacrifice?
+- probably buff king of the minotaurs in general; maybe tanky minion build with
+  sacrifice?
 - lightning damage reflect
+
+QoT:
+  Update Summon Shambler II-IV description to make clear how much stronger
+  Shamblers get.
 
 Erebus: Make Army of the Night attractive with some sort of Elite Nightcrawlers
 (fewer, but stronger)
@@ -44,15 +54,63 @@ Army of the Night:
 Oculus:
 Sacrifice now works as advertised. (Radius = 10)
 
-Rook:
+Regulus:
+Vengeance:
+  - 15 damage radius (normally 10)
+  Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
+  - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
+  - 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
+  Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
+  - -20% Attack Speed (15 Range, 10 Duration)
+Deadeye:
+  The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe.
+  - 1.5 second stun on Snipe added
+Impedance Bolt:
+  Enemies are also immobilized on WeaponProc (on top of higher mana costs)
+  - 0.8 seconds immobilization on WeaponProc
 
-Energizer adds a debuff immunity while channeling.
+Queen of Thorns:
+Shamblers:
+  - Turn rate: 360 (from 180)
+Entourage:
+  - Gold production increased by 1/2/3 (from 0/0/0)
+Compost:
+  - HP regeneration: 5/10/15/20/30/40 per compost level (from 0/0/0/0/0/0)
+Uproot III:
+  - Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
+Uproot IV:
+  - Stuns the targeted structure for its duration (10 sec).
+
+Rook:
+Energizer:
+  - Debuff immunity while channeling.
+Power of the Tower:
+  - 1500/1850/2200/2550 Tower HP (down from 1500/1950/2400/2850)
 
 Sedna:
+Horn of the Yeti:
+  - Turn rate: 360 (from 180)
+  - Attack radius: 6 (from 5)
+  - 0/50/100/150 armor (from 0/0/0/0)
+  - 525/650/775/900 mana cost (from 550/750/950/1150)
+Wild Swings:
+  - +40 Yeti weapon damage
 
-Yeti gain 0/50/100/150 armor (from 0/0/0/0)
-Yeti cost 525/650/775/900 mana (from 550/750/950/1150)
+# Items
+############################################################
 
+Amulet of Teleportation:
+Cooldown: 35 (up from 30; 45 in vanilla DG)
+
+Staff of the Warmage:
+Mana Regen over time: 4 + 0.5*hero level (instead of 4 + 0.2/60 seconds)
+  - Note: Also fixes the regen being lost upon death.
+
+Stormbringer:
+Proc chance: 50% (from 25)
+Lightning damage: 125 (from 250)
+Ice Rain movement slow: 15% (from 10%)
+Movement speed aura: 10% for allies in range 15
 
 ############################################################
 # v. 0.1
@@ -63,19 +121,22 @@ Yeti cost 525/650/775/900 mana (from 550/750/950/1150)
 ############################################################
 
 Oak:
-Adapt Shield III duration for a linear progression. Also create progression from
-damage immunity --> cleanse and damage immunity --> damage and debuff immunity:
-- Shield III duration: 5 seconds (normally 6)
-- Remove the cleanse from Shield I, so now it does what the description says.
-- Adapt description for Shield II to include the debuff cleanse.
-- Adapt description for Shield III to include debuff immunity.
-- Adapt description for Shield IV to include debuff immunity.
+Shield III:
+  Adapt duration for a linear progression. Also create progression from
+  damage immunity --> cleanse and damage immunity --> damage and debuff immunity:
+  - Shield III duration: 5 seconds (normally 6)
+  - Remove the cleanse from Shield I, so now it does what the description says.
+  - Adapt description for Shield II to include the debuff cleanse.
+  - Adapt description for Shield III to include debuff immunity.
+  - Adapt description for Shield IV to include debuff immunity.
 
 UB:
-Acclimation damage mitigation: 25% (normally 40%)
-Foul Grasp I + II: These don't ignore Stun Immunities anymore. TESTING REQUIRED!
+Acclimation:
+  - Damage mitigation: 25% (normally 40%)
+Foul Grasp I + II:
+  - These don't ignore Stun Immunities anymore. TESTING REQUIRED!
 
-TB: 
+TB:
 Just for ease of access, stance switch times are now accessible via
 Ability.HEMA01SwitchIce.SwitchDuration and
 Ability.HEMA01SwitchFire.SwitchDuration, respectively (via
