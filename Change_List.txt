@@ -11,27 +11,12 @@ v.0.2
 
 Erebus:
 Army of the Night:
-- 40% Attack Speed (from 5%)
-- 100% Lifesteal (from 10%)
+- 40% Nightwalker Attack Speed (from 5%)
+- 100% Nightwalker Lifesteal (from 10%)
 - Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
 
 Oculus:
 Sacrifice now works as advertised. (Radius = 10)
-
-Regulus:
-Vengeance:
-  - 15 damage radius (normally 10)
-  Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
-  - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
-  - 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
-  Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
-  - -20% Attack Speed (15 Range, 10 Duration)
-Deadeye:
-  The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe.
-  - 1.5 second stun on Snipe added
-Impedance Bolt:
-  Enemies are also immobilized on WeaponProc (on top of higher mana costs)
-  - 0.8 seconds immobilization on WeaponProc
 
 Queen of Thorns:
 Shamblers:
@@ -45,6 +30,21 @@ Uproot III:
 Uproot IV:
   - Stuns the targeted structure for its duration (10 sec).
 
+Regulus:
+Vengeance:
+  - 15 damage radius (normally 10)
+  Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
+  - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
+  - 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
+  Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
+  - -20% Attack Speed (15 Range, 10 Duration)
+Deadeye:
+  The WeaponProc has been removed. Instead Deadeye adds a stun to Snipe.
+  - 1.5 second stun on Snipe added
+Impedance Bolt:
+  Enemies are also immobilized on WeaponProc (on top of increasing mana costs)
+  - 0.8 seconds immobilization on WeaponProc
+
 Rook:
 Energizer:
   - Debuff immunity while channeling.
@@ -55,10 +55,15 @@ Sedna:
 Horn of the Yeti:
   - Turn rate: 360 (from 180)
   - Attack radius: 6 (from 5)
-  - 0/50/100/150 armor (from 0/0/0/0)
+  - 0/50/100/150 armor for Yetis (from 0/0/0/0)
   - 525/650/775/900 mana cost (from 550/750/950/1150)
 Wild Swings:
   - +40 Yeti weapon damage
+
+Unclean Beast:
+Ooze:
+  - 20/40/60/80 self damage per tick (from 20/30/40/50)
+
 
 # Items
 ############################################################
