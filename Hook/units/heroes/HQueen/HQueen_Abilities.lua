@@ -111,7 +111,19 @@ function Consume(abilityDef, unit, params)
     end
 end
 
+
 -- Schwiegerknecht start
+
+-- Adjust Summon Shambler 2-4 descriptions to clarify how much stronger Shamblers get.
+Ability['HQueenShambler02'].GetDamageRating = function(self) return math.floor( Buffs['HQueenShamblerBuff02'].Affects.DamageRating.Add ) end
+Ability['HQueenShambler02'].GetMaxHealth = function(self) return math.floor( Buffs['HQueenShamblerBuff02'].Affects.MaxHealth.Add ) end
+Ability['HQueenShambler02'].Description = 'Queen of Thorns summons [GetShamblersSummoned] Shamblers from her thorns to protect her. She may have [GetMaxShamblers] Shamblers active. Shamblers gain [GetDamageRating] Weapon Damage and [GetMaxHealth] Health.'
+Ability['HQueenShambler03'].GetDamageRating = function(self) return math.floor( Buffs['HQueenShamblerBuff03'].Affects.DamageRating.Add ) end
+Ability['HQueenShambler03'].GetMaxHealth = function(self) return math.floor( Buffs['HQueenShamblerBuff03'].Affects.MaxHealth.Add ) end
+Ability['HQueenShambler03'].Description = 'Queen of Thorns summons [GetShamblersSummoned] Shamblers from her thorns to protect her. She may have [GetMaxShamblers] Shamblers active. Shamblers gain [GetDamageRating] Weapon Damage and [GetMaxHealth] Health.'
+Ability['HQueenShambler04'].GetDamageRating = function(self) return math.floor( Buffs['HQueenShamblerBuff04'].Affects.DamageRating.Add ) end
+Ability['HQueenShambler04'].GetMaxHealth = function(self) return math.floor( Buffs['HQueenShamblerBuff04'].Affects.MaxHealth.Add ) end
+Ability['HQueenShambler04'].Description = 'Queen of Thorns summons [GetShamblersSummoned] Shamblers from her thorns to protect her. She may have [GetMaxShamblers] Shamblers active. Shamblers gain [GetDamageRating] Weapon Damage and [GetMaxHealth] Health.'
 
 -- Uproot 3 and 4 appliy fire rate debuff / stun to target.
 BuffBlueprint {

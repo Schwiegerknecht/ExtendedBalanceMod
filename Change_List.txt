@@ -6,35 +6,6 @@
 v.0.2
 ############################################################
 
-Potential Changes/Ideas:
-------------------------
-
-Capture Lock: Revert duration, increase cast time instead
-
-
-Oak: Decrease Shield duration by 1-1.5 seconds.
-
-Oculus:
-  Ideas to make the barely used abilities viable compared to dmg build:
-- minions explode upon death
-- mana aura
-- mana drain
-- probably buff king of the minotaurs in general; maybe tanky minion build with
-  sacrifice?
-- lightning damage reflect
-
-QoT:
-  Update Summon Shambler II-IV description to make clear how much stronger
-  Shamblers get.
-
-Erebus: Make Army of the Night attractive with some sort of Elite Nightcrawlers
-(fewer, but stronger)
-    -- Requirements/TODO: If they should be bigger visually create mesh.bp and
-    character.lua with modified DrawScales in the /character folder. Create a
-    script.lua and unit.bp in Heroes/HVampire and call those via the functions
-    RaiseVampire and Coven in HVampire_Abilities.lua. Otherwise just give them a
-    buff via Army of the Night.
-
 # Demigods
 ############################################################
 
