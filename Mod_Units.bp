@@ -282,6 +282,13 @@ UnitBlueprint {
     },
 }
 UnitBlueprint {
+    BlueprintId = "hsednaunit",
+    Merge = true,
+    Physics = {
+        TurnRate = 720, #450
+    },
+}
+UnitBlueprint {
     BlueprintId = "hsednayeti",
     Merge = true,
     Physics = {
@@ -295,6 +302,90 @@ UnitBlueprint {
 }
 UnitBlueprint {
     BlueprintId = "hqueenent",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "highpriest01",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "highpriest02",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "highpriest03",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "highpriest04",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "minotaurcaptain01",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "minotaurcaptain02",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "minotaurcaptain03",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "minotaurcaptain04",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "siegearcher01",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "siegearcher02",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "siegearcher03",
+    Merge = true,
+    Physics = {
+        TurnRate = 360, #180
+    },
+}
+UnitBlueprint {
+    BlueprintId = "siegearcher04",
     Merge = true,
     Physics = {
         TurnRate = 360, #180

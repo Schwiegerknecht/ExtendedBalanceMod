@@ -6,6 +6,8 @@
 v.0.2
 ############################################################
 
+All minions have had their Turn Rates increased to 360 (from 180).
+
 # Demigods
 ############################################################
 
@@ -20,7 +22,7 @@ Sacrifice now works as advertised. (Radius = 10)
 
 Queen of Thorns:
 Shamblers:
-  - Turn rate: 360 (from 180)
+  - Turn Rate: 360 (from 180)
 Entourage:
   - Gold production increased by 1/2/3 (from 0/0/0)
 Compost:
@@ -52,8 +54,10 @@ Power of the Tower:
   - 1500/1850/2200/2550 Tower HP (down from 1500/1950/2400/2850)
 
 Sedna:
+Sedna's Turn Rate:
+  - 720 (from 450)
 Horn of the Yeti:
-  - Turn rate: 360 (from 180)
+  - Turn Rate: 360 (from 180)
   - Attack radius: 6 (from 5)
   - 0/50/100/150 armor for Yetis (from 0/0/0/0)
   - 525/650/775/900 mana cost (from 550/750/950/1150)
