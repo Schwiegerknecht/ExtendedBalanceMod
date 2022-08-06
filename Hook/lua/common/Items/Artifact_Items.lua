@@ -27,9 +27,9 @@ Ability.Item_Artifact_040_2.AffectRadius = 9 -- (normally 8)
 Ability.Item_Artifact_040_2.DamageAmt = 120 -- (normally 80)
 
 
--- Girdle of Giants: CleaveSize 5 (normally 2.5), WeaponDamage 150 (normally 50)
+-- Girdle of Giants: CleaveSize 5 (normally 2.5), WeaponDamage 100 (from 50 in vanilla / 150 in v0.2+v0.1)
 Ability.Item_Artifact_090_WeaponProc.CleaveSize = 5
-Buffs.Item_Artifact_090.Affects.DamageRating.Add = 150
+Buffs.Item_Artifact_090.Affects.DamageRating.Add = 100
 
 -- In case we decide to use crit on Girdle after testing:
 --[[ Remove HP regen

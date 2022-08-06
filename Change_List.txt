@@ -3,7 +3,30 @@
 ############################################################
 
 ############################################################
-v.0.2
+v0.3
+############################################################
+
+#TODO
+############################################################
+
+- Buff Mard's Hammer
+- Godplate is a bit stronger than Groffling, but not much (Groffling needs like 2 procs to win)
+  Have Godplate give a buff when stunned or frozen?
+- Nimoth is as strong as Duelist's, even with 2 crits in a fight
+- Armor of Vengeance wins vs Duelist's, but not sure it's worth the price
+
+# Items
+############################################################
+
+Girdle of Giants:
+- Weapon Damage: 100 (from 150)
+
+Mard's Hammer:
+- Weapon Damage per hero level: 3
+
+
+############################################################
+v0.2
 ############################################################
 
 All minions have had their Turn Rates increased to 360 (from 180).
@@ -86,7 +109,7 @@ Ice Rain movement slow: 15% (from 10%)
 Movement speed aura: 10% for allies in range 15
 
 ############################################################
-# v. 0.1
+# v0.1
 ############################################################
 
 

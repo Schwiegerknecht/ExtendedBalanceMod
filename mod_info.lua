@@ -1,19 +1,20 @@
-    name = "Extended BalanceMod 0.2"
-    version = 0.2
+    name = "Extended BalanceMod 0.3"
+    version = 0.3
     copyright = "Copyright � 2012, LORD-ORION, 2021 Schwiegerknecht"
     description = "Balance Changes to Items and Demigods, expanding on the code of LORD-ORION'S BalanceMod 1.31."
     author = "LORD-ORION, Schwiegerknecht"                              # Optional author info
-    url = "https://github.com/Schwiegerknecht/ExtendedBalanceMod_v0.1"
+    url = "https://github.com/Schwiegerknecht/ExtendedBalanceMod"
 
-    uid = "C97FF2C6-07CA-11ED-83F8-C105EDFF9207"
+    uid = "11CEC504-156B-11ED-BCFE-96B2460F4163"
     exclusive = false
     ui_only = false
     
     conflicts = {
+    "C97FF2C6-07CA-11ED-83F8-C105EDFF9207", --ExtendedBalmod 0.2
     "74D55C14-CAD3-11EB-AF13-DC45FC2CA371", --ExtendedBalmod 0.1
     "872e2f19-e3e7-4b51-ae99-e901573b818c", --Balmod 1.31
 	"872e2f19-e3e7-4b51-ae99-e901573b818b", --Balmod 1.3
-    	"872e2f19-e3e7-4b51-ae99-e901573b818a", --Balmod 1.2 test
+    "872e2f19-e3e7-4b51-ae99-e901573b818a", --Balmod 1.2 test
 	"DD57B32E-833F-11E0-96BE-7FB04724019C", --MOBA 1.2
 	"672e2f19-e3e7-4b51-ae99-e901573b817f", --Balmod 1.1
 	"672e2f19-e3e7-4b51-ae99-e901573b817e", -- balancemod 1.1RC

@@ -27,20 +27,21 @@ Buffs.AchievementHealth.Affects.MaxHealth.Add = 600
 Buffs.AchievementMana.Affects.MaxEnergy.Add = 1050 
 
 -- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel) -- Schwiegerknecht
+-- Change Ability.AchievementMana_Aura.LevelEnergyRegen to change value
 BuffBlueprint{
 	Name = 'AchievementMana_LevelEnergyRegen',
 	BuffType = 'AchievementMana_LevelEnergyRegen',
 	DisplayName = '<LOC ITEM_Achievement_0090>Staff of the Warmage',
-	Description = '<LOC ITEM_Achievement_0091>Increasing Mana Regen',
+	Description = '<LOC ITEM_Achievement_0091>Increasing Mana Regen per level',
 	Icon = '/NewIcons/AchievementRewards/StaffoftheWarmage',
 	Debuff = false,
 	Stacks = 'REPLACE',
 	Duration = -1,
 	Affects = {
-		EnergyRegen = {Add = 0.5},
+		EnergyRegen = {Add = 0.5}, -- Dummy value, buff gets calculated in OnAuraPulse below
 	},
 }
-
+-- Add Aura to check hero level, calculate and apply buff
 table.insert(Items.AchievementMana.Abilities, AbilityBlueprint {
 	Name = 'AchievementMana_Aura',
 	AbilityType = 'Aura',
@@ -63,7 +64,7 @@ table.insert(Items.AchievementMana.Abilities, AbilityBlueprint {
 Buffs.AchievementMana.Affects.EnergyRegen = {Add = 4}
 -- Add description
 Items.AchievementMana.GetManaRegenBonus = function(self) return Buffs['AchievementMana'].Affects.EnergyRegen.Add end
-Items.AchievementMana.GetManaLevelRegen = function(self) return string.format("%.1f", Buffs['AchievementMana_LevelEnergyRegen'].Affects.EnergyRegen.Add) end
+Items.AchievementMana.GetManaLevelRegen = function(self) return string.format("%.1f", Ability['AchievementMana_Aura'].LevelEnergyRegen) end
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana Regen')
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaLevelRegen] Mana Regen per hero level')
 -- End of Staff of the Warmage change
@@ -118,10 +119,51 @@ table.insert(Items.AchievementVision.Abilities, AbilityBlueprint {
 })
 --End of goggle change
 
--- Add minion HP regeneration to Tome of Endurance - Schwiegerknecht
+
+-- Schwiegerknecht start
+-- Add minion HP regeneration to Tome of Endurance
 Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
 Items.AchievementMinionHealth.GetMinionRegenBonus = function(self) return Buffs['AchievementMinionHealthBuff'].Affects.Regen.Add end
 table.insert(Items.AchievementMinionHealth.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')
 
 -- Increase Dark Crimson Vial Cooldown to 60 seconds - Schwiegerknecht
 Ability.AchievementPotion.Cooldown = 60
+
+-- Give Mard's Hammer Weapon Damage scaling with level
+-- Add 3 Weapon Damage per level (Change Ability.AchievementDamage_Aura.LevelDamageRating to change value)
+BuffBlueprint{
+	Name = 'AchievementDamage_LevelDamageRating',
+	BuffType = 'AchievementDamage_LevelDamageRating',
+	DisplayName = '<LOC ITEM_Achievement_0067>Mard\'s Hammer',
+	Description = '<LOC ITEM_Achievement_0068>Increasing Damage per level',
+	Icon = '/NewIcons/AchievementRewards/HammerofDestruction',
+	Debuff = false,
+	Stacks = 'REPLACE',
+	Duration = -1,
+	Affects = {
+		DamageRating = {Add = 3}, -- Dummy value, buff gets calculated in OnAuraPulse, below
+	},
+}
+-- Add Aura to check hero level, calculate and apply buff
+table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
+	Name = 'AchievementDamage_Aura',
+	AbilityType = 'Aura',
+	AffectRadius = 1,
+	AuraPulseTime = 1,
+	LevelDamageRating = 3,
+	Icon = 'NewIcons/AchievementRewards/HammerofDestruction',
+	TargetAlliance = 'Ally',
+	TargetCategory = 'HERO - UNTARGETABLE',
+	OnAuraPulse = function(self, unit)
+		local aiBrain = unit:GetAIBrain()
+		local hero = aiBrain:GetHero()
+		local herolvl = hero:GetLevel()
+		local addDamage = herolvl * self.LevelDamageRating
+
+		Buffs['AchievementDamage_LevelDamageRating'].Affects.DamageRating.Add = addDamage
+		Buff.ApplyBuff(unit, 'AchievementDamage_LevelDamageRating', unit)
+	end,
+})
+-- Add Tooltip
+Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
+table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
