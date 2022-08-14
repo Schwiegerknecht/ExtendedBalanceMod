@@ -15,11 +15,24 @@ v0.3
 - Nimoth is as strong as Duelist's, even with 2 crits in a fight
 - Armor of Vengeance wins vs Duelist's, but not sure it's worth the price
 
+
+# Demigods
+############################################################
+
+Unclean Beast:
+Foul Grasp:
+  Foul Grasp I does not ignore stun immunities anymore.
+  Foul Grasp II + III do still ignore stun immunities.
+
+
 # Items
 ############################################################
 
 Girdle of Giants:
 - Weapon Damage: 100 (from 150)
+
+Gauntlets of Despair:
+- Mana leech down to 400 per proc (from 525 in BalMod 1.31; 300 in vanilla DG)
 
 Mard's Hammer:
 - Weapon Damage per hero level: 3

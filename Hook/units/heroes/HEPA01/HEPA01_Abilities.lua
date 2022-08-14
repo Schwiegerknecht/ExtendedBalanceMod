@@ -21,7 +21,7 @@ for i = 1,4 do
     Buffs['HEPA01OozeSelf0'..i].Affects.Health.Add = -20*i
 end
 
---Make Foul Grasp I+II not ignore stun immunities anymore --Schwiegerknecht
+--Make Foul Grasp I not ignore stun immunities anymore --Schwiegerknecht
 -- I think this works, but need to test with people
 BuffBlueprint {
     Name = 'HEPA01FoulGraspStun02',
@@ -42,31 +42,36 @@ Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its 
 
 -- Create copies of the Foul Grasp functions, changing all instances of
 -- HEPA01FoulGraspStun01
-DrawLifeNoImmune = function(def, unit, target)
+DrawLifeTriggersImmune = function(def, unit, target)
     unit:GetWeapon(1):SetStayOnTarget(true)
 
     # Add callbacks so we can interrupt Grasp
-    unit.Callbacks.OnWeaponFire:Add(EndGraspNoImmune, def)
-    unit.Callbacks.OnKilled:Add(EndGraspNoImmune, def)
-    unit.Callbacks.OnStunned:Add(EndGraspNoImmune, def)
-    unit.Callbacks.OnFrozen:Add(EndGraspNoImmune, def)
-    target.Callbacks.OnKilled:Add(EndGraspNoImmune, def)
-    unit.Callbacks.OnAbilityBeginCast:Add(EndGraspCancelNoImmune)
+    unit.Callbacks.OnWeaponFire:Add(EndGraspTriggersImmune, def)
+    unit.Callbacks.OnKilled:Add(EndGraspTriggersImmune, def)
+    unit.Callbacks.OnStunned:Add(EndGraspTriggersImmune, def)
+    unit.Callbacks.OnFrozen:Add(EndGraspTriggersImmune, def)
+    target.Callbacks.OnKilled:Add(EndGraspTriggersImmune, def)
+    unit.Callbacks.OnAbilityBeginCast:Add(EndGraspCancelTriggersImmune)
 
     Buff.ApplyBuff(unit, 'StayOnTarget', unit)
-    Buff.ApplyBuff(target, 'WeaponDisable', unit, unit:GetArmy())
     Buff.ApplyBuff(unit, 'WeaponDisable', unit)
-    target:GetNavigator():AbortMove()
-    if target.Character then
-        target.Character:AbortCast()
-    end
-    Buff.ApplyBuff(target, 'Immobile', unit, unit:GetArmy())
+    
+    -- Try applying the stun first so we trigger "Immune" in case of immunity.
     Buff.ApplyBuff(target, 'HEPA01FoulGraspStun02', unit, unit:GetArmy())
-
+    -- Only apply debuffs to target if the target is not StunImmune.
+    if not target.StunImmune then
+        target:GetNavigator():AbortMove()
+        if target.Character then
+            target.Character:AbortCast()
+        end
+        Buff.ApplyBuff(target, 'WeaponDisable', unit, unit:GetArmy())
+        Buff.ApplyBuff(target, 'Immobile', unit, unit:GetArmy())
+        -- And only in this case add target to unit.AbilityData
+        unit.AbilityData.FoulGraspTarget = target
+    end
     unit:GetNavigator():AbortMove()
     Buff.ApplyBuff(unit, 'Immobile', unit)
 
-    unit.AbilityData.FoulGraspTarget = target
     
     WaitSeconds(0.1)
     unit.Character:PlayAction('CastFoulGraspStart')
@@ -153,29 +158,29 @@ DrawLifeNoImmune = function(def, unit, target)
             Leech( unit, target, data, def.Amount )
             WaitSeconds(0.5)
         else
-            EndGraspNoImmune(def, unit, target)
+            EndGraspTriggersImmune(def, unit, target)
         end
     end
-    EndGraspNoImmune(def, unit, target)
+    EndGraspTriggersImmune(def, unit, target)
 end
 
-function EndGraspNoImmune(def, unit)
+function EndGraspTriggersImmune(def, unit)
     #LOG("*DEBUG: Ending foul grasp")
-    unit.Callbacks.OnWeaponFire:Remove(EndGraspNoImmune)
-    unit.Callbacks.OnKilled:Remove(EndGraspNoImmune)
-    unit.Callbacks.OnStunned:Remove(EndGraspNoImmune)
-    unit.Callbacks.OnFrozen:Remove(EndGraspNoImmune)
+    unit.Callbacks.OnWeaponFire:Remove(EndGraspTriggersImmune)
+    unit.Callbacks.OnKilled:Remove(EndGraspTriggersImmune)
+    unit.Callbacks.OnStunned:Remove(EndGraspTriggersImmune)
+    unit.Callbacks.OnFrozen:Remove(EndGraspTriggersImmune)
     unit.Callbacks.OnMotionHorzEventChange:Remove(Moved)
-    unit.Callbacks.OnAbilityBeginCast:Remove(EndGraspCancelNoImmune)
+    unit.Callbacks.OnAbilityBeginCast:Remove(EndGraspCancelTriggersImmune)
 
     local target = unit.AbilityData.FoulGraspTarget
     if target and not target:IsDead() then
         Buff.RemoveBuff(target, 'Immobile')
-        Buff.RemoveBuff(target, 'HEPA01FoulGraspStun02')
+        Buff.RemoveBuff(target, 'HEPA01FoulGraspStun02') --
         if Buff.HasBuff(target, 'WeaponDisable') then
             Buff.RemoveBuff(target, 'WeaponDisable')
         end
-        target.Callbacks.OnKilled:Remove(EndGraspNoImmune)
+        target.Callbacks.OnKilled:Remove(EndGraspTriggersImmune)
     end
 
     if unit.AbilityData.FoulGraspEffects then
@@ -204,23 +209,23 @@ function EndGraspNoImmune(def, unit)
     unit.Character:PlayAction('CastFoulGraspEnd')
 end
 
-function EndGraspCancelNoImmune(def, unit)
+function EndGraspCancelTriggersImmune(def, unit)
     #LOG("*DEBUG: Ending foul grasp")
-    unit.Callbacks.OnWeaponFire:Remove(EndGraspNoImmune)
-    unit.Callbacks.OnKilled:Remove(EndGraspNoImmune)
-    unit.Callbacks.OnStunned:Remove(EndGraspNoImmune)
-    unit.Callbacks.OnFrozen:Remove(EndGraspNoImmune)
+    unit.Callbacks.OnWeaponFire:Remove(EndGraspTriggersImmune)
+    unit.Callbacks.OnKilled:Remove(EndGraspTriggersImmune)
+    unit.Callbacks.OnStunned:Remove(EndGraspTriggersImmune)
+    unit.Callbacks.OnFrozen:Remove(EndGraspTriggersImmune)
     unit.Callbacks.OnMotionHorzEventChange:Remove(Moved)
-    unit.Callbacks.OnAbilityBeginCast:Remove(EndGraspCancelNoImmune)
+    unit.Callbacks.OnAbilityBeginCast:Remove(EndGraspCancelTriggersImmune)
 
     local target = unit.AbilityData.FoulGraspTarget
     if target and not target:IsDead() then
         Buff.RemoveBuff(target, 'Immobile')
-        Buff.RemoveBuff(target, 'HEPA01FoulGraspStun02')
+        Buff.RemoveBuff(target, 'HEPA01FoulGraspStun02') --
         if Buff.HasBuff(target, 'WeaponDisable') then
             Buff.RemoveBuff(target, 'WeaponDisable')
         end
-        target.Callbacks.OnKilled:Remove(EndGraspNoImmune)
+        target.Callbacks.OnKilled:Remove(EndGraspTriggersImmune)
     end
 
     if unit.AbilityData.FoulGraspEffects then
@@ -251,15 +256,12 @@ end
 -- Use those functions In Foul Grasp I + II
 Ability.HEPA01FoulGrasp01.OnStartAbility = function(self,unit,params)
     local target = params.Targets[1]
-    local thd = ForkThread(DrawLifeNoImmune, self, unit, target)
+    local thd = ForkThread(DrawLifeTriggersImmune, self, unit, target)
     unit.Trash:Add(thd)
     target.Trash:Add(thd)
     unit.AbilityData.FoulGraspThread = thd
 end
-Ability.HEPA01FoulGrasp02.OnStartAbility = function(self,unit,params)
-    local target = params.Targets[1]
-    local thd = ForkThread(DrawLifeNoImmune, self, unit, target)
-    unit.Trash:Add(thd)
-    target.Trash:Add(thd)
-    unit.AbilityData.FoulGraspThread = thd
-end
+-- Change descriptions to reflect which levels ignore Stun immunities.
+Ability.HEPA01FoulGrasp01.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This does not ignore stun immunities.'
+Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
+Ability.HEPA01FoulGrasp03.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
