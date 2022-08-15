@@ -10,20 +10,23 @@ Buffs.Item_Chest_060.Affects.MaxHealth = {Add = 200, AdjustEnergy = false}
 Items.Item_Chest_060.GetHealthBonus = function(self) return Buffs['Item_Chest_060'].Affects.MaxHealth.Add end
 table.insert(Items.Item_Chest_060.Tooltip.Bonuses, '+[GetHealthBonus] Health')
 
+--Schwiegerknecht start
 
 --Armor of Vengeance
 --[[ Add +10 health per second to Armor of Vengance and adjust description
 Buffs.Item_Chest_050.Affects.Regen = {Add = 10}
 Items.Item_Chest_050.GetRegenBonus = function(self) return Buffs['Item_Chest_050'].Affects.Regen.Add end
 table.insert(Items.Item_Chest_050.Tooltip.Bonuses, '+[GetRegenBonus] Health Per Second')
-]] -- Removed - Schwiegerknecht
+]] -- Removed
 
--- Added 200 HP to Armor of Vengeance (from 0) - Schwiegerknecht
-Buffs.Item_Chest_050.Affects.MaxHealth = {Add = 250}
+-- Added 400 HP to Armor of Vengeance (from 0)
+Buffs.Item_Chest_050.Affects.MaxHealth = {Add = 400}
+-- Increase Armor of Vengeance base damage reflect to 75 (from 35)
+Buffs.Item_Chest_050.Affects.DamageReturn = {Add = 75}
 -- Add Tooltip
 Items.Item_Chest_050.GetHealthBonus = function(self) return Buffs['Item_Chest_050'].Affects.MaxHealth.Add end
 table.insert(Items.Item_Chest_050.Tooltip.Bonuses, '+[GetHealthBonus] Health')
---Add ArmorProc that increases the damage being reflected - Schwiegerknecht
+--Add ArmorProc that increases the damage being reflected
 BuffBlueprint {
     Name = 'Item_Chest_050_Reflect',
     DisplayName = '<LOC ITEM_Chest_0014>Armor of Vengeance',
@@ -64,15 +67,17 @@ if not Items.Item_Chest_050.Tooltip.ChanceOnHit then
 end
 
 
---Increased armor of Duelist's Cuirass to 700 (from 500) - Schwiegerknecht
-Buffs.Item_Chest_090.Affects.Armor = {Add = 700}
+--Increased armor of Duelist's Cuirass to 800 (from 700; normally 500)
+Buffs.Item_Chest_090.Affects.Armor = {Add = 800}
+--Increased health of Duelist's Cuirass to 500 (from 350)
+Buffs.Item_Chest_090.Affects.MaxHealth = {Add = 500, AdjustEnergy = false}
 --Correct Description
 Items.Item_Chest_090.Tooltip.Bonuses = {
     '+[MaxHealth] Health',
     '+[GetArmorBonus] Armor',
 }
 
--- Add +10 minion HP regen to Godplate - Schwiegerknecht
+-- Add +10 minion HP regen to Godplate
 Buffs.Item_Chest_080_Minion_Buff.Affects.Regen = {Add = 10}
 Items.Item_Chest_080.GetMinionRegenBonus = function(self) return Buffs['Item_Chest_080_Minion_Buff'].Affects.Regen.Add end
 table.insert(Items.Item_Chest_080.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')

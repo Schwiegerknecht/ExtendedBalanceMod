@@ -13,8 +13,8 @@ Buffs.HEPA01DiseasedClaws03.Affects.MoveMult.Mult = -0.15
 Ability.HEPA01FoulGrasp02.Amount = 166
 Ability.HEPA01FoulGrasp03.Amount = 249
 
---Decrease the damage mitigation by Acclimation (down from 40%) --Schwiegerknecht
-Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.25}
+--Decrease the damage mitigation by Acclimation to 30% (down from 40%) --Schwiegerknecht
+Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.30}
 
 -- Increase Ooze self damage, scaling off hero level:
 -- 20 + herolevel*0/1/2/3 dmg (from 20/30/40/50)
@@ -94,8 +94,14 @@ for i = 2,4 do
 end
 ]]
 
---Make Foul Grasp I not ignore stun immunities anymore --Schwiegerknecht
--- I think this works, but need to test with people
+-- CHange Descriptions
+Ability.HEPA01Ooze02.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + UB\'s level.'
+Ability.HEPA01Ooze03.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + (UB\'s level * 2).'
+Ability.HEPA01Ooze04.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + (UB\'s level * 3).'
+
+
+# Make Foul Grasp I not ignore stun immunities anymore --Schwiegerknecht
+#################################################################################################################
 BuffBlueprint {
     Name = 'HEPA01FoulGraspStun02',
     DisplayName = '<LOC ABILITY_HEPA01_0043>Foul Grasp',
@@ -110,8 +116,6 @@ BuffBlueprint {
     },
     Icon = '/DGUncleanBeast/NewUncleanFoulGrasp01',
 }
-Ability.HEPA01FoulGrasp01.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This Level of Foul Grasp should not ignore Stun Immunities anymore. TESTING REQUIRED!'
-Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This Level of Foul Grasp should not ignore Stun Immunities anymore. TESTING REQUIRED!'
 
 -- Create copies of the Foul Grasp functions, changing all instances of
 -- HEPA01FoulGraspStun01
@@ -326,7 +330,7 @@ function EndGraspCancelTriggersImmune(def, unit)
     Buff.RemoveBuff(unit, 'Immobile')
     unit.Character:PlayAction('CastFoulGraspEnd')
 end
--- Use those functions In Foul Grasp I + II
+-- Use those functions In Foul Grasp I
 Ability.HEPA01FoulGrasp01.OnStartAbility = function(self,unit,params)
     local target = params.Targets[1]
     local thd = ForkThread(DrawLifeTriggersImmune, self, unit, target)

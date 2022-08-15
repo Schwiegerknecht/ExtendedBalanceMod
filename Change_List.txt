@@ -3,7 +3,7 @@
 ############################################################
 
 ############################################################
-v0.3
+# v0.3
 ############################################################
 
 #TODO
@@ -24,11 +24,22 @@ All Favor Items now cost 1 Favor Point.
 # Demigods
 ############################################################
 
+Oak:
+Shield:
+- Duration: 2/3/4/5 (from 3/4/5/6)
+
 Unclean Beast:
 Foul Grasp:
-  Foul Grasp I does not ignore stun immunities anymore.
-  Foul Grasp II + III do still ignore stun immunities.
-
+- Foul Grasp I does not ignore stun immunities anymore.
+  (Foul Grasp II + III do still ignore stun immunities.)
+Ooze:
+  Self damage: 20 + (UB's level * 0/1/2/3)
+    (Note: This results in self damage of 20//20/20/24/25/26/34/36/38/50 for
+    lvl 1-10, after that incrementing in steps of 3. This means Ooze is
+    actually buffed lvl 1-10 and nerfed only from lvl 11 onwards, giving
+    UB time to build into items that give HP/second.)
+Acclimation:
+  - Damage mitigation: 30% (from 25%; normally 40%)
 
 # Items
 ############################################################
@@ -40,7 +51,17 @@ Gauntlets of Despair:
 - Mana leech down to 400 per proc (from 525 in BalMod 1.31; 300 in vanilla DG)
 
 Mard's Hammer:
-- Weapon Damage per hero level: 3
+- Weapon Damage added per hero level: 3
+
+------------------------------------------------------------
+
+Duelist's Cuirass:
+- 500 HP (from 350)
+- 800 Armor (from 700; normally 500)
+
+Armor of Vengeance:
+- 400 HP (up from 250; normally 0)
+- Damage reflect: 75 (from 35)
 
 ------------------------------------------------------------
 
@@ -48,7 +69,7 @@ Charm of Life:
 - Health regeneration: 15 (from 10 in BalMod 1.31; 5 in vanilla)
 
 ############################################################
-v0.2
+# v0.2
 ############################################################
 
 

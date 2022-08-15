@@ -24,9 +24,10 @@ Buffs.HGSA01AngelicFuryBuff04.Description = 'Movement Speed increased. Damage in
 --Increase Maim 2 and 3 to 10% and 15% snare (normally 7 and 10)
 Buffs.HGSA01Maim02.Affects.MoveMult.Mult = -0.10
 Buffs.HGSA01Maim03.Affects.MoveMult.Mult = -0.15
- 
+
+# REMOVED - Schwiegerknecht
 --Increase Deadeye Proc Chance to 10% normally 3
-Ability.HGSA01Deadeye01.WeaponProcChance = 10
+--Ability.HGSA01Deadeye01.WeaponProcChance = 10
 
 
 -- Schwiegerknecht start
@@ -217,7 +218,7 @@ Ability.HGSA01Deadeye01.WeaponProcChance = nil
 Ability.HGSA01Deadeye01.GetChance = nil
 Ability.HGSA01Deadeye01.OnWeaponProc = nil
 Ability.HGSA01Deadeye01.GetSnipeStunDuration = function(self) return math.floor( Buffs['HGSA01DeadeyeSnipeStun01'].Duration ) end
-Ability.HGSA01Deadeye01.Description = 'Regulus\' arrows stop his enemies dead in their tracks. Snipe now stuns enemies for [GetSnipeStunDuration] second.'
+Ability.HGSA01Deadeye01.Description = 'Regulus\' arrows stop his enemies dead in their tracks. Snipe now stuns enemies for [GetSnipeStunDuration] second, ignoring stun immunities.'
 
 
 -- Impedance Bolt now immobilizes enemies for 0.5 seconds on WeaponProc
