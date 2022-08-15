@@ -16,10 +16,83 @@ Ability.HEPA01FoulGrasp03.Amount = 249
 --Decrease the damage mitigation by Acclimation (down from 40%) --Schwiegerknecht
 Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.25}
 
---Increase self damage from Ooze to 20/40/60/80 (from 20/30/40/50)
-for i = 1,4 do
-    Buffs['HEPA01OozeSelf0'..i].Affects.Health.Add = -20*i
+-- Increase Ooze self damage, scaling off hero level:
+-- 20 + herolevel*0/1/2/3 dmg (from 20/30/40/50)
+-- This means 20/30/40/50 dmg at lvl 10, and 20/40/60/80 dmg at lvl 20
+-- Maxing Ooze at lvl 1/4/7/10 would for the first 10 levels do dmg as follows:
+-- 20//20/20/24/25/26/34/36/38/50, after that incrementing in steps of 3.
+
+# Since for-loop does not work for some reason:
+Ability.HEPA01Ooze02.OnAuraPulse = function(self, unit, params)
+    local aiBrain = unit:GetAIBrain()
+    local hero = aiBrain:GetHero()
+    local herolvl = hero:GetLevel()
+    local loseHealth = -(20 + herolvl*1)
+
+    Buffs['HEPA01OozeSelf02'].Affects.Health.Add = loseHealth
+    
+    if unit.AbilityData.OozeOn then
+        Buff.ApplyBuff(unit, 'HEPA01OozeSelf02', unit)
+        if unit:GetHealth() < 100 then
+            local params = { AbilityName = 'HEPA01OozeOff'}
+            Abil.HandleAbility(unit, params)
+        end
+    end
 end
+Ability.HEPA01Ooze03.OnAuraPulse = function(self, unit, params)
+    local aiBrain = unit:GetAIBrain()
+    local hero = aiBrain:GetHero()
+    local herolvl = hero:GetLevel()
+    local loseHealth = -(20 + herolvl*2)
+
+    Buffs['HEPA01OozeSelf03'].Affects.Health.Add = loseHealth
+    
+    if unit.AbilityData.OozeOn then
+        Buff.ApplyBuff(unit, 'HEPA01OozeSelf03', unit)
+        if unit:GetHealth() < 100 then
+            local params = { AbilityName = 'HEPA01OozeOff'}
+            Abil.HandleAbility(unit, params)
+        end
+    end
+end
+Ability.HEPA01Ooze04.OnAuraPulse = function(self, unit, params)
+    local aiBrain = unit:GetAIBrain()
+    local hero = aiBrain:GetHero()
+    local herolvl = hero:GetLevel()
+    local loseHealth = -(20 + herolvl*3)
+
+    Buffs['HEPA01OozeSelf04'].Affects.Health.Add = loseHealth
+    
+    if unit.AbilityData.OozeOn then
+        Buff.ApplyBuff(unit, 'HEPA01OozeSelf04', unit)
+        if unit:GetHealth() < 100 then
+            local params = { AbilityName = 'HEPA01OozeOff'}
+            Abil.HandleAbility(unit, params)
+        end
+    end
+end
+
+#The for-loop, in case somebody gets it to work:
+--[[
+for i = 2,4 do
+    Ability['HEPA01Ooze0'..i].OnAuraPulse = function(self, unit, params)
+        local aiBrain = unit:GetAIBrain()
+        local hero = aiBrain:GetHero()
+        local herolvl = hero:GetLevel()
+        local loseHealth = -(20 + herolvl * (i - 1))
+
+        Buffs['HEPA01OozeSelf0'..i].Affects.Health.Add = loseHealth
+        
+        if unit.AbilityData.OozeOn then
+            Buff.ApplyBuff(unit, 'HEPA01OozeSelf0'..i, unit)
+            if unit:GetHealth() < 100 then
+                local params = { AbilityName = 'HEPA01OozeOff'}
+                Abil.HandleAbility(unit, params)
+            end
+        end
+    end
+end
+]]
 
 --Make Foul Grasp I not ignore stun immunities anymore --Schwiegerknecht
 -- I think this works, but need to test with people

@@ -116,38 +116,38 @@ UnitBlueprint {
     BlueprintId = "ugbshop05consumables",
     Merge = true,
     Shop = {
-    Tree = {
-        # Combat Health
-        Item_Health_Potion_Art = {
-            Cost = 375,
-            ItemBP = 'Item_Health_Potion_Art',
+        Tree = {
+            # Combat Health
+            Item_Health_Potion_Art = {
+                Cost = 375,
+                ItemBP = 'Item_Health_Potion_Art',
+                },
+            # Large Health
+            Item_Large_Health_Potion_Art = {
+                Cost = 750,
+                ItemBP = 'Item_Large_Health_Potion_Art',
             },
-        # Large Health
-        Item_Large_Health_Potion_Art = {
-            Cost = 750,
-            ItemBP = 'Item_Large_Health_Potion_Art',
+            # Combat Mana
+            Item_Mana_Potion_Art = {
+                Cost = 400,
+                ItemBP = 'Item_Mana_Potion_Art',
+            },
+            # Large Mana
+            Item_Large_Mana_Potion_Art = {
+                Cost = 750,
+                ItemBP = 'Item_Large_Mana_Potion_Art',
+            },
+            # Combat Rejuv
+            Item_Rejuv_Elixir_Art = {
+                Cost = 500,
+                ItemBP = 'Item_Rejuv_Elixir_Art',
+            },
+            # Large Rejuv
+            Item_Large_Rejuv_Elixir_Art = {
+                Cost = 900,
+                ItemBP = 'Item_Large_Rejuv_Elixir_Art',
+            },
         },
-        # Combat Mana
-        Item_Mana_Potion_Art = {
-            Cost = 400,
-            ItemBP = 'Item_Mana_Potion_Art',
-        },
-        # Large Mana
-        Item_Large_Mana_Potion_Art = {
-            Cost = 750,
-            ItemBP = 'Item_Large_Mana_Potion_Art',
-        },
-        # Combat Rejuv
-        Item_Rejuv_Elixir_Art = {
-            Cost = 500,
-            ItemBP = 'Item_Rejuv_Elixir_Art',
-        },
-        # Large Rejuv
-        Item_Large_Rejuv_Elixir_Art = {
-            Cost = 900,
-            ItemBP = 'Item_Large_Rejuv_Elixir_Art',
-        },
-    },
     },
 }
 UnitBlueprint {
@@ -189,66 +189,26 @@ UnitBlueprint {
                 Cost = 600,
                 ItemBP = 'Item_Consumable_040',
             },
-        },		
-    },
-}
-UnitBlueprint {
-    BlueprintId = "ugbshop06",
-    Merge = true,
-    Shop = {
-        Tree = {
             # Warlords Punisher
             Item_Consumable_130 = {
                 Cost = 1350,
                 ItemBP = 'Item_Consumable_130',
             },
-        },		
-    },
-}
-UnitBlueprint {
-    BlueprintId = "ugbshop06",
-    Merge = true,
-    Shop = {
-        Tree = {
             # Parasite Egg
             Item_Consumable_170 = {
                 Cost = 2000,
                 ItemBP = 'Item_Consumable_170',
             },
-        },		
-    },
-}
-UnitBlueprint {
-    BlueprintId = "ugbshop06",
-    Merge = true,
-    Shop = {
-        Tree = {
             # Twig of Life
             Item_Consumable_120 = {
                 Cost = 2000,
                 ItemBP = 'Item_Consumable_120',
             },
-        },		
-    },
-}
-UnitBlueprint {
-    BlueprintId = "ugbshop06",
-    Merge = true,
-    Shop = {
-        Tree = {
             # Magus Rod
             Item_Consumable_140 = {
                 Cost = 2500,
                 ItemBP = 'Item_Consumable_140',
             },
-        },		
-    },
-}
-UnitBlueprint {
-    BlueprintId = "ugbshop06",
-    Merge = true,
-    Shop = {
-        Tree = {
             # Warpstone
             Item_Consumable_070 = {
                 Cost = 4200,
@@ -389,5 +349,170 @@ UnitBlueprint {
     Merge = true,
     Physics = {
         TurnRate = 360, #180
+    },
+}
+# Set the cost of all Favor Items to 1
+UnitBlueprint {
+    BlueprintId = "ugbshop08",
+    Merge = true,
+    Shop = {
+        Tree = {
+            # Polished Crystal Goggles
+            AchievementVision = {
+                Cost = 1,
+                ItemBP = 'AchievementVision',
+            },
+            # Charm of Life
+            AchievementDeathReduction = {
+                Cost = 1,
+                ItemBP = 'AchievementDeathReduction',
+            },
+            # Brilliant Bauble
+            AchievementXPIncome = {
+                Cost = 1,
+                ItemBP = 'AchievementXPIncome',
+            },
+            # Magical Coin Pouch
+            AchievementGoldIncome = {
+                Cost = 1,
+                ItemBP = 'AchievementGoldIncome',
+            },
+            # Swift Anklet
+            AchievementRunSpeed = {
+                Cost = 1,
+                ItemBP = 'AchievementRunSpeed',
+            },
+            # Holy Symbol of Purity
+            AchievementPure = {
+                Cost = 1,
+                ItemBP = 'AchievementPure',
+            },
+            # Blood of the Fallen
+            AchievementHealth = {
+                Cost = 1,
+                ItemBP = 'AchievementHealth',
+            },
+            # Staff of the Warmage
+            AchievementMana = {
+                Cost = 1,
+                ItemBP = 'AchievementMana',
+            },
+            # Dark Crimson Vial
+            AchievementPotion = {
+                Cost = 1,
+                ItemBP = 'AchievementPotion',
+            },
+            # Amulet of Teleportation
+            AchievementTeleport = {
+                Cost = 1,
+                ItemBP = 'AchievementTeleport',
+            },
+            # Diamond Pendant
+            AchievementCooldown = {
+                Cost = 1,
+                ItemBP = 'AchievementCooldown',
+            },
+            # Cape of Plentiful Mana
+            AchievementAEMana = {
+                Cost = 1,
+                ItemBP = 'AchievementAEMana',
+            },
+            # Jekim's Pegasus Cloak
+            AchievementMovement = {
+                Cost = 1,
+                ItemBP = 'AchievementMovement',
+            },
+            # Regeneration of the Seraphim
+            AchievementAERegen = {
+                Cost = 1,
+                ItemBP = 'AchievementAERegen',
+            },
+        },		
+    },
+}
+UnitBlueprint {
+    BlueprintId = "ugbshop08_general",
+    Merge = true,
+    Shop = {
+        Tree = {
+            # Charred Totem of War
+            AchievementMinionDamage = {
+                Cost = 1,
+                ItemBP = 'AchievementMinionDamage',
+            },
+            # Tome of Endurance
+            AchievementMinionHealth = {
+                Cost = 1,
+                ItemBP = 'AchievementMinionHealth',
+            },
+            # Pendant of Grace
+            AchievementMinionEvasion= {
+                Cost = 1,
+                ItemBP = 'AchievementMinionEvasion'
+            },
+            # Horn of Battle
+            AchievementMinionBuff = {
+                Cost = 1,
+                ItemBP = 'AchievementMinionBuff',
+            },
+            # Ring of Divine Might
+            AchievementMinionMeta = {
+                Cost = 1,
+                ItemBP = 'AchievementMinionMeta',
+            },
+            # Blood Soaked Wand
+            AchievementAEHeal = {
+                Cost = 1,
+                ItemBP = 'AchievementAEHeal',
+            },
+            # Cloak of Night
+            AchievementMinionInvis = {
+                Cost = 1,
+                ItemBP = 'AchievementMinionInvis',
+            },
+        },
+    },
+}
+UnitBlueprint {
+    BlueprintId = "ugbshop08_assassin",
+    Merge = true,
+    Shop = {
+        Tree = {
+            # Blade of the Serpent
+            AchievementManaLeech = {
+                Cost = 1,
+                ItemBP = 'AchievementManaLeech',
+            },
+            # Poisoned Dagger of Hatred
+            AchievementSnare = {
+                Cost = 1,
+                ItemBP = 'AchievementSnare',
+            },
+            # Hammer of Destruction
+            AchievementDamage = {
+                Cost = 1,
+                ItemBP = 'AchievementDamage',
+            },
+            # Staff of Renewal
+            AchievementRefreshCooldowns = {
+                Cost = 1,
+                ItemBP = 'AchievementRefreshCooldowns',
+            },
+            # Purified Essence of Magic
+            AchievementFreeSpells = {
+                Cost = 1,
+                ItemBP = 'AchievementFreeSpells',
+            },
+            # Sword of a Thousand Blows
+            AchievementFlurry = {
+                Cost = 1,
+                ItemBP = 'AchievementFlurry',
+            },
+            # Heaven's Wrath
+            AchievementFinger = {
+                Cost = 1,
+                ItemBP = 'AchievementFinger',
+            },
+        },
     },
 }

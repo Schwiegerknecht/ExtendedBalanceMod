@@ -11,8 +11,8 @@ Buffs.AchievementMovement.Affects.MoveMult.Mult = 0.10
 Buffs.AchievementCooldown.Affects.Cooldown.Mult = -.13 
 -- Increase diamond pendant mana bonus to 525 up from 250 (this item was way out of balance whack compared to Staff of renewal, and is even now still weaker)
 Buffs.AchievementCooldown.Affects.MaxEnergy.Add = 525 
--- Increase Charm of Life health regeneration to 10 up from 5
-Buffs.AchievementDeathReduction.Affects.Regen.Add = 10 
+-- Increase Charm of Life health regeneration to 15 up from 5 (10 from BalMod 1.31) -- Schwiegerknecht
+Buffs.AchievementDeathReduction.Affects.Regen.Add = 15 
 -- Increase Furious Blade health bonus to 250 up from 100
 Buffs.AchievementFlurryPassive.Affects.MaxHealth.Add = 250 
 -- Increase pendant of grace demigod dodge to 20% up from 10%
