@@ -1,7 +1,7 @@
 --Increase Wyrmskin proc damage to 250, up from 60
 Buffs.Item_Glove_040_SlowDD.Affects.Health.Add = -250
--- Increase Gloves of Despair drain to 400 up from 300 -- EBMv0.2 (down from 525 in BalMod 1.31)
-Buffs.Item_Glove_030_Drain.Affects.Energy.Add = -400
+-- Increase Gloves of Despair drain to 525 up from 300
+Buffs.Item_Glove_030_Drain.Affects.Energy.Add = -525
 -- Increase Slayer's Wraps damage to 35 up from 30
 Buffs.Item_Glove_070_Buff.Affects.DamageRating.Add = 35
 
@@ -44,7 +44,7 @@ BuffBlueprint {
     EffectsBone = -2,
 }
 Ability.Item_Glove_030_WeaponProc.OnWeaponProc = function(self, unit, target, damageData)
-    if not target:IsDead() then
+    if not target:IsDead() and EntityCategoryContains(categories.HERO, target) then
         Buff.ApplyBuff(target, 'Item_Glove_030_Drain', unit)
         Buff.ApplyBuff(unit, 'Item_Glove_030_Leech', unit)
         AttachEffectsAtBone( unit, EffectTemplates.Items.Glove.GauntletsOfDespairProc, -2 )
@@ -52,7 +52,7 @@ Ability.Item_Glove_030_WeaponProc.OnWeaponProc = function(self, unit, target, da
 end
 -- Update description
 Items.Item_Glove_030.GetProcChanceRanged = function(self) return Ability['Item_Glove_030_WeaponProc'].WeaponProcChanceRanged end
-Items.Item_Glove_030.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit ([GetProcChanceRanged]% for ranged attacks) to drain [GetProcDrain] Mana and restoring it to the attacker.'
+Items.Item_Glove_030.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit ([GetProcChanceRanged]% for ranged attacks) to drain [GetProcDrain] Mana from enemy Demigods and restoring it to the attacker.'
 --FOR TESTING
 # Ability.Item_Glove_030_WeaponProc.WeaponProcChance = 100
 # Ability.Item_Glove_030_WeaponProc.WeaponProcChanceRanged = 100
