@@ -81,3 +81,92 @@ Items.Item_Chest_090.Tooltip.Bonuses = {
 Buffs.Item_Chest_080_Minion_Buff.Affects.Regen = {Add = 10}
 Items.Item_Chest_080.GetMinionRegenBonus = function(self) return Buffs['Item_Chest_080_Minion_Buff'].Affects.Regen.Add end
 table.insert(Items.Item_Chest_080.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')
+
+
+# Godplate testing
+
+BuffBlueprint {
+    Name = 'Item_Chest_080_ProcBuff',
+    BuffType = 'GODPLATEPROC',
+    DisplayName = 'Godplate',
+    Description = 'Godplate armor proc',
+    Debuff = false,
+    EntityCategory = 'ALLUNITS',
+    Stacks = 'IGNORE',
+    Duration = 5,
+    Affects = {
+        Armor = {Add = 500},
+        Regen = {Add = 100},
+    },
+    Icon = 'NewIcons/Chest/Chest9',
+    OnBuffRemove = function(self, unit)
+        Buff.ApplyBuff(unit, 'Item_Chest_080_OnCooldown', unit)
+    end,
+}
+BuffBlueprint {
+    Name = 'Item_Chest_080_OnCooldown',
+    BuffType = 'GODPLATEPROC',
+    DisplayName = 'Godplate',
+    Description = 'Godplate proc on Cooldown',
+    Debuff = false,
+    EntityCategory = 'ALLUNITS',
+    Stacks = 'REPLACE',
+    Duration = 25, -- Dummy value. Real value calculated by Ability.Item_Chest_080_Proc.CooldownBuffDur
+    Affects = {
+        Dummy = {Add = 1},
+    },
+    Icon = 'NewIcons/Chest/Chest9',
+}
+
+GodplateProc = function(self, unit)
+    Buff.ApplyBuff(unit, 'Item_Chest_080_ProcBuff', unit)
+end
+
+table.insert(Items.Item_Chest_080.Abilities, AbilityBlueprint {
+    Name = 'Item_Chest_080_Proc',
+    AbilityType = 'Aura',
+    AffectRadius = 1,
+    AuraPulseTime = 1,
+    CooldownTime = 30,
+    TargetAlliance = 'Ally',
+    TargetCategory = 'HERO',
+    #FromItem = 'Item_Chest_080',
+    Icon = 'NewIcons/Chest/Chest9',
+    Buffs = {
+        BuffBlueprint {
+            Name = 'Item_Chest_080_Dummy',
+            BuffType = 'GODPLATEDUMMY',
+            Debuff = false,
+            EntityCategory = 'ALLUNITS',
+            Stacks = 'REPLACE',
+            Duration = -1,
+            Affects = {
+                Dummy = {Add = 1},
+            },
+            #CooldownBuffDur = function(self)
+            #    
+            #end,
+            OnBuffAffect = function(self, unit)
+                local ProcDuration = Buffs.Item_Chest_080_ProcBuff.Duration
+                local TotalCooldown = Ability.Item_Chest_080_Proc.CooldownTime
+                local CooldownBuffDur = TotalCooldown - ProcDuration
+        
+                Buffs.Item_Chest_080_OnCooldown.Duration = CooldownBuffDur
+
+                if not unit:IsDead() then
+                    unit.Callbacks.OnStunned:Add(GodplateProc, self)
+                    unit.Callbacks.OnFrozen:Add(GodplateProc, self)
+                end
+            end,
+        },
+    },
+})
+
+-- Adjust Tooltip
+Items.Item_Chest_080.GetProcDuration = function(self) return Buffs.Item_Chest_080_ProcBuff.Duration end
+Items.Item_Chest_080.GetProcArmor = function(self) return Buffs.Item_Chest_080_ProcBuff.Affects.Armor.Add end
+Items.Item_Chest_080.GetProcRegen = function(self) return Buffs.Item_Chest_080_ProcBuff.Affects.Regen.Add end
+Items.Item_Chest_080.GetProcCooldown = function(self) return Ability.Item_Chest_080_Proc.CooldownTime end
+if not Items.Item_Chest_080.Tooltip.Passives then
+    Items.Item_Chest_080.Tooltip.Passives = '+[GetProcRegen] Health per second and +[GetProcArmor] Armor for [GetProcDuration] seconds when stunned, frozen or interrupted. This can only occur once every [GetProcCooldown] seconds.'
+end

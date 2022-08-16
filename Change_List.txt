@@ -57,6 +57,11 @@ Armor of Vengeance:
 - 400 HP (up from 250; normally 0)
 - Damage reflect: 75 (from 35)
 
+Godplate:
+- Proc: When stunned, frozen or interrupted you gain a 5 second buff, giving you:
+  + 100 Health per second
+  + 500 Armor
+
 ------------------------------------------------------------
 
 Gauntlets of Despair:
