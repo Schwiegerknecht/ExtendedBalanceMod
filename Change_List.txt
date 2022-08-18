@@ -9,12 +9,15 @@
 #TODO
 ############################################################
 
-- Buff Mard's Hammer
-- Godplate is a bit stronger than Groffling, but not much (Groffling needs like 2 procs to win)
-  Have Godplate give a buff when stunned or frozen?
-- Nimoth is as strong as Duelist's, even with 2 crits in a fight
-- Armor of Vengeance wins vs Duelist's, but not sure it's worth the price
-
+- Totem of War! What does it do? Does it do things? Let's find out!
+- Bejeweled Goggles could use some buff. Idea: ward placing one use.
+- Test Ring of Divine Might
+(- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
+(- FIX dropped Items disappearing if you try picking them up with full inventory
+  (see Inventory.lua)
+  Mistake probably in CanCarry() in ValidateInventory.lua. Maybe set a default
+  value for StacksPerSlot in CanCarry().
+  FIX: Even when you have the same item already, it doesn't abort.)
 
 # Miscellaneous
 ############################################################
@@ -27,6 +30,8 @@ All Favor Items now cost 1 Favor Point.
 Oak:
 Shield:
 - Duration: 2/3/4/5 (from 3/4/5/6)
+Penitence:
+- Cooldown: 8/8/8/8 (from 7/7/7/7)
 
 Unclean Beast:
 Foul Grasp:
@@ -39,7 +44,8 @@ Ooze:
     actually buffed lvl 1-10 and nerfed only from lvl 11 onwards, giving
     UB time to build into items that give HP/second.)
 Acclimation:
-  - Damage mitigation: 30% (from 25%; normally 40%)
+- Damage mitigation: 30% (from 25%; normally 40%)
+
 
 # Items
 ############################################################
@@ -58,14 +64,15 @@ Armor of Vengeance:
 - Damage reflect: 75 (from 35)
 
 Godplate:
-- Proc: When stunned, frozen or interrupted you gain a 5 second buff, giving you:
+- Added Proc that can only occur once every 30 seconds:
+  When stunned, frozen or interrupted you gain a buff for 5 seconds, giving you
   + 100 Health per second
   + 500 Armor
 
 ------------------------------------------------------------
 
 Gauntlets of Despair:
-- Mana leech can only procs on enemy Demigods, not creeps and towers.
+- Mana leech can now only proc on enemy Demigods, not creeps or towers.
 
 ------------------------------------------------------------
 
@@ -74,6 +81,13 @@ Charm of Life:
 
 Mard's Hammer:
 - Weapon Damage added per hero level: 3
+
+------------------------------------------------------------
+
+Capture Lock:
+- Duration: 35 (from 30 in EBM-0.2; normally 45)
+- Cooldown: 45 (from 40 in EBM-0.2; normally 45)
+
 
 ############################################################
 # v0.2

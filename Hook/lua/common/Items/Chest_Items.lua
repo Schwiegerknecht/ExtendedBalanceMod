@@ -1,3 +1,15 @@
+# ExtendedBalanceMod IMPORTANT NOTE:
+# Before each new release, enter the folder name of the current mod version here.
+local modfolder = 'ExtendedBalanceMod-main' -- ExtendedBalanceMod-0.3
+
+# So far I have found no way to automate this. Might have to search for where logs are produced, the folder path is contained there:
+--[[
+info: 00:00:14: Hooked /lua/common/items/artifact_items.lua with /mods/uberfix/hook/lua/common/items/artifact_items.lua
+info: 00:00:14: Hooked /lua/common/items/artifact_items.lua with /mods/extendedbalancemod-main/hook/lua/common/items/artifact_items.lua
+]]
+# Going via debug.getinfo(1).source does not actually help, since it does not get info on the file being hooked.
+# The alternative is giving up the possibility to have multiple versions of the mod installed at the same time.
+
 -- Increase Groffling armor proc chance to 5% up from 1%
 Ability.Item_Chest_070_WeaponProc.ArmorProcChance = 5
 
@@ -83,8 +95,8 @@ Items.Item_Chest_080.GetMinionRegenBonus = function(self) return Buffs['Item_Che
 table.insert(Items.Item_Chest_080.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')
 
 
-# Godplate testing
-
+-- Godplate: Add proc on stun/freeze/interrupt
+-- Give 500 Armor and 100 HP regen for 5 seconds
 BuffBlueprint {
     Name = 'Item_Chest_080_ProcBuff',
     BuffType = 'GODPLATEPROC',
@@ -103,6 +115,7 @@ BuffBlueprint {
         Buff.ApplyBuff(unit, 'Item_Chest_080_OnCooldown', unit)
     end,
 }
+-- Dummy buff to prevent new procs
 BuffBlueprint {
     Name = 'Item_Chest_080_OnCooldown',
     BuffType = 'GODPLATEPROC',
@@ -115,13 +128,13 @@ BuffBlueprint {
     Affects = {
         Dummy = {Add = 1},
     },
-    Icon = 'NewIcons/Chest/Chest9',
+    Icon = '../../../../../mods/' .. modfolder .. '/Icons/Chest9_dis',
 }
 
 GodplateProc = function(self, unit)
     Buff.ApplyBuff(unit, 'Item_Chest_080_ProcBuff', unit)
 end
-
+-- Add callbacks via Ability
 table.insert(Items.Item_Chest_080.Abilities, AbilityBlueprint {
     Name = 'Item_Chest_080_Proc',
     AbilityType = 'Aura',
@@ -139,29 +152,30 @@ table.insert(Items.Item_Chest_080.Abilities, AbilityBlueprint {
             Debuff = false,
             EntityCategory = 'ALLUNITS',
             Stacks = 'REPLACE',
-            Duration = -1,
+            Duration = 1,
             Affects = {
                 Dummy = {Add = 1},
             },
-            #CooldownBuffDur = function(self)
-            #    
-            #end,
-            OnBuffAffect = function(self, unit)
-                local ProcDuration = Buffs.Item_Chest_080_ProcBuff.Duration
-                local TotalCooldown = Ability.Item_Chest_080_Proc.CooldownTime
-                local CooldownBuffDur = TotalCooldown - ProcDuration
-        
-                Buffs.Item_Chest_080_OnCooldown.Duration = CooldownBuffDur
-
-                if not unit:IsDead() then
-                    unit.Callbacks.OnStunned:Add(GodplateProc, self)
-                    unit.Callbacks.OnFrozen:Add(GodplateProc, self)
-                end
-            end,
         },
     },
-})
+    OnAbilityAdded = function(self, unit)
+        local ProcDuration = Buffs.Item_Chest_080_ProcBuff.Duration
+        local TotalCooldown = Ability.Item_Chest_080_Proc.CooldownTime
+        local CooldownBuffDur = TotalCooldown - ProcDuration
 
+        Buffs.Item_Chest_080_OnCooldown.Duration = CooldownBuffDur
+
+        if not unit:IsDead() then
+            unit.Callbacks.OnStunned:Add(GodplateProc, self)
+            unit.Callbacks.OnFrozen:Add(GodplateProc, self)
+        end
+    end,
+    OnRemoveAbility = function(self, unit)
+        Buff.RemoveBuff(unit, 'Item_Chest_080_Dummy')
+        unit.Callbacks.OnStunned:Remove(GodplateProc)
+        unit.Callbacks.OnFrozen:Remove(GodplateProc)
+    end,
+})
 -- Adjust Tooltip
 Items.Item_Chest_080.GetProcDuration = function(self) return Buffs.Item_Chest_080_ProcBuff.Duration end
 Items.Item_Chest_080.GetProcArmor = function(self) return Buffs.Item_Chest_080_ProcBuff.Affects.Armor.Add end

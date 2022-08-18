@@ -1,10 +1,14 @@
 # ExtendedBalanceMod
 
-ExtendedBalanceMod builds upon LORD-ORION's BalanceMod 1.31 and tries to make more items and skills viable, since the metagame was still dominated by a few main builds and strategies. The current version is v0.2, contained in the main branch. The versions are mutually exclusive, so you can e.g. have "ExtendedBalanceMod-0.1" and "ExtendedBalanceMod-main" in your mod folder at the same time.
+ExtendedBalanceMod builds upon LORD-ORION's BalanceMod 1.31 and tries to make more items and skills viable, since the metagame was still dominated by a few main builds and strategies. The current version is v0.2. The versions are mutually exclusive, so you can e.g. have "ExtendedBalanceMod-0.1" and "ExtendedBalanceMod-0.2" in your mod folder at the same time.
 
 - Version 0.2 of ExtendedBalanceMod adds changes to many Demigods and a few changes to items.
 
 - Version 0.1 of ExtendedBalanceMod adds changes mostly to items, buffing many of those that are unviable in vanilla DG or even BalanceMod 1.31. A few items are nerfed, the most important being Journeyman's Treads, Ashkandor, Bulwark of the Ages, Dark Crimson Vial and Portal Locks.
+
+## IMPORTANT NOTE:
+
+Before each new release, enter the folder name of the current mod version in Chest_Items.lua. The alternative is giving up the possibility to have multiple versions of the mod installed at the same time.
 
 # Download and Installation:
 
