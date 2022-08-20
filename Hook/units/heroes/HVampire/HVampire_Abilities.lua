@@ -8,13 +8,12 @@ Ability.HVampireBatSwarm02.RangeMax = 25
 Ability.HVampireVampiricAura01.GetLifeSteal = function(self) return math.floor( Buffs['HVampireVampiricAura01'].Affects.LifeSteal.Add * 100) end
 Ability.HVampireVampiricAura01.Description = 'Lord Erebus gains a [GetLifeSteal]% Life Steal Aura.'
 
-
---Increase Army of the Night buffs: 40% Attack Speed (from 5) and + 100% Lifesteal (from 10%)
+-- Increase Army of the Night buffs: 40% Attack Speed (from 5) and + 100% Lifesteal (from 10%)
 Buffs.HVampireArmyoftheNight.Affects.RateOfFire.Mult = 0.4
 Buffs.HVampireArmyoftheNight.Affects.LifeSteal.Add = 1.0
-
--- Give Nightcrawlers a WeaponProc to reduce armor
+-- Army of the Night gives Nightcrawlers a WeaponProc to reduce armor
 -- Add ability via Buff in the ArmyBonusBlueprint
+
 Buffs.HVampireArmyoftheNight.OnBuffAffect = function(self, unit, instigator)
     Abil.AddAbility(unit, 'HVampireArmyoftheNightMinionAbil', true)
 end
@@ -22,7 +21,7 @@ end
 AbilityBlueprint {
     Name = 'HVampireArmyoftheNightMinionAbil',
     DisplayName = 'Army of the Night Armor Shred',
-    Description = 'Erebus\' Night Walkers have a [GetProcChance]% chance on each auto attack to reduce their targets armor by [GetArmorShred] for [GetDuration] seconds. This also works on structures.',
+    Description = 'Erebus\' Night Walkers have a [GetProcChance]% chance on each auto attack to reduce their target\'s armor by [GetArmorShred] for [GetDuration] seconds. This also works on structures.',
     GetProcChance = function(self) return math.floor( self.WeaponProcChance ) end,
     GetArmorShred = function(self) return math.floor( Buffs['HVampireArmyoftheNightProcDebuff'].Affects.Armor.Add * -1) end,
     GetDuration = function(self) return math.floor( Buffs['HVampireArmyoftheNightProcDebuff'].Duration) end,
@@ -53,9 +52,19 @@ BuffBlueprint {
 }
 -- Adjust description
 Ability.HVampireArmyoftheNight.GetLifeStealBonus = function(self) return math.floor( Buffs['HVampireArmyoftheNight'].Affects.LifeSteal.Add * 100 ) end
-Ability.HVampireArmyoftheNight.GetProcChance = function(self) return math.floor( Ability['HVampireArmyoftheNightMinionAbil'].WeaponProcChance ) end
-Ability.HVampireArmyoftheNight.GetArmorReduction = function(self) return math.floor( Buffs['HVampireArmyoftheNightProcDebuff'].Affects.Armor.Add * -1 ) end
-
+Ability.HVampireArmyoftheNight.GetProcChance = function(self) return Ability['HVampireArmyoftheNightMinionAbil'].WeaponProcChance end
+Ability.HVampireArmyoftheNight.GetArmorReduction = function(self) return Buffs['HVampireArmyoftheNightProcDebuff'].Affects.Armor.Add * -1 end
 Ability.HVampireArmyoftheNight.Description = 'Lord Erebus leads his Night Walkers as a bloodthirsty pack. Their Attack Speed is increased by [GetAttackBonus]% and they gain [GetLifeStealBonus]% lifesteal. They also have a [GetProcChance]% chance on auto attack to reduce the target\'s armor by [GetArmorReduction].'
+
+-- Clarify Stun Immunities in Mass Charm descriptions
+Ability.HVampireMassCharm01.GetImmuneDuration = function(self) return Buffs['HVampireMassCharm01HeroImmune'].Duration end
+Ability.HVampireMassCharm02.GetImmuneDuration = function(self) return Buffs['HVampireMassCharm02HeroImmune'].Duration end
+Ability.HVampireMassCharm03.GetImmuneDuration = function(self) return Buffs['HVampireMassCharm03HeroImmune'].Duration end
+Ability.HVampireMassCharm04.GetImmuneDuration = function(self) return Buffs['HVampireMassCharm04HeroImmune'].Duration end
+Ability.HVampireMassCharm01.Description = 'Stuns enemies around Lord Erebus for [GetMistStun] seconds. Demigods are stunned for [GetHeroMistStun] seconds, after which they receive Stun Immunity for [GetImmuneDuration] seconds.'
+Ability.HVampireMassCharm02.Description = 'Stuns enemies around Lord Erebus for [GetMistStun] seconds. Demigods are stunned for [GetHeroMistStun] seconds, after which they receive Stun Immunity for [GetImmuneDuration] seconds.'
+Ability.HVampireMassCharm03.Description = 'Stuns enemies around Lord Erebus for [GetMistStun] seconds. Demigods are stunned for [GetHeroMistStun] seconds, after which they receive Stun Immunity for [GetImmuneDuration] seconds.'
+Ability.HVampireMassCharm04.Description = 'Stuns enemies around Lord Erebus for [GetMistStun] seconds. Demigods are stunned for [GetHeroMistStun] seconds, after which they receive Stun Immunity for [GetImmuneDuration] seconds.'
+
 
 __moduleinfo.auto_reload = true

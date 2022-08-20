@@ -9,9 +9,6 @@
 #TODO
 ############################################################
 
-- Totem of War! What does it do? Does it do things? Let's find out!
-- Bejeweled Goggles could use some buff. Idea: ward placing one use.
-- Test Ring of Divine Might
 (- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
 (- FIX dropped Items disappearing if you try picking them up with full inventory
   (see Inventory.lua)
@@ -22,7 +19,17 @@
 # Miscellaneous
 ############################################################
 
+All Stuns that give the target a Stun Immunity afterwards have had their
+descriptions clarified (Frost Nova, Boulder Roll and Mass Charm). Likewise, the
+Stuns that ignore Stun Immunities state this explicitly in their descriptions
+(Deadeye, Foul Grasp II + III).
+
 All Favor Items now cost 1 Favor Point.
+
+Theurgist's Cap:
+Adjusted Description to clarify that it's a weapon proc, not an armor proc (as
+previously stated).
+
 
 # Demigods
 ############################################################

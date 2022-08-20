@@ -8,7 +8,7 @@ ExtendedBalanceMod builds upon LORD-ORION's BalanceMod 1.31 and tries to make mo
 
 ## IMPORTANT NOTE:
 
-Before each new release, enter the folder name of the current mod version in Chest_Items.lua. The alternative is giving up the possibility to have multiple versions of the mod installed at the same time.
+Before each new release, enter the folder name of the current mod version in Chest_Items.lua. (The alternative is giving up the possibility to have multiple versions of the mod installed at the same time.)
 
 # Download and Installation:
 

@@ -1,6 +1,7 @@
 --This level of override is necessary to play nice with Uberfix's weapon management system
---We are hooking the class itself so Uberfix's changes remain intact through inheritance, rather than having Balance Mod override the entire script destructively
----- Schwiegerknecht: This value can now be changed more easily in HEMA01_Abilities.lua
+--We are hooking the class itself so Uberfix's changes remain intact through inheritance,
+--rather than having Balance Mod override the entire script destructively
+---- Schwiegerknecht: Stance Switch Duration can now be changed more easily in HEMA01_Abilities.lua
 ---- as Ability.HEMA01SwitchIce.SwitchDuration and Ability.HEMA01SwitchFire.SwitchDuration
 
 local prevClass = HEMA01

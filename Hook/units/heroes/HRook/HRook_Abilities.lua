@@ -4,7 +4,6 @@ Buffs.HRookPoison.Affects.MoveMult.Mult = -0.15 -- increase slow to 15% from 10%
 -- Schwiegerknecht start
 
 -- Add stun immunity to Energizer while channeling.
-
 BuffBlueprint {
     Name = 'HRookEnergizerDebuffImmune',
     DisplayName = '<LOC ABILITY_HROOK_0060>Energizer',
@@ -19,9 +18,7 @@ BuffBlueprint {
     Icon = '/DGRookAbilities/NewRookEnergizer01',
 }
 
-
 -- Add stun immunity via StartTransfer
-
 function StartTransfer(def, unit, params)
     local target = params.Targets[1]
     local thd = ForkThread(TransferThread, def, unit, target)
@@ -142,15 +139,14 @@ function EndTransferCancel(def, ability, unit)
         unit.AbilityData.StructTransEffects = nil
     end
 end
-
-
+-- Adjust description
 Ability.HRookEnergizer.Description = 'The Rook drains the energy of structures. When he uses Structural Transfer, his Mana Per Second is increased by [GetManaRegen]% for [GetDuration] seconds. He also gains a debuff immunity while channeling.'
 
-#TODO:
--- Potentially modify stun and freeze callbacks in the Transfer functions or
--- just add stun immunity to StartTransfer.
--- Adjust Energizer Description.
-
--- TESTING!
-
+-- Clarify Stun Immunities in Boulder Roll descriptions
+Ability.HRookBoulderRoll01.GetImmuneDuration = function(self) return Buffs['HRookBoulderRoll01Immune'].Duration end
+Ability.HRookBoulderRoll02.GetImmuneDuration = function(self) return Buffs['HRookBoulderRoll02Immune'].Duration end
+Ability.HRookBoulderRoll03.GetImmuneDuration = function(self) return Buffs['HRookBoulderRoll03Immune'].Duration end
+Ability.HRookBoulderRoll01.Description = 'The Rook rips a chunk of the earth and hurls it at enemies ahead of him, dealing [GetAmount] damage, stunning for [GetDuration] seconds, and throwing smaller units into the air. Enemy Demigods hit receive Stun Immunity for [GetImmuneDuration] seconds afterwards.'
+Ability.HRookBoulderRoll02.Description = 'The Rook rips a chunk of the earth and hurls it at enemies ahead of him, dealing [GetAmount] damage, stunning for [GetDuration] seconds, and throwing smaller units into the air. Enemy Demigods hit receive Stun Immunity for [GetImmuneDuration] seconds afterwards.'
+Ability.HRookBoulderRoll03.Description = 'The Rook rips a chunk of the earth and hurls it at enemies ahead of him, dealing [GetAmount] damage, stunning for [GetDuration] seconds, and throwing smaller units into the air. Enemy Demigods hit receive Stun Immunity for [GetImmuneDuration] seconds afterwards.'
 __moduleinfo.auto_reload = true

@@ -45,4 +45,4 @@ Ability.Item_Helm_070_WeaponProc.OnWeaponProc = function(self, unit, target, dam
 end
 -- Update description
 Items.Item_Helm_070.GetProcManaRegenBuff = function(self) return math.floor( Buffs['Item_Helm_070_RegenBuff'].Affects.EnergyRegen.Mult * 100 ) end
-Items.Item_Helm_070.Tooltip.ChanceOnHit ='[GetProcChance]% chance on being hit to reduce the target\'s Health Per Second by [GetProcRegenDebuff]% and Mana Per Second by [GetProcManaRegenDebuff]% for [GetDuration] seconds, while increasing your own Mana Per Second by [GetProcManaRegenBuff]% for the same duration.'
+Items.Item_Helm_070.Tooltip.ChanceOnHit ='[GetProcChance]% chance on auto attack to reduce the target\'s Health Per Second by [GetProcRegenDebuff]% and Mana Per Second by [GetProcManaRegenDebuff]% for [GetDuration] seconds, while increasing your own Mana Per Second by [GetProcManaRegenBuff]% for the same duration.'
