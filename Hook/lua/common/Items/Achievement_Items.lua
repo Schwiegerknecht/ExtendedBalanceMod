@@ -41,7 +41,7 @@ BuffBlueprint{
 		EnergyRegen = {Add = 0.5}, -- Dummy value, buff gets calculated in OnAuraPulse below
 	},
 }
--- Add Aura to check hero level, calculate and apply buff
+-- Add Aura to check hero level, calculate and apply buff -- Schwiegerknecht
 table.insert(Items.AchievementMana.Abilities, AbilityBlueprint {
 	Name = 'AchievementMana_Aura',
 	AbilityType = 'Aura',
@@ -89,13 +89,6 @@ end
 table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetHealthBonus] Health')
 table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetManaBonus] Mana')
 
---Increase Charred Totem of War damage bonus to 30 up from 15 
---add 5% Attack Bonus to Charred Totem of War minions and update description
-Buffs.AchievementMinionDamage.Affects.DamageRating.Add = 30
-Buffs.AchievementMinionDamageBuff.Affects.RateOfFire = {Mult = 0.05}
-Items.AchievementMinionDamage.GetMinionAttackSpeedBonus = function(self) return math.floor( Buffs['AchievementMinionDamageBuff'].Affects.RateOfFire.Mult * 100 ) end
-table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackSpeedBonus]% Minion Attack Speed')
-
 --Horn of battle +100 life over 10 seconds / normally 50 over 20 seconds
 Buffs.AchievementMinionInvulnBuff.Affects.Regen.Add = 100
 Buffs.AchievementMinionInvulnBuff.Duration = 10
@@ -117,10 +110,124 @@ table.insert(Items.AchievementVision.Abilities, AbilityBlueprint {
 	CritMult = 1.5,
 	Icon = '/NewIcons/AchievementRewards/PolishedCrystalGoggles',
 })
+
+-- Schwiegerknecht:
+-- Make Bejeweled Goggles a useable item
+Items.AchievementVision.Useable = true
+-- Add useable ability to place Wards (EBM-0.3)
+-- Insert the ability at beginning of the Abilities Table
+table.insert(Items.AchievementVision.Abilities, 1, AbilityBlueprint {
+	Name = 'AchievementVision_Use',
+	DisplayName = '<LOC ITEM_Achievement_0010>Bejeweled Goggles',
+	AbilityType = 'TargetedArea',
+	AbilityCategory = 'USABLEITEM',
+	TargetAlliance = 'Any',
+	TargetCategory = 'ALLUNITS - UNTARGETABLE',
+	TargetingMethod = 'AREAARGETED',
+	Icon = '/NewIcons/AchievementRewards/PolishedCrystalGoggles', # 'NewIcons/Gadget/Totemofrevelation'
+	AffectRadius = 8,
+	Cooldown = 60,
+	RangeMax = 7,
+	RangeMin = 1,
+	CastingTime = 1,
+	InventoryType = 'Achievement',
+	CastAction = 'CastItem1sec',
+	Audio = {
+		 OnStartCasting = {Sound = 'Forge/ITEMS/snd_item_conjure',},
+		 OnFinishCasting = {Sound = 'Forge/ITEMS/Consumable/snd_item_consumable_Item_Consumable_020',},
+		 OnAbortCasting = {Sound = 'Forge/ITEMS/snd_item_abort',},
+	},
+	ErrorMessage = '<LOC error_0030>Cannot place that here.',
+	ErrorVO = 'Noplace',
+	FromItem = 'AchievementVision',
+	Reticule = 'AoE_Revelation',
+	OnStartAbility = function(self, unit, params)
+		local x = params.Target.Position[1]
+		local z = params.Target.Position[3]
+		local tower = CreateUnitHPR( 'UGBShop01Ward01', unit:GetArmy(), x, GetSurfaceHeight(x, z), z, 0, 0, 0)
+
+		AttachEffectsAtBone( tower, EffectTemplates.Items.Consumable.TotemOfRevelationActivate, -2 )
+	end,
+})
+-- Adapt description
+Items.AchievementVision.GetCooldown = function(self) return Ability.AchievementVision_Use.Cooldown end
+Items.AchievementVision.Description = 'On Use: Place Wards that last for 120 seconds. [GetCooldown] seconds Cooldown.'
 --End of goggle change
 
+--Increase Charred Totem of War damage bonus to 30 up from 15 
+Buffs.AchievementMinionDamage.Affects.DamageRating.Add = 30
+--add 5% Attack Bonus to Charred Totem of War minions and update description
+Buffs.AchievementMinionDamageBuff.Affects.RateOfFire = {Mult = 0.05}
+Items.AchievementMinionDamage.GetMinionAttackSpeedBonus = function(self) return math.floor( Buffs['AchievementMinionDamageBuff'].Affects.RateOfFire.Mult * 100 ) end
+table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackSpeedBonus]% Minion Attack Speed')
 
+
+##############################################################################
 -- Schwiegerknecht start
+##############################################################################
+
+-- Make Totem of War an useable item
+Items.AchievementMinionDamage.Useable = true
+-- On use give minions +25 Weapon Damage, +15% Movement Speed and +15% Attack Speed.
+table.insert(Items.AchievementMinionDamage.Abilities, 1, AbilityBlueprint {
+	Name = 'AchievementMinionDamageUseBuff',
+	AbilityType = 'Instant',
+	AbilityCategory = 'USABLEITEM',
+	TargetAlliance = 'Ally',
+	TargetCategory = 'ALLUNITS - UNTARGETABLE',
+	ReengageTargetAfterUse = true,
+	Cooldown = 45,
+	EnergyCost = 0,
+	Icon = '/NewIcons/AchievementRewards/CharredTotemofWar',
+	Audio = {
+		OnStartCasting = {Sound = 'Forge/ITEMS/snd_item_conjure',},
+		OnFinishCasting = {Sound = 'Forge/ITEMS/Artifact/snd_item_artifact_Item_Artifact_060',}, # Wand of Speed: Forge/ITEMS/Consumable/snd_item_consumable_Item_Consumable_050
+		OnAbortCasting = {Sound = 'Forge/ITEMS/snd_item_abort',},
+	},
+	FromItem = 'AchievementMinionDamage',
+	OnStartAbility = function(self, unit, params)
+		AttachEffectsAtBone( unit, EffectTemplates.Items.Artifacts.UnmakerActivate, -2 ) # EffectTemplates.Items.Achievement.PurifiedEssenceOfMagicActivate
+		local aiBrain = unit:GetAIBrain()
+		local minions = aiBrain:GetListOfUnits(categories.MINION, false)
+		for _,minion in minions do
+			Buff.ApplyBuff(minion, 'AchievementMinionDamageUseBuff', unit)
+		end
+	end,
+})
+ArmyBonusBlueprint {
+    Name = 'AchievementMinionDamageUseBuff',
+    DisplayName = '<LOC ITEM_Achievement_0048>Totem of War',
+    ApplyArmies = 'Single',
+    UnitCategory = 'MINION',
+    InventoryType = 'Achievement',
+    RemoveOnUnitDeath = true,
+    Buffs = {
+        BuffBlueprint {
+            Name = 'AchievementMinionDamageUseBuff',
+            DisplayName = '<LOC ITEM_Achievement_0048>Totem of War',
+            Description = '<LOC ITEM_Achievement_0049>Increased Damage, Movement and Attack Speed.',
+            BuffType = 'ACHIEVEMENTMINIONDAMAGEUSEBUFF',
+            Debuff = false,
+            Stacks = 'REPLACE',
+            EntityCategory = 'MINION',
+            Duration = 10,
+            Icon = '/NewIcons/AchievementRewards/CharredTotemofWar',
+            Affects = {
+                DamageRating = {Add = 10},
+                MoveMult = {Mult = 0.15},
+                RateOfFire = {Mult = 0.15},
+            },
+        }
+    }
+}
+-- Update Totem of War description
+Items.AchievementMinionDamage.GetDamageRating = function(self) return Buffs.AchievementMinionDamageUseBuff.Affects.DamageRating.Add end
+Items.AchievementMinionDamage.GetMoveMult = function(self) return math.floor( Buffs.AchievementMinionDamageUseBuff.Affects.MoveMult.Mult * 100 ) end
+Items.AchievementMinionDamage.GetRateOfFire = function(self) return math.floor( Buffs.AchievementMinionDamageUseBuff.Affects.RateOfFire.Mult * 100 ) end
+Items.AchievementMinionDamage.GetDuration = function(self) return Buffs.AchievementMinionDamageUseBuff.Duration end
+Items.AchievementMinionDamage.Description = 'Use: Minions gain +[GetDamageRating] Weapon Damage, +[GetMoveMult]% Movement Speed and +[GetRateOfFire]% Attack Speed for [GetDuration] seconds.'
+
+
 -- Add minion HP regeneration to Tome of Endurance
 Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
 Items.AchievementMinionHealth.GetMinionRegenBonus = function(self) return Buffs['AchievementMinionHealthBuff'].Affects.Regen.Add end

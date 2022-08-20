@@ -7,6 +7,7 @@ local GetRandomFloat = Utils.GetRandomFloat
 -- Increase clock of elfinkind dodge to 20, up from 15
 Buffs.Item_Artifact_050.Affects.Evasion.Add = 20 
 
+
 -- Schwiegerknecht start
 -- Decrease Ashkandor crit damage to x3, down from x4
 Ability.Item_Artifact_100_Crit.CritMult = 3.0
@@ -22,7 +23,7 @@ Buffs.Item_Artifact_110_2.Affects.EnergyRegen = {Add = 12}
 Items.Item_Artifact_110.GetEnergyRegen = function(self) return Buffs['Item_Artifact_110_2'].Affects.EnergyRegen.Add end
 table.insert(Items.Item_Artifact_110.Tooltip.Bonuses, '+[GetEnergyRegen] Mana Per Second')
 
--- Cloak of Flames buff
+-- Cloak of Flames: Increase Fire Circle radius to 9 and Dmg/tick to 120
 Ability.Item_Artifact_040_2.AffectRadius = 9 -- (normally 8)
 Ability.Item_Artifact_040_2.DamageAmt = 120 -- (normally 80)
 
@@ -64,8 +65,6 @@ Items.Item_Artifact_080.GetProcManaGain = nil
 #################################################################################################################
 -- What do storms have? Correct: lightning! Add Nature's Reckoning effect
 -- instead of of current proc.
-
-
 -- Add variables and effects used by lightning function
 Ability.Item_Artifact_080_WeaponProc.Chains = 4
 Ability.Item_Artifact_080_WeaponProc.ChainTime = 0.1
@@ -76,10 +75,8 @@ Ability.Item_Artifact_080_WeaponProc.Effects = {
     Group = 'Runes',
     Beams = 'LightningBeam01',
 }
-
 -- Adjust Proc Chance
 Ability.Item_Artifact_080_WeaponProc.WeaponProcChance = 50
-
 -- Add lightning function to AbilityBlueprint
 Ability.Item_Artifact_080_WeaponProc.LightningThread = function(self, unit, target, damageData)
     local weapon = unit:GetWeaponByLabel( damageData.DamageAction )
@@ -188,13 +185,11 @@ Ability.Item_Artifact_080_WeaponProc.LightningThread = function(self, unit, targ
     beamTrash:Destroy()
     beamTrash = nil
 end
-
 -- Make WeaponProc call lightning function, thereby deleting old Proc
 Ability.Item_Artifact_080_WeaponProc.OnWeaponProc = function(self, unit, target, damageData)
     # New Proc
     ForkThread(self.LightningThread, self, unit, target, damageData)
 end
-
 -- Update description
 Items.Item_Artifact_080.GetDamageBonus = function(self) return Ability['Item_Artifact_080_WeaponProc'].DamageAmt end
 Items.Item_Artifact_080.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to strike nearby enemies with lightning for [GetDamageBonus] damage.'
@@ -203,7 +198,6 @@ Items.Item_Artifact_080.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to
 # New Active Ability Rain of Ice
 #################################################################################################################
 -- New active ability that summons a hail storm
-
 -- Rain of Ice function
 function CallRain( abilityDef, unit, params, projectile )
     if unit:IsDead() then
@@ -509,6 +503,9 @@ Leech = function(self, unit, target, data)
 end
 
 -- Overwrite Abilities
+if Ability.Item_Artifact_060 then
+    Ability.Item_Artifact_060 = nil
+end
 Items.Item_Artifact_060.Abilities = {
     AbilityBlueprint {
         Name = 'Item_Artifact_060',
@@ -560,7 +557,6 @@ Items.Item_Artifact_060.Abilities = {
             },
         },
     },
-    
 }
 
 -- Update description for Buff Item_Artifact_060

@@ -39,10 +39,10 @@ Foul Grasp:
   (Foul Grasp II + III do still ignore stun immunities.)
 Ooze:
   Self damage: 20 + (UB's level * 0/1/2/3)
-    (Note: This results in self damage of 20//20/20/24/25/26/34/36/38/50 for
+    [Note: This results in self damage of 20//20/20/24/25/26/34/36/38/50 for
     lvl 1-10, after that incrementing in steps of 3. This means Ooze is
     actually buffed lvl 1-10 and nerfed only from lvl 11 onwards, giving
-    UB time to build into items that give HP/second.)
+    UB time to build into items that give HP/second.]
 Acclimation:
 - Damage mitigation: 30% (from 25%; normally 40%)
 
@@ -64,10 +64,10 @@ Armor of Vengeance:
 - Damage reflect: 75 (from 35)
 
 Godplate:
-- Added Proc that can only occur once every 30 seconds:
-  When stunned, frozen or interrupted you gain a buff for 5 seconds, giving you
-  + 100 Health per second
-  + 500 Armor
+Added Proc that can only occur once every 30 seconds:
+When stunned, frozen or interrupted you gain a buff for 5 seconds, giving you
+- +100 Health per second
+- +500 Armor
 
 ------------------------------------------------------------
 
@@ -76,17 +76,27 @@ Gauntlets of Despair:
 
 ------------------------------------------------------------
 
+Bejeweled Goggles:
+Bejeweled Goggles are now a useable item.
+- Cooldown: 60
+On use:
+  - Place a ward that detects invisible objects.
+    - Ward Duration: 120
+
 Charm of Life:
 - Health regeneration: 15 (from 10 in BalMod 1.31; 5 in vanilla)
 
 Mard's Hammer:
 - Weapon Damage added per hero level: 3
 
-------------------------------------------------------------
-
-Capture Lock:
-- Duration: 35 (from 30 in EBM-0.2; normally 45)
-- Cooldown: 45 (from 40 in EBM-0.2; normally 45)
+Totem of War:
+Totem of War is now a useable item.
+- Cooldown: 45
+On use:
+- Minions gain a buff for 10 seconds:
+  - +10 Weapon Damage
+  - +15% Attack Speed
+  - +15% Movement Speed
 
 
 ############################################################

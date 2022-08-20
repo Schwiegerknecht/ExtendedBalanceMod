@@ -15,8 +15,8 @@ Ability.Item_Consumable_070.Cooldown = 30
 -- Increase Sludge Slinger attack speed reduction to 40% (from 30)
 Buffs.Item_Consumable_040.Affects.RateOfFire = {Mult = -0.4}
 
--- Decrease Capture Lock duration to 35 seconds (from 45 originally; 30 in EBM-0.2)
-Buffs.Item_Consumable_030.Duration = 35
+-- Decrease Capture Lock duration to 30 seconds (from 45)
+Buffs.Item_Consumable_030.Duration = 30
 
 Ability.Item_Consumable_030.OnStartAbility = function(self, unit, params)
 
@@ -39,4 +39,4 @@ Ability.Item_Consumable_030.OnStartAbility = function(self, unit, params)
 end
 
 -- Decrease Capture Lock cooldown to 40 seconds
--- Ability.Item_Consumable_030.Cooldown = 40
+Ability.Item_Consumable_030.Cooldown = 40
