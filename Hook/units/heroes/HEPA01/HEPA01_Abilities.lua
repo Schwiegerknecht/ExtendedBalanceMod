@@ -342,3 +342,85 @@ end
 Ability.HEPA01FoulGrasp01.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This does not ignore stun immunities.'
 Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 Ability.HEPA01FoulGrasp03.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
+
+#################################################################################################################
+# Try fixing Plague. Someome used "continue" in the PlagueSpread functions,
+# which does not exist in LUA.
+
+PlagueSpread01 = function( instigator, targets, chance )
+    local instBrain = instigator:GetAIBrain()
+
+    for k, vUnit in targets do
+        if instigator:IsDead() or not instigator.Plague then
+            return
+        end
+
+        if Random(1, 100) < chance then
+            -- Replace the not working continue statement and instead invert the if-condition
+            if not (Buff.HasBuff(vUnit, 'HEPA01PlagueImmune') or Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01Plague01')) then
+                CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
+                if instBrain then
+                    local heroes = instBrain:GetListOfUnits(categories.HERO, false)
+                    if table.getn(heroes) > 0 then
+
+                        #LOG("*DEBUG: Applying Plague from "..instBrain.Name.." and hero ".. heroes[1]:GetUnitId().. " to unit ".. vUnit:GetUnitId())
+                        vUnit.PlagueInstance = {
+                            Instigator = instigator,
+                            InstigatorBrain = instBrain,
+                            IgnoreAffectPulses = true,
+                            NumIgnoredPulses = 0,
+                        }
+
+                        instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
+                        if(Validate.HasAbility(instigator, 'HEPA01Plague02')) then
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague02', heroes[1], heroes[1]:GetArmy())
+                        else
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague01', heroes[1], heroes[1]:GetArmy())
+                        end
+                        FloatTextAt(vUnit:GetFloatTextPosition(), "<LOC floattext_0011>PLAGUED!", 'Plague')
+                        break
+                    end
+                end
+            end
+        end
+    end
+end
+
+PlagueSpread02 = function( instigator, targets, chance )
+    local instBrain = instigator:GetAIBrain()
+
+    for k, vUnit in targets do
+        if instigator:IsDead() or not instigator.Plague then
+            return
+        end
+
+        if Random(1, 100) < chance then
+            -- Replace the not working continue statement and instead invert the if-condition
+            if not (Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01PlagueImmune')) then
+                CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
+                if instBrain then
+                    local heroes = instBrain:GetListOfUnits(categories.HERO, false)
+                    if table.getn(heroes) > 0 then
+
+                        #LOG("*DEBUG: Applying Plague from "..instBrain.Name.." and hero ".. heroes[1]:GetUnitId().. " to unit ".. vUnit:GetUnitId())
+                        vUnit.PlagueInstance = {
+                            Instigator = instigator,
+                            InstigatorBrain = instBrain,
+                            IgnoreAffectPulses = true,
+                            NumIgnoredPulses = 0,
+                        }
+
+                        instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
+                        if(Validate.HasAbility(instigator, 'HEPA01Plague02')) then
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague02', heroes[1], heroes[1]:GetArmy())
+                        else
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague01', heroes[1], heroes[1]:GetArmy())
+                        end
+                        FloatTextAt(vUnit:GetFloatTextPosition(), "<LOC floattext_0013>PLAGUED!", 'Plague')
+                        break
+                    end
+                end
+            end
+        end
+    end
+end

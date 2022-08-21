@@ -2,9 +2,9 @@
 # Extended BalanceMod Changes (for BalanceMod 1.31, see below)
 ############################################################
 
-############################################################
+#################################################################################################################
 # v0.3
-############################################################
+#################################################################################################################
 
 #TODO
 ############################################################
@@ -15,21 +15,6 @@
   Mistake probably in CanCarry() in ValidateInventory.lua. Maybe set a default
   value for StacksPerSlot in CanCarry().
   FIX: Even when you have the same item already, it doesn't abort.)
-
-# Miscellaneous
-############################################################
-
-All Stuns that give the target a Stun Immunity afterwards have had their
-descriptions clarified (Frost Nova, Boulder Roll and Mass Charm). Likewise, the
-Stuns that ignore Stun Immunities state this explicitly in their descriptions
-(Deadeye, Foul Grasp II + III).
-
-All Favor Items now cost 1 Favor Point.
-
-Theurgist's Cap:
-Adjusted Description to clarify that it's a weapon proc, not an armor proc (as
-previously stated).
-
 
 # Demigods
 ############################################################
@@ -45,7 +30,7 @@ Foul Grasp:
 - Foul Grasp I does not ignore stun immunities anymore.
   (Foul Grasp II + III do still ignore stun immunities.)
 Ooze:
-  Self damage: 20 + (UB's level * 0/1/2/3)
+  Self damage: 20 + (UB's level * 0/1/2/3) per tick
     [Note: This results in self damage of 20//20/20/24/25/26/34/36/38/50 for
     lvl 1-10, after that incrementing in steps of 3. This means Ooze is
     actually buffed lvl 1-10 and nerfed only from lvl 11 onwards, giving
@@ -86,9 +71,8 @@ Gauntlets of Despair:
 Bejeweled Goggles:
 Bejeweled Goggles are now a useable item.
 - Cooldown: 60
-On use:
-  - Place a ward that detects invisible objects.
-    - Ward Duration: 120
+- On use: Place a ward that detects invisible objects.
+  - Ward Duration: 120
 
 Charm of Life:
 - Health regeneration: 15 (from 10 in BalMod 1.31; 5 in vanilla)
@@ -99,22 +83,30 @@ Mard's Hammer:
 Totem of War:
 Totem of War is now a useable item.
 - Cooldown: 45
-On use:
-- Minions gain a buff for 10 seconds:
+- On use: Minions gain a buff for 10 seconds.
   - +10 Weapon Damage
   - +15% Attack Speed
   - +15% Movement Speed
 
-
-############################################################
-# v0.2
-############################################################
-
-
 # Miscellaneous
 ############################################################
 
-All minions have had their Turn Rates increased to 360 (from 180).
+All Stuns that give the target a Stun Immunity afterwards have had their
+descriptions clarified (Frost Nova, Boulder Roll and Mass Charm). Likewise, the
+Stuns that ignore Stun Immunities state this explicitly in their descriptions
+(Deadeye, Foul Grasp II + III).
+
+All Favor Items now cost 1 Favor Point.
+
+Theurgist's Cap:
+Adjusted Description to clarify that it's a weapon proc, not an armor proc (as
+previously stated).
+
+
+
+#################################################################################################################
+# v0.2
+#################################################################################################################
 
 
 # Demigods
@@ -195,10 +187,16 @@ Ice Rain movement slow: 15% (from 10%)
 Movement speed aura: 10% for allies in range 15
 
 
+# Miscellaneous
+############################################################
 
-############################################################
+All minions have had their Turn Rates increased to 360 (from 180).
+
+
+
+#################################################################################################################
 # v0.1
-############################################################
+#################################################################################################################
 
 
 # Demigods
@@ -395,9 +393,9 @@ Cooldown: 30 seconds (normally 60)
 
 
 
-############################################################
+#################################################################################################################
 # BalanceMod 1.31
-############################################################
+#################################################################################################################
 
 DA
 Warp Area: Added Debuff Immune (normally no debuff immunity)
