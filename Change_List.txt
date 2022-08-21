@@ -6,7 +6,7 @@
 # v0.3
 #################################################################################################################
 
-#TODO
+#TODO / Random Ideas
 ############################################################
 
 (- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
@@ -15,6 +15,11 @@
   Mistake probably in CanCarry() in ValidateInventory.lua. Maybe set a default
   value for StacksPerSlot in CanCarry().
   FIX: Even when you have the same item already, it doesn't abort.)
+- IDEA: Enhanced Attributes giving Dodge
+- IDEA: Building Firepower applies debuffs
+- IDEA: Experience upgrade increases level cap for that team.
+- Mod Ideas: Only 1 item of each kind buyable. - Recreate the mod that creeps don't give extra xp+gold
+
 
 # Demigods
 ############################################################
@@ -63,6 +68,17 @@ When stunned, frozen or interrupted you gain a buff for 5 seconds, giving you
 
 ------------------------------------------------------------
 
+Assassin's Footguards:
+- 8% Movement Speed (from 5 in EBM-0.2)
+
+Desperate Boots:
+- Activate at 55% Health (up from 50 in BalMod 1.31)
+
+Ironwalker:
+- +50 Health per second while active (from 0)
+
+------------------------------------------------------------
+
 Gauntlets of Despair:
 - Mana leech can now only proc on enemy Demigods, not creeps or towers.
 
@@ -101,6 +117,10 @@ All Favor Items now cost 1 Favor Point.
 Theurgist's Cap:
 Adjusted Description to clarify that it's a weapon proc, not an armor proc (as
 previously stated).
+
+UB's Plague is hopefully playable now.
+- A loop that unnecessarily ran a bunch of code has been fixed.
+- Animations for units affected by Plague have been disabled.
 
 
 
