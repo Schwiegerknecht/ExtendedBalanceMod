@@ -100,6 +100,8 @@ Ability.HEPA01Ooze03.Description = 'Unclean Beast oozes virulent bodily fluids. 
 Ability.HEPA01Ooze04.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + (UB\'s level * 3).'
 
 
+
+
 # Make Foul Grasp I not ignore stun immunities anymore --Schwiegerknecht
 #################################################################################################################
 BuffBlueprint {
@@ -343,6 +345,10 @@ Ability.HEPA01FoulGrasp01.Description = 'Unclean Beast clutches a target in its 
 Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 Ability.HEPA01FoulGrasp03.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 
+
+
+
+
 #################################################################################################################
 # Try fixing Plague. Someome used "continue" in the PlagueSpread functions,
 # which does not exist in LUA.
@@ -385,7 +391,6 @@ PlagueSpread01 = function( instigator, targets, chance )
         end
     end
 end
-
 PlagueSpread02 = function( instigator, targets, chance )
     local instBrain = instigator:GetAIBrain()
 
@@ -424,8 +429,8 @@ PlagueSpread02 = function( instigator, targets, chance )
         end
     end
 end
-
--- Remove animations
+-- Remove Plague animations
 for i = 1,2 do
-    Ability['HEPA01Plague0'..i].PlagueEffect = function( self, unit, targetpos, buffClassification ) end
+    Buffs['HEPA01Plague0'..i].Effects = nil
+    Buffs['HEPA01Plague0'..i].EffectsBone = nil
 end
