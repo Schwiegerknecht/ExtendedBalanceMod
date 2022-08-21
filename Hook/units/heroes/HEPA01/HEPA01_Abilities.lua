@@ -424,3 +424,8 @@ PlagueSpread02 = function( instigator, targets, chance )
         end
     end
 end
+
+-- Remove animations
+for i = 1,2 do
+    Ability['HEPA01Plague0'..i].PlagueEffect = function( self, unit, targetpos, buffClassification ) end
+end
