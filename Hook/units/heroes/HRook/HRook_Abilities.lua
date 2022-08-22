@@ -3,6 +3,15 @@ Buffs.HRookPoison.Affects.MoveMult.Mult = -0.15 -- increase slow to 15% from 10%
 
 -- Schwiegerknecht start
 
+-- Increase mana cost of Power of the Tower IV to fit the others
+Ability.HRookTower04.EnergyCost = 400
+
+-- Increase mana cost of Structural Transfer to 350/500/650/800 (from 265/375/490/610)
+Ability.HRookStructuralTransfer01.EnergyCost = 350
+Ability.HRookStructuralTransfer02.EnergyCost = 500
+Ability.HRookStructuralTransfer03.EnergyCost = 650
+Ability.HRookStructuralTransfer04.EnergyCost = 800
+
 -- Add stun immunity to Energizer while channeling.
 BuffBlueprint {
     Name = 'HRookEnergizerDebuffImmune',
