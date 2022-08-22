@@ -42,7 +42,7 @@ ArmyBonusBlueprint {
 
 
 -- Desperate boots increase trigger % to 50, up from 30 and increase dodge amount to 30% up from 20
-Ability.Item_Boot_060_Desperation.HealthPercentTrigger = 0.55 -- EBM-0.3
+Ability.Item_Boot_060_Desperation.HealthPercentTrigger = 0.65 -- EBM-0.3
 Buffs.Item_Boot_060_Desperation.Affects.Evasion.Add = 30
 -- Add 13% Movement Speed to Desperate Boots -- Schwiegerknecht
 Buffs.Item_Boot_060.Affects.MoveMult = {Mult = 0.13}

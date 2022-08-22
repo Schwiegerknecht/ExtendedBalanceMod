@@ -72,7 +72,7 @@ Assassin's Footguards:
 - 8% Movement Speed (from 5 in EBM-0.2)
 
 Desperate Boots:
-- Activate at 55% Health (up from 50 in BalMod 1.31)
+- Activate at 65% Health (up from 50 in BalMod 1.31)
 
 Ironwalker:
 - +50 Health per second while active (from 0)

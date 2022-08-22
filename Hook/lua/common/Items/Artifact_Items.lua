@@ -3,6 +3,8 @@ local Utils = import('/lua/utilities.lua')
 local Buff = import('/lua/sim/buff.lua')
 local Entity = import('/lua/sim/entity.lua').Entity
 local GetRandomFloat = Utils.GetRandomFloat
+-- Necessary ito nerf Unmaker for UB only:
+local Validate = import('/lua/common/ValidateAbility.lua')
 
 -- Increase clock of elfinkind dodge to 20, up from 15
 Buffs.Item_Artifact_050.Affects.Evasion.Add = 20 
@@ -526,6 +528,23 @@ Items.Item_Artifact_060.Abilities = {
                 },
             },
         },
+        -- Add nerf to UB, which is very overpowered with this item
+        --[[OnAbilityAdded = function(self, unit)
+            if Validate.HasAbility(unit, 'HEPA01VenomSpit01')
+            or Validate.HasAbility(unit, 'HEPA01VenomSpit02')
+            or Validate.HasAbility(unit, 'HEPA01VenomSpit03')
+            or Validate.HasAbility(unit, 'HEPA01VenomSpit04')
+            or Validate.HasAbility(unit, 'HEPA01FoulGrasp01')
+            or Validate.HasAbility(unit, 'HEPA01FoulGrasp02')
+            or Validate.HasAbility(unit, 'HEPA01FoulGrasp03') then
+                Buff.ApplyBuff(unit, 'Item_Artifact_060_UncleanBeast', unit)
+            end
+        end,
+        OnRemoveAbility = function(self, unit)
+            if Buff.HasBuff(unit, 'Item_Artifact_060_UncleanBeast') then
+                Buff.RemoveBuff(unit, 'Item_Artifact_060_UncleanBeast')
+            end
+        end,]]
     },
     AbilityBlueprint {
         Name = 'Item_Artifact_060_ManaLeech',
@@ -559,6 +578,19 @@ Items.Item_Artifact_060.Abilities = {
     },
 }
 
+BuffBlueprint {
+    Name = 'Item_Artifact_060_UncleanBeast',
+    BuffType = 'IARTCRIT2UNCLEANBEAST',
+    Debuff = false,
+    EntityCategory = 'ALLUNITS',
+    Stacks = 'ALWAYS',
+    Duration = -1,
+    Affects = {
+        Cooldown = {Mult = 0.15},
+        MaxEnergy = {Add = -2100, AdjustEnergy = false},
+    },
+}
+
 -- Update description for Buff Item_Artifact_060
 -- Items.Item_Artifact_060.GetSpellDamageBonus = function(self) return math.floor(Buffs['Item_Artifact_060'].Affects.SpellDamageMult.Add * 100) end
 Items.Item_Artifact_060.GetCooldownBonus = function(self) return math.floor(Buffs['Item_Artifact_060_Quiet'].Affects.Cooldown.Mult * 100 * (-1)) end
@@ -566,6 +598,8 @@ Items.Item_Artifact_060.GetManaBonus = function(self) return Buffs['Item_Artifac
 -- table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '+[GetSpellDamageBonus]% Spell Damage')
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '-[GetCooldownBonus]% to Ability Cooldowns')
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '+[GetManaBonus] Mana')
+-- UB Nerf:
+-- table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, 'These bonuses do not apply to Unclean Beast with Venom Spit or Foul Grasp.')
 
 -- Description for mana leech
 Items.Item_Artifact_060.GetManaLeechBonus = function(self) return math.floor(Buffs['Item_Artifact_060_ManaLeech'].EnergyReturnPercent * 100) end
