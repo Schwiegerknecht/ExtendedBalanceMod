@@ -24,6 +24,9 @@
 # Demigods
 ############################################################
 
+Demon Assassin:
+Base Speed: 6.3 (from 6.0)
+
 Oak:
 Shield:
 - Duration: 2/3/4/5 (from 3/4/5/6)
@@ -69,7 +72,7 @@ When stunned, frozen or interrupted you gain a buff for 5 seconds, giving you
 ------------------------------------------------------------
 
 Assassin's Footguards:
-- 8% Movement Speed (from 5 in EBM-0.2)
+- 10% Movement Speed (from 5 in EBM-0.2)
 
 Desperate Boots:
 - Activate at 65% Health (up from 50 in BalMod 1.31)
@@ -84,6 +87,12 @@ Gauntlets of Despair:
 
 ------------------------------------------------------------
 
+Sludge Slinger:
+- On use:
+  - Target gets -50% Health per second
+
+------------------------------------------------------------
+
 Bejeweled Goggles:
 Bejeweled Goggles are now a useable item.
 - Cooldown: 60
@@ -91,7 +100,7 @@ Bejeweled Goggles are now a useable item.
   - Ward Duration: 120
 
 Charm of Life:
-- Health regeneration: 15 (from 10 in BalMod 1.31; 5 in vanilla)
+- Health regeneration: 12 (from 10 in BalMod 1.31; 5 in vanilla)
 
 Mard's Hammer:
 - Weapon Damage added per hero level: 3
@@ -103,6 +112,7 @@ Totem of War is now a useable item.
   - +10 Weapon Damage
   - +15% Attack Speed
   - +15% Movement Speed
+
 
 # Miscellaneous
 ############################################################

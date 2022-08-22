@@ -529,6 +529,7 @@ Items.Item_Artifact_060.Abilities = {
             },
         },
         -- Add nerf to UB, which is very overpowered with this item
+        -- One could probably also use if unit:GetBlueprint() == 'hepa01'
         --[[OnAbilityAdded = function(self, unit)
             if Validate.HasAbility(unit, 'HEPA01VenomSpit01')
             or Validate.HasAbility(unit, 'HEPA01VenomSpit02')
@@ -538,6 +539,7 @@ Items.Item_Artifact_060.Abilities = {
             or Validate.HasAbility(unit, 'HEPA01FoulGrasp02')
             or Validate.HasAbility(unit, 'HEPA01FoulGrasp03') then
                 Buff.ApplyBuff(unit, 'Item_Artifact_060_UncleanBeast', unit)
+                #Buff.RemoveBuff(unit 'Item_Artifact_060_Quiet')
             end
         end,
         OnRemoveAbility = function(self, unit)
@@ -599,7 +601,7 @@ Items.Item_Artifact_060.GetManaBonus = function(self) return Buffs['Item_Artifac
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '-[GetCooldownBonus]% to Ability Cooldowns')
 table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, '+[GetManaBonus] Mana')
 -- UB Nerf:
--- table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, 'These bonuses do not apply to Unclean Beast with Venom Spit or Foul Grasp.')
+-- table.insert(Items.Item_Artifact_060.Tooltip.Bonuses, 'These bonuses do not apply to\nUnclean Beast with Venom Spit\nor Foul Grasp.')
 
 -- Description for mana leech
 Items.Item_Artifact_060.GetManaLeechBonus = function(self) return math.floor(Buffs['Item_Artifact_060_ManaLeech'].EnergyReturnPercent * 100) end

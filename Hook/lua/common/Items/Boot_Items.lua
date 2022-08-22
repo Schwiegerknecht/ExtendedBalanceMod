@@ -10,8 +10,8 @@ table.insert(Items.Item_Boot_030.Abilities, AbilityBlueprint {
 	CritChance = 10,
 	CritMult = 1.5,
 })
--- Add 8% Movement Speed to Assassins's Footguards (from 5 in EBM-0.2) -- Schwiegerknecht
-Buffs.Item_Boot_030.Affects.MoveMult = {Mult = 0.08}
+-- Add 10% Movement Speed to Assassins's Footguards (from 5 in EBM-0.2) -- Schwiegerknecht
+Buffs.Item_Boot_030.Affects.MoveMult = {Mult = 0.1}
 Items.Item_Boot_030.GetMoveSpeedBonus = function(self) return math.floor( Buffs['Item_Boot_030'].Affects.MoveMult.Mult * 100 ) end
 table.insert(Items.Item_Boot_030.Tooltip.Bonuses, '+[GetMoveSpeedBonus]% Movement Speed')
 -- Apply Movement Speed buff to minions
@@ -68,7 +68,7 @@ ArmyBonusBlueprint {
             Stacks = 'REPLACE',
             Duration = -1,
             Affects = {
-                MoveMult = {Mult = 0.13},
+                MoveMult = {Buffs.Item_Boot_060.Affects.MoveMult.Mult},
             },
         }
     }
@@ -111,4 +111,4 @@ Items.Item_Boot_070.Tooltip.ChanceOnHit = 'Whenever Movement Speed is under [Get
 
 -- Decrease the speedboost of Journeyman Treads from +50% down to +35% for hero and minions -- Schwiegerknecht
 Buffs.Item_Boot_050_Wind.Affects.MoveMult = {Mult = 0.35}
-Buffs.Item_Boot_050_WindArmy.Affects.MoveMult = {Mult = 0.35}
+Buffs.Item_Boot_050_WindArmy.Affects.MoveMult = {Buffs.Item_Boot_050_Wind.Affects.MoveMult.Mult}

@@ -261,6 +261,14 @@ UnitBlueprint {
     },
 }
 UnitBlueprint {
+    BlueprintId = "hdemon",
+    Merge = true,
+    Physics = {
+        MaxSpeed = 6.3, # 6.0
+    },
+}
+# Increase all Minion Turn Rates (Quality of Life)
+UnitBlueprint {
     BlueprintId = "hqueenent",
     Merge = true,
     Physics = {

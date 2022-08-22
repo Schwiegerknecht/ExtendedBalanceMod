@@ -362,7 +362,7 @@ PlagueSpread01 = function( instigator, targets, chance )
         end
 
         if Random(1, 100) < chance then
-            -- Replace the not working continue statement and instead invert the if-condition
+            -- Remove the not working continue statement and instead invert the if-condition
             if not (Buff.HasBuff(vUnit, 'HEPA01PlagueImmune') or Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01Plague01')) then
                 CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
                 if instBrain then
@@ -400,7 +400,7 @@ PlagueSpread02 = function( instigator, targets, chance )
         end
 
         if Random(1, 100) < chance then
-            -- Replace the not working continue statement and instead invert the if-condition
+            -- Remove the not working continue statement and instead invert the if-condition
             if not (Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01PlagueImmune')) then
                 CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
                 if instBrain then

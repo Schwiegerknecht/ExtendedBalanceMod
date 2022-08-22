@@ -12,8 +12,30 @@ Ability.Item_Consumable_130.ChainAffectRadius = 8
 -- Schwiegerknecht start
 -- Set Warpstone Cooldown to 30 (from 45)
 Ability.Item_Consumable_070.Cooldown = 30
+
 -- Increase Sludge Slinger attack speed reduction to 40% (from 30)
 Buffs.Item_Consumable_040.Affects.RateOfFire = {Mult = -0.4}
+-- Add 40% HP regen reduction (from 0)
+Buffs.Item_Consumable_040.Affects.Regen = {Mult = -0.5}
+Items.Item_Consumable_040.GetRegen = function(self) return math.floor( Buffs['Item_Consumable_040'].Affects.Regen.Mult * -100 ) end
+Buffs.Item_Consumable_040.Description = 'Attack Speed and Health per second reduced.'
+Items.Item_Consumable_040.Description = 'Use: Decreases target\'s Attack Speed by [GetAttackSpeedReduction]% and Health per second by [GetRegen]% for [GetDuration] seconds.'
+
+-- Have Sludge Slinger reset Priest heal Cooldown
+# ISSUE: Not a debuff = not cleansable = bad
+--[[
+Buffs.Item_Consumable_040.OnApplyBuff = function(self, unit)
+    Buff.ApplyBuff(unit, 'RPriest01HealCooldown01')
+    for i = 1,4 do
+        Buff.ApplyBuff(unit, 'HighPriest0'..i..'HealCooldown01')
+    end
+end
+-- Increase Sludge Slinger Cooldown to 35 (from 30)
+Ability.Item_Consumable_040.Cooldown = 35
+-- Adapt description
+Items.Item_Consumable_040.Description = 'Use: Decreases target\'s Attack Speed by [GetAttackSpeedReduction]% for [GetDuration] seconds. Also resets the target\'s Countdown for all kinds of Priest heals.'
+]]
+
 
 -- Decrease Capture Lock duration to 30 seconds (from 45)
 Buffs.Item_Consumable_030.Duration = 30
