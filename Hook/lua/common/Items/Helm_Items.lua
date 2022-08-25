@@ -4,10 +4,13 @@ Buffs.Item_Helm_070.Affects.EnergyRegen.Mult = 0.7
 Ability.Item_Helm_070_WeaponProc.WeaponProcChance = 10
 --Increase Vinling Proc Chance to 5% up from 3%
 Ability.Item_Helm_050_WeaponProc.ArmorProcChance = 5
---Increase Mana gain on Vinling proc to 500  - Schwiegerknecht
-Buffs.Item_Helm_050_Restore.Affects.Energy.Add = 500
 --Make Vinling's Mana gain a buff instead of debuff - Schwiegerknecht
 Buffs.Item_Helm_050_Restore.Debuff = false
+-- Give Vinling 10% Cooldown Reduction (from 0%) -- Schwiegerknecht
+Buffs.Item_Helm_050.Affects.Cooldown = {Mult = -0.10}
+-- Adjust description
+Items.Item_Helm_050.GetCooldown = function(self) return math.floor( Buffs['Item_Helm_050'].Affects.Cooldown.Mult * 100 ) end
+table.insert(Items.Item_Helm_050.Tooltip.Bonuses, '[GetCooldown]% to ability cooldowns')
 
 --Add 260 mana to Plate visor and adjust description
 Buffs.Item_Helm_020.Affects.MaxEnergy = {Add = 260, AdjustEnergy = false}

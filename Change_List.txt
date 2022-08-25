@@ -6,19 +6,7 @@
 # v0.3
 #################################################################################################################
 
-#TODO / Random Ideas
-############################################################
-
-(- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
-(- FIX dropped Items disappearing if you try picking them up with full inventory
-  (see Inventory.lua)
-  Mistake probably in CanCarry() in ValidateInventory.lua. Maybe set a default
-  value for StacksPerSlot in CanCarry().
-  FIX: Even when you have the same item already, it doesn't abort.)
-- IDEA: Enhanced Attributes giving Dodge
-- IDEA: Building Firepower applies debuffs
-- IDEA: Experience upgrade increases level cap for that team.
-- Mod Ideas: Only 1 item of each kind buyable. - Recreate the mod that creeps don't give extra xp+gold
+Maximum Cooldown Reduction is now 50% (from 60%)
 
 
 # Demigods
@@ -93,6 +81,12 @@ Gauntlets of Despair:
 
 ------------------------------------------------------------
 
+Vinling Helmet:
+- Proc Effect: 350 Mana restored (from 500 in EBM-0.2; 350 normally)
+- Cooldown Reduction: 10% (from 0)
+
+------------------------------------------------------------
+
 Sludge Slinger:
 - On use:
   - Target gets aura that prevents priest/bishop/etc. healing for 10 seconds.
@@ -130,7 +124,7 @@ The healing effect is now only interrupted by Stuns, Freezes and Interrupts.
 - Regen: 170 (from 200)
 
 
-# Miscellaneous
+# Other
 ############################################################
 
 All wards should now be targetable and therefore destructible. This hopefully
@@ -151,6 +145,22 @@ UB's Plague is hopefully playable now.
 - A loop that unnecessarily ran a bunch of code has been fixed.
   (Or maybe not. Not sure what they did there.)
 - Animations for units affected by Plague have been disabled.
+
+
+#TODO / Random Ideas
+############################################################
+
+(- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
+(- FIX dropped Items disappearing if you try picking them up with full inventory
+  (see Inventory.lua)
+  Mistake probably in CanCarry() in ValidateInventory.lua. Maybe set a default
+  value for StacksPerSlot in CanCarry().
+  FIX: Even when you have the same item already, it doesn't abort.)
+- IDEA: Enhanced Attributes giving Dodge
+- IDEA: Building Firepower applies debuffs
+- IDEA: Experience upgrade increases level cap for that team.
+- Mod Ideas: Only 1 item of each kind buyable. - Recreate the mod that creeps don't give extra xp+gold
+
 
 
 
@@ -237,7 +247,7 @@ Ice Rain movement slow: 15% (from 10%)
 Movement speed aura: 10% for allies in range 15
 
 
-# Miscellaneous
+# Other
 ############################################################
 
 All minions have had their Turn Rates increased to 360 (from 180).
@@ -342,7 +352,7 @@ Theurgist's Cap:
 WeaponProc: Now also increases your own Mana regen by an extra 50% (same duration as the debuff on enemies)
 
 Vinling Helmet:
-WeaponProc: restore 500 Mana (normally 350)
+ArmorProc: restore 500 Mana (normally 350)
 (On top of better proc chance from BalanceMod 1.31)
 
 ------------------------------------------------------------
