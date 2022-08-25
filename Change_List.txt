@@ -9,6 +9,8 @@
 #TODO / Random Ideas
 ############################################################
 
+- Perhaps have Wings of the Seraphim not be removed on damage.
+- Maybe some extra XP to Brilliant Bauble
 (- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
 (- FIX dropped Items disappearing if you try picking them up with full inventory
   (see Inventory.lua)
@@ -89,7 +91,8 @@ Gauntlets of Despair:
 
 Sludge Slinger:
 - On use:
-  - Target gets -50% Health per second
+  - Target gets aura that prevents priest/bishop/etc. healing for 10 seconds.
+- Cooldown: 45 (from 30)
 
 ------------------------------------------------------------
 
@@ -117,6 +120,10 @@ Totem of War is now a useable item.
 # Miscellaneous
 ############################################################
 
+TESTING REQUIRED:
+All wards should now be targetable and therefore destructible. This hopefully
+allows countering enemy wards with your own.
+
 All Stuns that give the target a Stun Immunity afterwards have had their
 descriptions clarified (Frost Nova, Boulder Roll and Mass Charm). Likewise, the
 Stuns that ignore Stun Immunities state this explicitly in their descriptions
@@ -130,6 +137,7 @@ previously stated).
 
 UB's Plague is hopefully playable now.
 - A loop that unnecessarily ran a bunch of code has been fixed.
+  (Or maybe not. Not sure what they did there.)
 - Animations for units affected by Plague have been disabled.
 
 

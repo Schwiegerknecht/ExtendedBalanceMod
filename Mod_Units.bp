@@ -359,6 +359,21 @@ UnitBlueprint {
         TurnRate = 360, #180
     },
 }
+# Make wards targetable
+UnitBlueprint {
+    BlueprintId = "ugbshop01ward01",
+    Merge = true,
+    Categories = {
+        'LAND',
+        'NOBUFFS',
+        'NOSPLASHDAMAGE',
+        'PRELOADRESOURCES',
+        'SELECTABLE',
+        'VISIBLETORECON',
+        'NOOCCUPYGROUND',
+        #'UNTARGETABLE', -- Removed
+    },
+}
 # Set the cost of all Favor Items to 1
 UnitBlueprint {
     BlueprintId = "ugbshop08",
