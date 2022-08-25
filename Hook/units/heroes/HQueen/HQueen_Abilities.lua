@@ -213,8 +213,8 @@ BuffBlueprint {
 BuffBlueprint {
     Name = 'HQueenEntourageTributeTest',
     BuffType = 'HQUEENTRIBUTE',
-    DisplayName = '<LOC ABILITY_Queen_0114>Entourage III Tribute',
-    Description = '<LOC ABILITY_Queen_0115>Gold production increased.',
+    DisplayName = '<LOC ABILITY_Queen_0116>Entourage III Tribute',
+    Description = '<LOC ABILITY_Queen_0117>Gold production increased.',
     Debuff = false,
     Stacks = 'REPLACE',
     Duration = -1,

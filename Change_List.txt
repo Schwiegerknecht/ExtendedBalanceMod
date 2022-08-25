@@ -35,6 +35,12 @@ Shield:
 Penitence:
 - Cooldown: 8/8/8/8 (from 7/7/7/7)
 
+Rook:
+Power of the Tower:
+- Mana costs: 400/400/400/400 (from 400/400/400/200)
+Structural Transfer:
+- Mana costs: 350/500/650/800 (from 265/375/490/610)
+
 Unclean Beast:
 Foul Grasp:
 - Foul Grasp I does not ignore stun immunities anymore.
@@ -47,6 +53,7 @@ Ooze:
     UB time to build into items that give HP/second.]
 Acclimation:
 - Damage mitigation: 30% (from 25%; normally 40%)
+
 
 
 # Items
@@ -116,13 +123,18 @@ Totem of War is now a useable item.
   - +15% Attack Speed
   - +15% Movement Speed
 
+Wings of the Seraphim:
+The healing effect is now only interrupted by Stuns, Freezes and Interrupts.
+(Not by damage like before.)
+- Cooldown: 60 (from 45)
+- Regen: 170 (from 200)
+
 
 # Miscellaneous
 ############################################################
 
-TESTING REQUIRED:
 All wards should now be targetable and therefore destructible. This hopefully
-allows countering enemy wards with your own.
+allows countering enemy wards with your own. (TESTING REQUIRED!)
 
 All Stuns that give the target a Stun Immunity afterwards have had their
 descriptions clarified (Frost Nova, Boulder Roll and Mass Charm). Likewise, the

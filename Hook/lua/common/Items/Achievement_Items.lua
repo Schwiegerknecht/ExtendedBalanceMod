@@ -227,6 +227,29 @@ Items.AchievementMinionDamage.GetRateOfFire = function(self) return math.floor( 
 Items.AchievementMinionDamage.GetDuration = function(self) return Buffs.AchievementMinionDamageUseBuff.Duration end
 Items.AchievementMinionDamage.Description = 'Use: Minions gain +[GetDamageRating] Weapon Damage, +[GetMoveMult]% Movement Speed and +[GetRateOfFire]% Attack Speed for [GetDuration] seconds.'
 
+-- Increase Wings of the Seraphim Cooldown to 60 (from 45)
+Ability.AchievementAERegen.Cooldown = 60
+-- Decrease Seraphim Regen to 170 (from 200)
+Buffs.AchievementAERegen.Affects.Regen.Add = 170
+-- Have Seraphim only interrupt when stunned or frozen
+Buffs.AchievementAERegen.OnApplyBuff = function(self, unit, instigator)
+	unit.Callbacks.OnStunned:Add(self.SeraphimStunned, self)
+	unit.Callbacks.OnFrozen:Add(self.SeraphimStunned, self)
+end
+Buffs.AchievementAERegen.OnBuffRemove = function(self,unit)
+	unit.Callbacks.OnStunned:Remove(self.SeraphimStunned)
+	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
+end
+Buffs.AchievementAERegen.SeraphimStunned = function(self, unit, data)
+	if Buff.HasBuff(unit, 'AchievementAERegen') then
+		Buff.RemoveBuff(unit, 'AchievementAERegen')
+	end
+	unit.Callbacks.OnStunned:Remove(self.SeraphimStunned)
+	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
+end
+-- Adjust description
+Items.AchievementAERegen.Description = 'Use: +[GetRegenBonus] Health Per Second Aura for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
+
 
 -- Add minion HP regeneration to Tome of Endurance
 Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
