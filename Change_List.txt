@@ -42,6 +42,8 @@ Structural Transfer:
 - Mana costs: 350/500/650/800 (from 265/375/490/610)
 
 Unclean Beast:
+Base Speed:
+  6.3 (from 6.0 in BalMod 1.31; 6.3 in vanilla)
 Foul Grasp:
 - Foul Grasp I does not ignore stun immunities anymore.
   (Foul Grasp II + III do still ignore stun immunities.)
@@ -51,9 +53,6 @@ Ooze:
     lvl 1-10, after that incrementing in steps of 3. This means Ooze is
     actually buffed lvl 1-10 and nerfed only from lvl 11 onwards, giving
     UB time to build into items that give HP/second.]
-Acclimation:
-- Damage mitigation: 30% (from 25%; normally 40%)
-
 
 
 # Items

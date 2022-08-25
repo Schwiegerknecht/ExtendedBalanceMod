@@ -1,11 +1,4 @@
 UnitBlueprint {
-    BlueprintId = "hepa01",
-    Merge = true,
-    Physics = {
-        MaxSpeed = 6.0, # 6.3
-    },
-}
-UnitBlueprint {
     BlueprintId = "hvampirevampire01",
     Merge = true,
     Physics = {

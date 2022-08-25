@@ -13,8 +13,8 @@ Buffs.HEPA01DiseasedClaws03.Affects.MoveMult.Mult = -0.15
 Ability.HEPA01FoulGrasp02.Amount = 166
 Ability.HEPA01FoulGrasp03.Amount = 249
 
---Decrease the damage mitigation by Acclimation to 30% (down from 40%) --Schwiegerknecht
-Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.30}
+--Decrease the damage mitigation by Acclimation to 25% (down from 40%) --Schwiegerknecht
+Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.25}
 
 -- Increase Ooze self damage, scaling off hero level:
 -- 20 + herolevel*0/1/2/3 dmg (from 20/30/40/50)
