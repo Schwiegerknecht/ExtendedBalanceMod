@@ -88,6 +88,8 @@ if not Items.AchievementXPIncome.Tooltip.Bonuses then
 end
 table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetHealthBonus] Health')
 table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetManaBonus] Mana')
+-- Increase XP Bonus to 12% (from 10%) -- Schwiegerknecht EBM-0.3
+Buffs.AchievementXPIncome.Affects.Experience.Add = 0.12
 
 --Horn of battle +100 life over 10 seconds / normally 50 over 20 seconds
 Buffs.AchievementMinionInvulnBuff.Affects.Regen.Add = 100

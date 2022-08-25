@@ -9,8 +9,6 @@
 #TODO / Random Ideas
 ############################################################
 
-- Perhaps have Wings of the Seraphim not be removed on damage.
-- Maybe some extra XP to Brilliant Bauble
 (- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
 (- FIX dropped Items disappearing if you try picking them up with full inventory
   (see Inventory.lua)
@@ -107,6 +105,9 @@ Bejeweled Goggles are now a useable item.
 - Cooldown: 60
 - On use: Place a ward that detects invisible objects.
   - Ward Duration: 120
+
+Brilliant Bauble:
+Experience Bonus: 12% (from 10%)
 
 Charm of Life:
 - Health regeneration: 12 (from 10 in BalMod 1.31; 5 in vanilla)

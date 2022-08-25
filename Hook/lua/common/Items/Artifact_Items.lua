@@ -528,25 +528,22 @@ Items.Item_Artifact_060.Abilities = {
                 },
             },
         },
-        -- Add nerf to UB, which is very overpowered with this item
-        -- One could probably also use if unit:GetBlueprint() == 'hepa01'
-        --[[OnAbilityAdded = function(self, unit)
-            if Validate.HasAbility(unit, 'HEPA01VenomSpit01')
-            or Validate.HasAbility(unit, 'HEPA01VenomSpit02')
-            or Validate.HasAbility(unit, 'HEPA01VenomSpit03')
-            or Validate.HasAbility(unit, 'HEPA01VenomSpit04')
-            or Validate.HasAbility(unit, 'HEPA01FoulGrasp01')
-            or Validate.HasAbility(unit, 'HEPA01FoulGrasp02')
-            or Validate.HasAbility(unit, 'HEPA01FoulGrasp03') then
-                Buff.ApplyBuff(unit, 'Item_Artifact_060_UncleanBeast', unit)
-                #Buff.RemoveBuff(unit 'Item_Artifact_060_Quiet')
-            end
-        end,
-        OnRemoveAbility = function(self, unit)
-            if Buff.HasBuff(unit, 'Item_Artifact_060_UncleanBeast') then
-                Buff.RemoveBuff(unit, 'Item_Artifact_060_UncleanBeast')
-            end
-        end,]]
+        #No Cooldown for UB
+        #OnAbilityAdded = function(self, unit)
+        #    if unit:GetBlueprint().Name == '<LOC UNIT_NAME_0014>Unclean Beast' then
+        #        if Buff.HasBuff(unit, 'Item_Artifact_060_Quiet') then
+        #            Buff.ApplyBuff(unit, 'Item_Artifact_060_UncleanBeast', unit)
+        #        end
+        #    end
+        #end,
+        #OnRemoveAbility = function(self, unit)
+        #    if Buff.HasBuff(unit, 'Item_Artifact_060_Quiet') then
+        #        Buff.RemoveBuff(unit, 'Item_Artifact_060_Quiet')
+        #    end
+        #    if Buff.HasBuff(unit, 'Item_Artifact_060_UncleanBeast') then
+        #        Buff.RemoveBuff(unit, 'Item_Artifact_060_UncleanBeast')
+        #    end
+        #end,
     },
     AbilityBlueprint {
         Name = 'Item_Artifact_060_ManaLeech',
@@ -585,11 +582,10 @@ BuffBlueprint {
     BuffType = 'IARTCRIT2UNCLEANBEAST',
     Debuff = false,
     EntityCategory = 'ALLUNITS',
-    Stacks = 'ALWAYS',
+    Stacks = 'REPLACE',
     Duration = -1,
     Affects = {
-        Cooldown = {Mult = 0.15},
-        MaxEnergy = {Add = -2100, AdjustEnergy = false},
+        Cooldown = {Mult = Buffs.Item_Artifact_060_Quiet.Affects.Cooldown.Mult * -1},
     },
 }
 
