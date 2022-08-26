@@ -179,7 +179,7 @@ UnitBlueprint {
         Tree = {
             # Sludge Slinger
             Item_Consumable_040 = {
-                Cost = 600,
+                Cost = 800, # 650
                 ItemBP = 'Item_Consumable_040',
             },
             # Warlords Punisher

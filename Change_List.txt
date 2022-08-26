@@ -57,6 +57,9 @@ Armor of Vengeance:
 - 400 HP (up from 250; normally 0)
 - Damage reflect: 75 (from 35)
 
+Platemail of the Crusader: 
+- 300 HP (from 200; normally 0)
+
 Godplate:
 Added Proc that can only occur once every 30 seconds:
 When stunned, frozen or interrupted you gain a buff for 5 seconds, giving you
@@ -91,6 +94,7 @@ Sludge Slinger:
 - On use:
   - Target gets aura that prevents priest/bishop/etc. healing for 10 seconds.
 - Cooldown: 45 (from 30)
+- Cost: 800 gold (from 600)
 
 ------------------------------------------------------------
 
@@ -336,7 +340,7 @@ Removed HP regeneration from BalanceMod 1.31
 Added 5% ArmorProc that increases the damage reflected by 75.
 
 Platemail of the Crusader: 
-250 HP (normally 0)
+200 HP (normally 0)
 (On top of better proc chance from BalanceMod 1.31)
 
 Godplate:

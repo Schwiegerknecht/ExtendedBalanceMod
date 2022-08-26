@@ -1,6 +1,6 @@
 # ExtendedBalanceMod IMPORTANT NOTE:
 # Before each new release, enter the folder name of the current mod version here.
-local modfolder = 'ExtendedBalanceMod-main' -- ExtendedBalanceMod-0.3
+local modfolder = 'ExtendedBalanceMod-0.3' -- ExtendedBalanceMod-main
 # So far I have found no way to automate this. Might have to search for where logs are produced, the folder path is contained there:
 --[[
 info: 00:00:14: Hooked /lua/common/items/artifact_items.lua with /mods/uberfix/hook/lua/common/items/artifact_items.lua
@@ -15,8 +15,8 @@ Ability.Item_Chest_070_WeaponProc.ArmorProcChance = 5
 
 -- Increase Platemail of the Crusader proc chance to 3% from 1%
 Ability.Item_Chest_060_WeaponProc.ArmorProcChance = 3
--- Add 200 HP to Platemail of the Crusader (from 0) - Schwiegerknecht
-Buffs.Item_Chest_060.Affects.MaxHealth = {Add = 200, AdjustEnergy = false}
+-- Add 300 HP to Platemail of the Crusader (from 0) - Schwiegerknecht
+Buffs.Item_Chest_060.Affects.MaxHealth = {Add = 300, AdjustEnergy = false}
 -- Add Tooltip
 Items.Item_Chest_060.GetHealthBonus = function(self) return Buffs['Item_Chest_060'].Affects.MaxHealth.Add end
 table.insert(Items.Item_Chest_060.Tooltip.Bonuses, '+[GetHealthBonus] Health')
@@ -181,5 +181,5 @@ Items.Item_Chest_080.GetProcArmor = function(self) return Buffs.Item_Chest_080_P
 Items.Item_Chest_080.GetProcRegen = function(self) return Buffs.Item_Chest_080_ProcBuff.Affects.Regen.Add end
 Items.Item_Chest_080.GetProcCooldown = function(self) return Ability.Item_Chest_080_Proc.CooldownTime end
 if not Items.Item_Chest_080.Tooltip.Passives then
-    Items.Item_Chest_080.Tooltip.Passives = '+[GetProcRegen] Health per second and +[GetProcArmor] Armor for [GetProcDuration] seconds when stunned, frozen or interrupted. This can only occur once every [GetProcCooldown] seconds.'
+    Items.Item_Chest_080.Tooltip.Passives = 'When stunned, frozen or interrupted get +[GetProcRegen] Health per second and +[GetProcArmor] Armor for [GetProcDuration] seconds. This can only occur once every [GetProcCooldown] seconds.'
 end
