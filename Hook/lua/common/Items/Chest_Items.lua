@@ -1,6 +1,6 @@
 # ExtendedBalanceMod IMPORTANT NOTE:
 # Before each new release, enter the folder name of the current mod version here.
-local modfolder = 'ExtendedBalanceMod-0.3' -- ExtendedBalanceMod-main
+local modfolder = 'ExtendedBalanceMod-main' -- ExtendedBalanceMod-main
 # So far I have found no way to automate this. Might have to search for where logs are produced, the folder path is contained there:
 --[[
 info: 00:00:14: Hooked /lua/common/items/artifact_items.lua with /mods/uberfix/hook/lua/common/items/artifact_items.lua
