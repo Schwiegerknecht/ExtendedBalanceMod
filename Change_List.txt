@@ -3,6 +3,20 @@
 ############################################################
 
 #################################################################################################################
+# v0.4
+#################################################################################################################
+
+# Other
+############################################################
+
+The lobby option Tower Strength has been rebalanced, since nobody really uses the Low setting
+- Low: 5600 Tower HP, 300 dmg; 3000 Archer Tower HP, 40 dmg
+- Normal: 8400 Tower HP, 450 dmg; 4500 Archer Tower HP, 60 dmg
+- Normal: 12600 Tower HP, 675 dmg; 6750 Archer Tower HP, 90 dmg
+
+
+
+#################################################################################################################
 # v0.3
 #################################################################################################################
 
@@ -149,22 +163,6 @@ UB's Plague is hopefully playable now.
 - A loop that unnecessarily ran a bunch of code has been fixed.
   (Or maybe not. Not sure what they did there.)
 - Animations for units affected by Plague have been disabled.
-
-
-#TODO / Random Ideas
-############################################################
-
-(- ISSUE Enhanced AI Mod: AI Oak Build Typo SurgeOfFaith in Pen_Shield_DPS build)
-(- FIX dropped Items disappearing if you try picking them up with full inventory
-  (see Inventory.lua)
-  Mistake probably in CanCarry() in ValidateInventory.lua. Maybe set a default
-  value for StacksPerSlot in CanCarry().
-  FIX: Even when you have the same item already, it doesn't abort.)
-- IDEA: Enhanced Attributes giving Dodge
-- IDEA: Building Firepower applies debuffs
-- IDEA: Experience upgrade increases level cap for that team.
-- Mod Ideas: Only 1 item of each kind buyable. - Recreate the mod that creeps don't give extra xp+gold
-
 
 
 
