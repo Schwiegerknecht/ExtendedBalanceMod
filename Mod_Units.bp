@@ -367,6 +367,50 @@ UnitBlueprint {
         #'UNTARGETABLE', -- Removed
     },
 }
+# Set current High Tower Strength as default
+UnitBlueprint {
+    BlueprintId = "ugbdefense01",
+    Merge = true,
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 4500,
+        MaxHealth = 4500,
+        RegenRate = 0,
+        SurfaceThreatLevel = 25,
+    },
+    Weapon = {
+        {
+            Damage = 60,
+        },
+        {
+            Damage = 60,
+        },
+        {
+            Damage = 60,
+        },
+        {
+            Damage = 60,
+        },
+    },
+}
+UnitBlueprint {
+    BlueprintId = "ugbdefense02",
+    Merge = true,
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 8400,
+        MaxHealth = 8400,
+        MaximumTowerConnections = 10,
+        RegenRate = 0,
+        SurfaceThreatLevel = 15,
+        TowerGraphConnection = 30,
+    },
+    Weapon = {
+        {
+            Damage = 450,
+        },
+    },
+}
 # Set the cost of all Favor Items to 1
 UnitBlueprint {
     BlueprintId = "ugbshop08",
