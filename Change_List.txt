@@ -6,13 +6,40 @@
 # v0.4
 #################################################################################################################
 
+# Demigods
+############################################################
+
+Regulus:
+Deadeye:
+- Stun Duration: 0.8 (from 1.5)
+
+Rook:
+Power of the Tower:
+- Mana cost: 400/450/500/550 (from 400/400/400/400 in EBM 0.3)
+
+
 # Other
 ############################################################
 
-The lobby option Tower Strength has been rebalanced, since nobody really uses the Low setting
-- Low: 5600 Tower HP, 300 dmg; 3000 Archer Tower HP, 40 dmg
-- Normal: 8400 Tower HP, 450 dmg; 4500 Archer Tower HP, 60 dmg
-- Normal: 12600 Tower HP, 675 dmg; 6750 Archer Tower HP, 90 dmg
+[No gameplay change, just quality of life.]
+What used to be High Tower Strength is now Normal. (Fortresses in the Fortress
+game mode have 1.5 times higher HP than Normal fortresses in Conquest have. This
+has been adjusted accordingly.)
+Low:
+- 5600 Tower HP, 300 dmg (from 4200, 225)
+- 3000 Archer Tower HP, 40 dmg (from 2250, 30)
+- 10000 Fort HP, 90 dmg (from 7500, 45)
+Normal:
+- 8400 Tower HP, 450 dmg (from 5600, 300)
+- 4500 Archer Tower HP, 60 dmg (from 3000, 40)
+- 15000 Fort HP, 90 dmg (from 10000, 60)
+High:
+- 12600 Tower HP, 675 dmg (from 8400, 300)
+- 6750 Archer Tower HP, 90 dmg (from 4500, 60)
+- 22500 Fort HP, 135 dmg (from 15000, 90)
+
+
+The change to a loop in UB's plague in 0.3 has been reverted.
 
 
 

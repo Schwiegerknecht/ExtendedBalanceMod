@@ -13,10 +13,13 @@ Buffs.HEPA01DiseasedClaws03.Affects.MoveMult.Mult = -0.15
 Ability.HEPA01FoulGrasp02.Amount = 166
 Ability.HEPA01FoulGrasp03.Amount = 249
 
---Decrease the damage mitigation by Acclimation to 25% (down from 40%) --Schwiegerknecht
+-- Schwiegerknecht start
+--Decrease the damage mitigation by Acclimation to 25% (down from 40%)
 Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.25}
 
--- Increase Ooze self damage, scaling off hero level:
+
+# Increase Ooze self damage, scaling off hero level:
+#################################################################################################################
 -- 20 + herolevel*0/1/2/3 dmg (from 20/30/40/50)
 -- This means 20/30/40/50 dmg at lvl 10, and 20/40/60/80 dmg at lvl 20
 -- Maxing Ooze at lvl 1/4/7/10 would for the first 10 levels do dmg as follows:
@@ -102,7 +105,7 @@ Ability.HEPA01Ooze04.Description = 'Unclean Beast oozes virulent bodily fluids. 
 
 
 
-# Make Foul Grasp I not ignore stun immunities anymore --Schwiegerknecht
+# Make Foul Grasp I not ignore stun immunities anymore
 #################################################################################################################
 BuffBlueprint {
     Name = 'HEPA01FoulGraspStun02',
@@ -120,7 +123,7 @@ BuffBlueprint {
 }
 
 -- Create copies of the Foul Grasp functions, changing all instances of
--- HEPA01FoulGraspStun01
+-- HEPA01FoulGraspStun01 to HEPA01FoulGraspStun02
 DrawLifeTriggersImmune = function(def, unit, target)
     unit:GetWeapon(1):SetStayOnTarget(true)
 
@@ -345,90 +348,8 @@ Ability.HEPA01FoulGrasp01.Description = 'Unclean Beast clutches a target in its 
 Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 Ability.HEPA01FoulGrasp03.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 
-
-
-
-
+# Try fixing Plague lagging
 #################################################################################################################
-# Try fixing Plague. Someome used "continue" in the PlagueSpread functions,
-# which does not exist in LUA.
-
-PlagueSpread01 = function( instigator, targets, chance )
-    local instBrain = instigator:GetAIBrain()
-
-    for k, vUnit in targets do
-        if instigator:IsDead() or not instigator.Plague then
-            return
-        end
-
-        if Random(1, 100) < chance then
-            -- Remove the not working continue statement and instead invert the if-condition
-            if not (Buff.HasBuff(vUnit, 'HEPA01PlagueImmune') or Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01Plague01')) then
-                CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
-                if instBrain then
-                    local heroes = instBrain:GetListOfUnits(categories.HERO, false)
-                    if table.getn(heroes) > 0 then
-
-                        #LOG("*DEBUG: Applying Plague from "..instBrain.Name.." and hero ".. heroes[1]:GetUnitId().. " to unit ".. vUnit:GetUnitId())
-                        vUnit.PlagueInstance = {
-                            Instigator = instigator,
-                            InstigatorBrain = instBrain,
-                            IgnoreAffectPulses = true,
-                            NumIgnoredPulses = 0,
-                        }
-
-                        instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
-                        if(Validate.HasAbility(instigator, 'HEPA01Plague02')) then
-                            Buff.ApplyBuff(vUnit, 'HEPA01Plague02', heroes[1], heroes[1]:GetArmy())
-                        else
-                            Buff.ApplyBuff(vUnit, 'HEPA01Plague01', heroes[1], heroes[1]:GetArmy())
-                        end
-                        FloatTextAt(vUnit:GetFloatTextPosition(), "<LOC floattext_0011>PLAGUED!", 'Plague')
-                        break
-                    end
-                end
-            end
-        end
-    end
-end
-PlagueSpread02 = function( instigator, targets, chance )
-    local instBrain = instigator:GetAIBrain()
-
-    for k, vUnit in targets do
-        if instigator:IsDead() or not instigator.Plague then
-            return
-        end
-
-        if Random(1, 100) < chance then
-            -- Remove the not working continue statement and instead invert the if-condition
-            if not (Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01PlagueImmune')) then
-                CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
-                if instBrain then
-                    local heroes = instBrain:GetListOfUnits(categories.HERO, false)
-                    if table.getn(heroes) > 0 then
-
-                        #LOG("*DEBUG: Applying Plague from "..instBrain.Name.." and hero ".. heroes[1]:GetUnitId().. " to unit ".. vUnit:GetUnitId())
-                        vUnit.PlagueInstance = {
-                            Instigator = instigator,
-                            InstigatorBrain = instBrain,
-                            IgnoreAffectPulses = true,
-                            NumIgnoredPulses = 0,
-                        }
-
-                        instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
-                        if(Validate.HasAbility(instigator, 'HEPA01Plague02')) then
-                            Buff.ApplyBuff(vUnit, 'HEPA01Plague02', heroes[1], heroes[1]:GetArmy())
-                        else
-                            Buff.ApplyBuff(vUnit, 'HEPA01Plague01', heroes[1], heroes[1]:GetArmy())
-                        end
-                        FloatTextAt(vUnit:GetFloatTextPosition(), "<LOC floattext_0013>PLAGUED!", 'Plague')
-                        break
-                    end
-                end
-            end
-        end
-    end
-end
 -- Remove Plague animations
 for i = 1,2 do
     Buffs['HEPA01Plague0'..i].Effects = nil

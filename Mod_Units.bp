@@ -411,6 +411,44 @@ UnitBlueprint {
         },
     },
 }
+UnitBlueprint {
+    BlueprintId = "ugbfort01",
+    Merge = true,
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 15000,
+        MaxHealth = 15000,
+        RegenRate = 0,
+        SurfaceThreatLevel = 25,
+    },
+    Weapon = {
+        {
+            Damage = 90,
+        },
+        {
+            Damage = 90,
+        },
+    },
+}
+UnitBlueprint {
+    BlueprintId = "ugbfort02",
+    Merge = true,
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 22500,
+        MaxHealth = 22500,
+        RegenRate = 0,
+        SurfaceThreatLevel = 25,
+    },
+    Weapon = {
+        {
+            Damage = 90,
+        },
+        {
+            Damage = 90,
+        },
+    },
+}
 # Set the cost of all Favor Items to 1
 UnitBlueprint {
     BlueprintId = "ugbshop08",
