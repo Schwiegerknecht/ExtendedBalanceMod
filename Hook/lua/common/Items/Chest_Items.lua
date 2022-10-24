@@ -1,13 +1,15 @@
-# ExtendedBalanceMod IMPORTANT NOTE:
-# Before each new release, enter the folder name of the current mod version here.
-local modfolder = 'ExtendedBalanceMod-main' -- ExtendedBalanceMod-main
-# So far I have found no way to automate this. Might have to search for where logs are produced, the folder path is contained there:
---[[
-info: 00:00:14: Hooked /lua/common/items/artifact_items.lua with /mods/uberfix/hook/lua/common/items/artifact_items.lua
-info: 00:00:14: Hooked /lua/common/items/artifact_items.lua with /mods/extendedbalancemod-main/hook/lua/common/items/artifact_items.lua
-]]
-# Going via debug.getinfo(1).source does not actually help, since it does not get info on the file being hooked.
-# The alternative is giving up the possibility to have multiple versions of the mod installed at the same time.
+# Find out what the folder path of this mod is, so the Godplate icon can be located
+-- Create default path string
+local ebm_path = 'ExtendedBalanceMod-0.4' -- ExtendedBalanceMod-main
+
+-- Search for versions of ExtendedBalanceMod in the table of active mods.
+for k, mod in pairs(__active_mods) do
+    local ebm_index = string.find(mod.location, 'extendedbalancemod')
+    if ebm_index != nil then
+        -- Filter out the substring with the needed mod name
+        ebm_path = string.sub(mod.location, ebm_index)
+    end
+end
 
 -- Increase Groffling armor proc chance to 5% up from 1%
 Ability.Item_Chest_070_WeaponProc.ArmorProcChance = 5
@@ -127,7 +129,7 @@ BuffBlueprint {
     Affects = {
         Dummy = {Add = 1},
     },
-    Icon = '../../../../../mods/' .. modfolder .. '/Icons/Chest9_dis',
+    Icon = '../../../../../mods/' .. ebm_path .. '/Icons/Chest9_dis',
 }
 
 GodplateProc = function(self, unit)

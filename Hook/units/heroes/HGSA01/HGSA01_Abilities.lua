@@ -217,7 +217,7 @@ Ability.HGSA01Deadeye01.AbilityType = 'Quiet'
 Ability.HGSA01Deadeye01.WeaponProcChance = nil
 Ability.HGSA01Deadeye01.GetChance = nil
 Ability.HGSA01Deadeye01.OnWeaponProc = nil
-Ability.HGSA01Deadeye01.GetSnipeStunDuration = function(self) return math.floor( Buffs['HGSA01DeadeyeSnipeStun01'].Duration ) end
+Ability.HGSA01Deadeye01.GetSnipeStunDuration = function(self) return string.format("%.1f", Buffs['HGSA01DeadeyeSnipeStun01'].Duration) end
 Ability.HGSA01Deadeye01.Description = 'Regulus\' arrows stop his enemies dead in their tracks. Snipe now stuns enemies for [GetSnipeStunDuration] seconds, ignoring stun immunities.'
 
 

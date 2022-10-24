@@ -363,7 +363,7 @@ UnitBlueprint {
         'PRELOADRESOURCES',
         'SELECTABLE',
         'VISIBLETORECON',
-        'NOOCCUPYGROUND',
+        #'NOOCCUPYGROUND', -- Removed
         #'UNTARGETABLE', -- Removed
     },
 }
