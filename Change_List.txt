@@ -9,6 +9,10 @@
 # Demigods
 ############################################################
 
+Erebus:
+Improved Conversion Aura:
+- Conversion Range: 22/24/26 (from 20/20/20)
+
 Regulus:
 Deadeye:
 - Stun Duration: 0.8 (from 1.5)

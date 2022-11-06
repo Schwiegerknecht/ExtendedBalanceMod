@@ -66,5 +66,16 @@ Ability.HVampireMassCharm02.Description = 'Stuns enemies around Lord Erebus for 
 Ability.HVampireMassCharm03.Description = 'Stuns enemies around Lord Erebus for [GetMistStun] seconds. Demigods are stunned for [GetHeroMistStun] seconds, after which they receive Stun Immunity for [GetImmuneDuration] seconds.'
 Ability.HVampireMassCharm04.Description = 'Stuns enemies around Lord Erebus for [GetMistStun] seconds. Demigods are stunned for [GetHeroMistStun] seconds, after which they receive Stun Immunity for [GetImmuneDuration] seconds.'
 
+-- Improved Conversion Aura increases the conversion range to 22/24/26 (from 20/20/20)
+Ability.HVampireConversion01.AffectRadius = 22
+Ability.HVampireConversion02.AffectRadius = 24
+Ability.HVampireConversion03.AffectRadius = 26
+-- Adjust description
+Ability.HVampireConversion01.GetConversionRange = function(self) return Ability['HVampireConversion01'].AffectRadius end
+Ability.HVampireConversion02.GetConversionRange = function(self) return Ability['HVampireConversion02'].AffectRadius end
+Ability.HVampireConversion03.GetConversionRange = function(self) return Ability['HVampireConversion03'].AffectRadius end
+Ability.HVampireConversion01.Description = 'Lord Erebus has a [GetVampireChance]% chance to convert infantry into Night Walkers when they die and increases his conversion range to [GetConversionRange]. His Night Walkers have +[GetHealthBonus] Health.'
+Ability.HVampireConversion02.Description = 'Lord Erebus has a [GetVampireChance]% chance to convert infantry into Night Walkers when they die and increases his conversion range to [GetConversionRange]. His Night Walkers have +[GetHealthBonus] Health.'
+Ability.HVampireConversion03.Description = 'Lord Erebus has a [GetVampireChance]% chance to convert infantry into Night Walkers when they die and increases his conversion range to [GetConversionRange]. His Night Walkers have +[GetHealthBonus] Health.'
 
 __moduleinfo.auto_reload = true

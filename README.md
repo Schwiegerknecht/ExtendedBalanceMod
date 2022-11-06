@@ -8,10 +8,6 @@ ExtendedBalanceMod builds upon LORD-ORION's BalanceMod 1.31 and tries to make mo
 
 - Version 0.1 of ExtendedBalanceMod adds changes mostly to items, buffing many of those that are unviable in vanilla DG or even BalanceMod 1.31. A few items are nerfed, the most important being Journeyman's Treads, Ashkandor, Bulwark of the Ages, Dark Crimson Vial and Portal Locks.
 
-## IMPORTANT NOTE:
-
-Before each new release, enter the folder name of the current mod version in Chest_Items.lua. (The alternative is giving up the possibility to have multiple versions of the mod installed at the same time. Unless I find a way to automate it.)
-
 # Download and Installation:
 
 - Go to: https://github.com/Schwiegerknecht/ExtendedBalanceMod/releases
