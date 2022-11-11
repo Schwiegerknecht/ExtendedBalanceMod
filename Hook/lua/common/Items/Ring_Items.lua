@@ -13,6 +13,10 @@ table.insert(Items.Item_Ring_040.Tooltip.Bonuses, '+[GetLifeStealBonus]% Life St
 
 -- Add 10 minion HP regen to Forest Band
 Buffs.Item_Ring_060_Minion.Affects.Regen = {Add = 10}
+-- Add 200 Minion Health
+Buffs.Item_Ring_060_Minion.Affects.MaxHealth = {Add = 150}
 -- Update description
 Items.Item_Ring_060.GetRegenBonus = function(self) return Buffs['Item_Ring_060_Minion'].Affects.Regen.Add end
+Items.Item_Ring_060.GetMaxHealthBonus = function(self) return Buffs['Item_Ring_060_Minion'].Affects.MaxHealth.Add end
+table.insert(Items.Item_Ring_060.Tooltip.MBonuses, '+[GetMaxHealthBonus] Minion Health')
 table.insert(Items.Item_Ring_060.Tooltip.MBonuses, '+[GetRegenBonus] Minion Health Per Second')

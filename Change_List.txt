@@ -29,7 +29,12 @@ Symbol of Purity:
 - Use: Remove the negative effects (except Stuns and Interrupts) of allied
 Demigods in Range 15. Cannot be used while stunned or frozen.
 - Cooldown: 45
-[This item now works similar to Cape of Plentiful Mana and Wings of the Seraphim.]
+[This item now works similarly to Cape of Plentiful Mana and Wings of the Seraphim.]
+
+------------------------------------------------------------
+
+Forest Band:
+- 150 Minion Health (from 0)
 
 
 # Other
