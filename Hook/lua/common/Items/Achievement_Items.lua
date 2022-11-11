@@ -25,6 +25,63 @@ Ability.AchievementMinionInvis.Cooldown = 45
 Buffs.AchievementHealth.Affects.MaxHealth.Add = 600 
 -- Staff of the Warmage, increase mana to 1050 up from 800
 Buffs.AchievementMana.Affects.MaxEnergy.Add = 1050 
+-- Cape of Plentiful Mana: Increase affect radius from 8 to 15, so this item is easier to use
+Ability.AchievementAEMana.AffectRadius = 15
+--Increase Wings of the Seraphim affect radius from 8 to 15 so this item is easier to use on teams     
+Ability.AchievementAERegen.AffectRadius = 15
+-- Poison Dagger attack speed 10% up from 5%,
+Buffs.AchievementSnarePassive.Affects.RateOfFire.Mult = .10 
+--Essence of Magic reduce cooldown timer to 30
+Ability.AchievementFreeSpells.Cooldown = 30 
+
+--Add +250 health and +175 mana to BrillIant Bauble and update description
+Buffs.AchievementXPIncome.Affects.MaxHealth = {Add = 250, AdjustEnergy = true}
+Buffs.AchievementXPIncome.Affects.MaxEnergy = {Add = 175}
+Items.AchievementXPIncome.GetHealthBonus = function(self) return Buffs.AchievementXPIncome.Affects.MaxHealth.Add end
+Items.AchievementXPIncome.GetManaBonus = function(self) return Buffs.AchievementXPIncome.Affects.MaxEnergy.Add end
+if not Items.AchievementXPIncome.Tooltip.Bonuses then 
+	Items.AchievementXPIncome.Tooltip.Bonuses = {}
+end
+table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetHealthBonus] Health')
+table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetManaBonus] Mana')
+-- Increase XP Bonus to 12% (from 10%) -- Schwiegerknecht EBM-0.3
+Buffs.AchievementXPIncome.Affects.Experience.Add = 0.12
+
+--Horn of battle +100 life over 10 seconds / normally 50 over 20 seconds
+Buffs.AchievementMinionInvulnBuff.Affects.Regen.Add = 100
+Buffs.AchievementMinionInvulnBuff.Duration = 10
+
+--Bejeweled Goggle; Crit: 10% chance to do 1.5 damage
+--Prepend the crit chance and proc adjustment to the description
+local critpassive = '[GetCritChance]% chance to deal a critical strike for [GetCritDamage]x damage.'
+Items.AchievementVision.Tooltip.Passives = critpassive .. '\n\n' .. Items.AchievementVision.Tooltip.Passives
+
+--Add the crit chance display functions (the string.format parameter '%.2f' rounds floating point numbers to 2 decimals)
+Items.AchievementVision.GetCritChance = function(self) return Ability['AchievementVision_Crit'].CritChance end
+Items.AchievementVision.GetCritDamage = function(self) return Ability['AchievementVision_Crit'].CritMult end
+
+--Add the crit ability
+table.insert(Items.AchievementVision.Abilities, AbilityBlueprint {
+	Name = 'AchievementVision_Crit',
+	AbilityType = 'WeaponCrit',
+	CritChance = 10,
+	CritMult = 1.5,
+	Icon = '/NewIcons/AchievementRewards/PolishedCrystalGoggles',
+})
+
+--Increase Charred Totem of War damage bonus to 30 up from 15 
+Buffs.AchievementMinionDamage.Affects.DamageRating.Add = 30
+--add 5% Attack Bonus to Charred Totem of War minions and update description
+Buffs.AchievementMinionDamageBuff.Affects.RateOfFire = {Mult = 0.05}
+Items.AchievementMinionDamage.GetMinionAttackSpeedBonus = function(self) return math.floor( Buffs['AchievementMinionDamageBuff'].Affects.RateOfFire.Mult * 100 ) end
+table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackSpeedBonus]% Minion Attack Speed')
+
+
+##############################################################################
+-- Schwiegerknecht start
+##############################################################################
+
+
 
 -- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel) -- Schwiegerknecht
 -- Change Ability.AchievementMana_Aura.LevelEnergyRegen to change value
@@ -69,51 +126,6 @@ table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana R
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaLevelRegen] Mana Regen per hero level')
 -- End of Staff of the Warmage change
 
--- Cape of Plentiful Mana: Increase affect radius from 8 to 15, so this item is easier to use
-Ability.AchievementAEMana.AffectRadius = 15 
---Increase Wings of the Seraphim affect radius from 8 to 15 so this item is easier to use on teams     
-Ability.AchievementAERegen.AffectRadius = 15 
--- Poison Dagger attack speed 10% up from 5%,
-Buffs.AchievementSnarePassive.Affects.RateOfFire.Mult = .10 
---Essence of Magic reduce cooldown timer to 30
-Ability.AchievementFreeSpells.Cooldown = 30 
-
---Add +250 health and +175 mana to Brillant Bauble and update description
-Buffs.AchievementXPIncome.Affects.MaxHealth = {Add = 250, AdjustEnergy = true}
-Buffs.AchievementXPIncome.Affects.MaxEnergy = {Add = 175}
-Items.AchievementXPIncome.GetHealthBonus = function(self) return Buffs.AchievementXPIncome.Affects.MaxHealth.Add end
-Items.AchievementXPIncome.GetManaBonus = function(self) return Buffs.AchievementXPIncome.Affects.MaxEnergy.Add end
-if not Items.AchievementXPIncome.Tooltip.Bonuses then 
-	Items.AchievementXPIncome.Tooltip.Bonuses = {}
-end
-table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetHealthBonus] Health')
-table.insert(Items.AchievementXPIncome.Tooltip.Bonuses, '+[GetManaBonus] Mana')
--- Increase XP Bonus to 12% (from 10%) -- Schwiegerknecht EBM-0.3
-Buffs.AchievementXPIncome.Affects.Experience.Add = 0.12
-
---Horn of battle +100 life over 10 seconds / normally 50 over 20 seconds
-Buffs.AchievementMinionInvulnBuff.Affects.Regen.Add = 100
-Buffs.AchievementMinionInvulnBuff.Duration = 10
-
---Bejeweled Goggle; Crit: 10% chance to do 1.5 damage
---Prepend the crit chance and proc adjustment to the description
-local critpassive = '[GetCritChance]% chance to deal a critical strike for [GetCritDamage]x damage.'
-Items.AchievementVision.Tooltip.Passives = critpassive .. '\n\n' .. Items.AchievementVision.Tooltip.Passives
-
---Add the crit chance display functions (the string.format parameter '%.2f' rounds floating point numbers to 2 decimals)
-Items.AchievementVision.GetCritChance = function(self) return Ability['AchievementVision_Crit'].CritChance end
-Items.AchievementVision.GetCritDamage = function(self) return Ability['AchievementVision_Crit'].CritMult end
-
---Add the crit ability
-table.insert(Items.AchievementVision.Abilities, AbilityBlueprint {
-	Name = 'AchievementVision_Crit',
-	AbilityType = 'WeaponCrit',
-	CritChance = 10,
-	CritMult = 1.5,
-	Icon = '/NewIcons/AchievementRewards/PolishedCrystalGoggles',
-})
-
--- Schwiegerknecht:
 -- Make Bejeweled Goggles a useable item
 Items.AchievementVision.Useable = true
 -- Add useable ability to place Wards (EBM-0.3)
@@ -155,18 +167,6 @@ table.insert(Items.AchievementVision.Abilities, 1, AbilityBlueprint {
 Items.AchievementVision.GetCooldown = function(self) return Ability.AchievementVision_Use.Cooldown end
 Items.AchievementVision.Description = 'On Use: Place Wards that last for 120 seconds. [GetCooldown] seconds Cooldown.'
 --End of goggle change
-
---Increase Charred Totem of War damage bonus to 30 up from 15 
-Buffs.AchievementMinionDamage.Affects.DamageRating.Add = 30
---add 5% Attack Bonus to Charred Totem of War minions and update description
-Buffs.AchievementMinionDamageBuff.Affects.RateOfFire = {Mult = 0.05}
-Items.AchievementMinionDamage.GetMinionAttackSpeedBonus = function(self) return math.floor( Buffs['AchievementMinionDamageBuff'].Affects.RateOfFire.Mult * 100 ) end
-table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackSpeedBonus]% Minion Attack Speed')
-
-
-##############################################################################
--- Schwiegerknecht start
-##############################################################################
 
 -- Make Totem of War an useable item
 Items.AchievementMinionDamage.Useable = true
@@ -228,6 +228,7 @@ Items.AchievementMinionDamage.GetMoveMult = function(self) return math.floor( Bu
 Items.AchievementMinionDamage.GetRateOfFire = function(self) return math.floor( Buffs.AchievementMinionDamageUseBuff.Affects.RateOfFire.Mult * 100 ) end
 Items.AchievementMinionDamage.GetDuration = function(self) return Buffs.AchievementMinionDamageUseBuff.Duration end
 Items.AchievementMinionDamage.Description = 'Use: Minions gain +[GetDamageRating] Weapon Damage, +[GetMoveMult]% Movement Speed and +[GetRateOfFire]% Attack Speed for [GetDuration] seconds.'
+-- End of Totem change
 
 -- Increase Wings of the Seraphim Cooldown to 60 (from 45)
 Ability.AchievementAERegen.Cooldown = 60
@@ -299,3 +300,60 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 -- Add Tooltip
 Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
 table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
+-- End of Mard's Hammer change
+
+-- Make Symbol of Purity an Area of Effect affecting allied Demigods.
+-- Increase Cooldown to 45 seconds (from 30)
+Ability.AchievementPure.Cooldown = 45
+-- Set Radius to 15 (from 0)
+Ability.AchievementPure.AffectRadius = 15
+-- Stuns (and Interrupts) are still not cleansed.
+function RemoveDebuffsExceptStuns(unit, debuff)
+    local removeBuffs = {}
+    for buffType, buffTbl in unit.Buffs.BuffTable do
+        for buffName, buffDef in buffTbl do
+            if(Buffs[buffName].Debuff == debuff) then
+                if(Buffs[buffName].CanBeDispelled == true) and not (Buffs[buffName].Affects.Stun or Buffs[buffName].Affects.Interrupt) then
+                    table.insert( removeBuffs, buffName )
+                end
+            end
+        end
+    end
+	-- Uncomment to see what the Bufftable looks like:
+	-- LOG(repr(unit.Buffs.BuffTable))
+    for _,buffName in removeBuffs do
+        Buff.RemoveBuff(unit, buffName, true)
+    end
+end
+-- Remove old OnStartAbility.
+-- It will become OnApplyBuff, since the effect needs to be applied to several units.
+Ability.AchievementPure.OnStartAbility = nil
+-- Make the ability affect Demigods
+Ability.AchievementPure.TargetCategory = 'HERO - UNTARGETABLE'
+-- Apply a dummy buff to Allies
+Ability.AchievementPure.Buffs = { }
+table.insert(Ability.AchievementPure.Buffs,	BuffBlueprint {
+		Name = 'AchievementPure_Aoe',
+		DisplayName = 'Symbol of Purity',
+		Description = 'All debuffs except stuns removed.',
+		BuffType = 'PURITYBUFFAOE',
+		Icon = '/NewIcons/AchievementRewards/HolysymbolofPurity',
+		Debuff = false,
+		EntityCategory = 'ALLUNITS',
+		Stacks = 'ALWAYS',
+		Duration = 0.5,
+		Affects = {
+			Dummy = {Add = 0.1},
+		},
+		# Effects = 'HolySymbolActivate',
+		# EffectsBone = -2,
+		OnApplyBuff = function(self, unit, params)
+			-- Replace Buff.RemoveBuffsByDebuff with the modified function
+			RemoveDebuffsExceptStuns(unit, true)
+			AttachEffectsAtBone( unit, EffectTemplates.Items.Achievement.HolySymbolActivate, -2 )
+		end,
+	}
+)
+-- Adjust description
+Items.AchievementPure.GetMaxRange = function(self) return Ability['AchievementPure'].AffectRadius end
+Items.AchievementPure.Description = 'Use: Purge all negative effects except stuns and interrupts. Affects all allied Demigods in range [GetMaxRange]. Cannot use while stunned or frozen.'

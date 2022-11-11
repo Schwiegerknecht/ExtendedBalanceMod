@@ -22,10 +22,20 @@ Power of the Tower:
 - Mana cost: 400/450/500/550 (from 400/400/400/400 in EBM 0.3)
 
 
+# Items
+############################################################
+
+Symbol of Purity:
+- Use: Remove the negative effects (except Stuns and Interrupts) of allied
+Demigods in Range 15. Cannot be used while stunned or frozen.
+- Cooldown: 45
+[This item now works similar to Cape of Plentiful Mana and Wings of the Seraphim.]
+
+
 # Other
 ############################################################
 
-[No gameplay change, just quality of life.]
+[No gameplay change, just quality of life:]
 What used to be High Tower Strength is now Normal. (Fortresses in the Fortress
 game mode have 1.5 times higher HP than Normal fortresses in Conquest have. This
 has been adjusted accordingly.)
@@ -45,6 +55,7 @@ High:
 
 The change to a loop in UB's plague in 0.3 has been reverted.
 
+Destruction of enemy Wards requires testing again!
 
 
 #################################################################################################################
@@ -192,7 +203,7 @@ previously stated).
 
 UB's Plague is hopefully playable now.
 - A loop that unnecessarily ran a bunch of code has been fixed.
-  (Or maybe not. Not sure what they did there.)
+  [Note: Reverted in 0.4.]
 - Animations for units affected by Plague have been disabled.
 
 
