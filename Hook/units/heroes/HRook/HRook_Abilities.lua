@@ -4,9 +4,10 @@ Buffs.HRookPoison.Affects.MoveMult.Mult = -0.15 -- increase slow to 15% from 10%
 -- Schwiegerknecht start
 
 -- Power of the Tower mana cost: 400/450/500/550 (from 400/400/400/400 in EBM 0.3)
-Ability.HRookTower02.EnergyCost = 450
-Ability.HRookTower03.EnergyCost = 500
-Ability.HRookTower04.EnergyCost = 550
+Ability.HRookTower01.EnergyCost = 350
+Ability.HRookTower02.EnergyCost = 400
+Ability.HRookTower03.EnergyCost = 450
+Ability.HRookTower04.EnergyCost = 500
 
 -- Increase mana cost of Structural Transfer to 350/500/650/800 (from 265/375/490/610)
 Ability.HRookStructuralTransfer01.EnergyCost = 350

@@ -1,4 +1,11 @@
 UnitBlueprint {
+    BlueprintId = "hepa01",
+    Merge = true,
+    Physics = {
+        MaxSpeed = 6.0, # 6.3
+    },
+}
+UnitBlueprint {
     BlueprintId = "hvampirevampire01",
     Merge = true,
     Physics = {
@@ -373,14 +380,14 @@ UnitBlueprint {
     Merge = true,
     Defense = {
         ArmorType = 'Structure',
-        Health = 4500,
-        MaxHealth = 4500,
+        Health = 4500, #3000
+        MaxHealth = 4500, #3000
         RegenRate = 0,
         SurfaceThreatLevel = 25,
     },
     Weapon = {
         {
-            Damage = 60,
+            Damage = 60, #40
         },
         {
             Damage = 60,
@@ -398,8 +405,8 @@ UnitBlueprint {
     Merge = true,
     Defense = {
         ArmorType = 'Structure',
-        Health = 8400,
-        MaxHealth = 8400,
+        Health = 8400, #5600
+        MaxHealth = 8400, #5600
         MaximumTowerConnections = 10,
         RegenRate = 0,
         SurfaceThreatLevel = 15,
@@ -407,23 +414,23 @@ UnitBlueprint {
     },
     Weapon = {
         {
-            Damage = 450,
+            Damage = 450, #300
         },
     },
 }
 UnitBlueprint {
-    BlueprintId = "ugbfort01",
+    BlueprintId = "ugbfort01", #conquest fortress
     Merge = true,
     Defense = {
         ArmorType = 'Structure',
-        Health = 15000,
-        MaxHealth = 15000,
+        Health = 15000, #10000
+        MaxHealth = 15000, #10000
         RegenRate = 0,
         SurfaceThreatLevel = 25,
     },
     Weapon = {
         {
-            Damage = 90,
+            Damage = 90, #60
         },
         {
             Damage = 90,
@@ -431,18 +438,18 @@ UnitBlueprint {
     },
 }
 UnitBlueprint {
-    BlueprintId = "ugbfort02",
+    BlueprintId = "ugbfort02", #fortress in fortress mode
     Merge = true,
     Defense = {
         ArmorType = 'Structure',
-        Health = 22500,
-        MaxHealth = 22500,
+        Health = 22500, #15000
+        MaxHealth = 22500, #15000
         RegenRate = 0,
         SurfaceThreatLevel = 25,
     },
     Weapon = {
         {
-            Damage = 90,
+            Damage = 90, #60
         },
         {
             Damage = 90,

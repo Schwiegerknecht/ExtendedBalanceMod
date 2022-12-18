@@ -17,6 +17,11 @@ Ability.HEPA01FoulGrasp03.Amount = 249
 --Decrease the damage mitigation by Acclimation to 25% (down from 40%)
 Buffs.HEPA01Acclimation.Affects.DamageTakenMult = {Add = -0.25}
 
+-- Decrease Ooze Attack Speed Debuff to 0/10/20/30 (from 10/20/30/40)
+for i = 1,4 do
+    Buffs['HEPA01Ooze0'..i].Affects.RateOfFire.Mult = -0.1*i + 0.1
+end
+Ability['HEPA01Ooze01'].Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second.\n\nUnclean Beast loses [GetDebuffSelfDamage] Health per second.'
 
 # Increase Ooze self damage, scaling off hero level:
 #################################################################################################################
