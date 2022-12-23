@@ -18,11 +18,18 @@ Base Speed: 6.0 (back again from 6.3)
 Ooze:
 - Attack Speed Reduction: 0/10/20/30% (from 10/20/30/40%)
 
-TODO: Remove Plague, probably.
-TODO: Nerf Ooze Atk Spd reduction (0/10/20/30)
+TODO: Remove Plague, probably. OR FIX IT :)
 TODO: Consider UB base armor nerf?
 TODO: Tweak Rook base hp/base hp regen maybe?
 TODO: Test what FiringRandomness actually does.
+
+TODO: Give Mard's Hammer Armor Reduction on AA (40/lvl?)
+TODO: Nerf Vial to 30% heal?
+TODO: UB lower Bestial Wrath Mana Costs?
+TODO: Cape Of Plentiful Mana - add some Base Mana / Mana Regen
+TODO: Consider Buff for 3500 Gloves?
+TODO: Maybe 10% Base Evasion for Warpstone?
+TODO: Clarify IronWalker Description
 
 #################################################################################################################
 # v0.4

@@ -360,3 +360,245 @@ for i = 1,2 do
     Buffs['HEPA01Plague0'..i].Effects = nil
     Buffs['HEPA01Plague0'..i].EffectsBone = nil
 end
+
+-- Set Pulses to 10 over 10 seconds
+for i = 1,2 do
+    Buffs['HEPA01Plague0'..i].Duration = 10
+    Buffs['HEPA01Plague0'..i].DurationPulse = 10 -- This is the number of pulses
+end
+-- Set up our counter of infected units in the BuffBlueprint. Used for Plague02 also!
+Buffs.HEPA01Plague01.NumPlaguedUnits = 0
+-- Set MaxPlaguedUnits for both Plagues to 10
+for i = 1,2 do
+    Ability['HEPA01Plague0'..i].MaxPlaguedUnits = 10
+end
+
+-- Add a comparison of current and maximum infected units in Plague(Spread) functions 01 and 02
+Ability.HEPA01Plague01.Plague = function(self, unit, target, data)
+    -- Only spread Plague if we are below the maximum number of infected
+    if (Random(1, 100) < self.TriggerChance) and
+       (Buffs.HEPA01Plague01.NumPlaguedUnits < Ability.HEPA01Plague01.MaxPlaguedUnits) then
+        #LOG("*DEBUG: Applying Initial Plague to: "..target:GetUnitId())
+
+        if unit:IsDead() or IsAlly(target:GetArmy(), unit:GetArmy()) or
+           data.DamageAction == 'HEPA01Plague01' or data.DamageAction == 'HEPA01Plague02' or (data.DamageAction and Ability[data.DamageAction].FromItem) then
+            return
+        end
+
+        if target:IsDead() or EntityCategoryContains(categories.STRUCTURE, target) then
+            local targets = unit:GetAIBrain():GetUnitsAroundPoint((categories.MOBILE - categories.UNTARGETABLE), unit:GetPosition(), self.SpreadAffectRadius, 'Enemy')
+            PlagueSpread01( unit, targets, self.SpreadAffectChance )
+        else
+            # Early out on application of plague here, rather than allow the buff system Manage it, to
+            # properly track number of affected targets
+            if Buff.HasBuff(target, 'HEPA01Plague01') or Buff.HasBuff(target, 'HEPA01PlagueImmune') or Buff.HasBuff(target, 'HEPA01Plague02') then
+                return
+            end
+            # Create initial triggered plague effects
+            self:PlagueEffect( unit, target:GetPosition(), target:GetEffectBuffClassification() )
+
+            # Add affected unit specific plague data
+            target.PlagueInstance = {
+                Instigator = unit,
+                InstigatorBrain = unit:GetAIBrain(),
+                IgnoreAffectPulses = true,
+                NumIgnoredPulses = 0,
+            }
+
+            FloatTextAt(target:GetFloatTextPosition(), "<LOC floattext_0010>PLAGUE!", 'Plague')
+            if(Validate.HasAbility(unit, 'HEPA01Plague02')) then
+                Buff.ApplyBuff(target, 'HEPA01Plague02', unit, unit:GetArmy())
+            else
+                Buff.ApplyBuff(target, 'HEPA01Plague01', unit, unit:GetArmy())
+            end
+            -- Add counter here
+            Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
+            LOG('NumPlaguedUnits: '..Buffs.HEPA01Plague01.NumPlaguedUnits)
+            if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague01.MaxPlaguedUnits then
+                LOG("*WARNING: NumPlaguedUnits > MaxPlaguedUnits ("..Ability.HEPA01Plague01.MaxPlaguedUnits..")")
+            end
+        end
+    end
+end
+PlagueSpread01 = function( instigator, targets, chance )
+    -- Only spread Plague if we are below the maximum number of infected
+    if Buffs.HEPA01Plague01.NumPlaguedUnits < Ability.HEPA01Plague01.MaxPlaguedUnits then
+        local instBrain = instigator:GetAIBrain()
+
+        for k, vUnit in targets do
+            if instigator:IsDead() or not instigator.Plague then
+                return
+            end
+
+            if Random(1, 100) < chance then
+                if Buff.HasBuff(vUnit, 'HEPA01PlagueImmune') or Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01Plague01') then
+                    continue
+                end
+
+                CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
+                if instBrain then
+                    local heroes = instBrain:GetListOfUnits(categories.HERO, false)
+                    if table.getn(heroes) > 0 then
+
+                        #LOG("*DEBUG: Applying Plague from "..instBrain.Name.." and hero ".. heroes[1]:GetUnitId().. " to unit ".. vUnit:GetUnitId())
+                        vUnit.PlagueInstance = {
+                            Instigator = instigator,
+                            InstigatorBrain = instBrain,
+                            IgnoreAffectPulses = true,
+                            NumIgnoredPulses = 0,
+                        }
+
+                        -- Not needed anymore:
+                        -- instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
+                        Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
+                        LOG("*DEBUG: NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
+                        if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague01.MaxPlaguedUnits then
+                            LOG("*WARNING: NumPlaguedUnits ("..Buffs.HEPA01Plague01.NumPlaguedUnits..") > MaxPlaguedUnits ("..Ability.HEPA01Plague01.MaxPlaguedUnits..")")
+                        end
+                        if(Validate.HasAbility(instigator, 'HEPA01Plague02')) then
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague02', heroes[1], heroes[1]:GetArmy())
+                        else
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague01', heroes[1], heroes[1]:GetArmy())
+                        end
+                        FloatTextAt(vUnit:GetFloatTextPosition(), "<LOC floattext_0011>PLAGUED!", 'Plague')
+                        break
+                    end
+                end
+            end
+        end
+    else
+        LOG("*DEBUG: Not doing PlagueSpread01 because MaxPlaguedUnits has been reached.")
+    end
+end
+Ability.HEPA01Plague02.Plague = function(self, unit, target, data)
+    -- Only spread Plague if we are below the maximum number of infected
+    if (Random(1, 100) < self.TriggerChance) and
+       (Buffs.HEPA01Plague01.NumPlaguedUnits < Ability.HEPA01Plague02.MaxPlaguedUnits) then
+        #LOG("*DEBUG: Applying Initial Plague to: "..target:GetUnitId())
+
+        if unit:IsDead() or IsAlly(target:GetArmy(), unit:GetArmy()) or data.DamageAction == 'HEPA01Plague02' or (data.DamageAction and Ability[data.DamageAction].FromItem) then
+            return
+        end
+
+        if target:IsDead() or EntityCategoryContains(categories.STRUCTURE, target) then
+            local targets = unit:GetAIBrain():GetUnitsAroundPoint((categories.MOBILE - categories.UNTARGETABLE), unit:GetPosition(), self.SpreadAffectRadius, 'Enemy')
+            PlagueSpread02( unit, targets, self.SpreadAffectChance )
+        else
+            # Early out on application of plague here, rather than allow the buff system Manage it, to
+            # properly track number of affected targets
+            if Buff.HasBuff(target, 'HEPA01Plague02') or Buff.HasBuff(target, 'HEPA01PlagueImmune') then
+                return
+            end
+
+            # Create initial triggered plague effects
+            self:PlagueEffect( unit, target:GetPosition(), target:GetEffectBuffClassification() )
+
+            # Add affected unit specific plague data
+            target.PlagueInstance = {
+                Instigator = unit,
+                InstigatorBrain = unit:GetAIBrain(),
+                IgnoreAffectPulses = true,
+                NumIgnoredPulses = 0,
+            }
+
+            FloatTextAt(target:GetFloatTextPosition(), "<LOC floattext_0012>PLAGUE!", 'Plague')
+            if(Validate.HasAbility(unit, 'HEPA01Plague02')) then
+                Buff.ApplyBuff(target, 'HEPA01Plague02', unit, unit:GetArmy())
+            else
+                Buff.ApplyBuff(target, 'HEPA01Plague01', unit, unit:GetArmy())
+            end
+            -- Add counter here
+            Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
+            LOG('NumPlaguedUnits: '..Buffs.HEPA01Plague01.NumPlaguedUnits)
+            if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague02.MaxPlaguedUnits then
+                LOG("*WARNING: NumPlaguedUnits > MaxPlaguedUnits ("..Ability.HEPA01Plague02.MaxPlaguedUnits..")")
+            end
+        end
+    end
+end
+PlagueSpread02 = function( instigator, targets, chance )
+    -- Only spread Plague if we are below the maximum number of infected
+    if Buffs.HEPA01Plague01.NumPlaguedUnits < Ability.HEPA01Plague02.MaxPlaguedUnits then
+        local instBrain = instigator:GetAIBrain()
+
+        for k, vUnit in targets do
+            if instigator:IsDead() or not instigator.Plague then
+                return
+            end
+
+            if Random(1, 100) < chance then
+                if Buff.HasBuff(vUnit, 'HEPA01Plague02') or Buff.HasBuff(vUnit, 'HEPA01PlagueImmune') then
+                    continue
+                end
+
+                CreateTemplatedEffectAtPos( 'UncleanBeast', 'PlagueInfectedTrigger02', vUnit:GetEffectBuffClassification(), vUnit:GetArmy(), vUnit:GetPosition()  )
+                if instBrain then
+                    local heroes = instBrain:GetListOfUnits(categories.HERO, false)
+                    if table.getn(heroes) > 0 then
+
+                        #LOG("*DEBUG: Applying Plague from "..instBrain.Name.." and hero ".. heroes[1]:GetUnitId().. " to unit ".. vUnit:GetUnitId())
+                        vUnit.PlagueInstance = {
+                            Instigator = instigator,
+                            InstigatorBrain = instBrain,
+                            IgnoreAffectPulses = true,
+                            NumIgnoredPulses = 0,
+                        }
+
+                        -- Not needed anymore:
+                        -- instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
+                        LOG("*DEBUG: NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
+                        if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague02.MaxPlaguedUnits then
+                            LOG("*WARNING: NumPlaguedUnits ("..Buffs.HEPA01Plague01.NumPlaguedUnits..") > MaxPlaguedUnits ("..Ability.HEPA01Plague02.MaxPlaguedUnits..")")
+                        end
+                        if(Validate.HasAbility(instigator, 'HEPA01Plague02')) then
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague02', heroes[1], heroes[1]:GetArmy())
+                        else
+                            Buff.ApplyBuff(vUnit, 'HEPA01Plague01', heroes[1], heroes[1]:GetArmy())
+                        end
+                        FloatTextAt(vUnit:GetFloatTextPosition(), "<LOC floattext_0013>PLAGUED!", 'Plague')
+                        break
+                    end
+                end
+            end
+        end
+    else
+        LOG("*DEBUG: Not doing PlagueSpread02 because MaxPlaguedUnits has been reached.")
+    end
+end
+
+-- Activate the Callbacks in both Plague Buffs that decrement
+-- the counter if the unit is killed or the buff removed
+for i = 1,2 do
+    Buffs['HEPA01Plague0'..i].OnApplyBuff = function( self, unit, instigator )
+        unit.Callbacks.OnKilled:Add(self.UnitOnKilledCallback, self)
+    end
+end
+for i = 1,2 do
+    Buffs['HEPA01Plague0'..i].OnBuffRemove = function(self, unit)
+        LOG("*DEBUG: Removing Buff")
+        self:DecrementPlagueCounter(unit)
+        Buff.ApplyBuff(unit, 'HEPA01PlagueImmune', unit)
+        -- Remove the OnKilled Callback to prevent decrementing twice in case it dies before getting reinfected.
+        unit.Callbacks.OnKilled:Remove(self.UnitOnKilledCallback)
+    end
+end
+for i = 1,2 do
+    Buffs['HEPA01Plague0'..i].UnitOnKilledCallback = function( self, unit )
+        unit.Callbacks.OnKilled:Remove(self.UnitOnKilledCallback)
+        LOG("*DEBUG: Unit killed")
+        self:DecrementPlagueCounter(unit)
+    end
+end
+
+for i = 1,2 do
+    Buffs['HEPA01Plague0'..i].DecrementPlagueCounter = function(self, unit)
+        Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits - 1
+        if Buffs.HEPA01Plague01.NumPlaguedUnits < 0 then
+            Buffs.HEPA01Plague01.NumPlaguedUnits = 0
+        end
+        if unit.PlagueInstance then
+            unit.PlagueInstance = nil
+        end
+        LOG("*DEBUG: Decremented NumPlaguedUnits to "..Buffs.HEPA01Plague01.NumPlaguedUnits)
+    end
+end
