@@ -102,7 +102,7 @@ for i = 2,4 do
 end
 ]]
 
--- CHange Descriptions
+-- Change Descriptions
 Ability.HEPA01Ooze02.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + UB\'s level.'
 Ability.HEPA01Ooze03.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + (UB\'s level * 2).'
 Ability.HEPA01Ooze04.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + (UB\'s level * 3).'
@@ -110,6 +110,7 @@ Ability.HEPA01Ooze04.Description = 'Unclean Beast oozes virulent bodily fluids. 
 
 
 
+#################################################################################################################
 # Make Foul Grasp I not ignore stun immunities anymore
 #################################################################################################################
 BuffBlueprint {
@@ -353,7 +354,12 @@ Ability.HEPA01FoulGrasp01.Description = 'Unclean Beast clutches a target in its 
 Ability.HEPA01FoulGrasp02.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 Ability.HEPA01FoulGrasp03.Description = 'Unclean Beast clutches a target in its claws, stunning them and draining [GetDamageAmt] life over [GetDuration] seconds. This ignores stun immunities.'
 
-# Try fixing Plague lagging
+# Foul Grasp changes end
+#################################################################################################################
+
+
+#################################################################################################################
+# Plague Fix
 #################################################################################################################
 -- Remove Plague animations
 for i = 1,2 do
@@ -361,17 +367,24 @@ for i = 1,2 do
     Buffs['HEPA01Plague0'..i].EffectsBone = nil
 end
 
--- Set Pulses to 10 over 10 seconds
+-- Set Pulses to 10 over 10 seconds (from 30 pulses over 30 seconds)
 for i = 1,2 do
     Buffs['HEPA01Plague0'..i].Duration = 10
     Buffs['HEPA01Plague0'..i].DurationPulse = 10 -- This is the number of pulses
 end
--- Set up our counter of infected units in the BuffBlueprint. Used for Plague02 also!
-Buffs.HEPA01Plague01.NumPlaguedUnits = 0
+-- Increase damage per tick to 15/25 (from 10/15)
+for i = 1,2 do
+    Buffs['HEPA01Plague0'..i].Affects.Health.Add = -(5 + 10*i)
+end
 -- Set MaxPlaguedUnits for both Plagues to 10
 for i = 1,2 do
     Ability['HEPA01Plague0'..i].MaxPlaguedUnits = 10
 end
+
+# Implement working counter to limit number of infected units
+#############################################################
+-- Set up our counter of infected units in the BuffBlueprint. Used for Plague02 also!
+Buffs.HEPA01Plague01.NumPlaguedUnits = 0
 
 -- Add a comparison of current and maximum infected units in Plague(Spread) functions 01 and 02
 Ability.HEPA01Plague01.Plague = function(self, unit, target, data)
@@ -413,7 +426,7 @@ Ability.HEPA01Plague01.Plague = function(self, unit, target, data)
             end
             -- Add counter here
             Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
-            LOG('NumPlaguedUnits: '..Buffs.HEPA01Plague01.NumPlaguedUnits)
+            LOG("*DEBUG: Plague01 NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
             if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague01.MaxPlaguedUnits then
                 LOG("*WARNING: NumPlaguedUnits > MaxPlaguedUnits ("..Ability.HEPA01Plague01.MaxPlaguedUnits..")")
             end
@@ -451,7 +464,7 @@ PlagueSpread01 = function( instigator, targets, chance )
                         -- Not needed anymore:
                         -- instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
                         Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
-                        LOG("*DEBUG: NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
+                        LOG("*DEBUG: PlagueSpread01 NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
                         if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague01.MaxPlaguedUnits then
                             LOG("*WARNING: NumPlaguedUnits ("..Buffs.HEPA01Plague01.NumPlaguedUnits..") > MaxPlaguedUnits ("..Ability.HEPA01Plague01.MaxPlaguedUnits..")")
                         end
@@ -509,7 +522,7 @@ Ability.HEPA01Plague02.Plague = function(self, unit, target, data)
             end
             -- Add counter here
             Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
-            LOG('NumPlaguedUnits: '..Buffs.HEPA01Plague01.NumPlaguedUnits)
+            LOG("*DEBUG: Plague02 NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
             if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague02.MaxPlaguedUnits then
                 LOG("*WARNING: NumPlaguedUnits > MaxPlaguedUnits ("..Ability.HEPA01Plague02.MaxPlaguedUnits..")")
             end
@@ -546,7 +559,7 @@ PlagueSpread02 = function( instigator, targets, chance )
 
                         -- Not needed anymore:
                         -- instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
-                        LOG("*DEBUG: NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
+                        LOG("*DEBUG: PlagueSpread02 NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
                         if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague02.MaxPlaguedUnits then
                             LOG("*WARNING: NumPlaguedUnits ("..Buffs.HEPA01Plague01.NumPlaguedUnits..") > MaxPlaguedUnits ("..Ability.HEPA01Plague02.MaxPlaguedUnits..")")
                         end
