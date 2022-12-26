@@ -83,7 +83,7 @@ table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackS
 
 
 
--- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel) -- Schwiegerknecht
+-- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel)
 -- Change Ability.AchievementMana_Aura.LevelEnergyRegen to change value
 BuffBlueprint{
 	Name = 'AchievementMana_LevelEnergyRegen',
@@ -98,7 +98,7 @@ BuffBlueprint{
 		EnergyRegen = {Add = 0.5}, -- Dummy value, buff gets calculated in OnAuraPulse below
 	},
 }
--- Add Aura to check hero level, calculate and apply buff -- Schwiegerknecht
+-- Add Aura to check hero level, calculate and apply buff
 table.insert(Items.AchievementMana.Abilities, AbilityBlueprint {
 	Name = 'AchievementMana_Aura',
 	AbilityType = 'Aura',
@@ -253,14 +253,15 @@ end
 -- Adjust description
 Items.AchievementAERegen.Description = 'Use: +[GetRegenBonus] Health Per Second Aura for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
 
-
 -- Add minion HP regeneration to Tome of Endurance
 Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
 Items.AchievementMinionHealth.GetMinionRegenBonus = function(self) return Buffs['AchievementMinionHealthBuff'].Affects.Regen.Add end
 table.insert(Items.AchievementMinionHealth.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')
 
--- Increase Dark Crimson Vial Cooldown to 60 seconds - Schwiegerknecht
+-- Increase Dark Crimson Vial Cooldown to 60 seconds
 Ability.AchievementPotion.Cooldown = 60
+-- Decrease Dark Crimson Vial heal to 30% (from 33%)
+Ability.AchievementPotion.RegenAmount = 0.3
 
 -- Give Mard's Hammer Weapon Damage scaling with level
 -- Add 3 Weapon Damage per level (Change Ability.AchievementDamage_Aura.LevelDamageRating to change value)
@@ -300,6 +301,44 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 -- Add Tooltip
 Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
 table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
+-- Add WeaponProc that reduces Armor by 40 per level
+-- Create Debuff
+BuffBlueprint{
+	Name = 'AchievementDamage_LevelArmorReduction',
+	BuffType = 'AchievementDamage_LevelArmorReduction',
+	DisplayName = '<LOC ITEM_Achievement_0069>Mard\'s Hammer',
+	Description = '<LOC ITEM_Achievement_0071>Armor Reduced',
+	Icon = '/NewIcons/AchievementRewards/HammerofDestruction',
+	Debuff = true,
+	Stacks = 'REPLACE',
+	Duration = 3,
+	Affects = {
+		Armor = {Add = -40}, -- Dummy value, buff gets calculated in OnAuraPulse, below
+	},
+}
+-- Add WeaponProc
+table.insert(Items.AchievementDamage.Abilities, 1, AbilityBlueprint {
+	Name = 'AchievementDamage_Proc',
+	AbilityType = 'WeaponProc',
+	LevelArmorReduction = 40,
+	Icon = 'NewIcons/AchievementRewards/HammerofDestruction',
+	FromItem = 'AchievementDamage',
+	WeaponProcChance = 100,
+    WeaponProcChanceRanged = 100,
+	OnWeaponProc = function(self, unit, target, damageData)
+		local aiBrain = unit:GetAIBrain()
+		local hero = aiBrain:GetHero()
+		local herolvl = hero:GetLevel()
+		local addDamage = herolvl * self.LevelArmorReduction * -1
+
+		Buffs['AchievementDamage_LevelArmorReduction'].Affects.Armor.Add = addDamage
+		Buff.ApplyBuff(target, 'AchievementDamage_LevelArmorReduction', unit)
+	end,
+})
+-- Add Tooltip
+Items.AchievementDamage.GetLevelArmorReduction = function(self) return Ability['AchievementDamage_Proc'].LevelArmorReduction end
+Items.AchievementDamage.GetArmorReductionDuration = function(self) return Buffs['AchievementDamage_LevelArmorReduction'].Duration end
+Items.AchievementDamage.Tooltip.ChanceOnHit = 'Autoattacks apply [GetLevelArmorReduction] Armor Reduction per hero level to the target for [GetArmorReductionDuration] seconds.'
 -- End of Mard's Hammer change
 
 -- Make Symbol of Purity an Area of Effect affecting allied Demigods.

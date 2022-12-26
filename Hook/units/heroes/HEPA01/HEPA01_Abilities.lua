@@ -367,22 +367,30 @@ for i = 1,2 do
     Buffs['HEPA01Plague0'..i].EffectsBone = nil
 end
 
--- Set Pulses to 10 over 10 seconds (from 30 pulses over 30 seconds)
 for i = 1,2 do
+-- Set Pulses to 10 over 10 seconds (from 30 pulses over 30 seconds)
     Buffs['HEPA01Plague0'..i].Duration = 10
     Buffs['HEPA01Plague0'..i].DurationPulse = 10 -- This is the number of pulses
-end
 -- Increase damage per tick to 15/25 (from 10/15)
-for i = 1,2 do
     Buffs['HEPA01Plague0'..i].Affects.Health.Add = -(5 + 10*i)
-end
 -- Set MaxPlaguedUnits for both Plagues to 10
-for i = 1,2 do
     Ability['HEPA01Plague0'..i].MaxPlaguedUnits = 10
 end
 
 # Implement working counter to limit number of infected units
 #############################################################
+
+--[[
+    The Plague code contained callbacks that were commented because they didn't work.
+    They should have decremented a NumPlaguedUnits whenever a Plague buff ran out or
+    an infected unit died. The counter was set up in UB's unit.Plague and to access
+    that the infected units needed to access their own unit.PlagueInstance.Instigator.
+    My guess is that this wasn't possible because the infected unit was already dead.
+    
+    The nasty workaround below just sets up the counter in the global Buffs table. 
+    Hopefully the counter is also decremented when UB is dead.
+]]
+
 -- Set up our counter of infected units in the BuffBlueprint. Used for Plague02 also!
 Buffs.HEPA01Plague01.NumPlaguedUnits = 0
 
@@ -463,6 +471,7 @@ PlagueSpread01 = function( instigator, targets, chance )
 
                         -- Not needed anymore:
                         -- instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
+                        -- Our new counter:
                         Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
                         LOG("*DEBUG: PlagueSpread01 NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
                         if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague01.MaxPlaguedUnits then
@@ -559,6 +568,8 @@ PlagueSpread02 = function( instigator, targets, chance )
 
                         -- Not needed anymore:
                         -- instigator.Plague.NumPlaguedUnits = instigator.Plague.NumPlaguedUnits + 1
+                        -- Our new counter:
+                        Buffs.HEPA01Plague01.NumPlaguedUnits = Buffs.HEPA01Plague01.NumPlaguedUnits + 1
                         LOG("*DEBUG: PlagueSpread02 NumPlaguedUnits: "..Buffs.HEPA01Plague01.NumPlaguedUnits)
                         if Buffs.HEPA01Plague01.NumPlaguedUnits > Ability.HEPA01Plague02.MaxPlaguedUnits then
                             LOG("*WARNING: NumPlaguedUnits ("..Buffs.HEPA01Plague01.NumPlaguedUnits..") > MaxPlaguedUnits ("..Ability.HEPA01Plague02.MaxPlaguedUnits..")")

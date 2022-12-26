@@ -17,19 +17,37 @@ Unclean Beast:
 Base Speed: 6.0 (back again from 6.3)
 Ooze:
 - Attack Speed Reduction: 0/10/20/30% (from 10/20/30/40%)
+Plague:
+- FIX: The limit for maximum infected units now works.
+- Maximum number of infected units: 10/10 (from 30/30; but since it didn't work it was unlimited)
+- Damage per pulse: 15/25 (from 10/15)
+- Damage pulses: 10 over 10 seconds (from 30 over 30 seconds)
 
-TODO: Remove Plague, probably. OR FIX IT :)
+# Items
+############################################################
+
+Dark Crimson Vial:
+- Heal: 30% of Max Health (normally 33%)
+
+Mard's Hammer:
+- Added WeaponProc that reduces Armor
+  - Armor Reduction: 40 per hero level
+  - WeaponProc Chance: 100% (melee and ranged)
+  - Duration: 3 seconds
+
+
+TODO: Consider Cataract CDR-Flag nerf (to maybe 10%)
+
 TODO: Consider UB base armor nerf?
-TODO: Tweak Rook base hp/base hp regen maybe?
+(TODO: Tweak Rook base hp/base hp regen maybe?)
 TODO: Test what FiringRandomness actually does.
 
-TODO: Give Mard's Hammer Armor Reduction on AA (40/lvl?)
-TODO: Nerf Vial to 30% heal?
 TODO: UB lower Bestial Wrath Mana Costs?
 TODO: Cape Of Plentiful Mana - add some Base Mana / Mana Regen
 TODO: Consider Buff for 3500 Gloves?
 TODO: Maybe 10% Base Evasion for Warpstone?
 TODO: Clarify IronWalker Description
+TODO: Consider Twig of Life Health per Second
 
 #################################################################################################################
 # v0.4
@@ -275,7 +293,7 @@ Vengeance:
 - Damage radius: 15 (normally 10)
 - Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
   - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
-  - 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
+  - 25% Attack Speed and 45 Weapon Damage for Regulus only (10 Duration)
 - Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
   - Attack Speed debuff: -20%
   - Range: 15

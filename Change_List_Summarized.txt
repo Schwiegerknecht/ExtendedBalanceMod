@@ -69,7 +69,7 @@ Vengeance:
 - Damage radius: 15 (normally 10)
 - Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
   - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
-  - 25% Attack Speed and 45 Weapon Damage for Regulus only (15 Range, 10 Duration)
+  - 25% Attack Speed and 45 Weapon Damage for Regulus only (10 Duration)
 - Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
   - Attack Speed debuff: -20%
   - Range: 15
@@ -134,7 +134,7 @@ Mode Switch Time: 0.8 seconds (normally 1.5)
 ---------------------Unclean Beast---------------------
 Base Speed: 6.0 (normally 6.3)
 Acclimation:
-  - Damage mitigation: 25% (normally 40%)
+- Damage mitigation: 25% (normally 40%)
 Bestial Wrath:
 - Duration: 10/10/10/15 (normally 7/7/7/10)
 Diseased Claw:
@@ -142,10 +142,15 @@ Diseased Claw:
 Foul Grasp:
 - Life Drain: 83/166/249 (normally 83/125/166)
 Foul Grasp I:
-  - Does not ignore Stun Immunities anymore. (Foul Grasp II+III still do.)
+- Does not ignore Stun Immunities anymore. (Foul Grasp II+III still do.)
 Ooze:
 - Self damage: 20 + (UB's level * 0/1/2/3) per tick
 - Attack Speed Reduction: 0/10/20/30% (normally 10/20/30/40%)
+Plague:
+- FIX: The limit for maximum infected units now works.
+- Maximum number of infected units: 10/10 (normally 30/30; but since it didn't work it was unlimited)
+- Damage per pulse: 15/25 (normally 10/15)
+- Damage pulses: 10 over 10 seconds (normally 30 over 30 seconds)
 
 ############################################################
 # Items
@@ -398,6 +403,7 @@ Staff of the Warmage:
 
 Dark Crimson Vial:
 - Cooldown: 60 (normally 45)
+- Heal: 30% of Max Health (normally 33%)
 
 Diamond Pendant:
 - Mana: 525 (nomally 250)
@@ -430,10 +436,14 @@ Essence of Magic:
 Furious Blade:
 - Health: 250 (normally 100)
 
----
-
 Mard's Hammer:
 - Weapon Damage added per hero level: 3
+- Added WeaponProc that reduces Armor
+  - Armor Reduction: 40 per hero level
+  - WeaponProc Chance: 100% (melee and ranged)
+  - Duration: 3 seconds
+
+---
 
 Charred Totem of War:
 Totem of War is now a useable item.
@@ -519,6 +529,7 @@ HEMA01_Abilities.lua). No change to switch times.
 ---------------------Unclean Beast---------------------
 UB's Plague is hopefully playable now.
 - Animations for units affected by Plague have been disabled.
+
 
 ---------------------Items and Descriptions---------------------
 All Stuns that give the target a Stun Immunity afterwards have had their
