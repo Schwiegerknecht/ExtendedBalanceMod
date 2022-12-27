@@ -81,8 +81,6 @@ table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackS
 -- Schwiegerknecht start
 ##############################################################################
 
-
-
 -- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel)
 -- Change Ability.AchievementMana_Aura.LevelEnergyRegen to change value
 BuffBlueprint{
@@ -122,8 +120,8 @@ Buffs.AchievementMana.Affects.EnergyRegen = {Add = 4}
 -- Add description
 Items.AchievementMana.GetManaRegenBonus = function(self) return Buffs['AchievementMana'].Affects.EnergyRegen.Add end
 Items.AchievementMana.GetManaLevelRegen = function(self) return string.format("%.1f", Ability['AchievementMana_Aura'].LevelEnergyRegen) end
-table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana Regen')
-table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaLevelRegen] Mana Regen per hero level')
+table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana Per Second')
+table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaLevelRegen] Mana Per Second per hero level')
 -- End of Staff of the Warmage change
 
 -- Make Bejeweled Goggles a useable item
@@ -251,7 +249,8 @@ Buffs.AchievementAERegen.SeraphimStunned = function(self, unit, data)
 	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
 end
 -- Adjust description
-Items.AchievementAERegen.Description = 'Use: +[GetRegenBonus] Health Per Second Aura for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
+Items.AchievementAERegen.GetAffectRadius = function(self) return Ability['AchievementAERegen'].AffectRadius end
+Items.AchievementAERegen.Description = 'Use: Ally Demigods in Radius [GetAffectRadius] receive +[GetRegenBonus] Health Per Second for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
 
 -- Add minion HP regeneration to Tome of Endurance
 Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
@@ -301,6 +300,7 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 -- Add Tooltip
 Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
 table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
+
 -- Add WeaponProc that reduces Armor by 40 per level
 -- Create Debuff
 BuffBlueprint{
@@ -313,7 +313,7 @@ BuffBlueprint{
 	Stacks = 'REPLACE',
 	Duration = 3,
 	Affects = {
-		Armor = {Add = -40}, -- Dummy value, buff gets calculated in OnAuraPulse, below
+		Armor = {Add = -40}, -- Dummy value, buff gets calculated in OnWeaponProc, below
 	},
 }
 -- Add WeaponProc
@@ -346,10 +346,24 @@ Items.AchievementDamage.Tooltip.ChanceOnHit = 'Autoattacks apply [GetLevelArmorR
 Ability.AchievementPure.Cooldown = 45
 -- Set Radius to 15 (from 0)
 Ability.AchievementPure.AffectRadius = 15
--- Stuns (and Interrupts) are still not cleansed.
+-- Use modified RemoveBuffsByDebuff so that Stuns (and Interrupts) are still not cleansed.
+--[[ unit.Buffs.BuffTable has the structure:
+{
+	BUFFTYPE1 ={
+		SomeSpecificBuff01={ BuffName="SomeSpecificBuff01", Count=Z, Trash={ } }
+		SomeSpecificBuff02={ BuffName="SomeSpecificBuff02", Count=Z, Trash={ } }
+	},
+	BUFFTYPE2 ={
+		SomeSpecificBuff01={ BuffName="SomeSpecificBuff01", Count=Z, Trash={ } }
+		SomeSpecificBuffn={ BuffName="SomeSpecificBuffn", Count=Z, Trash={ } }
+	},
+}
+]]
 function RemoveDebuffsExceptStuns(unit, debuff)
     local removeBuffs = {}
+	-- Go through buffTbl, equal to BUFFTYPEX
     for buffType, buffTbl in unit.Buffs.BuffTable do
+		-- Go through buffName, equal to SomeSpecificBuff01, equal to buffDef.BuffName
         for buffName, buffDef in buffTbl do
             if(Buffs[buffName].Debuff == debuff) then
                 if(Buffs[buffName].CanBeDispelled == true) and not (Buffs[buffName].Affects.Stun or Buffs[buffName].Affects.Interrupt) then
@@ -358,8 +372,8 @@ function RemoveDebuffsExceptStuns(unit, debuff)
             end
         end
     end
-	-- Uncomment to see what the Bufftable looks like:
-	-- LOG(repr(unit.Buffs.BuffTable))
+	-- Uncomment to see your Bufftable in the log:
+	--LOG(repr(unit.Buffs.BuffTable))
     for _,buffName in removeBuffs do
         Buff.RemoveBuff(unit, buffName, true)
     end
@@ -396,3 +410,42 @@ table.insert(Ability.AchievementPure.Buffs,	BuffBlueprint {
 -- Adjust description
 Items.AchievementPure.GetMaxRange = function(self) return Ability['AchievementPure'].AffectRadius end
 Items.AchievementPure.Description = 'Use: Purge all negative effects except stuns and interrupts. Affects all allied Demigods in range [GetMaxRange]. Cannot use while stunned or frozen.'
+-- End of Symbol of Purity change
+
+
+-- Give Cape of Plentiful 300 base Mana and 5 Mana Regeneration (from 0/0)
+table.insert(Items.AchievementAEMana.Abilities, AbilityBlueprint {
+	Name = 'AchievementAEMana_Base',
+	AbilityType = 'Quiet',
+	FromItem = 'AchievementAEMana',
+	Icon = '/NewIcons/AchievementRewards/CapeofPlentifulMana',
+	Buffs = {
+		BuffBlueprint {
+			Name = 'AchievementAEMana_Base',
+			BuffType = 'ACHIEVEMENTAEManaBASE',
+			Debuff = false,
+			EntityCategory = 'ALLUNITS',
+			Stacks = 'ALWAYS',
+			Duration = -1,
+			Affects = {
+				MaxEnergy = {Add = 300, AdjustEnergy = false},
+				EnergyRegen = {Add = 5},
+			},
+		}
+	},
+})
+-- Add Tooltip
+if not Items.AchievementAEMana.Tooltip then
+	Items.AchievementAEMana.Tooltip = {}
+end
+if not Items.AchievementAEMana.Tooltip.Bonuses then
+	Items.AchievementAEMana.Tooltip.Bonuses = {}
+end
+Items.AchievementAEMana.GetBaseMana = function(self) return Buffs.AchievementAEMana_Base.Affects.MaxEnergy.Add end
+Items.AchievementAEMana.GetBaseEnergyRegen = function(self) return Buffs.AchievementAEMana_Base.Affects.EnergyRegen.Add end
+table.insert(Items.AchievementAEMana.Tooltip.Bonuses, '+[GetBaseMana] Mana')
+table.insert(Items.AchievementAEMana.Tooltip.Bonuses, '+[GetBaseEnergyRegen] Mana Per Second')
+-- Make description of Cape of Plentiful Mana more accurate
+Items.AchievementAEMana.GetAffectRadius = function(self) return Ability['AchievementAEMana'].AffectRadius end
+Items.AchievementAEMana.Description = 'Use: Ally Demigods in Radius [GetAffectRadius] receive +[GetRegenBonus]% Mana Per Second for [GetDuration] seconds.'
+-- End of Cape of Plentiful Mana change

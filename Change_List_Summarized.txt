@@ -27,9 +27,9 @@ Warp Area:
 
 ---------------------Erebus---------------------
 Bat Swarm II:
-- Range: 25 (normally 30)
+- Radius: 25 (normally 30)
 Improved Conversion Aura:
-- Conversion Range: 22/24/26 (normally 20/20/20)
+- Conversion Radius: 22/24/26 (normally 20/20/20)
 NightCrawler:
 - Base Speed: 6.3 (normally 6.0)
 Army of the Night:
@@ -68,11 +68,11 @@ Angelic Fury:
 Vengeance:
 - Damage radius: 15 (normally 10)
 - Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
-  - 25% Movement Speed for Regulus and allies (15 Range, 10 Duration)
+  - 25% Movement Speed for Regulus and allies (15 Radius, 10 Duration)
   - 25% Attack Speed and 45 Weapon Damage for Regulus only (10 Duration)
 - Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
   - Attack Speed debuff: -20%
-  - Range: 15
+  - Radius: 15
   - Duration: 10
 
 ---------------------Queen of Thorns---------------------
@@ -91,7 +91,7 @@ Shamblers:
 Spike Wave:
 - Cooldown 10/10/10 (normally 10/10/15)
 Uproot:
-- Range: 20/25/30/35 (normally 20/20/20/20)
+- Radius: 20/25/30/35 (normally 20/20/20/20)
 Uproot III:
 - Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
 Uproot IV:
@@ -271,7 +271,7 @@ Forest Band:
 - Minion Health: 150 (normally 0)
 
 Warlord's Punisher:
-- Range: 20 (normally 15)
+- Radius: 20 (normally 15)
 - Cast: 0.3 (normally 1)
 - Chain radius: 8 (normally 5)
 - Cost: 1350 gold (normally 2250)
@@ -285,6 +285,7 @@ Parasite Egg:
 
 Twig of Life:
 - Cost: 2000 gold (normally 3000)
+- Health Per Second: 15 (normally 0)
 
 Magus Rod:
 - Cost: 2500 gold (normally 3250)
@@ -293,6 +294,7 @@ Warpstone:
 - Cast: Instant (normally 0.3)
 - Cooldown: 30 (normally 45)
 - Cost: 4200 gold (normally 5500)
+- Dodge: 10% (normally 0)
 
 
 ---------------------Artifacts---------------------
@@ -325,9 +327,9 @@ All old stats and old passive removed. Stormbringer now brings storm and lightni
 - On Use: Summon 5 waves of hail, doing 200 area damage and slowing movement speed of all enemy units by 10%.
     - Cooldown: 40 seconds.
     - Affect Radius: 8 (TB's Rain of Ice is 10)
-    - Ice Rain movement slow: 15% (from 10%)
+    - Ice Rain movement slow: 15%
 - 20% Attack Speed (normally 0)
-- Passive: 10% Movement speed aura for allies in range 15
+- Passive: 10% Movement speed aura for allies in radius 15
 
 Unmaker: =====[REWORK]=====
 All old stats and old passive removed.
@@ -391,7 +393,8 @@ Brilliant Bauble:
 
 Symbol of Purity:
 - Use: Remove the negative effects (except Stuns and Interrupts) of allied
-  Demigods in Range 15. Cannot be used while stunned or frozen.
+  Demigods. Cannot be used while stunned or frozen.
+- Radius: 15
 - Cooldown: 45
 
 Blood of the Fallen:
@@ -412,8 +415,10 @@ Diamond Pendant:
 Amulet of Teleportation:
 - Cooldown: 35 (normally 45)
 
-Cape of Plentiful Magic:
+Cape of Plentiful Mana:
 - Radius: 15 (normally 8)
+- Mana: 300 (normally 0)
+- Mana Per Second: 5 (normally 0)
 
 Wings of the Seraphim:
 - The healing effect is now only interrupted by Stuns, Freezes and Interrupts.

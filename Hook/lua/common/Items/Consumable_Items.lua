@@ -16,6 +16,36 @@ Ability.Item_Consumable_130.ChainAffectRadius = 8
 -- Schwiegerknecht start
 -- Set Warpstone Cooldown to 30 (from 45)
 Ability.Item_Consumable_070.Cooldown = 30
+-- Give Warpstone 10% base evasion (from 0%)
+table.insert( Items.Item_Consumable_070.Abilities, AbilityBlueprint {
+    Name = 'Item_Consumable_070_Passive',
+    AbilityType = 'Quiet',
+    FromItem = 'Item_Consumable_070',
+    Icon = 'NewIcons/Gadget/Warpstone',
+    Buffs = {
+        BuffBlueprint {
+            Name = 'Item_Consumable_070_Passive',
+            BuffType = 'ITEMCONSUMABLE070PASSIVE',
+            Debuff = false,
+            EntityCategory = 'ALLUNITS',
+            Stacks = 'ALWAYS',
+            Duration = -1,
+            Affects = {
+                Evasion = {Add = 10},
+            },
+        }
+    },
+})
+-- Add Tooltip
+Items.Item_Consumable_070.GetDodgeBonus = function(self) return Buffs['Item_Consumable_070_Passive'].Affects.Evasion.Add end
+if not Items.Item_Consumable_070.Tooltip then
+    Items.Item_Consumable_070.Tooltip = {}
+end
+if not Items.Item_Consumable_070.Tooltip.Bonuses then
+    Items.Item_Consumable_070.Tooltip.Bonuses = {}
+end
+table.insert(Items.Item_Consumable_070.Tooltip.Bonuses, '+[GetDodgeBonus]% Dodge')
+
 
 -- Increase Sludge Slinger Attack Speed reduction to 40% (from 30)
 Buffs.Item_Consumable_040.Affects.RateOfFire = {Mult = -0.4}
@@ -160,3 +190,30 @@ end
 
 -- Decrease Capture Lock cooldown to 40 seconds
 Ability.Item_Consumable_030.Cooldown = 40
+
+-- Add 15 Health Per Second to Twig of Life
+table.insert(Items.Item_Consumable_120.Abilities, AbilityBlueprint {
+    Name = 'Item_Consumable_120_Quiet',
+    AbilityType = 'Quiet',
+    FromItem = 'Item_Consumable_120',
+    Icon = 'NewIcons/Wand/Wand4',
+    Buffs = {
+        BuffBlueprint {
+            Name = 'Item_Consumable_120_Quiet',
+            BuffType = 'CONSUMABLE120PASSIVE',
+            Debuff = false,
+            EntityCategory = 'ALLUNITS',
+            Stacks = 'ALWAYS',
+            Duration = -1,
+            Affects = {
+                Regen = {Add = 15},
+            },
+        },
+    },
+})
+Items.Item_Consumable_120.GetRegenBonus = function(self) return Buffs['Item_Consumable_120_Quiet'].Affects.Regen.Add end
+if not Items.Item_Consumable_120.Tooltip.Bonuses then
+    Items.Item_Consumable_120.Tooltip.Bonuses = {'+[GetRegenBonus] Health Per Second',}
+else
+    table.insert(Items.Item_Consumable_120.Tooltip.Bonuses, '+[GetRegenBonus] Health Per Second')
+end

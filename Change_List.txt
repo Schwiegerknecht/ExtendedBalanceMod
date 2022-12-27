@@ -9,10 +9,6 @@
 # Demigods
 ############################################################
 
-Rook:
-Power of the Tower:
-- Mana cost: 350/400/450/500 (from 400/450/500/550)
-
 Unclean Beast:
 Base Speed: 6.0 (back again from 6.3)
 Ooze:
@@ -26,8 +22,15 @@ Plague:
 # Items
 ############################################################
 
+Warpstone:
+- Dodge: 10% (normally 0)
+
 Dark Crimson Vial:
-- Heal: 30% of Max Health (normally 33%)
+- Heal: 30% of maximum Health (normally 33%)
+
+Cape of Plentiful Mana:
+- Mana: 300 (normally 0)
+- Mana Per Second: 5 (normally 0)
 
 Mard's Hammer:
 - Added WeaponProc that reduces Armor
@@ -35,19 +38,20 @@ Mard's Hammer:
   - WeaponProc Chance: 100% (melee and ranged)
   - Duration: 3 seconds
 
+------------------------------------------------------------
 
-TODO: Consider Cataract CDR-Flag nerf (to maybe 10%)
+Twig of Life:
+- Health Per Second: 15 (normally 0)
 
+TODO: Consider Cataract CDR-Flag nerf (to maybe 10% from 15%?)
+TODO: Consider Rook Trebuchet damage nerf (to maybe 150/200 from 250?)
 TODO: Consider UB base armor nerf?
-(TODO: Tweak Rook base hp/base hp regen maybe?)
-TODO: Test what FiringRandomness actually does.
-
-TODO: UB lower Bestial Wrath Mana Costs?
-TODO: Cape Of Plentiful Mana - add some Base Mana / Mana Regen
 TODO: Consider Buff for 3500 Gloves?
-TODO: Maybe 10% Base Evasion for Warpstone?
-TODO: Clarify IronWalker Description
-TODO: Consider Twig of Life Health per Second
+
+Done: Test what FiringRandomness actually does.
+  An apparently unused mechanic is that autoattacks have
+  a chance to miss. FiringRandomness would have prevented those misses.
+
 
 #################################################################################################################
 # v0.4
@@ -657,7 +661,7 @@ Standard
 - Staff of the Warmage: +1050 mana (normally 800)
 - Diamond Pendant: Mana 525 (up from 250) Cooldown 13% (up from 10%)
 - Amulet of Teleportation: Cooldown 30 (normally 45)
-- Cape of Plentiful Magic: Radius 15 (normally 8)
+- Cape of Plentiful Mana: Radius 15 (normally 8)
 - Saam-Els Cloak: +10% Movement (up from +5%)
 - Wings of the Seraphim: Radius 15 (normally radius 8) 
 
