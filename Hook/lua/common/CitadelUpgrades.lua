@@ -21,9 +21,9 @@ Buffs.CGoldIncome02.Affects.GoldProduction.Add = 6
 Buffs.CGoldIncome03.Affects.GoldProduction.Add = 9
 
 --Give Building Firepower some range, so it can counter Siege Demolishers and cause the damage bonus is paltry.
-Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 2}
-Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 2}
-Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 2}
+Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 3}
+Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 6}
+Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 9}
 --Update descriptions
 ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end

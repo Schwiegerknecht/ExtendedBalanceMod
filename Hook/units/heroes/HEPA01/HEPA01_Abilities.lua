@@ -372,10 +372,20 @@ for i = 1,2 do
     Buffs['HEPA01Plague0'..i].Duration = 10
     Buffs['HEPA01Plague0'..i].DurationPulse = 10 -- This is the number of pulses
 -- Increase damage per tick to 15/25 (from 10/15)
-    Buffs['HEPA01Plague0'..i].Affects.Health.Add = -(5 + 10*i)
+    Buffs['HEPA01Plague0'..i].Affects.Health.Add = -(15*i)
 -- Set MaxPlaguedUnits for both Plagues to 10
     Ability['HEPA01Plague0'..i].MaxPlaguedUnits = 10
 end
+-- Set Chance to spread Plague to 60/90 (normally 100/100)
+Ability.HEPA01Plague01.SpreadAffectChance = 60
+Ability.HEPA01Plague02.SpreadAffectChance = 90
+
+-- Adjust description
+Ability['HEPA01Plague01'].GetSpreadChance = function(self) return Ability['HEPA01Plague01'].SpreadAffectChance end
+Ability['HEPA01Plague02'].GetSpreadChance = function(self) return Ability['HEPA01Plague02'].SpreadAffectChance end
+Ability['HEPA01Plague01'].Description = 'When Unclean Beast deals damage, it has a chance to start a plague, dealing [GetDamageAmt] damage over [GetDuration] seconds and having a [GetSpreadChance]% chance to spread to nearby units.\n\nAnything that survives the plague becomes immune to it for [GetImmuneDuration] seconds.'
+Ability['HEPA01Plague02'].Description = 'When Unclean Beast deals damage, it has a chance to start a plague, dealing [GetDamageAmt] damage over [GetDuration] seconds and having a [GetSpreadChance]% chance to spread to nearby units.\n\nAnything that survives the plague becomes immune to it for [GetImmuneDuration] seconds.'
+
 
 # Implement working counter to limit number of infected units
 #############################################################

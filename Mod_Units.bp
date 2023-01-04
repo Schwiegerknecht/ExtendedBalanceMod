@@ -119,17 +119,17 @@ UnitBlueprint {
         Tree = {
             # Combat Health
             Item_Health_Potion_Art = {
-                Cost = 375,
+                Cost = 550,
                 ItemBP = 'Item_Health_Potion_Art',
                 },
             # Large Health
             Item_Large_Health_Potion_Art = {
-                Cost = 750,
+                Cost = 1000,
                 ItemBP = 'Item_Large_Health_Potion_Art',
             },
             # Combat Mana
             Item_Mana_Potion_Art = {
-                Cost = 400,
+                Cost = 500,
                 ItemBP = 'Item_Mana_Potion_Art',
             },
             # Large Mana
@@ -139,12 +139,12 @@ UnitBlueprint {
             },
             # Combat Rejuv
             Item_Rejuv_Elixir_Art = {
-                Cost = 500,
+                Cost = 650,
                 ItemBP = 'Item_Rejuv_Elixir_Art',
             },
             # Large Rejuv
             Item_Large_Rejuv_Elixir_Art = {
-                Cost = 900,
+                Cost = 1200,
                 ItemBP = 'Item_Large_Rejuv_Elixir_Art',
             },
         },
