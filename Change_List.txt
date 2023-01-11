@@ -46,27 +46,35 @@ Twig of Life:
 
 ------------------------------------------------------------
 
-Enhanced Health Potion
+Enhanced Health Potion:
 - Cost: 550 (from 375 in BalMod 1.31; normally 800)
 
-Enhanced Mana Potion
+Enhanced Mana Potion:
 - Cost: 500 (from 400 in BalMod 1.31; normally 1000)
 
-Revitalization Elixir
-- Cost: 650 (from 500 in BalMod 1.31; normally 1000)
+Revitalization Elixir:
+- Cost: 750 (from 500 in BalMod 1.31; normally 1000)
 
-Supreme Health Potion
+Supreme Health Potion:
 - Cost: 1000 (from 750 in BalMod 1.31; normally 1200)
 
-Supreme Revitalization Elixir
+Supreme Revitalization Elixir:
 - Cost: 1200 (from 900 in BalMod 1.31; normally 1500)
 
 
 # Citadel Upgrades
 ############################################################
 
-Building Firepower
-- Range Bonus: 0/3/6/9 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
+Building Firepower:
+- Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
+- Damage Bonus: 10/20/30/60% (normally 10/15/20/25%)
+
+Blacksmith:
+- Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
+
+Fortified Structures:
+- Tower Health: 0/20/40/60% (normally 10/25/40/55%)
+
 
 TODO: Consider Cataract CDR-Flag nerf (to maybe 10% from 15%?)
 TODO: Consider Rook Trebuchet damage nerf (to maybe 150/200 from 250?)
@@ -74,7 +82,6 @@ TODO: Consider UB base armor nerf?
 TODO: Consider Buff for 3500 Gloves?
 TODO: Consider Saam-el's Cloak more speed resistance (maybe off current max speed) and less base speed?
 TODO: Consider Purity and Seraphim buff
-TODO: FS 1 only give regen, move max HP to later FS
 TODO: Buff Bejeweled Goggles somehow I guess
 
 

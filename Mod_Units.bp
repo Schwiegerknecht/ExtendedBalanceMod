@@ -139,7 +139,7 @@ UnitBlueprint {
             },
             # Combat Rejuv
             Item_Rejuv_Elixir_Art = {
-                Cost = 650,
+                Cost = 750,
                 ItemBP = 'Item_Rejuv_Elixir_Art',
             },
             # Large Rejuv
@@ -191,32 +191,33 @@ UnitBlueprint {
             },
             # Warlords Punisher
             Item_Consumable_130 = {
-                Cost = 1350,
+                Cost = 1350, #2250
                 ItemBP = 'Item_Consumable_130',
             },
             # Parasite Egg
             Item_Consumable_170 = {
-                Cost = 2000,
+                Cost = 2000, #3000
                 ItemBP = 'Item_Consumable_170',
             },
             # Twig of Life
             Item_Consumable_120 = {
-                Cost = 2000,
+                Cost = 2000, #3000
                 ItemBP = 'Item_Consumable_120',
             },
             # Magus Rod
             Item_Consumable_140 = {
-                Cost = 2500,
+                Cost = 2500, #3250
                 ItemBP = 'Item_Consumable_140',
             },
             # Warpstone
             Item_Consumable_070 = {
-                Cost = 4200,
+                Cost = 4200, #5500
                 ItemBP = 'Item_Consumable_070',
             },
         },		
     },
 }
+# Power of the Tower Health nerfs
 UnitBlueprint {
     BlueprintId = "hrooktoweroflight02",
     Merge = true,
@@ -242,6 +243,14 @@ UnitBlueprint {
     },
 }
 UnitBlueprint {
+    BlueprintId = "hdemon",
+    Merge = true,
+    Physics = {
+        MaxSpeed = 6.3, # 6.0
+    },
+}
+# Increase various Turn Rates for quality of life
+UnitBlueprint {
     BlueprintId = "hsednaunit",
     Merge = true,
     Physics = {
@@ -258,13 +267,6 @@ UnitBlueprint {
     {
         MaxRadius = 6, #5
     }
-    },
-}
-UnitBlueprint {
-    BlueprintId = "hdemon",
-    Merge = true,
-    Physics = {
-        MaxSpeed = 6.3, # 6.0
     },
 }
 # Increase all Minion Turn Rates (Quality of Life)
@@ -359,7 +361,7 @@ UnitBlueprint {
         TurnRate = 360, #180
     },
 }
-# Make wards targetable
+# Make wards targetable, maybe
 UnitBlueprint {
     BlueprintId = "ugbshop01ward01",
     Merge = true,
@@ -374,7 +376,7 @@ UnitBlueprint {
         #'UNTARGETABLE', -- Removed
     },
 }
-# Set current High Tower Strength as default
+# Set old High Tower Strength as the new Normal
 UnitBlueprint {
     BlueprintId = "ugbdefense01",
     Merge = true,

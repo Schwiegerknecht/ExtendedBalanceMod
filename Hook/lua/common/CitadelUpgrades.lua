@@ -1,35 +1,54 @@
---Troop armor put on Building Strength price track
+-- Troop armor put on Building Strength price track
 Upgrades.Tree.CTroopArmor01.Cost = 500 -- normally 600
 Upgrades.Tree.CTroopArmor02.Cost = 1500 -- normally 1800	
 Upgrades.Tree.CTroopArmor03.Cost = 2500 --  normally 3000
 Upgrades.Tree.CTroopArmor04.Cost = 3500 -- normally 4800
 
---Death Reduction put on Building Strength price track
+-- Death Reduction put on Building Strength price track
 Upgrades.Tree.CDeathPenalty01.Cost = 500 --Reduced from 600
 Upgrades.Tree.CDeathPenalty02.Cost = 1500 -- Reduced form 1800
 Upgrades.Tree.CDeathPenalty03.Cost = 3500 --Reduced from 5400 
 
---Siege put on Building Strength price track
+-- Siege put on Building Strength price track
 Upgrades.Tree.CUpgradeStructure01.Cost = 2500 --Reduced from 3200 to normalize price curve
 Upgrades.Tree.CUpgradeStructure02.Cost = 3500 --Reduced from 4000 to normalize price curve
 
---Restore beta gold income to normalize cost/benefit ratios - Removed - Schwiegerknecht
 -- Schwiegerknecht start
---Instead use a regular progression to remove absolute necessity for Cur3 
+
+-- Fortified Structure gives 0/20/40/60% more Health to towers (normally 10/25/40/55%)
+Buffs.CBuildingHealth01.Affects.MaxHealth = nil
+Buffs.CBuildingHealth02.Affects.MaxHealth.Mult = .2
+Buffs.CBuildingHealth03.Affects.MaxHealth.Mult = .4
+Buffs.CBuildingHealth04.Affects.MaxHealth.Mult = .6
+-- Update FS 1 description
+ArmyBonuses.CBuildingHealth01.Description = 'Buildings gain +[GetRegenBonus] Health Per Second.'
+
+-- Blacksmith put on Building Strength price track
+Upgrades.Tree.CTroopStrength01.Cost = 500 --Reduced from 1200 to normalize price curve
+Upgrades.Tree.CTroopStrength02.Cost = 1500 --Reduced from 2400 to normalize price curve
+Upgrades.Tree.CTroopStrength03.Cost = 2500 --Reduced from 3000 to normalize price curve
+Upgrades.Tree.CTroopStrength04.Cost = 3500 --Reduced from 5400 to normalize price curve
+
+-- Lower currency gold income to 3/6/9 (from 4/8/12) to remove absolute necessity for Cur3 
 Buffs.CGoldIncome01.Affects.GoldProduction.Add = 3
 Buffs.CGoldIncome02.Affects.GoldProduction.Add = 6
 Buffs.CGoldIncome03.Affects.GoldProduction.Add = 9
 
---Give Building Firepower some range, so it can counter Siege Demolishers and cause the damage bonus is paltry.
-Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 3}
-Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 6}
-Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 9}
---Update descriptions
+-- Give Building Firepower some range, so it can counter Siege Demolishers and cause the damage bonus is paltry.
+Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 2}
+Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 4}
+Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 6}
+-- Increase Building Firepower damage bonus to 10/20/30/60% (normally 10/15/20/25%)
+Buffs.CBuildingStrength01.Affects.DamageBonus = {Mult = .1}
+Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .2}
+Buffs.CBuildingStrength03.Affects.DamageBonus = {Mult = .3}
+Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = .6}
+-- Update descriptions
 ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs.CBuildingStrength04.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by another [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by another [GetMaxRadius].'
+ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
+ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
 
 __moduleinfo.auto_reload = true

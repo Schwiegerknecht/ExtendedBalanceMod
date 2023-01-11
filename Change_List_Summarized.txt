@@ -363,7 +363,7 @@ Enhanced Mana Potion:
 - Cost: 500 (from 400 in BalMod 1.31; normally 1000)
 
 Revitalization Elixir:
-- Cost: 650 (from 500 in BalMod 1.31; normally 1000)
+- Cost: 750 (from 500 in BalMod 1.31; normally 1000)
 
 Supreme Health Potion:
 - Cost: 1000 (from 750 in BalMod 1.31; normally 1200)
@@ -481,8 +481,15 @@ Cloak of the Night:
 # Citadel Upgrades
 ############################################################
 
+Fortified Structures:
+- Tower Health: 0/20/40/60% (normally 10/25/40/55%)
+
 Building Firepower:
-- Level 2, 3 and 4 each give towers 3 additional range.
+- Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
+- Damage Bonus: 10/20/30/60% (normally 10/15/20/25%)
+
+Blacksmith:
+- Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
 
 Armory:
 - Cost: 500/1500/2500/3500 gold (normally 600/1800/3000/4800)
