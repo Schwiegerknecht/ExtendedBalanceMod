@@ -9,6 +9,10 @@
 # Demigods
 ############################################################
 
+Oak:
+Shield:
+- Duration: 2/3/4/4.5 seconds (from 2/3/4/5)
+
 Unclean Beast:
 Base Speed: 6.0 (back again from 6.3; same as BalanceMod 1.31)
 Ooze:
@@ -17,14 +21,11 @@ Plague:
 - FIX: The limit for maximum infected units now works.
 - Maximum number of infected units: 10/10 (from 30/30; but since it didn't work it was unlimited)
 - Damage per pulse: 15/30 (from 10/15)
-- Damage pulses: 10 over 10 seconds (from 30 over 30 seconds)
+- Damage pulses: 10 over 10 seconds (normally 30 over 30 seconds)
 - Chance to spread: 60/90% (normally 100/100%)
 
 # Items
 ############################################################
-
-Warpstone:
-- Dodge: 10% (normally 0)
 
 Dark Crimson Vial:
 - Heal: 30% of maximum Health (normally 33%)
@@ -43,6 +44,9 @@ Mard's Hammer:
 
 Twig of Life:
 - Health Per Second: 15 (normally 0)
+
+Warpstone:
+- Dodge: 10% (normally 0)
 
 ------------------------------------------------------------
 
@@ -67,7 +71,10 @@ Supreme Revitalization Elixir:
 
 Building Firepower:
 - Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
-- Damage Bonus: 10/20/30/60% (normally 10/15/20/25%)
+- Damage Bonus: 10/25/50/100% (normally 10/15/20/25%)
+- Attack Speed Bonus: 0/0/0/50% (normally 0/0/0/0)
+Building Firepower IV:
+- WeaponProc: Every shot from a building reduces Armor by 100 for 3 seconds (infinite stacks)
 
 Blacksmith:
 - Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
@@ -77,17 +84,11 @@ Fortified Structures:
 
 
 TODO: Consider Cataract CDR-Flag nerf (to maybe 10% from 15%?)
-TODO: Consider Rook Trebuchet damage nerf (to maybe 150/200 from 250?)
 TODO: Consider UB base armor nerf?
 TODO: Consider Buff for 3500 Gloves?
 TODO: Consider Saam-el's Cloak more speed resistance (maybe off current max speed) and less base speed?
 TODO: Consider Purity and Seraphim buff
 TODO: Buff Bejeweled Goggles somehow I guess
-
-
-Done: Test what FiringRandomness actually does.
-  An apparently unused mechanic is that autoattacks have
-  a chance to miss. FiringRandomness would have prevented those misses.
 
 
 #################################################################################################################

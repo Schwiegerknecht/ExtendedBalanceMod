@@ -1,3 +1,5 @@
+local Buff = import('/lua/sim/buff.lua') -- Needed for Building Strength Buff
+
 -- Troop armor put on Building Strength price track
 Upgrades.Tree.CTroopArmor01.Cost = 500 -- normally 600
 Upgrades.Tree.CTroopArmor02.Cost = 1500 -- normally 1800	
@@ -38,17 +40,50 @@ Buffs.CGoldIncome03.Affects.GoldProduction.Add = 9
 Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 2}
 Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 4}
 Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 6}
--- Increase Building Firepower damage bonus to 10/20/30/60% (normally 10/15/20/25%)
+-- Increase Building Firepower damage bonus to 10/25/50/100% (normally 10/15/20/25%)
 Buffs.CBuildingStrength01.Affects.DamageBonus = {Mult = .1}
-Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .2}
-Buffs.CBuildingStrength03.Affects.DamageBonus = {Mult = .3}
-Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = .6}
+Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .25}
+Buffs.CBuildingStrength03.Affects.DamageBonus = {Mult = .5}
+Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = 1}
+-- Increase Building Firepower IV attack speed by 50%
+Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .5}
+-- Add WeaponProc to Building Firepower IV that reduces Armor by 100 per shot (infinite stacks)
+Buffs.CBuildingStrength04.OnBuffAffect = function(self, unit)
+    unit.Callbacks.OnPostDamage:Add(self.ApplyTargetBuffs, self)
+end
+Buffs.CBuildingStrength04.ApplyTargetBuffs = function(self, unit, target, data)
+    for k, buff in self.TargetBuffs do
+        Buff.ApplyBuff(target, buff, unit)
+    end
+end
+Buffs.CBuildingStrength04.TargetBuffs = {
+    BuffBlueprint {
+        Name = 'CBuildingStrength04_Proc',
+        DisplayName = 'Building Firepower',
+        Description = 'Armor reduced.',
+        BuffType = 'BUILDINGSTRENGTH_PROC',
+        EntityCategory = 'MOBILE - UNTARGETABLE',
+        Debuff = true,
+        CanBeDispelled = true,
+        Stacks = 'ALWAYS',
+        Duration = 3,
+        Affects = {
+            Armor = {Add = -100},
+        },
+        Effects = 'Impedance01',
+        EffectsBone = -2,
+        Icon = '/CitadelUpgrades/CitadelUpgrade_BuildingStrength02',
+    },
+}
 -- Update descriptions
 ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs.CBuildingStrength04.Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength04.GetArmorReduction = function(self) return Buffs.CBuildingStrength04_Proc.Affects.Armor.Add * -1 end
+ArmyBonuses.CBuildingStrength04.GetProcDuration = function(self) return Buffs.CBuildingStrength04_Proc.Duration end
+ArmyBonuses.CBuildingStrength04.GetRateOfFire = function(self) return Buffs.CBuildingStrength04.Affects.RateOfFire.Mult end
 ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
 ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
+ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius]. Every attack from a building reduces armor by [GetArmorReduction] for [GetProcDuration] seconds.'
 
 __moduleinfo.auto_reload = true

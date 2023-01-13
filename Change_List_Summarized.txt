@@ -42,7 +42,7 @@ Army of the Night:
 Rally:
 - Duration: 10 (normally 5)
 Shield:
-- Duration: 2/3/4/5 (normally 3/4/6/6)
+- Duration: 2/3/4/4.5 (normally 3/4/6/6)
 - Remove the cleanse from Shield I, so now it does what the description says.
 - Adapt description for Shield II to include the debuff cleanse.
 - Adapt description for Shield III to include debuff immunity.
@@ -486,7 +486,10 @@ Fortified Structures:
 
 Building Firepower:
 - Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
-- Damage Bonus: 10/20/30/60% (normally 10/15/20/25%)
+- Damage Bonus: 10/25/50/100% (normally 10/15/20/25%)
+- Attack Speed Bonus: 0/0/0/50% (normally 0/0/0/0)
+Building Firepower IV:
+- WeaponProc: Every shot from a building reduces Armor by 100 for 3 seconds (infinite stacks)
 
 Blacksmith:
 - Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
