@@ -44,9 +44,19 @@ Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 6}
 Buffs.CBuildingStrength01.Affects.DamageBonus = {Mult = .1}
 Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .25}
 Buffs.CBuildingStrength03.Affects.DamageBonus = {Mult = .5}
-Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = 1}
--- Increase Building Firepower IV attack speed by 50%
+Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = .75}
+-- Give Building Firepower IV 50% Tower Attack Speed bonus (normally none)
 Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .5}
+
+-- Update descriptions
+ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs.CBuildingStrength04.Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength04.GetAttackSpeedBonus = function(self) return math.floor(Buffs.CBuildingStrength04.Affects.RateOfFire.Mult * 100) end
+ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
+ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
+ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius]. Tower Attack Speed increased by [GetAttackSpeedBonus]%.'
+--[[ # Leaving this in, in case we wanna add debuffs to tower shots later
 -- Add WeaponProc to Building Firepower IV that reduces Armor by 100 per shot (infinite stacks)
 Buffs.CBuildingStrength04.OnBuffAffect = function(self, unit)
     unit.Callbacks.OnPostDamage:Add(self.ApplyTargetBuffs, self)
@@ -75,15 +85,8 @@ Buffs.CBuildingStrength04.TargetBuffs = {
         Icon = '/CitadelUpgrades/CitadelUpgrade_BuildingStrength02',
     },
 }
--- Update descriptions
-ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs.CBuildingStrength04.Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength04.GetArmorReduction = function(self) return Buffs.CBuildingStrength04_Proc.Affects.Armor.Add * -1 end
-ArmyBonuses.CBuildingStrength04.GetProcDuration = function(self) return Buffs.CBuildingStrength04_Proc.Duration end
-ArmyBonuses.CBuildingStrength04.GetRateOfFire = function(self) return Buffs.CBuildingStrength04.Affects.RateOfFire.Mult end
-ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and splash damage. Tower range increased by [GetMaxRadius]. Every attack from a building reduces armor by [GetArmorReduction] for [GetProcDuration] seconds.'
+--ArmyBonuses.CBuildingStrength04.GetArmorReduction = function(self) return Buffs.CBuildingStrength04_Proc.Affects.Armor.Add * -1 end
+--ArmyBonuses.CBuildingStrength04.GetProcDuration = function(self) return Buffs.CBuildingStrength04_Proc.Duration end
+]]
 
 __moduleinfo.auto_reload = true

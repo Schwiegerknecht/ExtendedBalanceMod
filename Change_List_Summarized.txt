@@ -486,10 +486,9 @@ Fortified Structures:
 
 Building Firepower:
 - Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
-- Damage Bonus: 10/25/50/100% (normally 10/15/20/25%)
-- Attack Speed Bonus: 0/0/0/50% (normally 0/0/0/0)
+- Damage Bonus: 10/25/50/75% (normally 10/15/20/25%)
 Building Firepower IV:
-- WeaponProc: Every shot from a building reduces Armor by 100 for 3 seconds (infinite stacks)
+- Tower Attack Speed: +50% (normally 0)
 
 Blacksmith:
 - Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
