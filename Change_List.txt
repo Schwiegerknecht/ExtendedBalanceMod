@@ -18,7 +18,7 @@ Base Speed: 6.0 (back again from 6.3; same as BalanceMod 1.31)
 Ooze:
 - Attack Speed Reduction: 0/10/20/30% (from 10/20/30/40%)
 Plague:
-- FIX: The limit for maximum infected units now works.
+- FIX: The limit for maximum infected units now works. (Though it's a terrible, dirty hack.)
 - Maximum number of infected units: 10/10 (from 30/30; but since it didn't work it was unlimited)
 - Damage per pulse: 15/30 (from 10/15)
 - Damage pulses: 10 over 10 seconds (normally 30 over 30 seconds)
