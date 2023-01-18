@@ -73,21 +73,13 @@ Building Firepower:
 - Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
 - Damage Bonus: 10/25/50/75% (normally 10/15/20/25%)
 Building Firepower IV:
-- Tower Attack Speed: +50% (normally 0)
+- Tower Attack Speed Bonus: 50% (normally 0)
 
 Blacksmith:
 - Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
 
 Fortified Structures:
-- Tower Health: 0/20/40/60% (normally 10/25/40/55%)
-
-
-TODO: Consider Cataract CDR-Flag nerf (to maybe 10% from 15%?)
-TODO: Consider UB base armor nerf?
-TODO: Consider Buff for 3500 Gloves?
-TODO: Consider Saam-el's Cloak more speed resistance (maybe off current max speed) and less base speed?
-TODO: Consider Purity and Seraphim buff
-TODO: Buff Bejeweled Goggles somehow I guess
+- Tower Health: 0/15/35/55% (normally 10/25/40/55%)
 
 
 #################################################################################################################

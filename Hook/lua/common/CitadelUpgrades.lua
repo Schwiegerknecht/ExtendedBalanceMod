@@ -17,11 +17,10 @@ Upgrades.Tree.CUpgradeStructure02.Cost = 3500 --Reduced from 4000 to normalize p
 
 -- Schwiegerknecht start
 
--- Fortified Structure gives 0/20/40/60% more Health to towers (normally 10/25/40/55%)
+-- Fortified Structure gives 0/15/35/55% more Health to towers (normally 10/25/40/55%)
 Buffs.CBuildingHealth01.Affects.MaxHealth = nil
-Buffs.CBuildingHealth02.Affects.MaxHealth.Mult = .2
-Buffs.CBuildingHealth03.Affects.MaxHealth.Mult = .4
-Buffs.CBuildingHealth04.Affects.MaxHealth.Mult = .6
+Buffs.CBuildingHealth02.Affects.MaxHealth.Mult = .15
+Buffs.CBuildingHealth03.Affects.MaxHealth.Mult = .35
 -- Update FS 1 description
 ArmyBonuses.CBuildingHealth01.Description = 'Buildings gain +[GetRegenBonus] Health Per Second.'
 
