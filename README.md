@@ -2,6 +2,8 @@
 
 ExtendedBalanceMod builds upon LORD-ORION's BalanceMod 1.31 and tries to make more items and skills viable, since the metagame was still dominated by a few main builds and strategies. The versions are mutually exclusive, so you can e.g. have "ExtendedBalanceMod-0.1" and "ExtendedBalanceMod-0.2" in your mod folder at the same time.
 
+- Version 0.5 mainly nerfs artifact potions and Fortified Structures I and UB's Ooze.
+
 - Version 0.4 adds only a few tweaks and one bigger Favor Item change.
 
 - Version 0.3 adds a few Demigod changes but mostly tries improving rarely used items.
