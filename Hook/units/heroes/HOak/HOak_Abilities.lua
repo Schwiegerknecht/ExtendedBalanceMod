@@ -9,7 +9,7 @@ Buffs.HOakRallyHeal.Duration = 10
 Buffs.HOAKShield01.Duration = 2
 Buffs.HOAKShield02.Duration = 3
 Buffs.HOAKShield03.Duration = 4
-Buffs.HOAKShield04.Duration = 4.5
+Buffs.HOAKShield04.Duration = 5
 -- Also create a progression from damage immunity to cleanse to damage and debuff immunity
 -- Remove the cleanse from Shield I, so now it does what the description says.
 Buffs.HOAKShield01.OnBuffAffect = function(self, unit, instigator)

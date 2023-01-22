@@ -1,4 +1,4 @@
--- Needed to give enemy an aura (Sludge Slinger)
+-- Needed to give enemy an aura (see Sludge Slinger)
 local Abil = import('/lua/sim/ability.lua')
 
 
@@ -10,7 +10,7 @@ Ability.Item_Consumable_130.RangeMax = 20
 Ability.Item_Consumable_130.CastingTime = 0.3
 --Decrease Warlord Punisher Cast action animation from 2 seconds 
 Ability.Item_Consumable_130.CastAction = 'CastItem1sec'
--- Increase Warlord Punisher chain radius to 10 from 5
+-- Increase Warlord Punisher chain radius to 8 from 5
 Ability.Item_Consumable_130.ChainAffectRadius = 8
 
 -- Schwiegerknecht start
@@ -51,7 +51,7 @@ table.insert(Items.Item_Consumable_070.Tooltip.Bonuses, '+[GetDodgeBonus]% Dodge
 Buffs.Item_Consumable_040.Affects.RateOfFire = {Mult = -0.4}
 -- Increase Sludge Slinger Cooldown to 45 (from 30)
 Ability.Item_Consumable_040.Cooldown = 45
---[[ Add 40% HP regen reduction (from 0)
+--[[ Add 50% HP regen reduction (from 0)
 Buffs.Item_Consumable_040.Affects.Regen = {Mult = -0.5}
 Items.Item_Consumable_040.GetRegen = function(self) return math.floor( Buffs['Item_Consumable_040'].Affects.Regen.Mult * -100 ) end
 Buffs.Item_Consumable_040.Description = 'Attack Speed and Health per second reduced.'
@@ -97,7 +97,7 @@ AbilityBlueprint {
             Icon = 'NewIcons/Scroll/Scroll2',
             DoNotPulseIcon = true,
             Affects = {
-                AbilityEnable = {Bool = true,},
+                AbilityEnable = {Bool = false,},
             },
             Effects = 'CounterHeal01',
             EffectsBone = -2,

@@ -16,12 +16,12 @@ Buffs.HSednaWildSwings.Affects.DamageRadius.Add = 3
 
 -- Schwiegerknecht start
 
--- Increase Yeti armor
+-- Increase Yeti armor by 0/50/150/200 (normally 0/0/0/0)
 Buffs.HSednaYetiBuff02.Affects.Armor  = {Add = 50}
 Buffs.HSednaYetiBuff03.Affects.Armor  = {Add = 100}
 Buffs.HSednaYetiBuff04.Affects.Armor  = {Add = 150}
 
--- Reduce mana cost of Horn of the Yeti
+-- Reduce mana cost of Horn of the Yeti to 525/650/775/900 (normally 550/750/950/1150)
 Ability.HSednaYeti01.EnergyCost = 525
 Ability.HSednaYeti02.EnergyCost = 650
 Ability.HSednaYeti03.EnergyCost = 775
@@ -39,7 +39,7 @@ Ability.HSednaYeti02.Description = 'Sedna summons [GetNumYetis] mighty Yeti to d
 Ability.HSednaYeti03.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
 Ability.HSednaYeti04.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
 
--- Wild Swings gives Yeti 40 auto attack damage
+-- Wild Swings gives Yeti 40 auto attack damage (normally 0)
 Buffs.HSednaWildSwings.Affects.DamageRating = {Add = 40}
 -- Adjust description and make it clearer
 Ability.HSednaWildSwings.GetDamageRating = function(self) return math.floor(Buffs.HSednaWildSwings.Affects.DamageRating.Add) end
