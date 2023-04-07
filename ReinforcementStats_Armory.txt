@@ -1,0 +1,142 @@
+Note:
+Instead of applying the 10/20/30/40% increase of max HP, Armory always adds the
+same amount on Low, Normal and High Grunt Strengths:
+
+Soldier:      30 
+Archer:       11 
+Priest:       45
+Angel:        70 
+Cata:         40 
+Giant:       165 
+
+These values are 10% of the max HP specified in the Unit Blueprints. The max HP
+on Normal Strength is 130% of the max HP in the Unit Blueprints.
+
+The Buffs 'GruntStrengthLow' and 'GruntStrengthHigh' should subtract/add 50% of
+the max HP (see lua/common/BuffDefMisc.lua). Which they don't. Low HP is 61.5%
+of Normal HP (close, but not correct) and High HP is 115% more than Normal HP.
+
+Aside from conquest.lua and globalInit.lua, check simInit.lua for info and
+possible cause. Maybe there's a mistake setting up ScenarioInfo.
+
+EDIT: ArmyBonuses are applied via AddArmyBonus() and ApplyArmyBonusToUnit() as
+defined in AIBrain.lua!
+
+
+#===================================================
+Reinforcement maximum HP - Low Strength
+#===================================================
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      240         270         300         330         360
+Archer        92         103         115         126         138
+Priest       360         405         450         495         540
+Angel        560         630         700         770         840
+Cata         320         360         400         440         480
+Giant       1320        1485        1650        1815        1980
+
+
+What it should be based on Armory Buff (+10/20/30/40%):
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      240         264         288         312         336
+Archer        92         101.2       110.4       119.6       128.8
+Priest       360         396         432         468         504
+Angel        560         616         672         728         784
+Cata         320         352         384         416         448
+Giant       1320        1452        1584        1716        1848
+
+
+
+#===================================================
+Reinforcement maximum HP - Normal Strength
+#===================================================
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      390         420         450         479         510
+Archer       149         161         172         183         195
+Priest       585         630         675         719         765
+Angel        909         980        1050        1119        1190
+Cata         520         600         560         639         680
+Giant       2145        2310        2475        2639        2805
+
+
+What it should be based on Armory Buff (+10/20/30/40%):
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      390         429         468         507         546
+Archer       149         163.9       178.8       193.7       208.6
+Priest       585         643.5       702         760.5       819
+Angel        909         999.9      1090.8      1181.7      1272.6
+Cata         520         572         624         676         728
+Giant       2145        2359.5      2574        2788.5      3003
+
+
+
+#===================================================
+Reinforcement maximum HP - High Strength
+#===================================================
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      840         870         900         930         960
+Archer       322         333         345         356         368
+Priest      1260        1304        1350        1395        1440
+Angel       1960        2029        2100        2170        2240
+Cata        1120        1160        1200        1240        1280
+Giant       4620        4785        4950        5115        5280
+
+
+What it should be based on Armory Buff (+10/20/30/40%):
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      840         924        1008        1092        1176   
+Archer       322         354.2       386.4       418.6       450.8
+Priest      1260        1386        1512        1638        1764
+Angel       1960        2156        2352        2548        2744
+Cata        1120        1232        1344        1456        1568
+Giant       4620        5082        5544        6006        6468
+
+
+#===================================================
+Reinforcement maximum HP - Normal Strength - Modded MaxHealth()
+#===================================================
+
+In BuffAffects.lua, if we replace
+'newMaxHealth = BuffCalculate(unit, buffName,'MaxHealth', unitbphealth)'
+with
+'newMaxHealth = BuffCalculate(unit, buffName,'MaxHealth', oldMaxHealth)',
+then the issue that the consecutive Armory buffs stack on units that are alive.
+Interestingly, the first armory buff give +40%.
+We get the following values for Normal Grunt Strength (slightly messed up):
+
+Unit    |   Base    Armory 1    Armory 2    Armory 3    Armory 4
+----------------------------------------------------------------
+Soldier      390         546        1064        1216        2689
+Archer       149         209         408         466        1030
+Priest       585         819        1597        1825        4033
+Angel        909        1274        2484        1455        3217
+Cata         520         728        1419         831        1838
+Giant       2145        3003        5855        3431        7584
+3646
+
+Sigil of Vitality gives a 50% boost from Max1550 HP to 4650 MaxHP...
+
+
+If Buffs.GruntStrengthLow.Affects.MaxHealth is set to Mult = -0.9 instead of
+Mult = -0.5 (the standard), then Grunt MaxHP is halved compared to normal low
+settings.
+
+#===================================================
+Reinforcement maximum HP - Normal Strength - Modded GruntStrengthLow/High
+#===================================================
+
+If Buffs.GruntStrengthHigh.Affects.MaxHealth is set to Mult = 10 instead of Mult
+= 1.5 (the standard), then Grunt MaxHP is almost quadrupled compared to normal
+High settings. (840 vs 3390)
+This corresponds to Normal Grunt Strength + 100*30, which makes sense, I guess.

@@ -14,6 +14,12 @@ Ability.Item_Consumable_130.CastAction = 'CastItem1sec'
 Ability.Item_Consumable_130.ChainAffectRadius = 8
 
 -- Schwiegerknecht start
+
+-- Give Magus Rod 900 Mana (normally 0)
+Buffs.Item_Consumable_140_Buff.Affects.MaxEnergy = {Add = 900}
+Items.Item_Consumable_140.GetManaBonus = function(self) return Buffs['Item_Consumable_140_Buff'].Affects.MaxEnergy.Add end
+table.insert(Items.Item_Consumable_140.Tooltip.Bonuses, '+[GetManaBonus] Mana')
+
 -- Set Warpstone Cooldown to 30 (from 45)
 Ability.Item_Consumable_070.Cooldown = 30
 -- Give Warpstone 10% base evasion (from 0%)
@@ -46,6 +52,62 @@ if not Items.Item_Consumable_070.Tooltip.Bonuses then
 end
 table.insert(Items.Item_Consumable_070.Tooltip.Bonuses, '+[GetDodgeBonus]% Dodge')
 
+-- Decrease Capture Lock duration to 30 seconds (from 45)
+Buffs.Item_Consumable_030.Duration = 30
+Ability.Item_Consumable_030.OnStartAbility = function(self, unit, params)
+    ForkThread(
+        function()
+            local blueprint = params.Targets[1]:GetBlueprint()
+            params.Targets[1].CanBeCaptured = false
+            params.Targets[1]:ShowBone(blueprint.Display.CaptureLockBone, true)
+            # Start Can Not Capture Flag Effect
+            AttachEffectsAtBone( params.Targets[1], EffectTemplates.Items.Consumable.DefenseOfVayikraActivate, -2 )
+            WaitSeconds(Buffs.Item_Consumable_030.Duration) -- Refer to duration in BuffBlueprint
+            if not params.Targets[1]:IsDead() then
+                params.Targets[1]:HideBone(blueprint.Display.CaptureLockBone, true)
+                params.Targets[1].CanBeCaptured = true
+            end
+            # End Can Not Capture Flag Effect
+            #AttachEffectsAtBone( params.Targets[1], EffectTemplates.Items.Achievement.PurifiedEssenceOfMagicActivate, -2 )
+        end
+    )
+end
+
+-- Decrease Capture Lock cooldown to 40 seconds
+Ability.Item_Consumable_030.Cooldown = 40
+
+
+# Twig of Life
+##############
+-- Add 15 Health Per Second to Twig of Life
+table.insert(Items.Item_Consumable_120.Abilities, AbilityBlueprint {
+    Name = 'Item_Consumable_120_Quiet',
+    AbilityType = 'Quiet',
+    FromItem = 'Item_Consumable_120',
+    Icon = 'NewIcons/Wand/Wand4',
+    Buffs = {
+        BuffBlueprint {
+            Name = 'Item_Consumable_120_Quiet',
+            BuffType = 'CONSUMABLE120PASSIVE',
+            Debuff = false,
+            EntityCategory = 'ALLUNITS',
+            Stacks = 'ALWAYS',
+            Duration = -1,
+            Affects = {
+                Regen = {Add = 15},
+            },
+        },
+    },
+})
+Items.Item_Consumable_120.GetRegenBonus = function(self) return Buffs['Item_Consumable_120_Quiet'].Affects.Regen.Add end
+if not Items.Item_Consumable_120.Tooltip.Bonuses then
+    Items.Item_Consumable_120.Tooltip.Bonuses = {'+[GetRegenBonus] Health Per Second',}
+else
+    table.insert(Items.Item_Consumable_120.Tooltip.Bonuses, '+[GetRegenBonus] Health Per Second')
+end
+
+# Sludge Slinger
+################
 
 -- Increase Sludge Slinger Attack Speed reduction to 40% (from 30)
 Buffs.Item_Consumable_040.Affects.RateOfFire = {Mult = -0.4}
@@ -71,7 +133,7 @@ function FxHealingWind02( unit, trash )
         unit.TrashOnKilled:Add(vEffect)
     end
 end
--- Counterheal aura added to enemies
+-- On use: Counterheal aura added to enemies
 AbilityBlueprint {
     Name = 'Item_Consumable_040_Counterheal',
     DisplayName = '<LOC ITEM_Consumable_0090>Counter Healing',
@@ -147,73 +209,3 @@ table.insert( Ability.Item_Consumable_040.Buffs, 1, BuffBlueprint {
 -- Adjust description
 Items.Item_Consumable_040.GetAuraDuration = function(self) return Buffs['Item_Consumable_040_Dummy'].Duration end
 Items.Item_Consumable_040.Description = 'Use: Decreases target\'s Attack Speed by [GetAttackSpeedReduction]% for [GetDuration] seconds. Also gives the target an aura that prevents priest healing for [GetAuraDuration] seconds.'
-
-
--- Have Sludge Slinger reset Priest heal Cooldown
-# ISSUE: Not a debuff = not cleansable = bad
---[[
-Buffs.Item_Consumable_040.OnApplyBuff = function(self, unit)
-    Buff.ApplyBuff(unit, 'RPriest01HealCooldown01')
-    for i = 1,4 do
-        Buff.ApplyBuff(unit, 'HighPriest0'..i..'HealCooldown01')
-    end
-end
--- Increase Sludge Slinger Cooldown to 35 (from 30)
-Ability.Item_Consumable_040.Cooldown = 35
--- Adapt description
-Items.Item_Consumable_040.Description = 'Use: Decreases target\'s Attack Speed by [GetAttackSpeedReduction]% for [GetDuration] seconds. Also resets the target\'s Countdown for all kinds of Priest heals.'
-]]
-
-
-
--- Decrease Capture Lock duration to 30 seconds (from 45)
-Buffs.Item_Consumable_030.Duration = 30
-Ability.Item_Consumable_030.OnStartAbility = function(self, unit, params)
-
-    ForkThread(
-        function()
-            local blueprint = params.Targets[1]:GetBlueprint()
-            params.Targets[1].CanBeCaptured = false
-            params.Targets[1]:ShowBone(blueprint.Display.CaptureLockBone, true)
-            # Start Can Not Capture Flag Effect
-            AttachEffectsAtBone( params.Targets[1], EffectTemplates.Items.Consumable.DefenseOfVayikraActivate, -2 )
-            WaitSeconds(Buffs.Item_Consumable_030.Duration)
-            if not params.Targets[1]:IsDead() then
-                params.Targets[1]:HideBone(blueprint.Display.CaptureLockBone, true)
-                params.Targets[1].CanBeCaptured = true
-            end
-            # End Can Not Capture Flag Effect
-            #AttachEffectsAtBone( params.Targets[1], EffectTemplates.Items.Achievement.PurifiedEssenceOfMagicActivate, -2 )
-        end
-    )
-end
-
--- Decrease Capture Lock cooldown to 40 seconds
-Ability.Item_Consumable_030.Cooldown = 40
-
--- Add 15 Health Per Second to Twig of Life
-table.insert(Items.Item_Consumable_120.Abilities, AbilityBlueprint {
-    Name = 'Item_Consumable_120_Quiet',
-    AbilityType = 'Quiet',
-    FromItem = 'Item_Consumable_120',
-    Icon = 'NewIcons/Wand/Wand4',
-    Buffs = {
-        BuffBlueprint {
-            Name = 'Item_Consumable_120_Quiet',
-            BuffType = 'CONSUMABLE120PASSIVE',
-            Debuff = false,
-            EntityCategory = 'ALLUNITS',
-            Stacks = 'ALWAYS',
-            Duration = -1,
-            Affects = {
-                Regen = {Add = 15},
-            },
-        },
-    },
-})
-Items.Item_Consumable_120.GetRegenBonus = function(self) return Buffs['Item_Consumable_120_Quiet'].Affects.Regen.Add end
-if not Items.Item_Consumable_120.Tooltip.Bonuses then
-    Items.Item_Consumable_120.Tooltip.Bonuses = {'+[GetRegenBonus] Health Per Second',}
-else
-    table.insert(Items.Item_Consumable_120.Tooltip.Bonuses, '+[GetRegenBonus] Health Per Second')
-end

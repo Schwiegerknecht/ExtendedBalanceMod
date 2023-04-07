@@ -7,10 +7,10 @@ includes all changes from BalanceMod 1.31 which weren't later overwritten.
 If you want to know what was changed (and maybe changed back) in which version,
 see Change_List.txt.
 
-CURRENT STATUS: Everything from BalanceMod 1.31 and up to 0.5
+CURRENT STATUS: Everything from BalanceMod 1.31 and up to 0.6
 
 #################################################################################################################
-# v0.5
+# v0.6
 #################################################################################################################
 
 
@@ -35,7 +35,7 @@ NightCrawler:
 Army of the Night:
 - Nightwalker Attack Speed: 40% (normally 5%)
 - Nightwalker Lifesteal: 100% (normally 10%)
-- Weapon Proc: Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
+- WeaponProc: Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
 
 
 ---------------------Oak---------------------
@@ -53,6 +53,30 @@ Ball Lightning:
 - Damage: 25/50/75/100 (normally 20/25/30/35)
 Sacrifice:
 - FIX: Sacrifice now works as advertised. (Radius = 10)
+
+---------------------Queen of Thorns---------------------
+Bramble Shield:
+- Mana Cost: 400/550/650/700 (normally 400/560/720/840)
+Compost:
+- Shambler Damage: 4/6/8/10/15/20 (normally 4/6/8/10/12/14)
+- HP regeneration: 5/10/15/20/30/40 per compost level (normally 0/0/0/0/0/0)
+Entourage:
+- Damage: 10/20/30 (normally 6/12/18)
+- Gold production: 1/2/3 (normally 0/0/0)
+Ground Spikes:
+- Mana cost: 425/500/675/750 (normally 500/500/675/750)
+Mulch:
+- Time to damage: 0.5 (normally 2)
+Shamblers:
+- Turn Rate: 360 (normally 180)
+Spike Wave:
+- Cooldown 10/10/10 (normally 10/10/15)
+Uproot:
+- Radius: 20/25/30/35 (normally 20/20/20/20)
+Uproot III:
+- Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
+Uproot IV:
+- Stuns the targeted structure for its duration (10 sec).
 
 ---------------------Regulus---------------------
 Deadeye:
@@ -74,28 +98,6 @@ Vengeance:
   - Attack Speed debuff: -20%
   - Radius: 15
   - Duration: 10
-
----------------------Queen of Thorns---------------------
-Compost:
-- Shambler Damage: 4/6/8/10/15/20 (normally 4/6/8/10/12/14)
-- HP regeneration: 5/10/15/20/30/40 per compost level (normally 0/0/0/0/0/0)
-Entourage:
-- Damage: 10/20/30 (normally 6/12/18)
-- Gold production: 1/2/3 (normally 0/0/0)
-Ground Spikes:
-- Mana cost: 425/500/675/750 (normally 500/500/675/750)
-Mulch:
-- Time to damage: 0.5 (normally 2)
-Shamblers:
-- Turn Rate: 360 (normally 180)
-Spike Wave:
-- Cooldown 10/10/10 (normally 10/10/15)
-Uproot:
-- Radius: 20/25/30/35 (normally 20/20/20/20)
-Uproot III:
-- Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
-Uproot IV:
-- Stuns the targeted structure for its duration (10 sec).
 
 ---------------------Rook---------------------
 Energizer:
@@ -120,6 +122,7 @@ Horn of the Yeti:
 Wild Swings:
 - Radius: 3 (normally 2)
 - Yeti weapon damage: +40
+- Yeti now have knockup on their auto-attacks
 Life's Child:
 - Proc at 50% of maximum HP (normally 30%)
 Inspiring Roar:
@@ -127,9 +130,10 @@ Inspiring Roar:
 - Duration: 10 (normally 5)
 
 ---------------------Torch Bearer---------------------
+Mode Switch Time: 0.8 seconds (normally 1.5)
 Deep Freeze:
 - Consume Damage: 100/200/300/400/500 (normally 100/175/250/325/425)
-Mode Switch Time: 0.8 seconds (normally 1.5)
+- Debuff Duration: 5/5/5/5 seconds (normally 5/6/7/7)
 
 ---------------------Unclean Beast---------------------
 Base Speed: 6.0 (normally 6.3)
@@ -235,18 +239,23 @@ Wyrmskin Handguards:
 - Attack speed: 15% (normally 0)
 
 Gauntlets of Despair:
-- Mana Drain: 525 (normally 300)
 - Turn the mana drain on weapon proc into a mana leech: You gain the mana that the enemy loses.
   Only works against enemy Demigods. (Proc chance unchanged: 15%, 10% ranged.)
+  - Mana Leech: 400 (normally 300)
+- Attack Speed: 15% (normally 0%)
 
 Slayer's Wraps:
+- Cost: 2500 (normally 3300)
 - Weapon Damage: 35 (normally 30)
 - Attack Speed: 10% (normally 0)
 
 Gloves of Fell-Darkur:
-WeaponProc: Replaced old Proc effect by cleave from Doomspite Grips.
-- New Proc Chance: 75% (50% ranged)
-- Cleave Size: 3 (as in BalanceMod 1.31)
+WeaponProc: Chance on hit to cause a fiery blast! After the blast,
+             the target takes burn damage over time.
+  - Proc Chance: 40% melee, 25% ranged
+  - Proc Damage: 200
+  - Proc Affect Radius: 3
+  - Burn damage: 50 damage per second. Lasts 3 seconds.
 - Attack Speed: 15% (normally 0)
 
 Doomspite Grips:
@@ -270,6 +279,9 @@ Blood Stone Ring:
 Forest Band:
 - Minion HP regen: 10 (normally 0)
 - Minion Health: 150 (normally 0)
+- Changed WeaponProc to ArmorProc:
+  - Proc Chance: 5%
+- Minion Heal on Proc: 150 Health (from 250)
 
 Warlord's Punisher:
 - Radius: 20 (normally 15)
@@ -279,7 +291,8 @@ Warlord's Punisher:
 
 Ring of the Ancients:
 - Attack Speed: 10% (normally 0)
-- 5% Life Steal (normally 0)
+- Life Steal: 5% (normally 0)
+- Armor: 600 (normally 400)
 
 Parasite Egg:
 - Cost: 2000 gold (normally 3000)
@@ -290,6 +303,7 @@ Twig of Life:
 
 Magus Rod:
 - Cost: 2500 gold (normally 3250)
+- Mana: 900 (normally 0)
 
 Warpstone:
 - Cast: Instant (normally 0.3)
@@ -411,7 +425,8 @@ Dark Crimson Vial:
 
 Diamond Pendant:
 - Mana: 525 (nomally 250)
-- Cooldown Reduction: 13% (normally 10%)
+- Cooldown Reduction: 15% (normally 10%)
+- Mana Regen: 6 (normally 0)
 
 Amulet of Teleportation:
 - Cooldown: 35 (normally 45)
@@ -443,10 +458,10 @@ Furious Blade:
 - Health: 250 (normally 100)
 
 Mard's Hammer:
-- Weapon Damage added per hero level: 3
+- Weapon Damage added per hero level: 2
 - Added WeaponProc that reduces Armor
-  - Armor Reduction: 40 per hero level
-  - WeaponProc Chance: 100% (melee and ranged)
+  - Armor Reduction: 20 per hero level
+  - WeaponProc Chance: 100% for melee attacks, 50% for ranged attacks
   - Duration: 3 seconds
 
 ---
@@ -485,7 +500,7 @@ Fortified Structures:
 - Tower Health: 0/15/35/55% (normally 10/25/40/55%)
 
 Building Firepower:
-- Tower Range Bonus: 0/2/4/6 (from 0/2/2/2 in EBM-0.4; normally 0/0/0/0)
+- Tower Range Bonus: 0/2/4/6 (normally 0/0/0/0)
 - Damage Bonus: 10/25/50/75% (normally 10/15/20/25%)
 Building Firepower IV:
 - Tower Attack Speed Bonus: 50% (normally 0)

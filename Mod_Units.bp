@@ -117,6 +117,7 @@ UnitBlueprint {
     Merge = true,
     Shop = {
         Tree = {
+            # Changed as of Extended BalanceMod 0.5
             # Combat Health
             Item_Health_Potion_Art = {
                 Cost = 550,
@@ -179,6 +180,19 @@ UnitBlueprint {
 #################################################################################################################
 # Extended BalanceMod start
 #################################################################################################################
+UnitBlueprint {
+    BlueprintId = "ugbshop03",
+    Merge = true,
+    Shop = {
+        Tree = {
+            # Slayer's Grips
+            Item_Glove_070 = {
+                Cost = 2500, # 3300
+                ItemBP = 'Item_Glove_070',
+            },
+        },		
+    },
+}
 UnitBlueprint {
     BlueprintId = "ugbshop06",
     Merge = true,

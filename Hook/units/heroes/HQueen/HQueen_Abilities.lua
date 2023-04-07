@@ -114,6 +114,11 @@ end
 
 -- Schwiegerknecht start
 
+-- Decrease Mana cost of Bramble Shield to 400/550/650/700 (normally 400/560/720/840)
+Ability.HQueenBrambleShield02.EnergyCost = 550
+Ability.HQueenBrambleShield03.EnergyCost = 650
+Ability.HQueenBrambleShield04.EnergyCost = 700
+
 -- Adjust Summon Shambler 2-4 descriptions to clarify how much stronger Shamblers get.
 Ability['HQueenShambler02'].GetDamageRating = function(self) return math.floor( Buffs['HQueenShamblerBuff02'].Affects.DamageRating.Add ) end
 Ability['HQueenShambler02'].GetMaxHealth = function(self) return math.floor( Buffs['HQueenShamblerBuff02'].Affects.MaxHealth.Add ) end
@@ -173,7 +178,6 @@ Ability.HQueenUproot04.Description = 'Queen of Thorns sends her vines deep benea
 
 
 -- Add gold income buff to Entourage (1/2/3 gold/sec), ramping up to Tribute.
--- This Entourage buff requires the corresponding Summon Shambler level.
 BuffBlueprint {
     Name = 'HQueenEntourageTribute01',
     BuffType = 'HQUEENTRIBUTE',

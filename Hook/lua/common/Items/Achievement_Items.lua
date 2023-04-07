@@ -7,8 +7,8 @@ Ability.AchievementAEHeal.CastingTime = 1
 Ability.AchievementAEHeal.CastAction = 'CastItem1sec' 
 -- Increase Saam-El's clock speed bonus to 10%, up from 5%
 Buffs.AchievementMovement.Affects.MoveMult.Mult = 0.10 
--- Decrease diamond Pendant cooldown by 13%, up from 10%
-Buffs.AchievementCooldown.Affects.Cooldown.Mult = -.13 
+-- Decrease diamond Pendant cooldown by 15%, up from 10%
+Buffs.AchievementCooldown.Affects.Cooldown.Mult = -.15
 -- Increase diamond pendant mana bonus to 525 up from 250 (this item was way out of balance whack compared to Staff of renewal, and is even now still weaker)
 Buffs.AchievementCooldown.Affects.MaxEnergy.Add = 525 
 -- Increase Charm of Life health regeneration to 12 up from 5 (10 from BalMod 1.31) -- Schwiegerknecht
@@ -81,6 +81,50 @@ table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackS
 -- Schwiegerknecht start
 ##############################################################################
 
+-- Give Diamond Pendant 5 mana regen (EBM 0.6)
+Buffs.AchievementCooldown.Affects.EnergyRegen = {Add = 6}
+-- Adjust Description
+Items.AchievementCooldown.GetManaRegenBonus =  function(self) return Buffs['AchievementCooldown'].Affects.EnergyRegen.Add end
+table.insert( Items.AchievementCooldown.Tooltip.Bonuses,'+[GetManaRegenBonus] Mana Per Second')
+
+-- Add minion HP regeneration to Tome of Endurance
+Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
+Items.AchievementMinionHealth.GetMinionRegenBonus = function(self) return Buffs['AchievementMinionHealthBuff'].Affects.Regen.Add end
+table.insert(Items.AchievementMinionHealth.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')
+
+-- Increase Dark Crimson Vial Cooldown to 60 seconds
+Ability.AchievementPotion.Cooldown = 60
+-- Decrease Dark Crimson Vial heal to 30% (from 33%)
+Ability.AchievementPotion.RegenAmount = 0.3
+
+-- Increase Wings of the Seraphim Cooldown to 60 (from 45)
+Ability.AchievementAERegen.Cooldown = 60
+-- Decrease Seraphim Regen to 170 (from 200)
+Buffs.AchievementAERegen.Affects.Regen.Add = 170
+-- Have Seraphim only interrupt when stunned or frozen
+Buffs.AchievementAERegen.OnApplyBuff = function(self, unit, instigator)
+	unit.Callbacks.OnStunned:Add(self.SeraphimStunned, self)
+	unit.Callbacks.OnFrozen:Add(self.SeraphimStunned, self)
+end
+Buffs.AchievementAERegen.OnBuffRemove = function(self,unit)
+	unit.Callbacks.OnStunned:Remove(self.SeraphimStunned)
+	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
+end
+Buffs.AchievementAERegen.SeraphimStunned = function(self, unit, data)
+	if Buff.HasBuff(unit, 'AchievementAERegen') then
+		Buff.RemoveBuff(unit, 'AchievementAERegen')
+	end
+	unit.Callbacks.OnStunned:Remove(self.SeraphimStunned)
+	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
+end
+-- Adjust description
+Items.AchievementAERegen.GetAffectRadius = function(self) return Ability['AchievementAERegen'].AffectRadius end
+Items.AchievementAERegen.Description = 'Use: Ally Demigods in Radius [GetAffectRadius] receive +[GetRegenBonus] Health Per Second for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
+
+
+
+# Staff of the Warmage
+######################
 -- Give Staff of the Warmage Mana Regen scaling over time: 4+(0.5*herolevel)
 -- Change Ability.AchievementMana_Aura.LevelEnergyRegen to change value
 BuffBlueprint{
@@ -124,6 +168,8 @@ table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaRegenBonus] Mana P
 table.insert(Items.AchievementMana.Tooltip.Bonuses, '+[GetManaLevelRegen] Mana Per Second per hero level')
 -- End of Staff of the Warmage change
 
+# Bejeweled Goggles
+###################
 -- Make Bejeweled Goggles a useable item
 Items.AchievementVision.Useable = true
 -- Add useable ability to place Wards (EBM-0.3)
@@ -166,7 +212,9 @@ Items.AchievementVision.GetCooldown = function(self) return Ability.AchievementV
 Items.AchievementVision.Description = 'On Use: Place Wards that last for 120 seconds. [GetCooldown] seconds Cooldown.'
 --End of goggle change
 
--- Make Totem of War an useable item
+# Totem of War
+##############
+-- Make Totem of War a useable item
 Items.AchievementMinionDamage.Useable = true
 -- On use give minions +25 Weapon Damage, +15% Movement Speed and +15% Attack Speed.
 table.insert(Items.AchievementMinionDamage.Abilities, 1, AbilityBlueprint {
@@ -195,30 +243,30 @@ table.insert(Items.AchievementMinionDamage.Abilities, 1, AbilityBlueprint {
 	end,
 })
 ArmyBonusBlueprint {
-    Name = 'AchievementMinionDamageUseBuff',
-    DisplayName = '<LOC ITEM_Achievement_0048>Totem of War',
-    ApplyArmies = 'Single',
-    UnitCategory = 'MINION',
-    InventoryType = 'Achievement',
-    RemoveOnUnitDeath = true,
-    Buffs = {
-        BuffBlueprint {
-            Name = 'AchievementMinionDamageUseBuff',
-            DisplayName = '<LOC ITEM_Achievement_0048>Totem of War',
-            Description = '<LOC ITEM_Achievement_0049>Increased Damage, Movement and Attack Speed.',
-            BuffType = 'ACHIEVEMENTMINIONDAMAGEUSEBUFF',
-            Debuff = false,
-            Stacks = 'REPLACE',
-            EntityCategory = 'MINION',
-            Duration = 10,
-            Icon = '/NewIcons/AchievementRewards/CharredTotemofWar',
-            Affects = {
-                DamageRating = {Add = 10},
-                MoveMult = {Mult = 0.15},
-                RateOfFire = {Mult = 0.15},
-            },
-        }
-    }
+	Name = 'AchievementMinionDamageUseBuff',
+	DisplayName = '<LOC ITEM_Achievement_0048>Totem of War',
+	ApplyArmies = 'Single',
+	UnitCategory = 'MINION',
+	InventoryType = 'Achievement',
+	RemoveOnUnitDeath = true,
+	Buffs = {
+		BuffBlueprint {
+			Name = 'AchievementMinionDamageUseBuff',
+			DisplayName = '<LOC ITEM_Achievement_0048>Totem of War',
+			Description = '<LOC ITEM_Achievement_0049>Increased Damage, Movement and Attack Speed.',
+			BuffType = 'ACHIEVEMENTMINIONDAMAGEUSEBUFF',
+			Debuff = false,
+			Stacks = 'REPLACE',
+			EntityCategory = 'MINION',
+			Duration = 10,
+			Icon = '/NewIcons/AchievementRewards/CharredTotemofWar',
+			Affects = {
+				DamageRating = {Add = 10},
+				MoveMult = {Mult = 0.15},
+				RateOfFire = {Mult = 0.15},
+			},
+		}
+	}
 }
 -- Update Totem of War description
 Items.AchievementMinionDamage.GetDamageRating = function(self) return Buffs.AchievementMinionDamageUseBuff.Affects.DamageRating.Add end
@@ -228,42 +276,16 @@ Items.AchievementMinionDamage.GetDuration = function(self) return Buffs.Achievem
 Items.AchievementMinionDamage.Description = 'Use: Minions gain +[GetDamageRating] Weapon Damage, +[GetMoveMult]% Movement Speed and +[GetRateOfFire]% Attack Speed for [GetDuration] seconds.'
 -- End of Totem change
 
--- Increase Wings of the Seraphim Cooldown to 60 (from 45)
-Ability.AchievementAERegen.Cooldown = 60
--- Decrease Seraphim Regen to 170 (from 200)
-Buffs.AchievementAERegen.Affects.Regen.Add = 170
--- Have Seraphim only interrupt when stunned or frozen
-Buffs.AchievementAERegen.OnApplyBuff = function(self, unit, instigator)
-	unit.Callbacks.OnStunned:Add(self.SeraphimStunned, self)
-	unit.Callbacks.OnFrozen:Add(self.SeraphimStunned, self)
+# Mards Hammer
+###############
+-- Remove Mard's Hammer Attack Speed and adjust Tooltip
+if Buffs.AchievementDamage.Affects.RateOfFire then
+	Buffs.AchievementDamage.Affects.RateOfFire = nil
+	table.removeByValue(Items.AchievementDamage.Tooltip.Bonuses, '<LOC ITEM_Glove_0003>+[GetAttackSpeedBonus]% Attack Speed')
 end
-Buffs.AchievementAERegen.OnBuffRemove = function(self,unit)
-	unit.Callbacks.OnStunned:Remove(self.SeraphimStunned)
-	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
-end
-Buffs.AchievementAERegen.SeraphimStunned = function(self, unit, data)
-	if Buff.HasBuff(unit, 'AchievementAERegen') then
-		Buff.RemoveBuff(unit, 'AchievementAERegen')
-	end
-	unit.Callbacks.OnStunned:Remove(self.SeraphimStunned)
-	unit.Callbacks.OnFrozen:Remove(self.SeraphimStunned)
-end
--- Adjust description
-Items.AchievementAERegen.GetAffectRadius = function(self) return Ability['AchievementAERegen'].AffectRadius end
-Items.AchievementAERegen.Description = 'Use: Ally Demigods in Radius [GetAffectRadius] receive +[GetRegenBonus] Health Per Second for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
 
--- Add minion HP regeneration to Tome of Endurance
-Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
-Items.AchievementMinionHealth.GetMinionRegenBonus = function(self) return Buffs['AchievementMinionHealthBuff'].Affects.Regen.Add end
-table.insert(Items.AchievementMinionHealth.Tooltip.MBonuses, '+[GetMinionRegenBonus] Minion Health Per Second')
-
--- Increase Dark Crimson Vial Cooldown to 60 seconds
-Ability.AchievementPotion.Cooldown = 60
--- Decrease Dark Crimson Vial heal to 30% (from 33%)
-Ability.AchievementPotion.RegenAmount = 0.3
-
--- Give Mard's Hammer Weapon Damage scaling with level
--- Add 3 Weapon Damage per level (Change Ability.AchievementDamage_Aura.LevelDamageRating to change value)
+-- Give Mard's Hammer Weapon Damage, scaling with level
+-- Add 2 Weapon Damage per level (Change Ability.AchievementDamage_Aura.LevelDamageRating to change value)
 BuffBlueprint{
 	Name = 'AchievementDamage_LevelDamageRating',
 	BuffType = 'AchievementDamage_LevelDamageRating',
@@ -274,7 +296,7 @@ BuffBlueprint{
 	Stacks = 'REPLACE',
 	Duration = -1,
 	Affects = {
-		DamageRating = {Add = 3}, -- Dummy value, buff gets calculated in OnAuraPulse, below
+		DamageRating = {Add = 2}, -- Dummy value, buff gets calculated in OnAuraPulse, below
 	},
 }
 -- Add Aura to check hero level, calculate and apply buff
@@ -283,7 +305,7 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 	AbilityType = 'Aura',
 	AffectRadius = 1,
 	AuraPulseTime = 1,
-	LevelDamageRating = 3,
+	LevelDamageRating = 2,
 	Icon = 'NewIcons/AchievementRewards/HammerofDestruction',
 	TargetAlliance = 'Ally',
 	TargetCategory = 'HERO - UNTARGETABLE',
@@ -301,7 +323,7 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
 table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
 
--- Add WeaponProc that reduces Armor by 40 per level
+-- Add WeaponProc that reduces Armor by 20 per level
 -- Create Debuff
 BuffBlueprint{
 	Name = 'AchievementDamage_LevelArmorReduction',
@@ -313,18 +335,18 @@ BuffBlueprint{
 	Stacks = 'REPLACE',
 	Duration = 3,
 	Affects = {
-		Armor = {Add = -40}, -- Dummy value, buff gets calculated in OnWeaponProc, below
+		Armor = {Add = -20}, -- Dummy value, buff gets calculated in OnWeaponProc, below
 	},
 }
 -- Add WeaponProc
 table.insert(Items.AchievementDamage.Abilities, 1, AbilityBlueprint {
 	Name = 'AchievementDamage_Proc',
 	AbilityType = 'WeaponProc',
-	LevelArmorReduction = 40,
+	LevelArmorReduction = 20,
 	Icon = 'NewIcons/AchievementRewards/HammerofDestruction',
 	FromItem = 'AchievementDamage',
 	WeaponProcChance = 100,
-    WeaponProcChanceRanged = 100,
+    WeaponProcChanceRanged = 50,
 	OnWeaponProc = function(self, unit, target, damageData)
 		local aiBrain = unit:GetAIBrain()
 		local hero = aiBrain:GetHero()
@@ -338,15 +360,19 @@ table.insert(Items.AchievementDamage.Abilities, 1, AbilityBlueprint {
 -- Add Tooltip
 Items.AchievementDamage.GetLevelArmorReduction = function(self) return Ability['AchievementDamage_Proc'].LevelArmorReduction end
 Items.AchievementDamage.GetArmorReductionDuration = function(self) return Buffs['AchievementDamage_LevelArmorReduction'].Duration end
-Items.AchievementDamage.Tooltip.ChanceOnHit = 'Autoattacks apply [GetLevelArmorReduction] Armor Reduction per hero level to the target for [GetArmorReductionDuration] seconds.'
--- End of Mard's Hammer change
+Items.AchievementDamage.GetProcChance = function(self) return Ability['AchievementDamage_Proc'].WeaponProcChance end
+Items.AchievementDamage.GetRangedProcChance = function(self) return Ability['AchievementDamage_Proc'].WeaponProcChanceRanged end
+Items.AchievementDamage.Tooltip.ChanceOnHit = 'Melee autoattacks apply [GetLevelArmorReduction] Armor Reduction per hero level to the target for [GetArmorReductionDuration] seconds. ([GetRangedProcChance]% chance for ranged autoattacks)'
+-- End of Mards Hammer change
 
+# Symbol of Purity
+##################
 -- Make Symbol of Purity an Area of Effect affecting allied Demigods.
 -- Increase Cooldown to 45 seconds (from 30)
 Ability.AchievementPure.Cooldown = 45
 -- Set Radius to 15 (from 0)
 Ability.AchievementPure.AffectRadius = 15
--- Use modified RemoveBuffsByDebuff so that Stuns (and Interrupts) are still not cleansed.
+-- Use modified version of RemoveBuffsByDebuff so that Stuns (and Interrupts) are still not cleansed.
 --[[ unit.Buffs.BuffTable has the structure:
 {
 	BUFFTYPE1 ={
@@ -412,7 +438,8 @@ Items.AchievementPure.GetMaxRange = function(self) return Ability['AchievementPu
 Items.AchievementPure.Description = 'Use: Purge all negative effects except stuns and interrupts. Affects all allied Demigods in range [GetMaxRange]. Cannot use while stunned or frozen.'
 -- End of Symbol of Purity change
 
-
+# Cape of Plentiful Mana
+########################
 -- Give Cape of Plentiful 300 base Mana and 5 Mana Regeneration (from 0/0)
 table.insert(Items.AchievementAEMana.Abilities, AbilityBlueprint {
 	Name = 'AchievementAEMana_Base',

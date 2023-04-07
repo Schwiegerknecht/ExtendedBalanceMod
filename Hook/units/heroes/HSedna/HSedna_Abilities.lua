@@ -16,6 +16,16 @@ Buffs.HSednaWildSwings.Affects.DamageRadius.Add = 3
 
 -- Schwiegerknecht start
 
+-- Add knockup to Wild Swings
+Buffs.HSednaWildSwings.Affects.MetaAmount = {Add = 8}
+Buffs.HSednaWildSwings.Affects.MetaRadius = {Add = 3}
+-- Wild Swings gives Yeti 40 auto attack damage (normally 0)
+Buffs.HSednaWildSwings.Affects.DamageRating = {Add = 40}
+-- Adjust description and make it clearer
+Ability.HSednaWildSwings.GetDamageRating = function(self) return math.floor(Buffs.HSednaWildSwings.Affects.DamageRating.Add) end
+Ability.HSednaWildSwings.Description = 'Sedna\'s Yetis strike with wide swings, dealing [GetDamageMult]% cleave damage to nearby enemies while knocking up smaller units. They also gain [GetDamageRating] weapon damage.'
+
+
 -- Increase Yeti armor by 0/50/150/200 (normally 0/0/0/0)
 Buffs.HSednaYetiBuff02.Affects.Armor  = {Add = 50}
 Buffs.HSednaYetiBuff03.Affects.Armor  = {Add = 100}
@@ -38,12 +48,6 @@ Ability.HSednaYeti04.GetYetiArmor = function(self) return math.floor ( Buffs.HSe
 Ability.HSednaYeti02.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
 Ability.HSednaYeti03.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
 Ability.HSednaYeti04.Description = 'Sedna summons [GetNumYetis] mighty Yeti to defend her. Yeti gain [GetYetiHP] HP and [GetYetiArmor] armor. She may have [GetMaxYeti] Yeti active.'
-
--- Wild Swings gives Yeti 40 auto attack damage (normally 0)
-Buffs.HSednaWildSwings.Affects.DamageRating = {Add = 40}
--- Adjust description and make it clearer
-Ability.HSednaWildSwings.GetDamageRating = function(self) return math.floor(Buffs.HSednaWildSwings.Affects.DamageRating.Add) end
-Ability.HSednaWildSwings.Description = 'Sedna\'s Yetis strike with wide swings, dealing [GetDamageMult]% cleave damage to nearby enemies. They also gain [GetDamageRating] weapon damage.'
 
 
 __moduleinfo.auto_reload = true

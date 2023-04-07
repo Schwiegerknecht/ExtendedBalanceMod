@@ -5,6 +5,11 @@ Ability.HEMA01FreezeStructure04.DamagePerBuff = 400 --normally 325
 
 -- ExtendedBalanceMod start
 
+--Decrease duration of Deep Freeze debuff to 5/5/5/5 (from 5/6/7/7)
+for i=1,4 do
+    Buffs['HEMA01FreezeSlow0'..i].Duration = 5
+end
+
 --Have HEMA01_Script.lua access these variables for stance switching time,
 --making for easier tweaks if wanted
 Ability.HEMA01SwitchIce.SwitchDuration = 0.8
