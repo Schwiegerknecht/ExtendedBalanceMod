@@ -6,16 +6,12 @@
 # v0.6
 #################################################################################################################
 
-TODO: Consider measures against increased match time. Capture Lock duration increase?
-
-TODO: Twig of Life
-TODO: Diamond Pendant cdr incorrectly displayed as 16%
-
-
 # Demigods
 ############################################################
 
 Queen of Thorns:
+Stance Switch:
+- Time needed: 0.8 seconds (normally 1.5)
 Bramble Shield:
 - Mana Cost: 400/550/650/700 (normally 400/560/720/840)
 
@@ -26,16 +22,6 @@ Wild Swings:
 Torch Bearer:
 Deep Freeze:
 - Debuff Duration: 5/5/5/5 seconds (normally 5/6/7/7)
-- Debuff Duration: 5/5/5/5 seconds (Change: 0/-1/-2/-2 seconds)
-- Debuff Duration: 5->5 / 6->5 / 7->5 / 7->5 seconds
-- Debuff Duration:
-  5 --> 5 seconds (Change: 0 % )
-  6 --> 5 seconds (Change: -16.6 % )
-  7 --> 5 seconds (Change: -28.6 % )
-  7 --> 5 seconds (Change: -28.6 % )
-- Debuff Duration: Decreased by 0/16.6/28.6/28.6 %
-- Debuff Duration: 5/5/5/5 seconds (normally 5/6/7/7 --> Debuff time decrease: 0/16.6/28.6/28.6% )
-
 
 # Items
 ############################################################
@@ -686,7 +672,7 @@ Warp Area: Added Debuff Immune (normally no debuff immunity)
 Elusiveness 10%,20%,30% Dodge (normally 5%,10%,15%)
 
 TB
-Mode Switch time 0.8 seconds (normally 1.5 seconds) 
+Stance Switch time 0.8 seconds (normally 1.5 seconds) 
 Consume Damage is 100,200,300,400,500 (normally 100,175,250,325,425)
 
 UB: 

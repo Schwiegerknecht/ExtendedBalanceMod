@@ -7,7 +7,8 @@ includes all changes from BalanceMod 1.31 which weren't later overwritten.
 If you want to know what was changed (and maybe changed back) in which version,
 see Change_List.txt.
 
-CURRENT STATUS: Everything from BalanceMod 1.31 and up to 0.6
+CURRENT STATUS:
+All changes from BalanceMod 1.31 and Extended BalanceMod 0.6 are included.
 
 #################################################################################################################
 # v0.6
@@ -55,6 +56,8 @@ Sacrifice:
 - FIX: Sacrifice now works as advertised. (Radius = 10)
 
 ---------------------Queen of Thorns---------------------
+Stance Switch:
+- Time needed: 0.8 seconds (normally 1.5)
 Bramble Shield:
 - Mana Cost: 400/550/650/700 (normally 400/560/720/840)
 Compost:
@@ -112,7 +115,7 @@ Structural Transfer:
 
 ---------------------Sedna---------------------
 Turn Rate:
-  - 720 (normally 450)
+- 720 (normally 450)
 Horn of the Yeti:
 - Turn Rate: 360 (normally 180)
 - Attack radius: 6 (normally 5)
@@ -130,7 +133,8 @@ Inspiring Roar:
 - Duration: 10 (normally 5)
 
 ---------------------Torch Bearer---------------------
-Mode Switch Time: 0.8 seconds (normally 1.5)
+Stance Switch:
+- Time needed: 0.8 seconds (normally 1.5)
 Deep Freeze:
 - Consume Damage: 100/200/300/400/500 (normally 100/175/250/325/425)
 - Debuff Duration: 5/5/5/5 seconds (normally 5/6/7/7)
@@ -554,7 +558,7 @@ Note for Modders:
 Just for ease of access, stance switch times are now accessible via
 Ability.HEMA01SwitchIce.SwitchDuration and
 Ability.HEMA01SwitchFire.SwitchDuration, respectively (via
-HEMA01_Abilities.lua). No change to switch times.
+HEMA01_Abilities.lua).
 
 ---------------------Unclean Beast---------------------
 UB's Plague is hopefully playable now.

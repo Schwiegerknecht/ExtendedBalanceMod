@@ -8,7 +8,10 @@ Ability.AchievementAEHeal.CastAction = 'CastItem1sec'
 -- Increase Saam-El's clock speed bonus to 10%, up from 5%
 Buffs.AchievementMovement.Affects.MoveMult.Mult = 0.10 
 -- Decrease diamond Pendant cooldown by 15%, up from 10%
+-- Brutally forced the tooltip because the game literally won't display -15% o.O
 Buffs.AchievementCooldown.Affects.Cooldown.Mult = -.15
+table.removeByValue(Items.AchievementCooldown.Tooltip.Bonuses, '<LOC ITEM_Achievement_0009>[GetCooldownBonus]% to ability cooldowns')
+table.insert( Items.AchievementCooldown.Tooltip.Bonuses, '-15% to ability cooldowns' )
 -- Increase diamond pendant mana bonus to 525 up from 250 (this item was way out of balance whack compared to Staff of renewal, and is even now still weaker)
 Buffs.AchievementCooldown.Affects.MaxEnergy.Add = 525 
 -- Increase Charm of Life health regeneration to 12 up from 5 (10 from BalMod 1.31) -- Schwiegerknecht
