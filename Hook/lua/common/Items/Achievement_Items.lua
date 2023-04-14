@@ -5,13 +5,10 @@ Ability.AchievementTeleport.Cooldown = 35
 Ability.AchievementAEHeal.CastingTime = 1 
 --Switch blood soaked wand cast animation to 1 second (because we reduced it from 2)
 Ability.AchievementAEHeal.CastAction = 'CastItem1sec' 
--- Increase Saam-El's clock speed bonus to 10%, up from 5%
+-- Increase Saam-El's clock speed bonus to 10%, up from 5% and make description more precise
 Buffs.AchievementMovement.Affects.MoveMult.Mult = 0.10 
--- Decrease diamond Pendant cooldown by 15%, up from 10%
--- Brutally forced the tooltip because the game literally won't display -15% o.O
-Buffs.AchievementCooldown.Affects.Cooldown.Mult = -.15
-table.removeByValue(Items.AchievementCooldown.Tooltip.Bonuses, '<LOC ITEM_Achievement_0009>[GetCooldownBonus]% to ability cooldowns')
-table.insert( Items.AchievementCooldown.Tooltip.Bonuses, '-15% to ability cooldowns' )
+Items.AchievementMovement.GetMovementProtectionBasePercent = function(self) return math.floor((1 + Buffs.AchievementMovement.Affects.MoveSlowCap.Mult) * 100) end
+Items.AchievementMovement.Tooltip.Passives = 'Movement Speed cannot be reduced below [GetMovementProtectionBasePercent]% of the base speed.'
 -- Increase diamond pendant mana bonus to 525 up from 250 (this item was way out of balance whack compared to Staff of renewal, and is even now still weaker)
 Buffs.AchievementCooldown.Affects.MaxEnergy.Add = 525 
 -- Increase Charm of Life health regeneration to 12 up from 5 (10 from BalMod 1.31) -- Schwiegerknecht
@@ -84,12 +81,6 @@ table.insert(Items.AchievementMinionDamage.Tooltip.MBonuses, '+[GetMinionAttackS
 -- Schwiegerknecht start
 ##############################################################################
 
--- Give Diamond Pendant 5 mana regen (EBM 0.6)
-Buffs.AchievementCooldown.Affects.EnergyRegen = {Add = 6}
--- Adjust Description
-Items.AchievementCooldown.GetManaRegenBonus =  function(self) return Buffs['AchievementCooldown'].Affects.EnergyRegen.Add end
-table.insert( Items.AchievementCooldown.Tooltip.Bonuses,'+[GetManaRegenBonus] Mana Per Second')
-
 -- Add minion HP regeneration to Tome of Endurance
 Buffs.AchievementMinionHealthBuff.Affects.Regen = {Add = 5}
 Items.AchievementMinionHealth.GetMinionRegenBonus = function(self) return Buffs['AchievementMinionHealthBuff'].Affects.Regen.Add end
@@ -124,7 +115,50 @@ end
 Items.AchievementAERegen.GetAffectRadius = function(self) return Ability['AchievementAERegen'].AffectRadius end
 Items.AchievementAERegen.Description = 'Use: Ally Demigods in Radius [GetAffectRadius] receive +[GetRegenBonus] Health Per Second for [GetDuration] seconds. Stuns, Freezes or Interrupts will break this effect.\n\nThe effect works only on Demigods.'
 
+# Diamond Pendant
+#################
 
+-- Give Diamond Pendant 3 mana regen (EBM 0.6)
+Buffs.AchievementCooldown.Affects.EnergyRegen = {Add = 3}
+-- Adjust Description
+Items.AchievementCooldown.GetManaRegenBonus =  function(self) return Buffs['AchievementCooldown'].Affects.EnergyRegen.Add end
+table.insert( Items.AchievementCooldown.Tooltip.Bonuses,'+[GetManaRegenBonus] Mana Per Second')
+
+-- Reduce CDR to 10% again and make it an aura
+table.insert( Items.AchievementCooldown.Abilities, 1, AbilityBlueprint {
+	AbilityType = 'Aura',
+	AffectRadius = 20,
+	AuraPulseTime = 5,
+	FromItem = 'AchievementCooldown',
+	Icon = '/NewIcons/AchievementRewards/DiamondEncrustedPendant',
+	Name = 'AchievementCooldown_Aura',
+	TargetAlliance = 'Ally',
+	TargetCategory = 'HERO - UNTARGETABLE',
+	Buffs = {
+		BuffBlueprint {
+			BuffType = 'ACHIEVEMENTCOOLDOWNAURA',
+			Debuff = false,
+			DisplayName = 'Diamond Pendant',
+			Description = '-10% to ability cooldowns',
+			Duration = 5,
+			EntityCategory = 'HERO',
+			Icon = '/NewIcons/AchievementRewards/DiamondEncrustedPendant',
+			Name = 'AchievementCooldown_Aura',
+			Stacks = 'ALWAYS',
+			Affects = {
+				Cooldown = {Mult = -0.10},
+			},
+		},
+	},
+})
+-- Remove old CDR and its Tooltip, add new aura Tooltip
+table.removeByValue( Items.AchievementCooldown.Tooltip.Bonuses, '<LOC ITEM_Achievement_0009>[GetCooldownBonus]% to ability cooldowns' )
+Buffs.AchievementCooldown.Affects.Cooldown = nil
+Items.AchievementCooldown.GetCooldownBonus = nil
+Items.AchievementCooldown.GetCooldownAuraBonus = function(self) return Buffs['AchievementCooldown_Aura'].Affects.Cooldown.Mult * 100 * -1 end
+if not Items.AchievementCooldown.Tooltip.Auras then
+	Items.AchievementCooldown.Tooltip.Auras = '[GetCooldownAuraBonus]% Cooldown Reduction Aura'
+end
 
 # Staff of the Warmage
 ######################

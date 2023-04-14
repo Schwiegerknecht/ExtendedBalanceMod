@@ -19,9 +19,6 @@ Sedna:
 Wild Swings:
 - Yeti will now knockup smaller units with their auto-attacks.
 
-Torch Bearer:
-Deep Freeze:
-- Debuff Duration: 5/5/5/5 seconds (normally 5/6/7/7)
 
 # Items
 ############################################################
@@ -57,8 +54,12 @@ Magus Rod:
 ------------------------------------------------------------
 
 Diamond Pendant:
-- Cooldown Reduction: 15% (from 13%)
-- Mana Regen: 6 (normally 0)
+
+- Mana Regen: 3 (normally 0)
+Replaced the usual Cooldown Reduction with a stackable Aura
+- Aura:
+  - Cooldown Reduction: 10% (normally 0)
+  - Range: 20 (same as Hungarling's Crown)
 
 Mard's Hammer:
 - Weapon Damage added per hero level: 2 (from 3)

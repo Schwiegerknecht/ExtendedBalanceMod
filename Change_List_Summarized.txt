@@ -137,7 +137,6 @@ Stance Switch:
 - Time needed: 0.8 seconds (normally 1.5)
 Deep Freeze:
 - Consume Damage: 100/200/300/400/500 (normally 100/175/250/325/425)
-- Debuff Duration: 5/5/5/5 seconds (normally 5/6/7/7)
 
 ---------------------Unclean Beast---------------------
 Base Speed: 6.0 (normally 6.3)
@@ -429,8 +428,11 @@ Dark Crimson Vial:
 
 Diamond Pendant:
 - Mana: 525 (nomally 250)
-- Cooldown Reduction: 15% (normally 10%)
-- Mana Regen: 6 (normally 0)
+- Mana Regen: 3 (normally 0)
+Replaced the usual Cooldown Reduction with a stackable Aura
+- Aura:
+  - Cooldown Reduction: 10% (normally 0)
+  - Range: 20 (same as Hungarling's Crown)
 
 Amulet of Teleportation:
 - Cooldown: 35 (normally 45)
@@ -553,7 +555,7 @@ High:
 - 22500 Fort HP, 135 dmg (from 15000, 90)
 [Note: This actually increases the % Health Bonus that Towers get from Fortified Structures, since that calculates off of Normal Towers]
 
----------------------Torchbearer---------------------
+---------------------Torch Bearer---------------------
 Note for Modders:
 Just for ease of access, stance switch times are now accessible via
 Ability.HEMA01SwitchIce.SwitchDuration and
