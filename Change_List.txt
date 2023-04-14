@@ -33,7 +33,7 @@ Slayer's Wraps:
 Gloves of Fell-Darkur:
 Weapon Proc: Replaced the cleave with a fiery blast! After the blast,
              the target takes burn damage over time.
-- Proc Chance: 40% melee, 25% ranged
+- Proc Chance: 30% melee, 25% ranged
 - Proc Damage: 200
 - Proc Affect Radius: 3
 - Burn damage: 50 damage per second. Lasts 3 seconds.
