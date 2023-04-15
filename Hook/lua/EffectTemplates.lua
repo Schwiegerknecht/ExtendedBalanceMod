@@ -5,8 +5,6 @@ if not EffectTemplates.Items.Glove.GlovesOfFellDarkurProc then
         '/effects/emitters/heroes/torchbearer/attack/spell/nova/fire/h_tb_atk_s_n_fi_12_castfire_h_emit.bp',
         -- The ground effect (?) from FireNovaCast01
         '/effects/emitters/heroes/torchbearer/attack/spell/nova/fire/h_tb_atk_s_n_fi_12_castfire_l_emit.bp',
-        -- Sparks from FireNova01
-        --'/effects/emitters/heroes/torchbearer/attack/spell/nova/fire/h_tb_atk_s_n_fi_10_sparks_h_emit.bp',
         -- The ground burst from FireRing01
         '/effects/emitters/heroes/torchbearer/attack/spell/ring/fire/h_tb_atk_s_r_fi_03_groundburst_h_emit.bp',
         -- From FireBallImpact01

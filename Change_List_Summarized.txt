@@ -341,11 +341,16 @@ Ashkandor:
 
 Stormbringer: =====[REWORK]=====
 All old stats and old passive removed. Stormbringer now brings storm and lightning!
-- WeaponProc: 50% chance on hit to strike nearby enemies with lightning, hitting 4 enemies for 125 damage each.
-- On Use: Summon 5 waves of hail, doing 200 area damage and slowing movement speed of all enemy units by 10%.
-    - Cooldown: 40 seconds.
-    - Affect Radius: 8 (TB's Rain of Ice is 10)
-    - Ice Rain movement slow: 15%
+- WeaponProc: chance on hit to strike nearby enemies with a chain of lightning
+  - WeaponProc Chance: 50%
+  - Damage: 125
+  - Max Lightning Chain: 4
+- On Use: Summon 5 waves of hail that slow increasingly more, with the last wave immobilizing.
+  - Damage per wave: 200
+  - Cooldown: 40 seconds
+  - Affect Radius: 10 (TB's Rain of Ice is 10)
+  - Ice Rain movement slow: 20/40/60/80%/Immobility
+  - Slow/Immobility Duration: 5 seconds
 - 20% Attack Speed (normally 0)
 - Passive: 10% Movement speed aura for allies in radius 15
 

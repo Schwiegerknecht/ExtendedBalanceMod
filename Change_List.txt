@@ -53,6 +53,13 @@ Magus Rod:
 
 ------------------------------------------------------------
 
+Stormbringer:
+The waves of hail now slow increasingly more, with the last wave immobilizing
+- Ice Rain movement slow: 20/40/60/80%/Immobility (from 15/15/15/15/15%)
+- Hail Affect Radius: 10 (from 8)
+
+------------------------------------------------------------
+
 Diamond Pendant:
 
 - Mana Regen: 3 (normally 0)

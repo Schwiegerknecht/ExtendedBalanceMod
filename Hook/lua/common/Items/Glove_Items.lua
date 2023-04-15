@@ -144,7 +144,7 @@ Ability.Item_Glove_060_WeaponProc.OnWeaponProc = function(self, unit, target, da
     local affectedEntities = {}
     # Filter untargetables. Fire TB is immune, too
     for k, vEntity in entities do
-        if not EntityCategoryContains(categories.UNTARGETABLE,vEntity) and not( vEntity.Character.CharBP.Name == 'MageFire') then
+        if not EntityCategoryContains(categories.UNTARGETABLE,vEntity) then -- and not( vEntity.Character.CharBP.Name == 'MageFire') then
             table.insert(affectedEntities, vEntity)
         end
     end
@@ -172,10 +172,10 @@ Ability.Item_Glove_060_WeaponProc.OnWeaponProc = function(self, unit, target, da
     }
     DamageArea( data, affectedEntities )
 
-    # Apply damage over time. Fire TB is immune
-    if not (target.Character.CharBP.Name == 'MageFire') then
+    # Apply damage over time. --Fire TB is immune
+    --if not (target.Character.CharBP.Name == 'MageFire') then
         Buff.ApplyBuff(target, 'Item_Glove_060_DoT', unit)
-    end
+    --end
 end
 -- Update description
 Items.Item_Glove_060.GetProcChanceRanged = function(self) return Ability['Item_Glove_060_WeaponProc'].WeaponProcChanceRanged end

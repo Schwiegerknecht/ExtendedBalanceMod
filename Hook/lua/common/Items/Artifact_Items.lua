@@ -263,15 +263,21 @@ function CallRain( abilityDef, unit, params, projectile )
 
         DamageArea(data)
         
-        if abilityDef.Buff1 and abilityDef.Buff2 then
+        if abilityDef.SlowDebuff == true then
             local entities = GetEntitiesInSphere("UNITS", pos, abilityDef.AffectRadius)
-            for k,entity in entities do
-                if IsEnemy(unit:GetArmy(),entity:GetArmy()) and not entity:IsDead() and EntityCategoryContains(categories.MOBILE, entity) and not EntityCategoryContains(categories.NOBUFFS, entity) and not EntityCategoryContains(categories.UNTARGETABLE, entity) then
-                    Buff.ApplyBuff(entity, abilityDef.Buff1, unit)
-                    Buff.ApplyBuff(entity, abilityDef.Buff2, unit)
-                    -- if Validate.HasAbility(unit,'HEMA01Clarity') then
-                    --     Buff.ApplyBuff(entity, 'HEMA01ClarityBuff', unit)
-                    -- end
+            if j < 5 then
+                for k,entity in entities do
+                    if IsEnemy(unit:GetArmy(),entity:GetArmy()) and not entity:IsDead() and EntityCategoryContains(categories.MOBILE, entity) and not EntityCategoryContains(categories.NOBUFFS, entity) and not EntityCategoryContains(categories.UNTARGETABLE, entity) then
+                        Buff.ApplyBuff(entity, 'Item_Artifact_080_Slow_0'..j, unit)
+                        Buff.ApplyBuff(entity, 'Item_Artifact_080_FreezeSlowFx01', unit)
+                    end
+                end
+            elseif j >= 5 then
+                for k,entity in entities do
+                    if IsEnemy(unit:GetArmy(),entity:GetArmy()) and not entity:IsDead() and EntityCategoryContains(categories.MOBILE, entity) and not EntityCategoryContains(categories.NOBUFFS, entity) and not EntityCategoryContains(categories.UNTARGETABLE, entity) then
+                        Buff.ApplyBuff(entity, 'Item_Artifact_080_Slow_Immobile', unit)
+                        Buff.ApplyBuff(entity, 'Item_Artifact_080_FreezeSlowFx01', unit)
+                    end
                 end
             end
         end
@@ -282,10 +288,10 @@ function CallRain( abilityDef, unit, params, projectile )
         end
     end
 end
-
+         
 -- Movement Slow Buff
 BuffBlueprint {
-    Name = 'Item_Artifact_080_Slow',
+    Name = 'Item_Artifact_080_Slow_01',
     DisplayName = 'Stormbringer',
     Description = 'Movement Speed reduced.',
     BuffType = 'Item_Artifact_080_SLOWUNITRAIN',
@@ -293,10 +299,73 @@ BuffBlueprint {
     CanBeDispelled = true,
     EntityCategory = 'MOBILE',
     Stacks = 'REPLACE', -- use 'ALWAYS' for slow that stacks for each wave, 'REPLACE' for singular slow
+    Duration = Items.Item_Artifact_080.Abilities.SlowDuration,
+    Affects = {
+        MoveMult = {Mult = -0.2},
+    },
+    Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
+}
+BuffBlueprint {
+    Name = 'Item_Artifact_080_Slow_02',
+    DisplayName = 'Stormbringer',
+    Description = 'Movement Speed reduced.',
+    BuffType = 'Item_Artifact_080_SLOWUNITRAIN',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    Duration = Items.Item_Artifact_080.Abilities.SlowDuration,
+    Affects = {
+        MoveMult = {Mult = -0.4},
+    },
+    Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
+}
+BuffBlueprint {
+    Name = 'Item_Artifact_080_Slow_03',
+    DisplayName = 'Stormbringer',
+    Description = 'Movement Speed reduced.',
+    BuffType = 'Item_Artifact_080_SLOWUNITRAIN',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    Duration = Items.Item_Artifact_080.Abilities.SlowDuration,
+    Affects = {
+        MoveMult = {Mult = -0.6},
+    },
+    Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
+}
+BuffBlueprint {
+    Name = 'Item_Artifact_080_Slow_04',
+    DisplayName = 'Stormbringer',
+    Description = 'Movement Speed reduced.',
+    BuffType = 'Item_Artifact_080_SLOWUNITRAIN',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    Duration = Items.Item_Artifact_080.Abilities.SlowDuration,
+    Affects = {
+        MoveMult = {Mult = -0.8},
+    },
+    Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
+}
+BuffBlueprint {
+    Name = 'Item_Artifact_080_Slow_Immobile',
+    DisplayName = 'Stormbringer',
+    Description = 'Immobilized.',
+    BuffType = 'Item_Artifact_080_IMMOBILIZEUNITRAIN',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    
     Duration = 5,
     Affects = {
-        MoveMult = {Mult = -0.15},
+        UnitImmobile = {Bool = true},
     },
+    Effects = 'Impedance01',
+    EffectsBone = -2,
     Icon = '/dgtorchbearer/NewTorchBearRainofIce01',
 }
 BuffBlueprint {
@@ -306,7 +375,7 @@ BuffBlueprint {
     Debuff = true,
     CanBeDispelled = true,
     Stacks = 'REPLACE',
-    Duration = 5,
+    Duration = Items.Item_Artifact_080.Abilities.SlowDuration,
     Affects = {
         Dummy = {},
     },
@@ -322,8 +391,8 @@ Items.Item_Artifact_080.InventoryType = 'Clickables'
 
 -- New AbilityBlueprint with RainOfIce
 -- Simply inserting this (at last index) leads to only single targeting and
--- permanently applying the Quiet Affects from Buffs.Item_Artifact_080. Index 1
--- works. Not sure why that is.
+-- permanently applying the Quiet Affects from Buffs.Item_Artifact_080.
+-- Index 1 works. Not sure why that is.
 table.insert(Items.Item_Artifact_080.Abilities, 1, AbilityBlueprint {
     Name = 'Item_Artifact_080_Usable',
     AbilityType = 'TargetedArea',
@@ -338,12 +407,12 @@ table.insert(Items.Item_Artifact_080.Abilities, 1, AbilityBlueprint {
     RangeMax = 20,
     Cooldown = 40,
     DamageAmt = 200,
-    AffectRadius = 8,
-    NumFireBalls = 5,
+    AffectRadius = 10,
+    NumFireBalls = 8,
     NumWaves = 5,
     DamageType = 'SpellFire',
-    Buff1 = 'Item_Artifact_080_Slow',
-    Buff2 = 'Item_Artifact_080_FreezeSlowFx01',
+    SlowDebuff = true,
+    SlowDuration = 5,
     CastAction = 'CastFreeze',
     CastingTime = 0.1,
     FollowThroughTime = 0.2,
@@ -363,10 +432,13 @@ table.insert(Items.Item_Artifact_080.Abilities, 1, AbilityBlueprint {
 Items.Item_Artifact_080.GetCooldown = function(self) return Ability.Item_Artifact_080_Usable.Cooldown end
 Items.Item_Artifact_080.GetDamage = function(self) return Ability.Item_Artifact_080_Usable.DamageAmt end
 Items.Item_Artifact_080.GetWaves = function(self) return Ability.Item_Artifact_080_Usable.NumWaves end
-Items.Item_Artifact_080.GetMovementSlow = function(self) return math.floor(Buffs.Item_Artifact_080_Slow.Affects.MoveMult.Mult * 100 * (-1)) end
-Items.Item_Artifact_080.GetMovementSlowDuration = function(self) return Buffs.Item_Artifact_080_Slow.Duration end
+Items.Item_Artifact_080.GetMoveSlow01 = function(self) return math.floor(Buffs.Item_Artifact_080_Slow_01.Affects.MoveMult.Mult * 100 * (-1)) end
+Items.Item_Artifact_080.GetMoveSlow02 = function(self) return math.floor(Buffs.Item_Artifact_080_Slow_02.Affects.MoveMult.Mult * 100 * (-1)) end
+Items.Item_Artifact_080.GetMoveSlow03 = function(self) return math.floor(Buffs.Item_Artifact_080_Slow_03.Affects.MoveMult.Mult * 100 * (-1)) end
+Items.Item_Artifact_080.GetMoveSlow04 = function(self) return math.floor(Buffs.Item_Artifact_080_Slow_04.Affects.MoveMult.Mult * 100 * (-1)) end
+Items.Item_Artifact_080.GetMovementSlowDuration = function(self) return Ability.Item_Artifact_080_Usable.SlowDuration end
 Items.Item_Artifact_080.Tooltip.Cooldown = Items.Item_Artifact_080.GetCooldown
-Items.Item_Artifact_080.Description = 'Use: Summon [GetWaves] waves of hail to the targeted location, each wave doing [GetDamage] damage and slowing enemies by [GetMovementSlow]% for [GetMovementSlowDuration] seconds.'
+Items.Item_Artifact_080.Description = 'Use: Summon [GetWaves] waves of hail, each doing [GetDamage] damage. The first 4 waves slow enemies by [GetMoveSlow01]/[GetMoveSlow02]/[GetMoveSlow04]/[GetMoveSlow04]%, the last wave immobilizes for [GetMovementSlowDuration] seconds.'
 -- Items.Item_Artifact_080.Tooltip.Bonuses = {}
 -- Items.Item_Artifact_080.Tooltip.ChanceOnHit = {}
 
