@@ -5,8 +5,10 @@ Ability.AchievementTeleport.Cooldown = 35
 Ability.AchievementAEHeal.CastingTime = 1 
 --Switch blood soaked wand cast animation to 1 second (because we reduced it from 2)
 Ability.AchievementAEHeal.CastAction = 'CastItem1sec' 
--- Increase Saam-El's clock speed bonus to 10%, up from 5% and make description more precise
-Buffs.AchievementMovement.Affects.MoveMult.Mult = 0.10 
+-- Increase Saam-El's clock speed bonus to 7%, up from 5% and make description more precise
+Buffs.AchievementMovement.Affects.MoveMult.Mult = 0.07
+-- Increase MoveSlowCap to base speed
+Buffs.AchievementMovement.Affects.MoveSlowCap.Mult = 0 
 Items.AchievementMovement.GetMovementProtectionBasePercent = function(self) return math.floor((1 + Buffs.AchievementMovement.Affects.MoveSlowCap.Mult) * 100) end
 Items.AchievementMovement.Tooltip.Passives = 'Movement Speed cannot be reduced below [GetMovementProtectionBasePercent]% of the base speed.'
 -- Increase diamond pendant mana bonus to 525 up from 250 (this item was way out of balance whack compared to Staff of renewal, and is even now still weaker)

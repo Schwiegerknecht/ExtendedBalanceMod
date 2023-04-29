@@ -7,7 +7,7 @@ Buffs.Item_Glove_030_Drain.Affects.Energy.Add = -400
 -- Increase Slayer's Wraps damage to 35 up from 30
 Buffs.Item_Glove_070_Buff.Affects.DamageRating.Add = 35
 
-# REMOVED. Doomspite cleave goes to Fell-Darkur, Doomspite get new passive. 
+# REMOVED. Doomspite gets new passive
 # See below. - Schwiegerknecht
 --[[ Increase Doomspite cleave chance to 50% up from 25%
 Ability.Item_Glove_050_WeaponProc.WeaponProcChance = 50
@@ -103,7 +103,7 @@ Buffs.Item_Glove_050.Affects.RateOfFire.Mult = 0.20
 
 -- Add Weapon Proc that actually creates a fiery blast.
 Ability.Item_Glove_060_WeaponProc.WeaponProcChance = 30
-Ability.Item_Glove_060_WeaponProc.WeaponProcChanceRanged = 25
+Ability.Item_Glove_060_WeaponProc.WeaponProcChanceRanged = 15
 Ability.Item_Glove_060_WeaponProc.ProcDamage = 200
 Ability.Item_Glove_060_WeaponProc.DamageType = 'SpellFire'
 Ability.Item_Glove_060_WeaponProc.AffectRadius = 3
@@ -181,7 +181,8 @@ end
 Items.Item_Glove_060.GetProcChanceRanged = function(self) return Ability['Item_Glove_060_WeaponProc'].WeaponProcChanceRanged end
 Items.Item_Glove_060.GetProcDamage = function(self) return math.floor( Ability['Item_Glove_060_WeaponProc'].ProcDamage ) end
 Items.Item_Glove_060.GetDotDuration = function(self) return Buffs['Item_Glove_060_DoT'].Duration end
-Items.Item_Glove_060.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit ([GetProcChanceRanged]% for ranged attacks) to unleash a fiery blast, dealing [GetProcDamage] damage to nearby units. The target takes burn damage for [GetDotDuration] seconds.'
+Items.Item_Glove_060.GetDotDmg = function(self) return Buffs['Item_Glove_060_DoT'].Affects.Health.Add * (-1) * Buffs['Item_Glove_060_DoT'].DurationPulse end
+Items.Item_Glove_060.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit ([GetProcChanceRanged]% for ranged attacks) to unleash a fiery blast, dealing [GetProcDamage] damage to nearby units. The target takes [GetDotDmg] burn damage over [GetDotDuration] seconds.'
 -- Gloves of Fell-Darkur: Add 15% Attack Speed 
 Buffs.Item_Glove_060.Affects.RateOfFire = {Mult = 0.15}
 Items.Item_Glove_060.GetAttackSpeedBonus = function(self) return math.floor(Buffs['Item_Glove_060'].Affects.RateOfFire.Mult * 100) end

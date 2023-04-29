@@ -255,7 +255,7 @@ Slayer's Wraps:
 Gloves of Fell-Darkur:
 WeaponProc: Chance on hit to cause a fiery blast! After the blast,
              the target takes burn damage over time.
-  - Proc Chance: 30% melee, 25% ranged
+  - Proc Chance: 30% melee, 15% ranged
   - Proc Damage: 200
   - Proc Affect Radius: 3
   - Burn damage: 50 damage per second. Lasts 3 seconds.
@@ -455,7 +455,8 @@ Wings of the Seraphim:
 - Radius: 15 (normally 8)
 
 Saam-El's Cloak:
-- Movement Speed: 10% (normally 5%)
+- Movement Speed: 7% (normally 5%)
+- Passive: Speed cannot be reduced below 100% of base speed (from 85% of base speed)
 
 ---
 
