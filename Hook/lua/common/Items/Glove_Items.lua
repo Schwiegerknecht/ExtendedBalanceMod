@@ -26,8 +26,8 @@ Items.Item_Glove_020.GetWeaponDamage = function(self) return Buffs['Item_Glove_0
 table.insert(Items.Item_Glove_020.Tooltip.Bonuses, '+[GetArmorBonus] Armor')
 table.insert(Items.Item_Glove_020.Tooltip.Bonuses, '+[GetWeaponDamage] Weapon Damage')
 
--- Add 15% Attack Speed to Wyrmskin Handguards and update description
-Buffs.Item_Glove_040.Affects.RateOfFire = {Mult = 0.15}
+-- Add 10% Attack Speed to Wyrmskin Handguards and update description
+Buffs.Item_Glove_040.Affects.RateOfFire = {Mult = 0.10}
 Items.Item_Glove_040.GetAttackSpeedBonus = function(self) return math.floor( Buffs['Item_Glove_040'].Affects.RateOfFire.Mult * 100) end
 table.insert(Items.Item_Glove_040.Tooltip.Bonuses, '+[GetAttackSpeedBonus]% Attack Speed')
 -- Make Wyrmskin Handguards' description of Proc chance more specific

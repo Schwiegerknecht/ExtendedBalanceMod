@@ -9,6 +9,9 @@
 # Items
 ############################################################
 
+Wyrmskin Handguards:
+- Attack Speed: 10% (from 15%)
+
 Gloves of Fell-Darkur:
 - Ranged Proc Chance: 15% (from 25%)
 

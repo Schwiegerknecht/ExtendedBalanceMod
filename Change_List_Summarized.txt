@@ -239,7 +239,7 @@ Gladiator's Gloves:
 - Weapon Damage: 5 (normally 0)
 
 Wyrmskin Handguards:
-- Attack speed: 15% (normally 0)
+- Attack speed: 10% (normally 0)
 
 Gauntlets of Despair:
 - Turn the mana drain on weapon proc into a mana leech: You gain the mana that the enemy loses.
