@@ -362,7 +362,7 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
 table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
 
--- Add WeaponProc that reduces Armor by 20 per level
+-- Add WeaponProc that reduces Armor by 15 per level
 -- Create Debuff
 BuffBlueprint{
 	Name = 'AchievementDamage_LevelArmorReduction',
@@ -381,11 +381,11 @@ BuffBlueprint{
 table.insert(Items.AchievementDamage.Abilities, 1, AbilityBlueprint {
 	Name = 'AchievementDamage_Proc',
 	AbilityType = 'WeaponProc',
-	LevelArmorReduction = 20,
+	LevelArmorReduction = 15,
 	Icon = 'NewIcons/AchievementRewards/HammerofDestruction',
 	FromItem = 'AchievementDamage',
 	WeaponProcChance = 100,
-    WeaponProcChanceRanged = 50,
+    WeaponProcChanceRanged = 25,
 	OnWeaponProc = function(self, unit, target, damageData)
 		local aiBrain = unit:GetAIBrain()
 		local hero = aiBrain:GetHero()

@@ -29,32 +29,53 @@ Upgrades.Tree.CTroopStrength01.Cost = 500 --Reduced from 1200 to normalize price
 Upgrades.Tree.CTroopStrength02.Cost = 1500 --Reduced from 2400 to normalize price curve
 Upgrades.Tree.CTroopStrength03.Cost = 2500 --Reduced from 3000 to normalize price curve
 Upgrades.Tree.CTroopStrength04.Cost = 3500 --Reduced from 5400 to normalize price curve
+-- Increase Blacksmith Damage Bonus to 20/40/60/80% (normally 20/35/50/65%)
+Buffs.CTroopStrength02.Affects.DamageBonus.Mult = 0.4
+Buffs.CTroopStrength03.Affects.DamageBonus.Mult = 0.6
+Buffs.CTroopStrength04.Affects.DamageBonus.Mult = 0.8
+-- Give Blacksmith IV 25% Attack Speed Bonus
+Buffs.CTroopStrength04.Affects.RateOfFire = {Mult = 0.25}
+-- Update description
+ArmyBonuses.CTroopStrength04.GetAttackSpeedBonus = function(self) return math.floor( Buffs['CTroopStrength04'].Affects.RateOfFire.Mult * 100 ) end
+ArmyBonuses.CTroopStrength04.Description = 'Constructs a blacksmith, increasing reinforcement damage by +[GetDamageBonus]% and reinforcement attack speed by [GetAttackSpeedBonus]%.'
+
 
 -- Lower currency gold income to 3/6/9 (from 4/8/12) to remove absolute necessity for Cur3 
 Buffs.CGoldIncome01.Affects.GoldProduction.Add = 3
 Buffs.CGoldIncome02.Affects.GoldProduction.Add = 6
 Buffs.CGoldIncome03.Affects.GoldProduction.Add = 9
 
+-- Increase Armory MaxHealth bonus to 10/25/50/75% (normally 10/20/30/40%)
+Buffs.CTroopArmor02.Affects.MaxHealth.Mult = .25
+Buffs.CTroopArmor03.Affects.MaxHealth.Mult = .5
+Buffs.CTroopArmor04.Affects.MaxHealth.Mult = .75
+-- Increase Armory Armor bonus to 200/400/600/800 (normally 100/200/300/400)
+Buffs.CTroopArmor01.Affects.Armor.Add = 200
+Buffs.CTroopArmor02.Affects.Armor.Add = 400
+Buffs.CTroopArmor03.Affects.Armor.Add = 600
+Buffs.CTroopArmor04.Affects.Armor.Add = 800
+
 -- Give Building Firepower some range, so it can counter Siege Demolishers and cause the damage bonus is paltry.
 Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 2}
 Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 4}
 Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 6}
--- Increase Building Firepower damage bonus to 10/25/50/100% (normally 10/15/20/25%)
+-- Increase Building Firepower damage bonus to 10/25/50/75% (normally 10/15/20/25%)
 Buffs.CBuildingStrength01.Affects.DamageBonus = {Mult = .1}
 Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .25}
 Buffs.CBuildingStrength03.Affects.DamageBonus = {Mult = .5}
 Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = .75}
 -- Give Building Firepower IV 50% Tower Attack Speed bonus (normally none)
-Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .5}
+--Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .5}
 
 -- Update descriptions
 ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs.CBuildingStrength04.Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength04.GetAttackSpeedBonus = function(self) return math.floor(Buffs.CBuildingStrength04.Affects.RateOfFire.Mult * 100) end
+--ArmyBonuses.CBuildingStrength04.GetAttackSpeedBonus = function(self) return math.floor(Buffs.CBuildingStrength04.Affects.RateOfFire.Mult * 100) end
 ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
 ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius]. Tower Attack Speed increased by [GetAttackSpeedBonus]%.'
+ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].' -- Tower Attack Speed increased by [GetAttackSpeedBonus]%.'
+
 --[[ # Leaving this in, in case we wanna add debuffs to tower shots later
 -- Add WeaponProc to Building Firepower IV that reduces Armor by 100 per shot (infinite stacks)
 Buffs.CBuildingStrength04.OnBuffAffect = function(self, unit)
