@@ -55,10 +55,10 @@ Buffs.CTroopArmor02.Affects.Armor.Add = 400
 Buffs.CTroopArmor03.Affects.Armor.Add = 600
 Buffs.CTroopArmor04.Affects.Armor.Add = 800
 
--- Give Building Firepower some range, so it can counter Siege Demolishers and cause the damage bonus is paltry.
+-- Give Building Firepower some range, so it can counter Siege Demolishers.
 Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 2}
-Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 4}
-Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 6}
+Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 3}
+Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 4}
 -- Increase Building Firepower damage bonus to 10/25/50/75% (normally 10/15/20/25%)
 Buffs.CBuildingStrength01.Affects.DamageBonus = {Mult = .1}
 Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .25}

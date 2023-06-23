@@ -30,6 +30,9 @@ Blacksmith:
 Blacksmith IV:
 - Reinforcement Attack Speed: +25% (normally 0%)
 
+Building Firepower:
+- Tower Range: +0/2/3/4 (from 0/2/4/6)
+    Note: +4 is needed to counter Siege Demolishers
 Building Firepower IV:
 - Removed Attack Speed increase
 
