@@ -68,9 +68,9 @@ Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = .75}
 --Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .5}
 
 -- Update descriptions
-ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs.CBuildingStrength02.Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs.CBuildingStrength03.Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs.CBuildingStrength04.Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs['CBuildingStrength02'].Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs['CBuildingStrength03'].Affects.MaxRadius.Add end
+ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs['CBuildingStrength04'].Affects.MaxRadius.Add end
 --ArmyBonuses.CBuildingStrength04.GetAttackSpeedBonus = function(self) return math.floor(Buffs.CBuildingStrength04.Affects.RateOfFire.Mult * 100) end
 ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
 ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
