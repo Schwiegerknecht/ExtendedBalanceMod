@@ -514,6 +514,8 @@ Fortified Structures:
 Building Firepower:
 - Tower Range Bonus: 0/2/3/4 (normally 0/0/0/0)
 - Damage Bonus: 10/25/50/75% (normally 10/15/20/25%)
+Building Firepower IV:
+- Tower Attack Speed: 25% (from 50%)
 
 Blacksmith:
 - Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
@@ -524,7 +526,7 @@ Blacksmith IV:
 Armory:
 - Cost: 500/1500/2500/3500 gold (normally 600/1800/3000/4800)
 - Reinforcement Maximum Health: +10/25/50/75% (normally 10/20/30/40%)
-- Reinforcement Armor: 200/400/600/800 (normally 100/200/300/400)
+- Reinforcement Armor: 150/300/450/600 (normally 100/200/300/400)
 
 Graveyard:
 - Cost: 500/1500/2500 gold (normally 600/1800/5400)

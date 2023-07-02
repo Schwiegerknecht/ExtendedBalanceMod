@@ -23,7 +23,7 @@ Mard's Hammer:
 
 Armory:
 - Reinforcement Maximum Health: +10/25/50/75% (normally 10/20/30/40%)
-- Reinforcement Armor: 200/400/600/800 (normally 100/200/300/400)
+- Reinforcement Armor: 150/300/450/600 (normally 100/200/300/400)
 
 Blacksmith:
 - Reinforcement Weapon Damage: +20/40/60/80% (normally 20/35/50/65%)
@@ -34,7 +34,7 @@ Building Firepower:
 - Tower Range: +0/2/3/4 (from 0/2/4/6)
     Note: +4 is needed to counter Siege Demolishers
 Building Firepower IV:
-- Removed Attack Speed increase
+- Tower Attack Speed: 25% (from 50%)
 
 
 #################################################################################################################
