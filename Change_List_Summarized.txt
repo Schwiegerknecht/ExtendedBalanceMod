@@ -8,10 +8,10 @@ If you want to know what was changed (and maybe changed back) in which version,
 see Change_List.txt.
 
 CURRENT STATUS:
-All changes from BalanceMod 1.31 and Extended BalanceMod 0.6.2 are included.
+All changes from BalanceMod 1.31 and Extended BalanceMod 0.7 are included.
 
 #################################################################################################################
-# v0.6.2
+# v0.7
 #################################################################################################################
 
 
@@ -263,8 +263,8 @@ WeaponProc: Chance on hit to cause a fiery blast! After the blast,
 
 Doomspite Grips:
 - Attack Speed: 20% (normally 10)
-- WeaponProc: On each hit, target loses 1.5% of its max HP. Only applies to enemy Demigods.
-- Proc Chance: 100%
+- WeaponProc: On each hit, target loses 1% of its max HP. Only applies to enemy Demigods.
+- Proc Chance: 100% melee, 50% ranged 
 
 
 ---------------------Trinkets---------------------
@@ -316,6 +316,18 @@ Warpstone:
 
 
 ---------------------Artifacts---------------------
+
+=====[NEW ARTIFACT]=====
+Shield of the Undead
+- Maximum Health: 800
+- Armor: 1200
+- ArmorProc:
+  - Effect: Demigods have their Attack Speed and Movement Speed reduced. This effect can stack.
+  - Proc Chance: 100%
+  - Attack Speed reduction per stack: -10%
+  - Movement Speed reduction per stack: -5%
+  - Debuff Duration: 5 seconds
+  - Maximum stacks: 3
 
 Orb of Veiled Storms:
 - Cooldown: 30 (normally 45)

@@ -34,23 +34,145 @@ Ability.Item_Artifact_040_2.DamageAmt = 120 -- (normally 80)
 Ability.Item_Artifact_090_WeaponProc.CleaveSize = 5
 Buffs.Item_Artifact_090.Affects.DamageRating.Add = 100
 
--- In case we decide to use crit on Girdle after testing:
---[[ Remove HP regen
-Buffs.Item_Artifact_090.Affects.Regen.Add = nil
-table.removeByValue(Items.Item_Artifact_090.Tooltip.Bonuses, '<LOC ITEM_Artifact_0089>+[GetHealthRegen] Health Per Second')
--- Add 10% chance for 2x crit (normally none)
-table.insert(Items.Item_Artifact_090.Abilities, AbilityBlueprint {
-    Name = 'Item_Artifact_090_Crit',
-    AbilityType = 'WeaponCrit',
-    CritChance = 15,
-    CritMult = 2.0,
-})
--- Update description
-Items.Item_Artifact_090.GetCritChance = function(self) return Ability['Item_Artifact_090_Crit'].CritChance end
-Items.Item_Artifact_090.GetCritMult = function(self) return Ability['Item_Artifact_090_Crit'].CritMult end
-Items.Item_Artifact_090.Tooltip.Passives = '[GetCritChance]% chance to deal a critical strike for [GetCritMult]x damage.'
-]]
 
+#################################################################################################################
+#  Shield of the Undead - NEW ITEM
+#################################################################################################################
+
+ItemBlueprint {
+    Name = 'Item_Artifact_200',
+    DisplayName = '<LOC ITEM_Artifact_2000>Shield of the Undead',
+    GetArmorBonus = function(self) return Buffs['Item_Artifact_200_Quiet'].Affects.Armor.Add end,
+    GetHealthBonus = function(self) return Buffs['Item_Artifact_200_Quiet'].Affects.MaxHealth.Add end,
+    GetProcMoveSlow_1 = function(self) return math.floor(Buffs['Item_Artifact_200_ArmorProcDebuff_1'].Affects.RateOfFire.Mult * 100 * (-1)) end,
+    GetProcMoveSlow_2 = function(self) return math.floor(Buffs['Item_Artifact_200_ArmorProcDebuff_2'].Affects.RateOfFire.Mult * 100 * (-1)) end,
+    GetProcMoveSlow_3 = function(self) return math.floor(Buffs['Item_Artifact_200_ArmorProcDebuff_3'].Affects.RateOfFire.Mult * 100 * (-1)) end,
+    GetProcAttackSlow_1 = function(self) return math.floor(Buffs['Item_Artifact_200_ArmorProcDebuff_1'].Affects.MoveMult.Mult * 100 * (-1)) end,
+    GetProcAttackSlow_2 = function(self) return math.floor(Buffs['Item_Artifact_200_ArmorProcDebuff_2'].Affects.MoveMult.Mult * 100 * (-1)) end,
+    GetProcAttackSlow_3 = function(self) return math.floor(Buffs['Item_Artifact_200_ArmorProcDebuff_3'].Affects.MoveMult.Mult * 100 * (-1)) end,
+    GetArmorProcDuration = function(self) return Ability['Item_Artifact_200_ArmorProc'].ArmorProcDuration end,
+    AttackSpeedSlow_1 = -0.1,
+    AttackSpeedSlow_2 = -0.2,
+    AttackSpeedSlow_3 = -0.3,
+    MoveSlow_1 = -0.05,
+    MoveSlow_2 = -0.1,
+    MoveSlow_3 = -0.15,
+    Tooltip = {
+        Bonuses = {
+            '<LOC ITEM_Artifact_2001>[GetArmorBonus] Armor',
+            '<LOC ITEM_Artifact_2002>[GetHealthBonus] Health',
+        },
+        ChanceOnHit = '<LOC ITEM_Artifact_2003> Enemies attacking with melee or ranged weapons have their Attack Speed and Movement Speed reduced for [GetArmorProcDuration] seconds. This can stack up to 3 times.\nAttack Speed Reduction: 10/20/30%.\nMovement Speed Reduction: 5/10/15%',
+        --ChanceOnHit = '<LOC ITEM_Artifact_2003> Enemies attacking with melee or ranged weapons have their Attack Speed and Movement Speed reduced for [GetArmorProcDuration] seconds. This can stack up to 3 times. Attack Speed Reduction: [GetProcAttackSlow_1], [GetProcAttackSlow_2], [GetProcAttackSlow_3]%. Movement Speed reduction: [GetProcMoveSlow_1], [GetProcMoveSlow_2], [GetProcMoveSlow_3]%',
+    },
+    Mesh = '/meshes/items/chest/chest_mesh',
+    Animation = '/meshes/items/chest/Animations/chest_Idle_anim.gr2',
+    MeshScale = 0.10,
+    Icon = '../../../../../textures/ui/common/BuffFlags/buff_flag_valor',
+    Abilities = {
+        AbilityBlueprint {
+            Name = 'Item_Artifact_200',
+            AbilityType = 'Quiet',
+            FromItem = 'Item_Artifact_200',
+            Icon = '../../../../../textures/ui/common/BuffFlags/buff_flag_valor',
+            Buffs = {
+                BuffBlueprint {
+                    Name = 'Item_Artifact_200_Quiet',
+                    BuffType = 'SHIELDPASSIVE',
+                    Debuff = false,
+                    EntityCategory = 'ALLUNITS',
+                    Stacks = 'ALWAYS',
+                    Duration = -1,
+                    Affects = {
+                        Armor = {Add = 1200},
+                        MaxHealth = {Add = 800},
+                    },
+                }
+            },
+        },
+        AbilityBlueprint {
+            Name = 'Item_Artifact_200_ArmorProc',
+            AbilityType = 'ArmorProc',
+            FromItem = 'Item_Artifact_200',
+            Icon = '../../../../../textures/ui/common/BuffFlags/buff_flag_valor',
+            ArmorProcChance = 100,
+            ArmorProcDuration = 5,
+            OnArmorProc = function(self, unit, data) -- See Ability.lua and ForgeUnit.lua
+                local instigator = data.Instigator
+
+                -- Since we want to debuff the same attackers as with DamageReturn, check for that
+                if data.CanDamageReturn == true and not instigator:IsDead() then
+                    if Buff.HasBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_3') then
+                        Buff.ApplyBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_3', unit)
+                    elseif Buff.HasBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_2') then
+                        Buff.RemoveBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_2')
+                        Buff.ApplyBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_3', unit)
+                    elseif Buff.HasBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_1') then
+                        Buff.RemoveBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_1')
+                        Buff.ApplyBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_2', unit)
+                    else
+                        Buff.ApplyBuff(instigator, 'Item_Artifact_200_ArmorProcDebuff_1', unit)
+                    end
+                end
+            end,
+        }
+    },
+}
+
+BuffBlueprint {
+    Name = 'Item_Artifact_200_ArmorProcDebuff_1',
+    DisplayName = '<LOC ITEM_Artifact_2004>Shield of the Undead - 1 stack',
+    BuffType = 'SHIELDARMORPROC',
+    Icon = '../../../../../textures/ui/common/BuffFlags/buff_flag_valor',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    Duration = Ability.Item_Artifact_200_ArmorProc.ArmorProcDuration,
+    DoNotPulseIcon = true,
+    Affects = {
+        RateOfFire = {Mult = -0.1},
+        MoveMult = {Mult = -0.05}
+    },
+    Effects = 'Slow01',
+    EffectsBone = -2,
+}
+BuffBlueprint {
+    Name = 'Item_Artifact_200_ArmorProcDebuff_2',
+    DisplayName = '<LOC ITEM_Artifact_2005>Shield of the Undead - 2 stacks',
+    BuffType = 'SHIELDARMORPROC',
+    Icon = '../../../../../textures/ui/common/BuffFlags/buff_flag_valor',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    Duration = Ability.Item_Artifact_200_ArmorProc.ArmorProcDuration,
+    DoNotPulseIcon = true,
+    Affects = {
+        RateOfFire = {Mult = -0.2},
+        MoveMult = {Mult = -0.1}
+    },
+    Effects = 'Slow01',
+    EffectsBone = -2,
+}
+BuffBlueprint {
+    Name = 'Item_Artifact_200_ArmorProcDebuff_3',
+    DisplayName = '<LOC ITEM_Artifact_2006>Shield of the Undead - 3 stacks',
+    BuffType = 'SHIELDARMORPROC',
+    Icon = '../../../../../textures/ui/common/BuffFlags/buff_flag_valor',
+    Debuff = true,
+    CanBeDispelled = true,
+    EntityCategory = 'MOBILE',
+    Stacks = 'REPLACE',
+    Duration = Ability.Item_Artifact_200_ArmorProc.ArmorProcDuration,
+    DoNotPulseIcon = true,
+    Affects = {
+        RateOfFire = {Mult = -0.3},
+        MoveMult = {Mult = -0.15}
+    },
+    Effects = 'Slow01',
+    EffectsBone = -2,
+}
 
 #################################################################################################################
 # Stormbringer Rework

@@ -5,7 +5,35 @@
 # TODOs
 
 - Maybe make Parasite Egg's effect a constant passive
-- Perhaps rework Ring of Ancients à la Midgardian Mail/Introduce new item
+- Consider ways to shorten match length.
+  - Tower HP
+  - Tower dmg
+  - Citadel upgrade costs
+  - Trebuchet availability at WR 8 instead of WR 7 (weaken the Rook counter)
+
+#################################################################################################################
+# v0.7
+#################################################################################################################
+
+# Items
+############################################################
+
+=====[NEW ARTIFACT]=====
+Shield of the Undead
+- Maximum Health: 800
+- Armor: 1200
+- ArmorProc:
+  - Effect: Demigods have their Attack Speed and Movement Speed reduced. This effect can stack.
+  - Proc Chance: 100%
+  - Attack Speed reduction per stack: -10%
+  - Movement Speed reduction per stack: -5%
+  - Debuff Duration: 5 seconds
+  - Maximum stacks: 3
+
+Doomspite Grips:
+- WeaponProc:
+  - Health loss: 1% of maximum Health (from 1.5%)
+  - Ranged Proc Chance: 50% (from 100%)
 
 #################################################################################################################
 # v0.6.2

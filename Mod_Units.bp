@@ -113,6 +113,19 @@ UnitBlueprint {
     },
 }
 UnitBlueprint {
+    BlueprintId = "ugbshop05",
+    Merge = true,
+    Shop = {
+        Tree = {
+            # Shield of the Undead
+            Item_Artifact_200 = {
+                Cost = 8000,
+                ItemBP = 'Item_Artifact_200',
+            },
+        },
+    },
+}
+UnitBlueprint {
     BlueprintId = "ugbshop05consumables",
     Merge = true,
     Shop = {

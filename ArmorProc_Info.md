@@ -1,3 +1,42 @@
+# Miscellaneous info on Armor Procs
+
+The following functions are called in order from bottom to top when an Armor Proc happens:
+
+`ArmorProc` (Ability.lua)
+`DoArmorProcs` (ForgetUnit.lua)
+`DoTakeDamage` (ForgetUnit.lua)
+`OnDamage` (ForgetUnit.lua)
+`DealDamage`
+`DoDamage`
+
+
+`DoTakeDamage` accesses the data from the attack event, so maybe try passing that as argument to `DoArmorProcs` and `ArmorProc` (in Ability.lua), so that OnArmorProc can access it in an ability blueprint.
+
+## Passing the `def` argument (see code in next section):
+{
+  AbilityCategory="GENERIC",
+  AbilityType="ArmorProc",
+  ArmorProcChance=100,
+  FromItem="Item_Artifact_200",
+  Icon="../../../../../textures/ui/common/BuffFlags/buff_flag_valor",
+  Name="Item_Artifact_200_ArmorProc",
+  OnArmorProc=function: 19C527A8
+}
+
+## Passing the `params` argument:
+nil
+
+## Passing the `damageData` argument:
+nil
+
+## Passing the `instigator` argument:
+nil
+
+## Passing the `target` argument:
+nil
+
+# Attemps to access attacker's data in OnArmorProc
+
 OnArmorProc = function(self, unit, instigator)
     # unit = Item owner, instigator = projectile that hits unit?
     LOG(repr(instigator.DamageData))
@@ -14,8 +53,7 @@ OnArmorProc = function(self, unit, instigator)
     end
 end
 
-For function(self, unit, X) check for various arguments X:
-
+For OnArmorProc = function(self, unit, X) check for various arguments X:
 Argument X: View function
 Result
 ---

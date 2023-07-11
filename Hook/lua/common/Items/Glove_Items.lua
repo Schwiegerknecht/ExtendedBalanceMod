@@ -78,22 +78,23 @@ BuffBlueprint {
     Stacks = 'ALWAYS',
     Duration = 0,
     Affects = {
-        Health = {MaxHealthPercent = -0.015},
+        Health = {MaxHealthPercent = -0.01},
     },
     Effects = 'Manadrain01',
     EffectsBone = -2,
 }
 Ability.Item_Glove_050_WeaponProc.CleaveSize = nil
 Ability.Item_Glove_050_WeaponProc.WeaponProcChance = 100
-Ability.Item_Glove_050_WeaponProc.WeaponProcChanceRanged = 100
+Ability.Item_Glove_050_WeaponProc.WeaponProcChanceRanged = 50
 Ability.Item_Glove_050_WeaponProc.OnWeaponProc = function(self, unit, target, damageData)
-    if not target:IsDead() then
+    if not target:IsDead() and EntityCategoryContains(categories.HERO, target) then
         Buff.ApplyBuff(target, 'Item_Glove_050_Drain', unit)
     end
 end
 -- Update Tooltip
-Items.Item_Glove_050.GetHealthDrain = function(self) return string.format("%.1f", Buffs.Item_Glove_050_Drain.Affects.Health.MaxHealthPercent * 100 * -1) end
-Items.Item_Glove_050.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to make enemy demigods lose [GetHealthDrain]% of their maximum health'
+Items.Item_Glove_050.GetHealthDrain = function(self) return string.format("%.1f", Buffs['Item_Glove_050_Drain'].Affects.Health.MaxHealthPercent * 100 * -1) end
+Items.Item_Glove_050.GetProcChanceRanged = function(self) return Ability['Item_Glove_050_WeaponProc'].WeaponProcChanceRanged end
+Items.Item_Glove_050.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit ([GetProcChanceRanged]% for ranged attacks) to make enemy demigods lose [GetHealthDrain]% of their maximum health'
 
 -- Doomspite Grips: Increase Attack Speed to 20% (normally 10)
 Buffs.Item_Glove_050.Affects.RateOfFire.Mult = 0.20
