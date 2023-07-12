@@ -176,6 +176,7 @@ Assassin's Footguards:
 Ironwalkers:
 - Armor: 450 (normally 0)
 - Mana: 1050 (normally 0)
+- Armor Proc: Activates at anything below 100% of base Movement Speed
 - Armor Proc: 50 Health per second while active (normally 0)
 
 Desperate Boots:
@@ -558,6 +559,14 @@ Currency:
 # Other
 ############################################################
 
+---------------------Included UberFix changes---------------------
+
+As of 0.6.3 Extended BalanceMod includes the following changes from UberFix 1.06 by default:
+- Desperate Boots Fix
+- Ironwalkers Fix and changes to proc mechanics (triggers at percent value of max health)
+- Absorption mechanics (multiple absorption buffs can be active at the same time)
+(But it is still recommended to play with UberFix)
+
 ---------------------General Game Mechanics---------------------
 Maximum Cooldown Reduction is now 50% (from 60%)
 
@@ -586,9 +595,8 @@ Ability.HEMA01SwitchFire.SwitchDuration, respectively (via
 HEMA01_Abilities.lua).
 
 ---------------------Unclean Beast---------------------
-UB's Plague is hopefully playable now.
 - Animations for units affected by Plague have been disabled.
-
+Unfortunately Plague still seems to cause lag.
 
 ---------------------Items and Descriptions---------------------
 All Stuns that give the target a Stun Immunity afterwards have had their
@@ -603,22 +611,18 @@ Theurgist's Cap:
 Favor Items:
 - All Favor Items now cost 1 Favor Point.
 
-Wards:
-All wards should now be targetable and therefore destructible. This hopefully
-allows countering enemy wards with your own. (TESTING REQUIRED!)
-
 ---------------------Minions---------------------
 
 Turn Rate: All minions have had their Turn Rates increased to 360 (normally 180).
 
 ---------------------Reinforcements---------------------
 
-- Angels:
-Damage 90 (normally 45)
-Targeting Priority: Catapultasauri -> Priests -> Everything
+Angels:
+- Damage 90 (normally 45)
+- Targeting Priority: Catapultasauri -> Priests -> Everything
 
-- Catapultasauri:
-Targeting Priority: Demigods -> Structures -> Everything
+Catapultasauri:
+- Targeting Priority: Demigods -> Structures -> Everything
 
-- Priests:
-Targeting Priority: Demigods -> Structures -> Everything
+Priests:
+- Targeting Priority: Demigods -> Structures -> Everything

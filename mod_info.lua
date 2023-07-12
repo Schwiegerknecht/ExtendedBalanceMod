@@ -1,5 +1,5 @@
-    name = "Extended BalanceMod 0.7"
-    version = 0.7
+    name = "Extended BalanceMod 0.6.3"
+    version = 0.63
     copyright = "Copyright � 2012, LORD-ORION, 2022 Schwiegerknecht"
     description = "Balance Changes to Items and Demigods, expanding on LORD-ORION'S BalanceMod 1.31."
     author = "LORD-ORION, Schwiegerknecht"                              # Optional author info

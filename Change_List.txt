@@ -4,6 +4,7 @@
 
 # TODOs
 
+- Make enemy wards discoverable and targetable with your own.
 - Maybe make Parasite Egg's effect a constant passive
 - Consider ways to shorten match length.
   - Tower HP
@@ -12,14 +13,14 @@
   - Trebuchet availability at WR 8 instead of WR 7 (weaken the Rook counter)
 
 #################################################################################################################
-# v0.7
+# v0.6.3
 #################################################################################################################
 
 # Items
 ############################################################
 
 =====[NEW ARTIFACT]=====
-Shield of the Undead
+Shield of the Undead:
 - Maximum Health: 800
 - Armor: 1200
 - ArmorProc:
@@ -30,10 +31,31 @@ Shield of the Undead
   - Debuff Duration: 5 seconds
   - Maximum stacks: 3
 
+------------------------------------------------------------
+
 Doomspite Grips:
 - WeaponProc:
   - Health loss: 1% of maximum Health (from 1.5%)
   - Ranged Proc Chance: 50% (from 100%)
+
+------------------------------------------------------------
+
+Ironwalkers:
+Proc: Now activates when you're below 100% of base speed (from 90%)
+
+
+# Others
+############################################################
+
+Extended BalanceMod now includes the following changes from UberFix 1.06 by default:
+- Desperate Boots Fix
+- Ironwalkers Fix and changes to proc mechanics (triggers at percent value of max health)
+- Absorption mechanics (multiple absorption buffs can be active at the same time)
+(But it is still recommended to play with UberFix)
+
+As of EBM 0.6.3, there is no compatibility with FavorMod 2.3.3 anymore. 0.6.2 or
+any version prior still works.
+
 
 #################################################################################################################
 # v0.6.2
