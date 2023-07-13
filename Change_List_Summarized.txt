@@ -561,7 +561,7 @@ Currency:
 
 ---------------------Included UberFix changes---------------------
 
-As of 0.6.3 Extended BalanceMod includes the following changes from UberFix 1.06 by default:
+As of v0.6.3, Extended BalanceMod includes the following changes from UberFix 1.06 by default:
 - Desperate Boots Fix
 - Ironwalkers Fix and changes to proc mechanics (triggers at percent value of max health)
 - Absorption mechanics (multiple absorption buffs can be active at the same time)

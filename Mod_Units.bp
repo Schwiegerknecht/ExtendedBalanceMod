@@ -193,6 +193,17 @@ UnitBlueprint {
 #################################################################################################################
 # Extended BalanceMod start
 #################################################################################################################
+--Oculus - force rechecking on targets that are too close
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = 'hoculus',
+    Weapon = {
+        {
+            AlwaysRecheckTarget = true,
+            MinRadius = 0,
+        },
+    },
+}
 UnitBlueprint {
     BlueprintId = "ugbshop03",
     Merge = true,
@@ -394,13 +405,16 @@ UnitBlueprint {
     Merge = true,
     Categories = {
         'LAND',
-        'NOBUFFS',
+        #'NOBUFFS', -- Removed
         'NOSPLASHDAMAGE',
         'PRELOADRESOURCES',
         'SELECTABLE',
         'VISIBLETORECON',
         #'NOOCCUPYGROUND', -- Removed
         #'UNTARGETABLE', -- Removed
+    },
+    Intel= {
+        Cloak = false,
     },
 }
 # Set old High Tower Strength as the new Normal
