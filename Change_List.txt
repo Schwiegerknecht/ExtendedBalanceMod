@@ -7,7 +7,6 @@
 - Make enemy wards discoverable and targetable with your own.
 - Maybe make Parasite Egg's effect a constant passive
 - Consider ways to shorten match length.
-  - Nerf Graveyard?
   - Tower HP
   - Tower dmg
   - Citadel upgrade costs
