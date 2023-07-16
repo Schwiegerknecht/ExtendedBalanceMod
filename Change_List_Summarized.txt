@@ -323,7 +323,7 @@ Shield of the Undead
 - Maximum Health: 800
 - Armor: 1200
 - ArmorProc:
-  - Effect: Demigods have their Attack Speed and Movement Speed reduced. This effect can stack.
+  - Effect: Attacking Demigods have their Attack Speed and Movement Speed reduced. This effect can stack.
   - Proc Chance: 100%
   - Attack Speed reduction per stack: -10%
   - Movement Speed reduction per stack: -5%
