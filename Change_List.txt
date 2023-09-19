@@ -13,6 +13,34 @@
   - Trebuchet availability at WR 8 instead of WR 7 (weaken the Rook counter)
 
 #################################################################################################################
+# v0.6.4
+#################################################################################################################
+
+# Demigods
+############################################################
+
+Queen of Thorns:
+Closed State:
+- Auto attacks have no cleave anymore (DamageRadius = 0)
+Open State:
+- Auto attacks gain cleave (DamageRadius = 1.5)
+- Attack Speed increase: 10% (normally 0%)
+Spike Wave:
+- Mana Cost: 500/650/800 (from 750/1000/1250)
+- Slow: 15/25/35% (from 15/20/25%)
+Uproot:
+- Uproot can now also target allied towers and enemy mobile units (Demigods,
+  minions and reinforcements).
+  Allied towers are healed and enemy units are immobilized.
+  - Allied tower heal: 200/400/600/800 healing over 10 seconds
+  - Immobilize duration: 1/1.5/2/2.5 seconds
+Violent Siege:
+- Also does 100 damage per second in an area around immobilized enemy units.
+Compost:
+- Compost increases the allied tower heal of Uproot (just like the damage
+  increase vs. enemy towers).
+
+#################################################################################################################
 # v0.6.3
 #################################################################################################################
 
@@ -653,6 +681,7 @@ Armor of Vengeance:
 - Removed HP regeneration from BalanceMod 1.31
 - Health: 200 (normally 0)
 - ArmorProc: 5% chance to increase the damage reflected by 75 (normally no ArmorProc)
+- ArmorProc Duration: 6 seconds
 
 Platemail of the Crusader: 
 - Health: 200 (normally 0)

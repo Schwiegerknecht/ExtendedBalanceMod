@@ -30,69 +30,24 @@ Ability['HEPA01Ooze01'].Description = 'Unclean Beast oozes virulent bodily fluid
 -- Maxing Ooze at lvl 1/4/7/10 would for the first 10 levels do dmg as follows:
 -- 20//20/20/24/25/26/34/36/38/50, after that incrementing in steps of 3.
 
-# Since for-loop does not work for some reason:
-Ability.HEPA01Ooze02.OnAuraPulse = function(self, unit, params)
-    local aiBrain = unit:GetAIBrain()
-    local hero = aiBrain:GetHero()
-    local herolvl = hero:GetLevel()
-    local loseHealth = -(20 + herolvl*1)
-
-    Buffs['HEPA01OozeSelf02'].Affects.Health.Add = loseHealth
-    
-    if unit.AbilityData.OozeOn then
-        Buff.ApplyBuff(unit, 'HEPA01OozeSelf02', unit)
-        if unit:GetHealth() < 100 then
-            local params = { AbilityName = 'HEPA01OozeOff'}
-            Abil.HandleAbility(unit, params)
-        end
-    end
-end
-Ability.HEPA01Ooze03.OnAuraPulse = function(self, unit, params)
-    local aiBrain = unit:GetAIBrain()
-    local hero = aiBrain:GetHero()
-    local herolvl = hero:GetLevel()
-    local loseHealth = -(20 + herolvl*2)
-
-    Buffs['HEPA01OozeSelf03'].Affects.Health.Add = loseHealth
-    
-    if unit.AbilityData.OozeOn then
-        Buff.ApplyBuff(unit, 'HEPA01OozeSelf03', unit)
-        if unit:GetHealth() < 100 then
-            local params = { AbilityName = 'HEPA01OozeOff'}
-            Abil.HandleAbility(unit, params)
-        end
-    end
-end
-Ability.HEPA01Ooze04.OnAuraPulse = function(self, unit, params)
-    local aiBrain = unit:GetAIBrain()
-    local hero = aiBrain:GetHero()
-    local herolvl = hero:GetLevel()
-    local loseHealth = -(20 + herolvl*3)
-
-    Buffs['HEPA01OozeSelf04'].Affects.Health.Add = loseHealth
-    
-    if unit.AbilityData.OozeOn then
-        Buff.ApplyBuff(unit, 'HEPA01OozeSelf04', unit)
-        if unit:GetHealth() < 100 then
-            local params = { AbilityName = 'HEPA01OozeOff'}
-            Abil.HandleAbility(unit, params)
-        end
-    end
-end
-
-#The for-loop, in case somebody gets it to work:
---[[
+# The for-loop, in case somebody gets it to work:
+-- Apparently local variables do the trick, else function declarations within
+-- the outer loop seem to increment i themselves. So it's like nested loops and
+-- OnAuraPulse only returns the value calculated with the highest value of i.
 for i = 2,4 do
-    Ability['HEPA01Ooze0'..i].OnAuraPulse = function(self, unit, params)
+    local ooze = 'HEPA01Ooze0'..i
+    local oozeSelfDmg = 'HEPA01OozeSelf0'..i
+    Ability[ooze].SelfDmgMultiplier = i - 1
+    Ability[ooze].OnAuraPulse = function(self, unit, params)
         local aiBrain = unit:GetAIBrain()
         local hero = aiBrain:GetHero()
         local herolvl = hero:GetLevel()
-        local loseHealth = -(20 + herolvl * (i - 1))
+        local loseHealth = -(20 + herolvl * (self.SelfDmgMultiplier))
 
-        Buffs['HEPA01OozeSelf0'..i].Affects.Health.Add = loseHealth
+        Buffs[oozeSelfDmg].Affects.Health.Add = loseHealth
         
         if unit.AbilityData.OozeOn then
-            Buff.ApplyBuff(unit, 'HEPA01OozeSelf0'..i, unit)
+            Buff.ApplyBuff(unit, oozeSelfDmg, unit)
             if unit:GetHealth() < 100 then
                 local params = { AbilityName = 'HEPA01OozeOff'}
                 Abil.HandleAbility(unit, params)
@@ -100,7 +55,6 @@ for i = 2,4 do
         end
     end
 end
-]]
 
 -- Change Descriptions
 Ability.HEPA01Ooze02.Description = 'Unclean Beast oozes virulent bodily fluids. While active, nearby enemies take [GetDebuffDamage] damage per second and their Attack Speed is slowed by [GetDebuffSlow]%.\n\nUnclean Beast loses Health per second equivalent to 20 + UB\'s level.'

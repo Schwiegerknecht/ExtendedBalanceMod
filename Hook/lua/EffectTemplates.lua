@@ -80,3 +80,6 @@ end
 -- AmbientFireSphereFaint01: Very small flame on the ground
 -- CastFireBall01+03: A downward trail of fire at head height. Kinda nice for Rook maybe?
 -- CastFireBall02: A small flame at head height, not at the object
+
+-- Candidates for special QoT Uproot effects: UprootCast01, UprootCast02,
+-- UprootStructure01, MulchTarget01, GraspingTendrilAura01

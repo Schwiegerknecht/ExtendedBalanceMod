@@ -23,9 +23,12 @@ HQueen = Class(prevClass) {
             #self:GetNavigator():AbortMove()
             #self.Character.IsMoving = false
             self.Sync.AvatarState = 1
-            WaitSeconds(stanceSwitchTime)
+            WaitSeconds(stanceSwitchTime) -- Schwiegerknecht
 
             self.Character:PlayIdle()
+            if Buff.HasBuff(self, 'HQueenUnpackedBuffs') then -- Schwiegerknect
+                Buff.RemoveBuff(self, 'HQueenUnpackedBuffs')
+            end
             
             if Buff.HasBuff( self, 'HQueenPackedWeaponDisable' ) then
                 Buff.RemoveBuff( self, 'HQueenPackedWeaponDisable' )
@@ -35,6 +38,7 @@ HQueen = Class(prevClass) {
             #Buff.RemoveBuff(self, 'Immobile')
             self.TransitionImmobilityActive = false
             Buff.ApplyBuff(self, 'HQueenPackedBuffs', self)
+            
 
             if Buff.HasBuff(self, 'HQueenAbilityDisable') then
                 Buff.RemoveBuff(self, 'HQueenAbilityDisable')
@@ -60,7 +64,7 @@ HQueen = Class(prevClass) {
             self.Character:PlayMove()
             self.Character:PlayAction('Open')
             self.Sync.AvatarState = 2
-            WaitSeconds(stanceSwitchTime)
+            WaitSeconds(stanceSwitchTime) -- Schwiegerknecht
             #self.Character:PlayIdle()
             if Buff.HasBuff(self, 'HQueenPackedBuffs') then
                 Buff.RemoveBuff(self, 'HQueenPackedBuffs')
@@ -76,6 +80,7 @@ HQueen = Class(prevClass) {
             
             #Buff.RemoveBuff(self, 'Immobile')
             self.TransitionImmobilityActive = false
+            Buff.ApplyBuff(self, 'HQueenUnpackedBuffs', self) -- Schwiegerknecht
             if Buff.HasBuff(self, 'HQueenAbilityDisable') then
                 Buff.RemoveBuff(self, 'HQueenAbilityDisable')
             end

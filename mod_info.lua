@@ -1,15 +1,16 @@
-    name = "Extended BalanceMod 0.6.3"
-    version = 0.63
-    copyright = "Copyright � 2012, LORD-ORION, 2022 Schwiegerknecht"
+    name = "Extended BalanceMod 0.6.4"
+    version = 0.64
+    copyright = ""
     description = "Balance Changes to Items and Demigods, expanding on LORD-ORION'S BalanceMod 1.31."
     author = "LORD-ORION, Schwiegerknecht"                              # Optional author info
     url = "https://github.com/Schwiegerknecht/ExtendedBalanceMod/releases"
 
-    uid = "9FC9128E-1E97-11EE-BD20-8315CDB27A8B"
+    uid = "5732B2B4-51AF-11EE-A7BB-3FA57134574D"
     exclusive = false
     ui_only = false
     
     conflicts = {
+    "9FC9128E-1E97-11EE-BD20-8315CDB27A8B", --Extended BalanceMod 0.6.3
     "6B991720-DB23-66LC-7C55-667788A89113", --FavorMod 2.3.3
     "0067ba9d-980f-4e16-b7fb-35aff7e6d3f1", --ExtendedBalmod 0.6.2
     "3829FE54-E675-11ED-912C-12DFFB2CA371", --ExtendedBalmod 0.6.1
