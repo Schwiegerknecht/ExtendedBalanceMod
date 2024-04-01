@@ -89,7 +89,7 @@ Uproot:
   Allied towers are healed and enemy units are immobilized.
   - Allied tower heal: 200/400/600/800 healing over 10 seconds
   - Immobilize duration: 1/1.5/2/2.5 seconds
-- Radius: 20/25/30/35 (normally 20/20/20/20)
+- Radius: 20/22/24/26 (normally 20/20/20/20)
 Uproot III:
 - Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
 Uproot IV:
@@ -273,7 +273,7 @@ Slayer's Wraps:
 Gloves of Fell-Darkur:
 WeaponProc: Chance on hit to cause a fiery blast! After the blast,
              the target takes burn damage over time.
-  - Proc Chance: 30% melee, 15% ranged
+  - Proc Chance: 25% melee, 15% ranged
   - Proc Damage: 200
   - Proc Affect Radius: 3
   - Burn damage: 50 damage per second. Lasts 3 seconds.

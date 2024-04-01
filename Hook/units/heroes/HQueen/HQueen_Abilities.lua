@@ -40,11 +40,12 @@ for i = 1,3 do
     Ability['HQueenCompost0'..i].Description = 'As nearby enemies die, their bodies nourish Queen of Thorns. For every 3 enemies killed, her Health Per Second increases (up to [GetRegen]) and Uproot increases in damage or healing done to towers. Her Shamblers gain Weapon Damage and Health. The effects cap at 9 enemies killed, and the effects diminish over time.'
 end
 
--- Increase uproot range from 20 to match Rook's Treb Hat (range 35)
+-- BalMod 1.31: Increase uproot range from 20 to match Rook's Treb Hat (range 35)
+-- Schwieger: Increase uproot range to 20/22/24/26 (from 20)
 Ability.HQueenUproot01.RangeMax = 20
-Ability.HQueenUproot02.RangeMax = 25
-Ability.HQueenUproot03.RangeMax = 30
-Ability.HQueenUproot04.RangeMax = 35
+Ability.HQueenUproot02.RangeMax = 22
+Ability.HQueenUproot03.RangeMax = 24
+Ability.HQueenUproot04.RangeMax = 26
 
 -- Entourage increase damage to 10 (from 6) 
 Buffs.HQueenEntourageBuff01.Affects.DamageRating.Add = 10

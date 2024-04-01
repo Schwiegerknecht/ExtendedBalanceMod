@@ -103,7 +103,7 @@ Buffs.Item_Glove_050.Affects.RateOfFire.Mult = 0.20
 #######################
 
 -- Add Weapon Proc that actually creates a fiery blast.
-Ability.Item_Glove_060_WeaponProc.WeaponProcChance = 30
+Ability.Item_Glove_060_WeaponProc.WeaponProcChance = 25
 Ability.Item_Glove_060_WeaponProc.WeaponProcChanceRanged = 15
 Ability.Item_Glove_060_WeaponProc.ProcDamage = 200
 Ability.Item_Glove_060_WeaponProc.DamageType = 'SpellFire'
@@ -143,7 +143,7 @@ Ability.Item_Glove_060_WeaponProc.OnWeaponProc = function(self, unit, target, da
 	# Cache all entities in sphere
     local entities = GetEntitiesInSphere('UNITS', pos, self.AffectRadius )
     local affectedEntities = {}
-    # Filter untargetables. Fire TB is immune, too
+    # Filter untargetables. -- Fire TB is immune, too
     for k, vEntity in entities do
         if not EntityCategoryContains(categories.UNTARGETABLE,vEntity) then -- and not( vEntity.Character.CharBP.Name == 'MageFire') then
             table.insert(affectedEntities, vEntity)

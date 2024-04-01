@@ -16,6 +16,12 @@
 # v0.6.4
 #################################################################################################################
 
+# Items
+############################################################
+
+Gloves of Fell-Darkur:
+- Melee Proc Chance: 25% (from 30%)
+
 # Demigods
 ############################################################
 
@@ -34,6 +40,7 @@ Uproot:
   Allied towers are healed and enemy units are immobilized.
   - Allied tower heal: 200/400/600/800 healing over 10 seconds
   - Immobilize duration: 1/1.5/2/2.5 seconds
+  - Radius: 20/22/24/26 (from 20/25/30/35)
 Violent Siege:
 - Also does 100 damage per second in an area around immobilized enemy units.
 Compost:
