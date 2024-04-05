@@ -1,9 +1,11 @@
--- Schwieger: Extended BalMod only modifies DoArmorProcs() in DoTakeDmg, by
--- passing data as argument, so armor procs can target an instigator. See
--- Ability.lua
+-- Schwieger: Extended BalMod modifies DoArmorProcs() in DoTakeDmg, by passing
+-- data as argument, so armor procs can target instigators and apply debuffs to
+-- them. This is needed for Shield of the Undead. See Artifact_Items.lua and
+-- Ability.lua.
 -- Since UberFix also modifies DoTakeDmg, the changes from there are included to
--- keep compatibility. DoAbsorption and the Ooze suicide fix have been
--- overwritten, though.
+-- keep compatibility.
+-- DoAbsorption and the Ooze suicide fix have been overwritten here, since
+-- they're included/called from DoTakeDmg.
 -- No compatibility with FavorMod 2.3.3, though.
 
 local prevClass = ForgeUnit
@@ -245,5 +247,4 @@ ForgeUnit = Class(prevClass) {
             AbilitySystem.ArmorProc( self, abilityName, data )
         end
     end
-    
 }

@@ -47,6 +47,13 @@ Compost:
 - Compost increases the allied tower heal of Uproot (just like the damage
   increase vs. enemy towers).
 
+Unclean Beast:
+Plague I and II:
+  FIX: The dirty hack has been replaced by a proper fix. It might not track the
+    number of plagued units completely accurately, but it should be good enough.
+    It might still lag, though. Use with caution.
+  - Chance to spread: 100%/100% (back to normal after the change in 0.5)
+
 #################################################################################################################
 # v0.6.3
 #################################################################################################################

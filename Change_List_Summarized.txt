@@ -174,7 +174,6 @@ Plague:
 - Maximum number of infected units: 10/10 (normally 30/30; but since it didn't work it was unlimited)
 - Damage per pulse: 15/30 (normally 10/15)
 - Damage pulses: 10 over 10 seconds (normally 30 over 30 seconds)
-- Chance to spread: 60/90% (normally 100/100%)
 
 ############################################################
 # Items
