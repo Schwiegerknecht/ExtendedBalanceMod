@@ -160,7 +160,7 @@ BuffBlueprint {
     Name = 'HQueenUnpackedBuffs',
     Debuff = false,
     DisplayName = '<LOC ABILITY_Queen_0205>Open',
-    Description = '<LOC ABILITY_Queen_0206>Armor increased.\nMana Per Second increased.\nHealth Per Second increased.',
+    Description = '<LOC ABILITY_Queen_0206>Attack Speed increased.\nAttacks do cleave damage.',
     BuffType = 'HQUEENREGEN',
     Stacks = 'IGNORE',  
     Duration = -1,
@@ -312,15 +312,6 @@ function UprootMobile(self, unit, params)
             end
         end
     end
-    -- for i = 1,4 do
-        -- if not target:IsDead() then
-            -- Buff.ApplyBuff(target, 'HQueenUproot01Root', unit)
-        -- end
-        -- WaitSeconds(0.5)
-    -- end
-    -- if Validate.HasAbility(unit, 'HQueenViolentSiege') then
-    --     Buff.ApplyBuff(target, 'HQueenUprootStun04', unit)
-    -- end
 
     if UprootEffects then
         for kEffect, vEffect in UprootEffects do

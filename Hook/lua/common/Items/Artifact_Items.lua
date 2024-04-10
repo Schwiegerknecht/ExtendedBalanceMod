@@ -53,8 +53,8 @@ ItemBlueprint {
     GetArmorProcDuration = function(self) return Ability['Item_Artifact_200_ArmorProc'].ArmorProcDuration end,
     Tooltip = {
         Bonuses = {
-            '<LOC ITEM_Artifact_2001>[GetArmorBonus] Armor',
-            '<LOC ITEM_Artifact_2002>[GetHealthBonus] Health',
+            '<LOC ITEM_Artifact_2001>+[GetArmorBonus] Armor',
+            '<LOC ITEM_Artifact_2002>+[GetHealthBonus] Health',
         },
         ChanceOnHit = '<LOC ITEM_Artifact_2003> Enemies attacking you have their Attack Speed and Movement Speed reduced for [GetArmorProcDuration] seconds. This can stack up to 3 times.\nAttack Speed Reduction: 10/20/30%.\nMove Speed Reduction: 5/10/15%',
         --ChanceOnHit = '<LOC ITEM_Artifact_2003> Enemies attacking you have their Attack Speed and Movement Speed reduced for [GetArmorProcDuration] seconds. This can stack up to 3 times. \nAttack Speed Reduction: [GetProcAttackSlow_1], [GetProcAttackSlow_2], [GetProcAttackSlow_3]%. Move Speed Reduction: [GetProcMoveSlow_1], [GetProcMoveSlow_2], [GetProcMoveSlow_3]%',
