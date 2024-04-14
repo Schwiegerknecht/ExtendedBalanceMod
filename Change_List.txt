@@ -19,6 +19,10 @@
 # Items
 ############################################################
 
+Gauntlets of Despair:
+- WeaponProc: Removed
+- Mana Leech: 10% (normally 0%)
+
 Gloves of Fell-Darkur:
 - Melee Proc Chance: 25% (from 30%)
 
@@ -52,7 +56,14 @@ Plague I and II:
   FIX: The dirty hack has been replaced by a proper fix. It might not track the
     number of plagued units completely accurately, but it should be good enough.
     It might still lag, though. Use with caution.
+  The damage over time adjustments from EBM 0.5 remain.
   - Chance to spread: 100%/100% (back to normal after the change in 0.5)
+
+# Other
+############################################################
+
+Mana Leech is added as a game mechanic equivalent to Life Steal.
+
 
 #################################################################################################################
 # v0.6.3

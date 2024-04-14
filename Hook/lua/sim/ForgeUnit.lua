@@ -6,6 +6,10 @@
 -- keep compatibility.
 -- DoAbsorption and the Ooze suicide fix have been overwritten here, since
 -- they're included/called from DoTakeDmg.
+-- To add mana leech functionality even without UberFix, DoLifeSteal,
+-- DoEnergyAdd, DoEnergyLeech and AdjustEnergy are also included here if UberFix
+-- is not active.
+
 -- No compatibility with FavorMod 2.3.3, though.
 
 local prevClass = ForgeUnit
@@ -243,8 +247,83 @@ ForgeUnit = Class(prevClass) {
                 continue
             end
 
-            -- changed
-            AbilitySystem.ArmorProc( self, abilityName, data )
+            AbilitySystem.ArmorProc( self, abilityName, data ) -- changed
         end
     end
 }
+
+-- To add Mana Leech we don't need to overwrite anything. So we only add the
+-- needed functions if UberFix is not active.
+local uberfix_active = false
+for k, mod in pairs(__active_mods) do
+    if mod.uid == "003B56DC-6BF9-11DF-8A4C-A7DEDFD71052" then -- check for UberFix 1.06
+        uberfix_active = true
+    end
+end
+
+if uberfix_active == false then
+    local prevForgeUnit = ForgeUnit
+
+    -- Update ForgeUnit with mana leech functions
+    ForgeUnit = Class(prevForgeUnit) {
+        --Hook DoLifeSteal to perform mana add/leech
+        DoLifeSteal = function(self, target, amount)
+            --Do normal lifesteal
+            prevClass.DoLifeSteal(self, target, amount)
+
+            --Do energy add based on damage
+            self:DoEnergyAdd(target, amount, self.EnergyAdd, true)
+
+            --Do energy leech based on damage and target energy
+            self:DoEnergyLeech(target, amount, self.EnergyLeech, true)
+        end,
+
+        --Mithy: New energy leech/drain functions for associated BuffAffects
+        --Adds mana based on damage done (similar to life steal, but demigod to mobile only)
+        DoEnergyAdd = function(self, target, damage, pct, text)
+            if EntityCategoryContains(categories.HERO, self) and EntityCategoryContains(categories.MOBILE, target) and damage ~= 0 and pct and pct > 0 then
+                local energyAdd = damage * pct
+                self:AdjustEnergy(energyAdd, text)
+            end
+        end,
+
+        --Leeches mana from the target based on damage done (demigod to demigod only)
+        DoEnergyLeech = function(self, target, damage, pct, text)
+            if EntityCategoryContains(categories.HERO, self) and EntityCategoryContains(categories.HERO, target) and damage ~= 0 and pct and pct > 0 then
+                local energyDrain = (damage * pct) * -1
+                energyDrain = target:AdjustEnergy(energyDrain, text) * -1
+                self:AdjustEnergy(energyDrain, text)
+            end
+        end,
+
+        --Utility function for adding/removing energy, floatText is an optional bool for displaying the amount
+        --Returns actual change in energy, if any
+        AdjustEnergy = function(self, amount, floatText)
+            if amount ~= 0 and self.Energy then
+                local currentEnergy = (self.Energy or self:GetBlueprint().Energy.EnergyStart) or 0
+                local newEnergy = currentEnergy + amount
+
+                if newEnergy > self.EnergyMax then
+                    newEnergy = self.EnergyMax
+                elseif newEnergy < 0 then
+                    newEnergy = 1
+                end
+
+                local energyChange = newEnergy - currentEnergy
+                if energyChange ~= 0 then
+                    self:SetEnergy(newEnergy)
+                    if floatText then
+                        local energyText = tostring(math.floor(energyChange))
+                        if energyChange > 0 then
+                            energyText = '+' .. energyText
+                        end
+                        FloatTextAt(self:GetFloatTextPositionOffset(0, 1, 0), energyText, 'EnergyRegen', self:GetArmy())
+                    end
+                end
+                return energyChange
+            else
+                return false
+            end
+        end
+    }
+end

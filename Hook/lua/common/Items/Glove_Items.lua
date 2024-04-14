@@ -34,32 +34,16 @@ table.insert(Items.Item_Glove_040.Tooltip.Bonuses, '+[GetAttackSpeedBonus]% Atta
 Items.Item_Glove_040.GetProcChanceRanged = function(self) return Ability['Item_Glove_040_WeaponProc'].WeaponProcChanceRanged end
 Items.Item_Glove_040.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to eviscerate the target dealing [GetProcDrain] damage and reducing their Attack Speed and Movement Speed [GetSlowBuff]%. ([GetProcChanceRanged]% chance for ranged attacks)'
 
--- Increase Attack Speed of Gauntlets of Despair to 15% (from 8%)
+-- Gauntlets of Despair: Increase Attack Speed to 15% (from 8%)
 Buffs.Item_Glove_030.Affects.RateOfFire.Mult = 0.15
--- Make Gauntlets of Despair's mana drain a mana leech (gives as much as is drained).
-BuffBlueprint {
-    Name = 'Item_Glove_030_Leech',
-    BuffType = 'ITEM_GLOVE_030_LEECH',
-    Debuff = false,
-    CanBeDispelled = true,
-    Stacks = 'REPLACE',
-    Duration = 0,
-    Affects = {
-        Energy = {Add = -(Buffs.Item_Glove_030_Drain.Affects.Energy.Add)},
-    },
-    Effects = 'Manadrain01',
-    EffectsBone = -2,
-}
-Ability.Item_Glove_030_WeaponProc.OnWeaponProc = function(self, unit, target, damageData)
-    if not target:IsDead() and EntityCategoryContains(categories.HERO, target) then
-        Buff.ApplyBuff(target, 'Item_Glove_030_Drain', unit)
-        Buff.ApplyBuff(unit, 'Item_Glove_030_Leech', unit)
-        AttachEffectsAtBone( unit, EffectTemplates.Items.Glove.GauntletsOfDespairProc, -2 )
-    end
-end
--- Update description
-Items.Item_Glove_030.GetProcChanceRanged = function(self) return Ability['Item_Glove_030_WeaponProc'].WeaponProcChanceRanged end
-Items.Item_Glove_030.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to drain [GetProcDrain] Mana from enemy Demigods and restoring it to the attacker ([GetProcChanceRanged]% for ranged attacks).'
+-- Gauntlets of Despair: Add 10% Mana Leech, remove the weapon proc
+-- Mana leech is introduced by UberFix. Compare BuffAffects.lua (and ForgeUnit.lua, HeroUnit.lua)
+Buffs.Item_Glove_030.Affects.EnergyLeech = {Add = 0.1}
+-- Remove proc, adjust description
+Ability.Item_Glove_030_WeaponProc = nil
+Items.Item_Glove_030.Tooltip.ChanceOnHit = nil
+Items.Item_Glove_030.GetManaLeech = function(self) return math.floor(Buffs['Item_Glove_030'].Affects.EnergyLeech.Add * 100) end
+table.insert( Items.Item_Glove_030.Tooltip.Bonuses, '+[GetManaLeech]% Mana Leech' )
 
 -- Add 10% Attack Speed to Slayer's Wraps
 Buffs.Item_Glove_070_Buff.Affects.RateOfFire = {Mult = 0.1}

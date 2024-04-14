@@ -3,27 +3,19 @@
 -- Make it compatible with UberFix, which introduces global variables for these
 -- things, in this case CooldownCap.
 
--- Check if UberFix 1.06 is in table of active mods
-local uberfix_version = nil
-for k, mod in pairs(__active_mods) do
-    local uberfix_index = string.find(mod.name, 'UberFix')
-    if uberfix_index != nil then
-        -- Filter out the substring with the needed mod name
-        uberfix_version = string.sub(mod.name, uberfix_index)
-    end
-end
-if uberfix_version == "UberFix 1.06" then -- UberFix is being used
-    LOG('Found ', repr(uberfix_version), ' in active mods')
+-- Check if UberFix 1.06 is active by checking global variable it introduces
+
+if CooldownCap then
     CooldownCap = 0.5
 else
-    LOG('Did not find any version of UberFix in active mods')
-
-    -- If no UberFix, overwrite the function
+    -- If no UberFix, introduce that here
+    CooldownCap = 0.5
+    
     function Cooldown( unit, buffName )
         local val = BuffCalculate(unit, buffName, 'Cooldown', 1)
 
-        if val < 0.5 then
-            val = 0.5
+        if val < CooldownCap then
+            val = CooldownCap
         end
 
         unit.Sync.CooldownMod = val
@@ -73,5 +65,73 @@ else
         end
         unit.Sync.Absorption = total
         unit.Sync.AbsorptionMult = abData.Mult
+    end
+end
+
+-- Add Mithy's Mana Leech.
+-- New BuffAffects values:
+--   EnergyAdd
+--   EnergyLeech
+
+if not EnergyAdd then
+    EnergyAddCap = false
+
+    --EnergyAdd - acts like life steal, adding mana based on damage done
+    function EnergyAdd(unit, buffName, buffDef, buffAffects, instigator, instigatorArmy, afterRemove)
+        local val = BuffCalculate(unit, buffName, 'EnergyAdd', 0)
+        if EnergyAddCap then
+            val = math.min(val, EnergyAddCap)
+        end
+        unit.EnergyAdd = val
+        unit.Sync.EnergyAdd = val
+    end
+end
+
+if not EnergyLeech then
+    EnergyLeechCap = false
+
+    --EnergyLeech - as above, but actually takes mana from the target based on damage done and adds that amount
+    function EnergyLeech(unit, buffName, buffDef, buffAffects, instigator, instigatorArmy, afterRemove)
+        local val = BuffCalculate(unit, buffName, 'EnergyLeech', 0)
+        if EnergyLeechCap then
+            val = math.min(val, EnergyLeechCap)
+        end
+        unit.EnergyLeech = val
+        unit.Sync.EnergyLeech = val
+    end
+end
+
+if not EnergyDrain then
+    --EnergyDrain - one-time transfer like Energy, except it steals from the target like EnergyLeech and adds that amount to the instigator
+    --Add must be >0 (although this amount is actually subtracted from the target)
+    function EnergyDrain(unit, buffName, buffDef, buffAffects, instigator, instigatorArmy, afterRemove)
+        --Make sure instigator is alive, skip on remove since we're instant
+        if afterRemove or not instigator or instigator:IsDead() then return end
+
+        local amount = buffAffects.EnergyDrain.Add
+        local text = not buffAffects.EnergyDrain.NoFloatText
+        if amount > 0 then
+            --Let ForgeUnit.DoEnergyLeech handle the checks and energy transaction
+            instigator:DoEnergyLeech(unit, amount, 1, text)
+        end
+
+        --Nil out this buff affect table on the recipient unit, since it's a one-off like energy and health (not worth hard-overriding Buff.ApplyBuff for)
+        unit.Buffs.Affects.EnergyDrain = nil
+    end
+end
+
+if not LifeStealCap then
+    LifeStealCap = false
+
+    function LifeSteal( unit, buffName )
+        local val = BuffCalculate(unit, buffName, 'LifeSteal', 0)
+        --New global cap
+        if LifeStealCap then
+            val = math.min(val, LifeStealCap)
+        end
+        unit.LifeSteal = val
+    
+        --Added sync var for UI display
+        unit.Sync.LifeSteal = val
     end
 end

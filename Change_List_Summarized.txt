@@ -8,10 +8,10 @@ If you want to know what was changed (and maybe changed back) in which version,
 see Change_List.txt.
 
 CURRENT STATUS:
-All changes from BalanceMod 1.31 and Extended BalanceMod 0.7 are included.
+All changes from BalanceMod 1.31 and Extended BalanceMod 0.6.4 are included.
 
 #################################################################################################################
-# v0.7
+# v0.6.4
 #################################################################################################################
 
 
@@ -36,8 +36,8 @@ NightCrawler:
 Army of the Night:
 - Nightwalker Attack Speed: 40% (normally 5%)
 - Nightwalker Lifesteal: 100% (normally 10%)
-- WeaponProc: Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
-
+- WeaponProc: Nightwalkers have 50% chance to reduce target's armor by 75 on
+  auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
 
 ---------------------Oak---------------------
 Rally:
@@ -175,6 +175,7 @@ Plague:
 - Damage per pulse: 15/30 (normally 10/15)
 - Damage pulses: 10 over 10 seconds (normally 30 over 30 seconds)
 
+
 ############################################################
 # Items
 ############################################################
@@ -202,9 +203,7 @@ Desperate Boots:
 Journeyman Treads:
 - Speedboost: +35% for hero and minions (normally +50%)
 
-
 ---------------------Helms---------------------
-
 
 Plate Visor:
 - Mana: 260 (normally 0)
@@ -216,7 +215,8 @@ Theurgist's Hat:
 - Mana Regen: 70% (normally 35%)
 - Proc Chance: 10% (normally 5%)
 - Mana: 300 (normally 0)
-- WeaponProc: Now also increases your own Mana regen by an extra 50% (same duration as the debuff on enemies).
+- WeaponProc: Now also increases your own Mana regen by an extra 50% (same
+  duration as the debuff on enemies).
 
 Vinling Helmet:
 - Proc Chance: 5% (normally 3%)
@@ -259,9 +259,8 @@ Wyrmskin Handguards:
 - Attack speed: 10% (normally 0)
 
 Gauntlets of Despair:
-- Turn the mana drain on weapon proc into a mana leech: You gain the mana that the enemy loses.
-  Only works against enemy Demigods. (Proc chance unchanged: 15%, 10% ranged.)
-  - Mana Leech: 400 (normally 300)
+- WeaponProc: Removed
+- Mana Leech: 10% (normally 0%)
 - Attack Speed: 15% (normally 0%)
 
 Slayer's Wraps:
@@ -282,7 +281,6 @@ Doomspite Grips:
 - Attack Speed: 20% (normally 10)
 - WeaponProc: On each hit, target loses 1% of its max HP. Only applies to enemy Demigods.
 - Proc Chance: 100% melee, 50% ranged 
-
 
 ---------------------Trinkets---------------------
 
@@ -331,7 +329,6 @@ Warpstone:
 - Cost: 4200 gold (normally 5500)
 - Dodge: 10% (normally 0)
 
-
 ---------------------Artifacts---------------------
 
 =====[NEW ARTIFACT]=====
@@ -339,7 +336,8 @@ Shield of the Undead
 - Maximum Health: 800
 - Armor: 1200
 - ArmorProc:
-  - Effect: Attacking Demigods have their Attack Speed and Movement Speed reduced. This effect can stack.
+  - Effect: Attacking Demigods have their Attack Speed and Movement Speed
+            reduced. This effect can stack.
   - Proc Chance: 100%
   - Attack Speed reduction per stack: -10%
   - Movement Speed reduction per stack: -5%
@@ -404,7 +402,6 @@ Capture Lock:
 - Duration: 30 seconds
 - Cooldown: 40 seconds
 
-
 ---------------------Artifact Potions---------------------
 
 Enhanced Health Potion:
@@ -424,7 +421,6 @@ Supreme Mana Potion:
 
 Supreme Revitalization Elixir:
 - Cost: 1200 (from 900 in BalMod 1.31; normally 1500)
-
 
 ---------------------Favor Items---------------------
 
@@ -485,7 +481,8 @@ Wings of the Seraphim:
 
 Saam-El's Cloak:
 - Movement Speed: 7% (normally 5%)
-- Passive: Speed cannot be reduced below 100% of base speed (from 85% of base speed)
+- Passive: Speed cannot be reduced below 100% of base speed (from 85% of base
+           speed)
 
 ---
 
@@ -581,10 +578,14 @@ As of 0.6.3 Extended BalanceMod includes the following changes from UberFix 1.06
 - Desperate Boots Fix
 - Ironwalkers Fix and changes to proc mechanics (triggers at percent value of max health)
 - Absorption mechanics (multiple absorption buffs can be active at the same time)
+
 (But it is still recommended to play with UberFix)
 
 ---------------------General Game Mechanics---------------------
 Maximum Cooldown Reduction is now 50% (from 60%)
+
+Mana Leech is added as a mana equivalent to Life Steal. The code is basically
+taken from UberFix 1.06, keeping compatibility without requiring it.
 
 What used to be High Tower Strength is now Normal. (Fortresses in the Fortress
 game mode have 1.5 times higher HP than Normal fortresses in Conquest have. This
@@ -601,7 +602,8 @@ High:
 - 12600 Tower HP, 675 dmg (from 8400, 300)
 - 6750 Archer Tower HP, 90 dmg (from 4500, 60)
 - 22500 Fort HP, 135 dmg (from 15000, 90)
-[Note: This actually increases the % Health Bonus that Towers get from Fortified Structures, since that calculates off of Normal Towers]
+[Note: This actually increases the % Health Bonus that Towers get from Fortified
+Structures, since that calculates off of Normal Towers]
 
 ---------------------Torch Bearer---------------------
 Note for Modders:
