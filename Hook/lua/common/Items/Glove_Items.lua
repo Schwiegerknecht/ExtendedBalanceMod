@@ -88,7 +88,7 @@ Buffs.Item_Glove_050.Affects.RateOfFire.Mult = 0.20
 
 -- Add Weapon Proc that actually creates a fiery blast.
 Ability.Item_Glove_060_WeaponProc.WeaponProcChance = 25
-Ability.Item_Glove_060_WeaponProc.WeaponProcChanceRanged = 15
+Ability.Item_Glove_060_WeaponProc.WeaponProcChanceRanged = 10
 Ability.Item_Glove_060_WeaponProc.ProcDamage = 200
 Ability.Item_Glove_060_WeaponProc.DamageType = 'SpellFire'
 Ability.Item_Glove_060_WeaponProc.AffectRadius = 3

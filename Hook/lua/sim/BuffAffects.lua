@@ -3,9 +3,14 @@
 -- Make it compatible with UberFix, which introduces global variables for these
 -- things, in this case CooldownCap.
 
--- Check if UberFix 1.06 is active by checking global variable it introduces
-
-if CooldownCap then
+-- Check if UberFix 1.06 is active
+local uberfix_active = false
+for k, mod in pairs(__active_mods) do
+    if mod.uid == "003B56DC-6BF9-11DF-8A4C-A7DEDFD71052" then -- check for UberFix 1.06
+        uberfix_active = true
+    end
+end
+if uberfix_active == true then
     CooldownCap = 0.5
 else
     -- If no UberFix, introduce that here
@@ -69,11 +74,16 @@ else
 end
 
 -- Add Mithy's Mana Leech.
--- New BuffAffects values:
+-- New BuffAffects functions:
 --   EnergyAdd
 --   EnergyLeech
+-- New Variables:
+--   EnergyAddCap
+--   EnergyLeechCap
+--   LifestealCap
+--   CooldownCap
 
-if not EnergyAdd then
+if uberfix_active == false then
     EnergyAddCap = false
 
     --EnergyAdd - acts like life steal, adding mana based on damage done
@@ -85,11 +95,8 @@ if not EnergyAdd then
         unit.EnergyAdd = val
         unit.Sync.EnergyAdd = val
     end
-end
-
-if not EnergyLeech then
+    
     EnergyLeechCap = false
-
     --EnergyLeech - as above, but actually takes mana from the target based on damage done and adds that amount
     function EnergyLeech(unit, buffName, buffDef, buffAffects, instigator, instigatorArmy, afterRemove)
         local val = BuffCalculate(unit, buffName, 'EnergyLeech', 0)
@@ -99,9 +106,7 @@ if not EnergyLeech then
         unit.EnergyLeech = val
         unit.Sync.EnergyLeech = val
     end
-end
-
-if not EnergyDrain then
+   
     --EnergyDrain - one-time transfer like Energy, except it steals from the target like EnergyLeech and adds that amount to the instigator
     --Add must be >0 (although this amount is actually subtracted from the target)
     function EnergyDrain(unit, buffName, buffDef, buffAffects, instigator, instigatorArmy, afterRemove)
@@ -118,11 +123,8 @@ if not EnergyDrain then
         --Nil out this buff affect table on the recipient unit, since it's a one-off like energy and health (not worth hard-overriding Buff.ApplyBuff for)
         unit.Buffs.Affects.EnergyDrain = nil
     end
-end
-
-if not LifeStealCap then
+    
     LifeStealCap = false
-
     function LifeSteal( unit, buffName )
         local val = BuffCalculate(unit, buffName, 'LifeSteal', 0)
         --New global cap

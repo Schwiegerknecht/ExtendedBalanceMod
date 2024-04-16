@@ -249,7 +249,25 @@ ForgeUnit = Class(prevClass) {
 
             AbilitySystem.ArmorProc( self, abilityName, data ) -- changed
         end
-    end
+    end,
+
+    --Hook DoLifeSteal to perform mana add/leech
+    -- Schwieger: Overwriting to prevent lifestealing from invincible targets
+    DoLifeSteal = function(self, target, amount)
+        -- Schwieger: Check added
+        if target.CanTakeDamage == false then
+            return
+        else
+            --Do normal lifesteal
+            prevClass.DoLifeSteal(self, target, amount)
+            
+            --Do energy add based on damage
+            self:DoEnergyAdd(target, amount, self.EnergyAdd, true)
+            
+            --Do energy leech based on damage and target energy
+            self:DoEnergyLeech(target, amount, self.EnergyLeech, true)
+        end
+    end,
 }
 
 -- To add Mana Leech we don't need to overwrite anything. So we only add the
@@ -266,18 +284,6 @@ if uberfix_active == false then
 
     -- Update ForgeUnit with mana leech functions
     ForgeUnit = Class(prevForgeUnit) {
-        --Hook DoLifeSteal to perform mana add/leech
-        DoLifeSteal = function(self, target, amount)
-            --Do normal lifesteal
-            prevClass.DoLifeSteal(self, target, amount)
-
-            --Do energy add based on damage
-            self:DoEnergyAdd(target, amount, self.EnergyAdd, true)
-
-            --Do energy leech based on damage and target energy
-            self:DoEnergyLeech(target, amount, self.EnergyLeech, true)
-        end,
-
         --Mithy: New energy leech/drain functions for associated BuffAffects
         --Adds mana based on damage done (similar to life steal, but demigod to mobile only)
         DoEnergyAdd = function(self, target, damage, pct, text)
@@ -289,6 +295,10 @@ if uberfix_active == false then
 
         --Leeches mana from the target based on damage done (demigod to demigod only)
         DoEnergyLeech = function(self, target, damage, pct, text)
+            -- Just to be sure to not drain mana from invincible targets, do a check
+            if target.CanTakeDamage == false then
+                return
+            end
             if EntityCategoryContains(categories.HERO, self) and EntityCategoryContains(categories.HERO, target) and damage ~= 0 and pct and pct > 0 then
                 local energyDrain = (damage * pct) * -1
                 energyDrain = target:AdjustEnergy(energyDrain, text) * -1

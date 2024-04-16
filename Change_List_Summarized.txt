@@ -271,7 +271,7 @@ Slayer's Wraps:
 Gloves of Fell-Darkur:
 WeaponProc: Chance on hit to cause a fiery blast! After the blast,
              the target takes burn damage over time.
-  - Proc Chance: 25% melee, 15% ranged
+  - Proc Chance: 25% melee, 10% ranged
   - Proc Damage: 200
   - Proc Affect Radius: 3
   - Burn damage: 50 damage per second. Lasts 3 seconds.
@@ -586,6 +586,9 @@ Maximum Cooldown Reduction is now 50% (from 60%)
 
 Mana Leech is added as a mana equivalent to Life Steal. The code is basically
 taken from UberFix 1.06, keeping compatibility without requiring it.
+
+Lifesteal (and Mana Leech) does not activate against invincibility anymore (like
+Oak shield).
 
 What used to be High Tower Strength is now Normal. (Fortresses in the Fortress
 game mode have 1.5 times higher HP than Normal fortresses in Conquest have. This

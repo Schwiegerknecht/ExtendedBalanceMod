@@ -8,6 +8,8 @@ for k, mod in pairs(__active_mods) do
 end
 
 if uberfix_active == false then
+    local prevClass = HeroUnit
+    
     HeroUnit = Class(prevClass) {
 
         OnStopBeingBuilt = function(self, builder, layer)
