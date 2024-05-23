@@ -2,10 +2,12 @@ local Buff = import('/lua/sim/buff.lua')
 
 --Increase Wyrmskin proc damage to 250, up from 60
 Buffs.Item_Glove_040_SlowDD.Affects.Health.Add = -250
--- Increase Gloves of Despair drain to 525 up from 300
-Buffs.Item_Glove_030_Drain.Affects.Energy.Add = -400
 -- Increase Slayer's Wraps damage to 35 up from 30
 Buffs.Item_Glove_070_Buff.Affects.DamageRating.Add = 35
+
+# Schwieger: Removed
+-- Increase Gloves of Despair drain to 525 up from 300
+-- Buffs.Item_Glove_030_Drain.Affects.Energy.Add = -400
 
 # REMOVED. Doomspite gets new passive
 # See below. - Schwiegerknecht
@@ -37,13 +39,48 @@ Items.Item_Glove_040.Tooltip.ChanceOnHit = '[GetProcChance]% chance on hit to ev
 -- Gauntlets of Despair: Increase Attack Speed to 15% (from 8%)
 Buffs.Item_Glove_030.Affects.RateOfFire.Mult = 0.15
 -- Gauntlets of Despair: Add 10% Mana Leech, remove the weapon proc
--- Mana leech is introduced by UberFix. Compare BuffAffects.lua (and ForgeUnit.lua, HeroUnit.lua)
+-- For Mana leech see BuffAffects.lua (and ForgeUnit.lua, HeroUnit.lua)
 Buffs.Item_Glove_030.Affects.EnergyLeech = {Add = 0.1}
 -- Remove proc, adjust description
 Ability.Item_Glove_030_WeaponProc = nil
 Items.Item_Glove_030.Tooltip.ChanceOnHit = nil
 Items.Item_Glove_030.GetManaLeech = function(self) return math.floor(Buffs['Item_Glove_030'].Affects.EnergyLeech.Add * 100) end
 table.insert( Items.Item_Glove_030.Tooltip.Bonuses, '+[GetManaLeech]% Mana Leech' )
+-- Gauntlets of Despair: Add 5% lifesteal for melee Demigods only
+BuffBlueprint {
+    Name = 'Item_Glove_030_Melee',
+    BuffType = 'ENCHANTCRITMULT',
+    Debuff = false,
+    EntityCategory = 'ALLUNITS',
+    Stacks = 'ALWAYS',
+    Duration = -1,
+    Affects = {
+        LifeSteal = {Add = 0.05},
+    },
+    Effects = 'Lifesteal02',
+}
+
+Buffs.Item_Glove_030.OnBuffAffect = function(self, unit)
+    local wep = unit:GetWeapon(1)
+    local wepbp = wep:GetBlueprint()
+    if wepbp.IsMelee == true then
+        Buff.ApplyBuff(unit, 'Item_Glove_030_Melee', unit)
+        if Buff.HasBuff(unit, 'Item_Glove_030_Melee') then
+            LOG("*DEBUG: Gloves of Despair - Applied melee buff.")
+        end
+    else
+        LOG("*DEBUG: Gloves of Despair - Not melee, did not apply melee buff.")
+    end
+end
+Buffs.Item_Glove_030.OnBuffRemove = function(self, unit)
+    if Buff.HasBuff(unit, 'Item_Glove_030_Melee') then
+        Buff.RemoveBuff(unit, 'Item_Glove_030_Melee')
+    end
+end
+-- Update Description
+Items.Item_Glove_030.GetLifeStealBonus = function(self) return math.floor(Buffs['Item_Glove_030_Melee'].Affects.LifeSteal.Add * 100) end
+Items.Item_Glove_030.Tooltip.Passives = '+[GetLifeStealBonus]% Life Steal for Demigods using melee attacks'
+
 
 -- Add 10% Attack Speed to Slayer's Wraps
 Buffs.Item_Glove_070_Buff.Affects.RateOfFire = {Mult = 0.1}

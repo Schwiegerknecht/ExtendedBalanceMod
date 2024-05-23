@@ -1,4 +1,5 @@
 local Buff = import('/lua/sim/buff.lua') -- Needed for Building Strength Buff
+local Abil = import('/lua/sim/ability.lua')
 
 -- Troop armor put on Building Strength price track
 Upgrades.Tree.CTroopArmor01.Cost = 500 -- normally 600
@@ -35,9 +36,55 @@ Buffs.CTroopStrength03.Affects.DamageBonus.Mult = 0.6
 Buffs.CTroopStrength04.Affects.DamageBonus.Mult = 0.8
 -- Give Blacksmith IV 25% Attack Speed Bonus
 Buffs.CTroopStrength04.Affects.RateOfFire = {Mult = 0.25}
+-- Blacksmith IV: Troops apply a debuff to structures, preventing them from healing
+Buffs.CTroopStrength04.OnBuffAffect = function(self, unit)
+    Abil.AddAbility(unit,'TroopStrengthProc', true)
+end
+Buffs.CTroopStrength04.OnBuffRemove = function(self, unit)
+    Abil.RemoveAbility(unit,'TroopStrengthProc')
+end
+
+AbilityBlueprint {
+    Name = 'TroopStrengthProc',
+    DisplayName = 'Blacksmith IV Weaponproc',
+    Description = 'Reinforcements apply a debuff to structures by attacking them, preventing them from healing for [GetDuration] seconds.',
+    GetChance = function(self) return math.floor( self.WeaponProcChance ) end,
+    GetDuration = function(self) return math.floor( Buffs['TroopStrengthAntiheal'].Duration ) end,
+    AbilityType = 'WeaponProc',
+    WeaponProcChance = 100,
+    OnWeaponProc = function(self, unit, target, damageData)
+        if not target:IsDead() and EntityCategoryContains(categories.STRUCTURE, target) then
+            Buff.ApplyBuff(target, 'TroopStrengthAntiheal', unit)
+        end
+        
+        -- # Play altered impact effects on top of normal effects, if the unit is a Hero
+        -- if EntityCategoryContains(categories.HERO, target) then
+        --     FxImpedanceImpact(unit:GetArmy(), damageData.Origin)
+        -- end
+    end,
+    Icon = '/CitadelUpgrades/CitadelUpgrade_TroopStrength',
+}
+BuffBlueprint {
+    Name = 'TroopStrengthAntiheal',
+    DisplayName = 'Blacksmith Structure Antiheal',
+    Description = 'Structure cannot regenerate health',
+    BuffType = 'TROOPSTRENGTHDEBUFF',
+    Debuff = true,
+    CanBeDispelled = true,
+    Stacks = 'REPLACE',
+    EntityCategory = 'STRUCTURE',
+    Duration = 15,
+    Affects = {
+        Regen = {Mult = -1.0},
+    },
+    Effects = 'Impedance01',
+    EffectsBone = -2,
+    Icon = '/CitadelUpgrades/CitadelUpgrade_TroopStrength',
+}
 -- Update description
 ArmyBonuses.CTroopStrength04.GetAttackSpeedBonus = function(self) return math.floor( Buffs['CTroopStrength04'].Affects.RateOfFire.Mult * 100 ) end
-ArmyBonuses.CTroopStrength04.Description = 'Constructs a blacksmith, increasing reinforcement damage by +[GetDamageBonus]% and reinforcement attack speed by [GetAttackSpeedBonus]%.'
+ArmyBonuses.CTroopStrength04.GetDuration = function(self) return math.floor( Buffs['TroopStrengthAntiheal'].Duration ) end
+ArmyBonuses.CTroopStrength04.Description = 'Constructs a blacksmith, increasing reinforcement damage by +[GetDamageBonus]% and reinforcement attack speed by [GetAttackSpeedBonus]%. Reinforcements do lasting damage to structures, preventing them from regenerating for [GetDuration] seconds.'
 
 
 -- Lower currency gold income to 3/6/9 (from 4/8/12) to remove absolute necessity for Cur3 
@@ -55,7 +102,7 @@ Buffs.CTroopArmor02.Affects.Armor.Add = 300
 Buffs.CTroopArmor03.Affects.Armor.Add = 450
 Buffs.CTroopArmor04.Affects.Armor.Add = 600
 
--- Give Building Firepower some range, so it can counter Siege Demolishers.
+-- Give Building Firepower +0/2/3/4 range, so it can counter Siege Demolishers.
 Buffs.CBuildingStrength02.Affects.MaxRadius = {Add = 2}
 Buffs.CBuildingStrength03.Affects.MaxRadius = {Add = 3}
 Buffs.CBuildingStrength04.Affects.MaxRadius = {Add = 4}
@@ -65,16 +112,17 @@ Buffs.CBuildingStrength02.Affects.DamageBonus = {Mult = .25}
 Buffs.CBuildingStrength03.Affects.DamageBonus = {Mult = .5}
 Buffs.CBuildingStrength04.Affects.DamageBonus = {Mult = .75}
 -- Give Building Firepower IV 25% Tower Attack Speed bonus (normally none)
-Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .25}
+-- Buffs.CBuildingStrength04.Affects.RateOfFire = {Mult = .25}
 
 -- Update descriptions
 ArmyBonuses.CBuildingStrength02.GetMaxRadius = function(self) return Buffs['CBuildingStrength02'].Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength03.GetMaxRadius = function(self) return Buffs['CBuildingStrength03'].Affects.MaxRadius.Add end
 ArmyBonuses.CBuildingStrength04.GetMaxRadius = function(self) return Buffs['CBuildingStrength04'].Affects.MaxRadius.Add end
-ArmyBonuses.CBuildingStrength04.GetAttackSpeedBonus = function(self) return math.floor(Buffs['CBuildingStrength04'].Affects.RateOfFire.Mult * 100) end
+-- ArmyBonuses.CBuildingStrength04.GetAttackSpeedBonus = function(self) return math.floor(Buffs['CBuildingStrength04'].Affects.RateOfFire.Mult * 100) end
 ArmyBonuses.CBuildingStrength02.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
 ArmyBonuses.CBuildingStrength03.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
-ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius]. Tower Attack Speed increased by [GetAttackSpeedBonus]%.'
+-- ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius]. Tower Attack Speed increased by [GetAttackSpeedBonus]%.'
+ArmyBonuses.CBuildingStrength04.Description = 'Buildings gain +[GetDamageBonus]% damage and increased splash damage. Tower range increased by [GetMaxRadius].'
 
 --[[ # Leaving this in, in case we wanna add debuffs to tower shots later
 -- Add WeaponProc to Building Firepower IV that reduces Armor by 100 per shot (infinite stacks)

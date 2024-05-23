@@ -360,7 +360,7 @@ table.insert(Items.AchievementDamage.Abilities, AbilityBlueprint {
 })
 -- Add Tooltip
 Items.AchievementDamage.GetLevelDamageRating = function(self) return Ability['AchievementDamage_Aura'].LevelDamageRating end
-table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Damage Rating per hero level')
+table.insert(Items.AchievementDamage.Tooltip.Bonuses, '+[GetLevelDamageRating] Weapon Damage per hero level')
 
 -- Add WeaponProc that reduces Armor by 15 per level
 -- Create Debuff

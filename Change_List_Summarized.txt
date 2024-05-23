@@ -10,6 +10,46 @@ see Change_List.txt.
 CURRENT STATUS:
 All changes from BalanceMod 1.31 and Extended BalanceMod 0.6.4 are included.
 
+# Table of Contents
+#################################################################################################################
+
+(Ctrl + F search each line to find it quickly.)
+
+# Demigods
+--Demon Assassin
+--Erebus
+--Oak
+--Oculus
+--Queen of Thorns
+--Regulus
+--Rook
+--Sedna
+--Torch Bearer
+--Unclean Beast
+
+# Items
+--Boots
+--Helms
+--Armor
+--Gloves
+--Trinkets
+--Artifacts
+--Consumables
+--Artifact Potions
+--Favor Items
+
+# Citadel Upgrades
+
+# Other
+--Included UberFix changes
+--General Game Mechanics
+--Torch Bearer
+--Unclean Beast
+--Items and Descriptions
+--Minions
+--Reinforcements
+
+
 #################################################################################################################
 # v0.6.4
 #################################################################################################################
@@ -540,14 +580,14 @@ Fortified Structures:
 Building Firepower:
 - Tower Range Bonus: 0/2/3/4 (normally 0/0/0/0)
 - Damage Bonus: 10/25/50/75% (normally 10/15/20/25%)
-Building Firepower IV:
-- Tower Attack Speed: 25% (from 50%)
 
 Blacksmith:
 - Cost: 500/1500/2500/3500 (normally 1200/2400/3000/5400)
 - Reinforcement Weapon Damage: +20/40/60/80% (normally 20/35/50/65%)
 Blacksmith IV:
 - Reinforcement Attack Speed: +25% (normally 0%)
+- Reinforcements apply a debuff to enemy structures that prevents health
+  regeneration for 15 seconds.
 
 Armory:
 - Cost: 500/1500/2500/3500 gold (normally 600/1800/3000/4800)
@@ -572,6 +612,9 @@ Currency:
 # Other
 ############################################################
 
+As of EBM 0.6.3, there is no compatibility with FavorMod 2.3.3 anymore. 0.6.2 or
+any version prior still works.
+
 ---------------------Included UberFix changes---------------------
 
 As of 0.6.3 Extended BalanceMod includes the following changes from UberFix 1.06 by default:
@@ -584,8 +627,9 @@ As of 0.6.3 Extended BalanceMod includes the following changes from UberFix 1.06
 ---------------------General Game Mechanics---------------------
 Maximum Cooldown Reduction is now 50% (from 60%)
 
-Mana Leech is added as a mana equivalent to Life Steal. The code is basically
-taken from UberFix 1.06, keeping compatibility without requiring it.
+Mana Leech is added as a mana equivalent to Life Steal (as of 0.6.4). The code
+is basically taken from UberFix 1.06 while not requiring it, keeping
+compatibility.
 
 Lifesteal (and Mana Leech) does not activate against invincibility anymore (like
 Oak shield).
@@ -617,7 +661,6 @@ HEMA01_Abilities.lua).
 
 ---------------------Unclean Beast---------------------
 - Animations for units affected by Plague have been disabled.
-Unfortunately Plague still seems to cause lag.
 
 ---------------------Items and Descriptions---------------------
 All Stuns that give the target a Stun Immunity afterwards have had their

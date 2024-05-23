@@ -16,6 +16,19 @@
 # v0.6.4
 #################################################################################################################
 
+# Citadel Upgrades
+############################################################
+
+Blacksmith:
+Blacksmith IV:
+- Reinforcements now apply a debuff to enemy structures that prevents health
+  regeneration for 15 seconds.
+
+Building Firepower:
+Building Firepower IV:
+- Tower Attack Speed: 0% (from 25%, normally 0%)
+
+
 # Items
 ############################################################
 
@@ -58,7 +71,8 @@ Plague I and II:
     number of plagued units completely accurately, but it should be good enough.
     It might still lag, though. Use with caution.
   The damage over time adjustments from EBM 0.5 remain.
-  - Chance to spread: 100%/100% (back to normal after the change in 0.5)
+  - Chance to spread: 100%/100% (back to normal after the change in 0.5. It
+    spreads at a high rate no matter how low this percentage is.)
 
 # Other
 ############################################################
