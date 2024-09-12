@@ -11,6 +11,9 @@
   - Tower dmg
   - Citadel upgrade costs
   - Trebuchet availability at WR 8 instead of WR 7 (weaken the Rook counter)
+- QoT:
+  - make stance bonuses like those of TB
+
 
 #################################################################################################################
 # v0.6.4
@@ -51,7 +54,8 @@ Open State:
 - Attack Speed increase: 10% (normally 0%)
 Spike Wave:
 - Mana Cost: 500/650/800 (from 750/1000/1250)
-- Slow: 15/25/35% (from 15/20/25%)
+- Slow: 15/30/45% (from 15/20/25%)
+- Damage: 350/600/850 (from 350/500/650)
 Uproot:
 - Uproot can now also target allied towers and enemy mobile units (Demigods,
   minions and reinforcements).
@@ -59,6 +63,8 @@ Uproot:
   - Allied tower heal: 200/400/600/800 healing over 10 seconds
   - Immobilize duration: 1/1.5/2/2.5 seconds
   - Radius: 20/22/24/26 (from 20/25/30/35)
+- Uproot I to III:
+  - Enemy tower Rate of Fire reduction: 25/50/75% (from 0/0/50%)
 Violent Siege:
 - Also does 100 damage per second in an area around immobilized enemy units.
 Compost:

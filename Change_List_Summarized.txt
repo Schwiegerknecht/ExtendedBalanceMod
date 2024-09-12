@@ -122,18 +122,20 @@ Shamblers:
 Spike Wave:
 - Cooldown 10/10/10 (normally 10/10/15)
 - Mana Cost: 500/650/800 (from 750/1000/1250)
-- Slow: 15/25/35% (from 15/20/25%)
+- Slow: 15/30/45% (from 15/20/25%)
+- Damage: 350/600/850 (from 350/500/650)
 Uproot:
 - Uproot can now also target allied towers and enemy mobile units (Demigods,
   minions and reinforcements).
   Allied towers are healed and enemy units are immobilized.
-  - Allied tower heal: 200/400/600/800 healing over 10 seconds
+  - Allied tower heal: 200/400/600/800 healing over 10 seconds. This heal is
+    increased by Compost.
   - Immobilize duration: 1/1.5/2/2.5 seconds
 - Radius: 20/22/24/26 (normally 20/20/20/20)
-Uproot III:
-- Reduces the targeted structure's rate of fire by 50% for its duration (10 sec).
+Uproot I to III:
+- Reduces the targeted structure's rate of fire by 25/50/75% for its duration (10 sec).
 Uproot IV:
-- Stuns the targeted structure for its duration (10 sec).
+- Stuns and disables the targeted structure for its duration (10 sec).
 Violent Siege:
 - Also does 100 damage per second in an area around immobilized enemy units.
 

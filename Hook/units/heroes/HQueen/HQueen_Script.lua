@@ -28,6 +28,7 @@ HQueen = Class(prevClass) {
             self.Character:PlayIdle()
             if Buff.HasBuff(self, 'HQueenUnpackedBuffs') then -- Schwiegerknect
                 Buff.RemoveBuff(self, 'HQueenUnpackedBuffs')
+                Buff.ApplyBuff(self, 'HQueenUnpackedBuffsTemp', self)
             end
             
             if Buff.HasBuff( self, 'HQueenPackedWeaponDisable' ) then
@@ -68,6 +69,7 @@ HQueen = Class(prevClass) {
             #self.Character:PlayIdle()
             if Buff.HasBuff(self, 'HQueenPackedBuffs') then
                 Buff.RemoveBuff(self, 'HQueenPackedBuffs')
+                Buff.ApplyBuff(self, 'HQueenPackedBuffsTemp', self) -- Schwiegerknecht
             end
 
             self.AbilityData.Queen.IsPacked = false
@@ -85,7 +87,6 @@ HQueen = Class(prevClass) {
                 Buff.RemoveBuff(self, 'HQueenAbilityDisable')
             end
         end,
-    },
-
+    }
 }
 TypeClass = HQueen

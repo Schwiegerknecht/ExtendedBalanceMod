@@ -150,10 +150,21 @@ end
 Ability.HQueenSpikeWave01.EnergyCost = 500
 Ability.HQueenSpikeWave02.EnergyCost = 650
 Ability.HQueenSpikeWave03.EnergyCost = 800
--- Increase Spike Wave slow to 15/25/35% (from 15/20/25)
-Buffs.HQueenSpikeWave02.Affects.MoveMult.Mult = -0.25
-Buffs.HQueenSpikeWave03.Affects.MoveMult.Mult = -0.35
+-- Increase Spike Wave slow to 15/30/45% (from 15/20/25)
+Buffs.HQueenSpikeWave02.Affects.MoveMult.Mult = -0.30
+Buffs.HQueenSpikeWave03.Affects.MoveMult.Mult = -0.45
+-- Increase Spike Wave damage to 350/600/850 (from 350/500/650)
+Ability.HQueenSpikeWave02.DamageAmt = 600
+Ability.HQueenSpikeWave03.DamageAmt = 850
 
+#################################################################################################################
+# Packed/Unpacked States
+#################################################################################################################
+-- Adjust the way Queen's packed and unpacked states work:
+-- Queen gains 10% Attack Speed and cleave auto attacks in open state but loses
+-- the cleave in packed state.
+-- The buffs persist while in that state and also a while after she leaves it
+-- (similar to Torch Bearer). This is handled mostly in HQueen_Script.lua.
 
 -- This buff is gained in open state, see HQueen_Script.lua
 BuffBlueprint {
@@ -170,10 +181,48 @@ BuffBlueprint {
     },
     Icon = '/dgqueenofthorns/NewQueenOpen01',
 }
+-- These two buffs persist for 10 seconds after queen leaves the closed/open
+-- state, see HQueen_Script.lua
+#TODO: Not working yet!
 
+local tempStateBuffDuration = 10
+BuffBlueprint {
+    Name = 'HQueenPackedBuffsTemp',
+    Debuff = false,
+    DisplayName = '<LOC ABILITY_Queen_0207>Recently Closed',
+    Description = '<LOC ABILITY_Queen_0208>Armor increased.\nMana Per Second increased.\nHealth Per Second increased.',
+    BuffType = 'HQUEENREGEN',
+    Stacks = 'IGNORE',
+    Duration = tempStateBuffDuration,
+    Affects = {
+        Armor = {Mult = 0.1},
+        EnergyRegen = {Mult = 0.5},
+        Regen = {Add = 10},
+        RateOfFire = {Mult = 0},
+        MoveMult = {Mult = 0},
+    },
+    Icon = '/dgqueenofthorns/NewQueenClose',
+}
+BuffBlueprint {
+    Name = 'HQueenUnpackedBuffsTemp',
+    Debuff = false,
+    DisplayName = '<LOC ABILITY_Queen_0209>Recently Open',
+    Description = '<LOC ABILITY_Queen_0210>Atack Speed increased.\nAttacks do cleave damage.',
+    BuffType = 'HQUEENREGEN',
+    Stacks = 'IGNORE',  
+    Duration = tempStateBuffDuration,
+    Affects = {
+        RateOfFire = {Mult = 0.1},
+        MoveMult = {Mult = 0},
+    },
+    Icon = '/dgqueenofthorns/NewQueenOpen01',
+}
+
+#################################################################################################################
 # Uproot
 #################################################################################################################
--- Change Uproot to target friendly structures, healing them, and also enemies, rooting them.
+-- Change Uproot to target friendly structures, healing them, and also enemies,
+-- rooting/immobilizing them.
 
 -- Allow other targets than enemy structures
 for i = 1,4 do
@@ -329,8 +378,8 @@ for i = 1,4 do
         Name = 'HQueenUproot0'..i,
         Debuff = true,
         CanBeDispelled = false,
-        DisplayName = '<LOC ABILITY_Queen_0207>Uproot',
-        Description = '<LOC ABILITY_Queen_0208>Taking severe damage.',
+        DisplayName = '<LOC ABILITY_Queen_0307>Uproot',
+        Description = '<LOC ABILITY_Queen_0308>Taking severe damage.',
         BuffType = 'UPROOTDUMMY',
         Stacks = 'REPLACE',
         Icon = '/dgqueenofthorns/NewQueenUproot01',
@@ -348,8 +397,8 @@ for i = 1,4 do
         Name = 'HQueenUproot0'..i..'Root',
         Debuff = true,
         CanBeDispelled = true,
-        DisplayName = '<LOC ABILITY_Queen_0209>Uproot',
-        Description = '<LOC ABILITY_Queen_0210>Immobilized.',
+        DisplayName = '<LOC ABILITY_Queen_0309>Uproot',
+        Description = '<LOC ABILITY_Queen_0310>Immobilized.',
         BuffType = 'UPROOTROOT',
         Stacks = 'REPLACE',
         Icon = '/dgqueenofthorns/NewQueenUproot01',
@@ -360,27 +409,31 @@ for i = 1,4 do
     }
 end
 -- Uproot 3 and 4 appliy fire rate debuff / stun to enemy structures.
-BuffBlueprint {
-    Name = 'HQueenUprootStun03',
-    Debuff = true,
-    CanBeDispelled = false,
-    DisplayName = '<LOC ABILITY_Queen_0211>Uproot',
-    Description = '<LOC ABILITY_Queen_0212>Rate of fire reduced.',
-    BuffType = 'UPROOTSTUN',
-    Stacks = 'REPLACE',
-    Icon = '/dgqueenofthorns/NewQueenUproot01',
-    Duration = Ability.HQueenUproot03.Pulses,
-    Affects = {
-        RateOfFire = {Mult = -0.5},
-    },
-}
+for i = 1,3 do
+    local RateOfFireMult = -0.25 * i
+    
+    BuffBlueprint {
+        Name = 'HQueenUprootStun0'..i,
+        Debuff = true,
+        CanBeDispelled = false,
+        DisplayName = '<LOC ABILITY_Queen_0311>Uproot',
+        Description = '<LOC ABILITY_Queen_0312>Rate of fire reduced.',
+        BuffType = 'UPROOTSTUN',
+        Stacks = 'REPLACE',
+        Icon = '/dgqueenofthorns/NewQueenUproot01',
+        Duration = Ability.HQueenUproot03.Pulses,
+        Affects = {
+            RateOfFire = {Mult = RateOfFireMult},
+        },
+    }
+end
 
 BuffBlueprint {
     Name = 'HQueenUprootStun04',
     Debuff = true,
     CanBeDispelled = false,
-    DisplayName = '<LOC ABILITY_Queen_0213>Uproot',
-    Description = '<LOC ABILITY_Queen_0214>Stunned.',
+    DisplayName = '<LOC ABILITY_Queen_0313>Uproot',
+    Description = '<LOC ABILITY_Queen_0314>Stunned.',
     BuffType = 'UPROOTSTUN',
     Stacks = 'REPLACE',
     Icon = '/dgqueenofthorns/NewQueenUproot01',
@@ -395,15 +448,22 @@ for i = 1,4 do
     Ability[uproot].GetHeal = function(self) return math.floor( Ability[uproot].HealAmt * Ability[uproot].Pulses) end
     Ability[uproot].GetRootDuration = function(self) return Buffs[uproot..'Root'].Duration end
 end
-Ability.HQueenUproot03.GetRateOfFire = function(self) return math.floor( Buffs['HQueenUprootStun03'].Affects.RateOfFire.Mult * 100 * -1) end
+for i = 1,3 do
+    local uproot = 'HQueenUproot0'..i
+    local uprootStun = 'HQueenUprootStun0'..i
+    Ability[uproot].GetRateOfFire = function(self) return math.floor( Buffs[uprootStun].Affects.RateOfFire.Mult * 100 * -1) end
+end
 Ability.HQueenUproot04.GetStunDuration = function(self) return math.floor( Buffs['HQueenUprootStun04'].Duration) end
-Ability.HQueenUproot01.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. \n\n Allied stuctures are healed for [GetHeal].\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] second.'
-Ability.HQueenUproot02.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. \n\n Allied stuctures are healed for [GetHeal].\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] seconds.'
-Ability.HQueenUproot03.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. The structure\'s rate of fire is reduced by [GetRateOfFire]%.\n\n Allied stuctures are healed for [GetHeal].\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] seconds.'
-Ability.HQueenUproot04.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. The structure is disabled for [GetStunDuration] seconds.\n\n Allied stuctures are healed for [GetHeal].\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] seconds.'
+Ability.HQueenUproot01.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. The structure\'s rate of fire is reduced by [GetRateOfFire]%.\n\n Allied stuctures are healed for [GetHeal] (improved by Compost).\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] second.'
+Ability.HQueenUproot02.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. The structure\'s rate of fire is reduced by [GetRateOfFire]%.\n\n Allied stuctures are healed for [GetHeal] (improved by Compost).\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] seconds.'
+Ability.HQueenUproot03.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. The structure\'s rate of fire is reduced by [GetRateOfFire]%.\n\n Allied stuctures are healed for [GetHeal] (improved by Compost).\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] seconds.'
+Ability.HQueenUproot04.Description = 'Queen of Thorns sends her vines deep beneath the earth. Enemy target structures are damaged for [GetDamage] damage over [GetDuration] seconds. The structure is disabled for [GetStunDuration] seconds.\n\n Allied stuctures are healed for [GetHeal] (improved by Compost).\n\n Enemy Demigods and reinforcements are immobilized by the roots for [GetRootDuration] seconds.'
 
 -- Update Violent Siege description
 Ability.HQueenViolentSiege.Description = 'When Queen of Thorns uses Uproot, the vines grow ever wilder. Enemies standing near the targeted structure or unit take [GetDamage] damage per second while Uproot is active.'
+
+# End of Uproot changes
+#################################################################################################################
 
 -- Make Entourage gold buff dependent on having Summon Shambler.
 -- The level of Summon Shambler needs to be at least as high as the Entourage level to grant its gold bonus.

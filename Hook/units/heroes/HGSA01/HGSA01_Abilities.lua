@@ -39,6 +39,10 @@ Ability.HGSA01AngelicFuryOn.VengAffectRadius = 15
 -- and decreases enemy Attack Speed by 20% when deactivating it.
 -- Regulus also gains 25% Attack Speed and 45 Weapon Damage for himself.
 -- Ally Movement Speed buff
+local VeangeanceAlly_MoveSpeed = 0.25
+local VeangeanceSelf_AtkSpeed = 0.25
+local VeangeanceSelf_WepDamage = 35
+local VeangeanceEnemy_AtkSpeed = -0.20
 BuffBlueprint {
     Name = 'HGSA01VeangeanceAllyBuff',
     DisplayName = 'Vengeance',
@@ -48,7 +52,7 @@ BuffBlueprint {
     Stacks = 'REPLACE',
     Duration = 10,
     Affects = {
-        MoveMult = {Mult = 0.25},
+        MoveMult = {Mult = VeangeanceAlly_MoveSpeed},
     },
     Icon = '/DGRegulus/NewRegulusvengence01',
 }
@@ -62,8 +66,8 @@ BuffBlueprint {
     Stacks = 'REPLACE',
     Duration = 10,
     Affects = {
-        RateOfFire = {Mult = 0.25},
-        DamageRating = {Add = 45},
+        RateOfFire = {Mult = VeangeanceSelf_AtkSpeed},
+        DamageRating = {Add = VeangeanceSelf_WepDamage},
     },
     Icon = '/DGRegulus/NewRegulusvengence01',
 }
@@ -77,7 +81,7 @@ BuffBlueprint {
     Stacks = 'REPLACE',
     Duration = 10,
     Affects = {
-        RateOfFire = {Mult = -0.20},
+        RateOfFire = {Mult = VeangeanceEnemy_AtkSpeed},
     },
     Icon = '/DGRegulus/NewRegulusvengence01',
 }
