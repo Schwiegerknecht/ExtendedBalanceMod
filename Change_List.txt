@@ -13,7 +13,9 @@
   - Trebuchet availability at WR 8 instead of WR 7 (weaken the Rook counter)
 - QoT:
   - make stance bonuses like those of TB
-
+  - Tribute: Consider nerf for Entourage gold and shopping cost reduction for Tribute
+- Rook: Give Energizer damage immunity
+- Building Firepower: Consider range reduction: 0/2/2.5/3
 
 #################################################################################################################
 # v0.6.4
@@ -53,7 +55,7 @@ Open State:
 - Auto attacks gain cleave (DamageRadius = 1.5)
 - Attack Speed increase: 10% (normally 0%)
 Spike Wave:
-- Mana Cost: 500/650/800 (from 750/1000/1250)
+- Mana Costs: 500/650/800 (from 750/1000/1250)
 - Slow: 15/30/45% (from 15/20/25%)
 - Damage: 350/600/850 (from 350/500/650)
 Uproot:
@@ -70,6 +72,12 @@ Violent Siege:
 Compost:
 - Compost increases the allied tower heal of Uproot (just like the damage
   increase vs. enemy towers).
+
+Rook:
+Power of the Tower:
+- Mana Costs: 400/400/400/400 (from 400/450/500/550)
+Structural Transfer:
+- Mana Costs: 265/375/490/610 (from 350/500/650/800)
 
 Unclean Beast:
 Plague I and II:

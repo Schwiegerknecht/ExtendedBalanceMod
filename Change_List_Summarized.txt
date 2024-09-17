@@ -166,10 +166,8 @@ Energizer:
 Poison Arrow:
 - Slow: 15% (normally 10%)
 Power of the Tower:
-- Mana cost: 400/450/500/550 (normally 400/400/400/200)
+- Mana cost: 400/400/400/400 (normally 400/400/400/200)
 - Tower Health: 1500/1850/2200/2550 (down from 1500/1950/2400/2850)
-Structural Transfer:
-- Mana costs: 350/500/650/800 (normally 265/375/490/610)
 
 ---------------------Sedna---------------------
 Turn Rate:
