@@ -162,12 +162,16 @@ Vengeance:
 
 ---------------------Rook---------------------
 Energizer:
-- Debuff immunity while channeling.
+- Invincibility while channeling.
 Poison Arrow:
 - Slow: 15% (normally 10%)
 Power of the Tower:
 - Mana cost: 400/400/400/400 (normally 400/400/400/200)
 - Tower Health: 1500/1850/2200/2550 (down from 1500/1950/2400/2850)
+Structural Transfer:
+  FIX: There was a bug that allowed casting another ability within the first
+       second of casting Structural Transfer without aborting the Transfer.
+       This should now be fixed.
 
 ---------------------Sedna---------------------
 Turn Rate:

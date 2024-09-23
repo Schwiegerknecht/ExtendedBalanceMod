@@ -77,7 +77,12 @@ Rook:
 Power of the Tower:
 - Mana Costs: 400/400/400/400 (from 400/450/500/550)
 Structural Transfer:
+  FIX: There was a bug that allowed casting another ability within the first
+       second of casting Structural Transfer without aborting the Transfer.
+       This should now be fixed.
 - Mana Costs: 265/375/490/610 (from 350/500/650/800)
+Energizer:
+- Gain Invincibility while channeling. 
 
 Unclean Beast:
 Plague I and II:
@@ -583,7 +588,7 @@ Army of the Night:
 - Weapon Proc: Nightwalkers have 50% chance to reduce target's armor by 75 on auto attack (debuff duration 5 sec, stacks infinitely, works on structures)
 
 Oculus:
-Sacrifice now works as advertised. (Radius = 10)
+FIX: Sacrifice now works as advertised. (Radius = 10)
 
 Queen of Thorns:
 Shamblers:
