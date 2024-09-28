@@ -163,8 +163,12 @@ Ability.HQueenSpikeWave03.DamageAmt = 850
 -- Adjust the way Queen's packed and unpacked states work:
 -- Queen gains 10% Attack Speed and cleave auto attacks in open state but loses
 -- the cleave in packed state.
--- The buffs persist while in that state and also a while after she leaves it
+-- The buffs persist while in that state and also a bit after she leaves it
 -- (similar to Torch Bearer). This is handled mostly in HQueen_Script.lua.
+
+-- These two buffs persist for 10 seconds after queen leaves the closed/open
+-- state, see HQueen_Script.lua
+local tempStateBuffDuration = 10
 
 -- This buff is gained in open state, see HQueen_Script.lua
 BuffBlueprint {
@@ -172,34 +176,35 @@ BuffBlueprint {
     Debuff = false,
     DisplayName = '<LOC ABILITY_Queen_0205>Open',
     Description = '<LOC ABILITY_Queen_0206>Attack Speed increased.\nAttacks do cleave damage.',
-    BuffType = 'HQUEENREGEN',
-    Stacks = 'IGNORE',  
+    BuffType = 'HQUEENOPENBUFFS',
+    Stacks = 'REPLACE',  
     Duration = -1,
     Affects = {
         RateOfFire = {Mult = 0.1},
+        DamageRadius = {Add = 1.5},
         MoveMult = {Mult = 0},
     },
     Icon = '/dgqueenofthorns/NewQueenOpen01',
 }
--- These two buffs persist for 10 seconds after queen leaves the closed/open
--- state, see HQueen_Script.lua
-#TODO: Not working yet!
 
-local tempStateBuffDuration = 10
+-- If Queen's original packed buff has Stacks = 'IGNORE', it would get ignored when
+-- Queen still has HQueenPackedBuffsTemp active.
+Buffs.HQueenPackedBuffs.Stacks = 'REPLACE'
+
 BuffBlueprint {
     Name = 'HQueenPackedBuffsTemp',
     Debuff = false,
     DisplayName = '<LOC ABILITY_Queen_0207>Recently Closed',
     Description = '<LOC ABILITY_Queen_0208>Armor increased.\nMana Per Second increased.\nHealth Per Second increased.',
     BuffType = 'HQUEENREGEN',
-    Stacks = 'IGNORE',
+    Stacks = 'REPLACE',
     Duration = tempStateBuffDuration,
     Affects = {
         Armor = {Mult = 0.1},
         EnergyRegen = {Mult = 0.5},
         Regen = {Add = 10},
-        RateOfFire = {Mult = 0},
-        MoveMult = {Mult = 0},
+        -- RateOfFire = {Mult = 0},
+        -- MoveMult = {Mult = 0},
     },
     Icon = '/dgqueenofthorns/NewQueenClose',
 }
@@ -208,11 +213,12 @@ BuffBlueprint {
     Debuff = false,
     DisplayName = '<LOC ABILITY_Queen_0209>Recently Open',
     Description = '<LOC ABILITY_Queen_0210>Atack Speed increased.\nAttacks do cleave damage.',
-    BuffType = 'HQUEENREGEN',
-    Stacks = 'IGNORE',  
+    BuffType = 'HQUEENOPENBUFFS',
+    Stacks = 'REPLACE',  
     Duration = tempStateBuffDuration,
     Affects = {
         RateOfFire = {Mult = 0.1},
+        DamageRadius = {Add = 1.5},
         MoveMult = {Mult = 0},
     },
     Icon = '/dgqueenofthorns/NewQueenOpen01',

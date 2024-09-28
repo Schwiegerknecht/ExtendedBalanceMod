@@ -96,8 +96,10 @@ Sacrifice:
 - FIX: Sacrifice now works as advertised. (Radius = 10)
 
 ---------------------Queen of Thorns---------------------
-Stance Switch:
+Open / Close:
 - Time needed: 0.8 seconds (normally 1.5)
+- Bonuses from Closed and Open State persist for 10 seconds, even after
+  switching state (similar to Torch Bearer).
 Closed State:
 - Auto attacks have no cleave anymore (DamageRadius = 0)
 Open State:
@@ -154,7 +156,7 @@ Vengeance:
 - Damage radius: 15 (normally 10)
 - Vengeance now adds buffs to Regulus and nearby allies when he activates Angelic Fury:
   - 25% Movement Speed for Regulus and allies (15 Radius, 10 Duration)
-  - 25% Attack Speed and 45 Weapon Damage for Regulus only (10 Duration)
+  - 20% Attack Speed and 40 Weapon Damage for Regulus only (10 Duration)
 - Vengeance now adds a Attack Speed debuff to nearby enemies when Regulus exits Angelic Fury:
   - Attack Speed debuff: -20%
   - Radius: 15

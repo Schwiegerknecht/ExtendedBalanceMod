@@ -37,11 +37,11 @@ Ability.HGSA01AngelicFuryOn.VengAffectRadius = 15
 
 -- Vengeance gives 25% Movement Speed to allies on activating Angelic Fury
 -- and decreases enemy Attack Speed by 20% when deactivating it.
--- Regulus also gains 25% Attack Speed and 45 Weapon Damage for himself.
+-- Regulus also gains 20% Attack Speed and 40 Weapon Damage for himself.
 -- Ally Movement Speed buff
 local VeangeanceAlly_MoveSpeed = 0.25
-local VeangeanceSelf_AtkSpeed = 0.25
-local VeangeanceSelf_WepDamage = 35
+local VeangeanceSelf_AtkSpeed = 0.20
+local VeangeanceSelf_WepDamage = 40
 local VeangeanceEnemy_AtkSpeed = -0.20
 BuffBlueprint {
     Name = 'HGSA01VeangeanceAllyBuff',

@@ -12,9 +12,7 @@
   - Citadel upgrade costs
   - Trebuchet availability at WR 8 instead of WR 7 (weaken the Rook counter)
 - QoT:
-  - make stance bonuses like those of TB
   - Tribute: Consider nerf for Entourage gold and shopping cost reduction for Tribute
-- Rook: Give Energizer damage immunity
 - Building Firepower: Consider range reduction: 0/2/2.5/3
 
 #################################################################################################################
@@ -49,6 +47,9 @@ Gloves of Fell-Darkur:
 ############################################################
 
 Queen of Thorns:
+Open / Close:
+- Bonuses from Closed and Open State persist for 10 seconds, even after
+  switching state (similar to Torch Bearer).
 Closed State:
 - Auto attacks have no cleave anymore (DamageRadius = 0)
 Open State:
@@ -72,6 +73,11 @@ Violent Siege:
 Compost:
 - Compost increases the allied tower heal of Uproot (just like the damage
   increase vs. enemy towers).
+
+Regulus:
+Vengeance:
+- Weapon Damage: 40 (from 45)
+- Attack Speed: 20% (from 25%)
 
 Rook:
 Power of the Tower:

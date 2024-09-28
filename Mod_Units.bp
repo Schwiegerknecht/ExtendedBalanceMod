@@ -269,13 +269,13 @@ UnitBlueprint {
         MaxHealth = 2550,
     },
 }
-# Make QoT's aggressive open form the one with stronger auto attacks
+# Handle QoT's cleave in HQueen_Abilities.lua
 UnitBlueprint {
     BlueprintId = "hqueen",
     Merge = true,
     Weapon = {
         {# PrimaryWeapon
-            DamageRadius = 1.5, # 1
+            DamageRadius = 0, # 1
             #RateOfFire = 0.72, # 0.69,
         },
         {# PackedWeapon
